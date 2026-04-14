@@ -36,8 +36,8 @@ log = logging.getLogger(__name__)
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 BASE_URL = "https://selfservice.or.occompt.com/ssweb/search/DOCSEARCH2950S1"
-OUTPUT_PATH = "/data/output.json"
-DASHBOARD_PATH = "/dashboard/index.html"
+OUTPUT_PATH = "data/output.json"
+DASHBOARD_PATH = "dashboard/index.html"
 REQUEST_DELAY = 1.5          # seconds between requests (polite crawling)
 MAX_PAGES = 50               # safety ceiling to prevent runaway loops
 SESSION_TIMEOUT = 30         # seconds
