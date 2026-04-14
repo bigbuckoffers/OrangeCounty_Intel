@@ -1,6 +1,1546 @@
 {
-  "generated_at": "2026-04-14T02:04:18.008096Z",
-  "total_records": 0,
-  "date_range": "01/14/2026 to 04/14/2026",
-  "leads": []
+  "generated_at": "2026-04-14T02:15:19.859892Z",
+  "total_records": 110,
+  "leads": [
+    {
+      "document_number": "20260208883",
+      "file_date": "04/13/2026 01:12 PM",
+      "grantor": "PLANET HOME LENDING LLC",
+      "grantee": "NAVARRO JOSEPH, EASTWOOD COMMUNITY ASSOCIATION INC, CAPITAL ONE BANK USA N A, VELOCITY INVESTMENTS LLC",
+      "legal_description": "Lot: 146   Parcel: 36 22 31 7987 01460  SHERWOOD PHASE TWO",
+      "property_address": "Lot: 146   Parcel: 36 22 31 7987 01460  SHERWOOD PHASE TWO",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858693Z"
+    },
+    {
+      "document_number": "20260208471",
+      "file_date": "04/13/2026 10:08 AM",
+      "grantor": "ONITY MORTGAGE CORPORATION, PHH MORTGAGE CORPORATION",
+      "grantee": "RUIZ ELIZA, RUIZ LUIS, SECRETARY OF HOUSING AND URBAN DEVELOPMENT",
+      "legal_description": "Lot: 212    SKY LAKE OAK RIDGE SECTION UNIT THREE",
+      "property_address": "Lot: 212    SKY LAKE OAK RIDGE SECTION UNIT THREE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858727Z"
+    },
+    {
+      "document_number": "20260208468",
+      "file_date": "04/13/2026 10:08 AM",
+      "grantor": "ROCKET MORTGAGE LLC",
+      "grantee": "DOBBS KATHLEEN, CROSSINGS AT CONWAY CONDOMINIUM ASSOCIATION INC",
+      "legal_description": "Unit: 4111    CROSSINGS AT CONWAY",
+      "property_address": "Unit: 4111    CROSSINGS AT CONWAY",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858736Z"
+    },
+    {
+      "document_number": "20260208372",
+      "file_date": "04/13/2026 09:42 AM",
+      "grantor": "GITSIT SOLUTIONS LLC, GV TRUST 2026 1",
+      "grantee": "TORRES GLADYS I, TORRES FRANCISCO JR, TORRES NELSON, TORRES NEREIDA, TORRES MICHAEL",
+      "legal_description": "Lot: 119   Parcel: 14 23 30 1250 01190  CHARLIN PARK SECOND ADDITION",
+      "property_address": "Lot: 119   Parcel: 14 23 30 1250 01190  CHARLIN PARK SECOND ADDITION",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858742Z"
+    },
+    {
+      "document_number": "20260208224",
+      "file_date": "04/13/2026 09:20 AM",
+      "grantor": "FLINTSTONE LENDING LLC",
+      "grantee": "GREEN HERBERT, GREEN POLLY, WALKER DON MARQUIS, MACK ROBERT, AMTEK ROOFING LLC",
+      "legal_description": "Lot: 5    EATON ESTATES UNIT TWO",
+      "property_address": "Lot: 5    EATON ESTATES UNIT TWO",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858749Z"
+    },
+    {
+      "document_number": "20260207787",
+      "file_date": "04/13/2026 08:28 AM",
+      "grantor": "VIZCAYA AT WATERFORD HOMEOWNERS ASSOCIATION INC",
+      "grantee": "BURGOS MIRIAM ALVARADO, DOE JOHN, DOE JANE",
+      "legal_description": "Lot: 42    VIZCAYA AT WATERFORD",
+      "property_address": "Lot: 42    VIZCAYA AT WATERFORD",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858756Z"
+    },
+    {
+      "document_number": "20260207230",
+      "file_date": "04/10/2026 03:44 PM",
+      "grantor": "U S BANK TRUST COMPANY NATIONAL ASSOCIATION, U S BANK NATIONAL ASSOCIATION, BANK OF AMERICA NATIONAL ASSOCIATION, LASALLE BANK NATIONAL ASSOCIATION, GSAMP TRUST 2006 HE5",
+      "grantee": "DAVIS CORINNE A, DAVIS GLENN A, DAVIS GLENN, HOMEOWNERS ASSOCIATION OF EAGLE CREEK INC, USA INTERNAL REVENUE",
+      "legal_description": "Lot: 545    EAGLE CREEK PHASE 1A",
+      "property_address": "Lot: 545    EAGLE CREEK PHASE 1A",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858768Z"
+    },
+    {
+      "document_number": "20260206600",
+      "file_date": "04/10/2026 01:17 PM",
+      "grantor": "PLANET HOME LENDING LLC",
+      "grantee": "CAMPINOSE JESSICA, SECRETARY OF HOUSING AND URBAN DEVELOPMENT, COUNTRY ADDRESS COMMUNITY ASSOCIATION INC, UNITED STATES OF AMERICA",
+      "legal_description": "Lot: 55   Parcel: 23 21 28 1775 00 550  COUNTRY ADDRESS PHASE 1",
+      "property_address": "Lot: 55   Parcel: 23 21 28 1775 00 550  COUNTRY ADDRESS PHASE 1",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858776Z"
+    },
+    {
+      "document_number": "20260205656",
+      "file_date": "04/10/2026 09:05 AM",
+      "grantor": "WELLS FARGO BANK N A, CARRINGTON MORTGAGE LOAN TRUST SERIES 2006 NC2",
+      "grantee": "MORALES PETER J, MORALES CARMEN L, MORALES CARMEN, MORALES CAREM",
+      "legal_description": "Lot: 619    PARK MANOR ESTATES UNIT TWELVE C",
+      "property_address": "Lot: 619    PARK MANOR ESTATES UNIT TWELVE C",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858782Z"
+    },
+    {
+      "document_number": "20260205570",
+      "file_date": "04/10/2026 08:51 AM",
+      "grantor": "ASSOCIATION RESOURCES LLC",
+      "grantee": "SANTANA JOSHUA",
+      "legal_description": "Unit: D    MILLENNIUM PALMS",
+      "property_address": "Unit: D    MILLENNIUM PALMS",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858788Z"
+    },
+    {
+      "document_number": "20260205562",
+      "file_date": "04/10/2026 08:51 AM",
+      "grantor": "WILMINGTON SAVINGS FUND SOCIETY FSB, CFS15 GRANTOR TRUST",
+      "grantee": "FENEDICK BILLIE J, S M K, KELLY ROXANNE YOUNG, KELLY JOEY COLON, HATHCOCK MAUREEN JEANNETTE",
+      "legal_description": "Lot: 154    COLLEGE HEIGHTS",
+      "property_address": "Lot: 154    COLLEGE HEIGHTS",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858795Z"
+    },
+    {
+      "document_number": "20260205211",
+      "file_date": "04/10/2026 08:11 AM",
+      "grantor": "FLEX COLLECTION LLC",
+      "grantee": "ORR NATHAN GREGORY, FLEX COLLECTION OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858804Z"
+    },
+    {
+      "document_number": "20260205157",
+      "file_date": "04/10/2026 08:07 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "BOTHA DANIELLE, BOTHA JAYSON",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858811Z"
+    },
+    {
+      "document_number": "20260205128",
+      "file_date": "04/10/2026 08:02 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "RODRIGUEZ WILLIAM PEREZ, CASTILLO MELBIS IDANIA CALCINES, CALCINES ROBERTO M QUINTERO",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858815Z"
+    },
+    {
+      "document_number": "20260205096",
+      "file_date": "04/10/2026 07:59 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "ELWELL DAPHNE GAIL, ELWELL TIMOTHY TODD",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858819Z"
+    },
+    {
+      "document_number": "20260205091",
+      "file_date": "04/10/2026 07:58 AM",
+      "grantor": "PALM FINANCIAL SERVICES LLC",
+      "grantee": "SCALIA CANDACE S, SCALIA JOHN B, SCALIA THERESA",
+      "legal_description": "TS: DISNEY VACATION CLUB AT DISNEY S BOARDWALK VILLAS",
+      "property_address": "TS: DISNEY VACATION CLUB AT DISNEY S BOARDWALK VILLAS",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858824Z"
+    },
+    {
+      "document_number": "20260205084",
+      "file_date": "04/10/2026 07:57 AM",
+      "grantor": "PALM FINANCIAL SERVICES LLC",
+      "grantee": "ESQUIVEL BRANDY C",
+      "legal_description": "TS: DISNEY S SARATOGA SPRINGS RESORT",
+      "property_address": "TS: DISNEY S SARATOGA SPRINGS RESORT",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858831Z"
+    },
+    {
+      "document_number": "20260205083",
+      "file_date": "04/10/2026 07:57 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "FRAZAO MANOEL COSTA JUNIOR, FRAZAO KEYLA TOSCANO DE FRANCA",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858835Z"
+    },
+    {
+      "document_number": "20260205043",
+      "file_date": "04/10/2026 07:52 AM",
+      "grantor": "SECURITY NATIONAL LIFE INSURANCE COMPANY",
+      "grantee": "HUANG LIUQING, WESTMINSTER LANDING HOMEOWNERS ASSOCIATION INC, NEW SMYRNA BEACH REAL ESTATE CONSORTIUM LLLP",
+      "legal_description": "Lot: 96   Parcel: 10 23 28 8241 00960  WESTMINSTER LANDING PHASE 1",
+      "property_address": "Lot: 96   Parcel: 10 23 28 8241 00960  WESTMINSTER LANDING PHASE 1",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858840Z"
+    },
+    {
+      "document_number": "20260204067",
+      "file_date": "04/09/2026 12:01 PM",
+      "grantor": "ROCKET MORTGAGE LLC",
+      "grantee": "PEREZ ENRIQUE, HERNANDEZ ERIKA, HENRIQUEZ CARLOS ADAN CENTENO, DUARTE WENDY R CUAREZMA, DUARTE WENDY RAQUEL CUAREZMA",
+      "legal_description": "Lot: 74    CYPRESS LAKES PARCEL G",
+      "property_address": "Lot: 74    CYPRESS LAKES PARCEL G",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858845Z"
+    },
+    {
+      "document_number": "20260204057",
+      "file_date": "04/09/2026 11:59 AM",
+      "grantor": "PENNYMAC LOAN SERVICES LLC",
+      "grantee": "RAMULAPENTA HIMA BINDU, DOMAKONDA THIRUPATHI, SUNNOVA ENERGY CORPORATION, SUNNOVA TE MANAGEMENT LLC, STOREY PARK COMMUNITY ASSOCIATION INC",
+      "legal_description": "Lot: 441    STOREY PARK PARCEL K PHASE 3",
+      "property_address": "Lot: 441    STOREY PARK PARCEL K PHASE 3",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858849Z"
+    },
+    {
+      "document_number": "20260204049",
+      "file_date": "04/09/2026 11:57 AM",
+      "grantor": "ROCKET MORTGAGE LLC",
+      "grantee": "MARCHESE SHERI LYNN, MARCHESE FRANK JR, WINDING BAY PRESERVE HOMEOWNERS ASSOCIATION INC",
+      "legal_description": "Lot: 81    WINDING BAY PHASE 1B",
+      "property_address": "Lot: 81    WINDING BAY PHASE 1B",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858854Z"
+    },
+    {
+      "document_number": "20260204042",
+      "file_date": "04/09/2026 11:54 AM",
+      "grantor": "SUNCOAST EQUITY PARTNERS LLC",
+      "grantee": "NEUDIGATE JOSHUA, NO PROPERTY GROUP LLC, BERMUDA DUNES PRIVATE RESIDENCES CONDOMINIUM ASSOCIATION INC",
+      "legal_description": "Unit: 1222    BERMUDA DUNES PRIVATE RESIDENCES",
+      "property_address": "Unit: 1222    BERMUDA DUNES PRIVATE RESIDENCES",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858858Z"
+    },
+    {
+      "document_number": "20260203738",
+      "file_date": "04/09/2026 10:55 AM",
+      "grantor": "WELLS FARGO BANK NATIONAL ASSOCIATION, ABFC 2006 OPT2 TRUST",
+      "grantee": "GROCHOLSKI JOHN WAYNERIGHT, GROCHOLSKI JOHNATHIN WAYNERIGHT, GROCHOLSKI JOHN W, GROCHOLSKI KIM LYNN, GROCHOLSKI KIM L",
+      "legal_description": "Lot: 84    SUNSET VIEW",
+      "property_address": "Lot: 84    SUNSET VIEW",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858863Z"
+    },
+    {
+      "document_number": "20260203447",
+      "file_date": "04/09/2026 10:03 AM",
+      "grantor": "ECON LANDING COMMUNITY ASSOCIATION INC",
+      "grantee": "MARTINEZ GARCIA JESIKA, GIRALDO ISAZA CARLOS ALIRIO",
+      "legal_description": "Lot: 104    ECON LANDING PHASE 2",
+      "property_address": "Lot: 104    ECON LANDING PHASE 2",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858867Z"
+    },
+    {
+      "document_number": "20260203422",
+      "file_date": "04/09/2026 09:58 AM",
+      "grantor": "ECON LANDING COMMUNITY ASSOCIATION INC",
+      "grantee": "CARTER JESSE H, CORNERSTONE FOUNDATION LIVING TRUST, SECRETARY OF HOUSING AND URBAN DEVELOPMENT",
+      "legal_description": "Lot: 163    ECON LANDING PHASE 2",
+      "property_address": "Lot: 163    ECON LANDING PHASE 2",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858871Z"
+    },
+    {
+      "document_number": "20260203382",
+      "file_date": "04/09/2026 09:51 AM",
+      "grantor": "ECON LANDING COMMUNITY ASSOCIATION INC",
+      "grantee": "DELGADO JOSE LUIS SANCHEZ",
+      "legal_description": "Lot: 168    ECON LANDING PHASE 2",
+      "property_address": "Lot: 168    ECON LANDING PHASE 2",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858881Z"
+    },
+    {
+      "document_number": "20260203347",
+      "file_date": "04/09/2026 09:42 AM",
+      "grantor": "ECON LANDING COMMUNITY ASSOCIATION INC",
+      "grantee": "PEREIRA ROBERTA TAVARES, MORAIS JOAO LUIS DE CASTRO",
+      "legal_description": "Lot: 164    ECON LANDING PHASE 2",
+      "property_address": "Lot: 164    ECON LANDING PHASE 2",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858885Z"
+    },
+    {
+      "document_number": "20260202617",
+      "file_date": "04/09/2026 08:01 AM",
+      "grantor": "SECURITY NATIONAL LIFE INSURANCE COMPANY",
+      "grantee": "HUANG LIUQING, WESTMINSTER LANDING HOMEOWNERS ASSOCIATION INC, NEW SMYRNA BEACH REAL ESTATE CONSORTIUM LLLP",
+      "legal_description": "Lot: 92   Parcel: 10 23 28 8241 00920  WESTMINSTER LANDING PHASE I",
+      "property_address": "Lot: 92   Parcel: 10 23 28 8241 00920  WESTMINSTER LANDING PHASE I",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858890Z"
+    },
+    {
+      "document_number": "20260202607",
+      "file_date": "04/09/2026 08:00 AM",
+      "grantor": "WHISPER LAKES MASTER COMMUNITY ASSOCIATION INC",
+      "grantee": "CURBELO VIRGINIA, WHISPER LAKES UNIT 7 HOMEOWNER S ASSOCIATION INC",
+      "legal_description": "Lot: 35    WHISPER LAKES UNIT 7",
+      "property_address": "Lot: 35    WHISPER LAKES UNIT 7",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858894Z"
+    },
+    {
+      "document_number": "20260202580",
+      "file_date": "04/09/2026 07:55 AM",
+      "grantor": "ASSOCIATION RESOURCES LLC",
+      "grantee": "SANTANA JOSHUA",
+      "legal_description": "Unit: D    MILLENNIUM PALMS",
+      "property_address": "Unit: D    MILLENNIUM PALMS",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858898Z"
+    },
+    {
+      "document_number": "20260201944",
+      "file_date": "04/08/2026 02:44 PM",
+      "grantor": "SCALA WILLIAM D",
+      "grantee": "KENNELLY KATHLEEN SCALA, SCALA WILLIAM D , KATHLEEN SCALA KENNELLY REVOCABLE TRUST",
+      "legal_description": "Lot: 2 Block: C   Parcel: 04 22 30 0000 00 045  PARK MANOR FIRST ADDITION ETC",
+      "property_address": "Lot: 2 Block: C   Parcel: 04 22 30 0000 00 045  PARK MANOR FIRST ADDITION ETC",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858903Z"
+    },
+    {
+      "document_number": "20260201765",
+      "file_date": "04/08/2026 02:02 PM",
+      "grantor": "U S BANK TRUST COMPANY NATIONAL ASSOCIATION, VELOCITY COMMERCIAL CAPITAL LOAN TRUST 2025 3",
+      "grantee": "RASA TAMIM A IBNE, T H PARTNERS INC",
+      "legal_description": "Lot: 4 Block: B    REPLAT OF JESSAMINE BEACH ETC",
+      "property_address": "Lot: 4 Block: B    REPLAT OF JESSAMINE BEACH ETC",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858907Z"
+    },
+    {
+      "document_number": "20260201653",
+      "file_date": "04/08/2026 01:39 PM",
+      "grantor": "VUE AT LAKE EOLA CONDOMINIUM ASSOCIATION INC",
+      "grantee": "ARGERICH ORIOL ROSELL",
+      "legal_description": "Unit: 24 B09    VUE AT LAKE EOLA",
+      "property_address": "Unit: 24 B09    VUE AT LAKE EOLA",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858912Z"
+    },
+    {
+      "document_number": "20260201259",
+      "file_date": "04/08/2026 12:16 PM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "REIHEL MARY KATHLEEN",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858915Z"
+    },
+    {
+      "document_number": "20260200987",
+      "file_date": "04/08/2026 10:56 AM",
+      "grantor": "HARBOR BEND HOMEOWNERS ASSOCIATION INC",
+      "grantee": "TRIM MELISSA",
+      "legal_description": "Lot: 107    HARBOR BEND",
+      "property_address": "Lot: 107    HARBOR BEND",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858922Z"
+    },
+    {
+      "document_number": "20260199676",
+      "file_date": "04/08/2026 08:30 AM",
+      "grantor": "CARRINGTON MORTGAGE SERVICES LLC",
+      "grantee": "MARSHALL CYNTHIA, MARSHALL CYNTHIA ANN, MARSHALL CYNTHIA GIBBS, GIBBS CYNTHIA P, MARSHALL LAWRENCE J",
+      "legal_description": "Lot: 9 Block: B    PHILLIPS FIRST REPLAT OF LAKEWOOD",
+      "property_address": "Lot: 9 Block: B    PHILLIPS FIRST REPLAT OF LAKEWOOD",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858927Z"
+    },
+    {
+      "document_number": "20260199312",
+      "file_date": "04/08/2026 07:29 AM",
+      "grantor": "UNITED WHOLESALE MORTGAGE LLC",
+      "grantee": "GARCON ROSELINE, GARCON JOHN, GARCON JOHN BOB, GAINEY PENNY, ORANGE COUNTY",
+      "legal_description": "Lot: 10 Block: C    ROBINSWOOD SECTION SIX",
+      "property_address": "Lot: 10 Block: C    ROBINSWOOD SECTION SIX",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858931Z"
+    },
+    {
+      "document_number": "20260198612",
+      "file_date": "04/07/2026 01:42 PM",
+      "grantor": "NEWREZ LLC, SHELLPOINT MORTGAGE SERVICING",
+      "grantee": "BUYON JOSE LUIS PEREZ, PEREZ JOSE LUIS, GARCIA YULIMAR GIL, SAWGRASS PLANTATION ORLANDO MASTER HOMEOWNERS ASSOCIATION INC",
+      "legal_description": "Lot: 450    SAWGRASS PLANTATION PHASE 1B SECTION 3",
+      "property_address": "Lot: 450    SAWGRASS PLANTATION PHASE 1B SECTION 3",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858940Z"
+    },
+    {
+      "document_number": "20260198236",
+      "file_date": "04/07/2026 12:38 PM",
+      "grantor": "RIO PINAR LAKES HOMEOWNER S ASSOCIATION INC",
+      "grantee": "GOMEZ JORGE A",
+      "legal_description": "Lot: 43C    RIO PINAR LAKES UNIT TWO PHASE THREE ETC",
+      "property_address": "Lot: 43C    RIO PINAR LAKES UNIT TWO PHASE THREE ETC",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858945Z"
+    },
+    {
+      "document_number": "20260198095",
+      "file_date": "04/07/2026 11:52 AM",
+      "grantor": "WATERFORD TRAILS HOMEOWNERS ASSOCIATION INC",
+      "grantee": "TESFAYE BRUK, AXIA FINANCIAL LLC",
+      "legal_description": "Lot: 107    WATERFORD TRAILS PHASE I",
+      "property_address": "Lot: 107    WATERFORD TRAILS PHASE I",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858949Z"
+    },
+    {
+      "document_number": "20260198020",
+      "file_date": "04/07/2026 11:39 AM",
+      "grantor": "BLUE HERON BEACH RESORT COMMUNITY ASSOCIATION INC",
+      "grantee": "KARIM FAHIM",
+      "legal_description": "Unit: 1506    BLUE HERON BEACH RESORT TOWER 1",
+      "property_address": "Unit: 1506    BLUE HERON BEACH RESORT TOWER 1",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858954Z"
+    },
+    {
+      "document_number": "20260197953",
+      "file_date": "04/07/2026 11:29 AM",
+      "grantor": "HOMEOWNERS ASSOCIATION OF SKY LAKE SOUTH UNITS SIX AND SEVEN INC",
+      "grantee": "COMISO TIMOTHY Q",
+      "legal_description": "Lot: 2    SKY LAKE SOUTH UNITS 6 AND 7 PHASE 3B",
+      "property_address": "Lot: 2    SKY LAKE SOUTH UNITS 6 AND 7 PHASE 3B",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858959Z"
+    },
+    {
+      "document_number": "20260197891",
+      "file_date": "04/07/2026 11:18 AM",
+      "grantor": "U S BANK NATIONAL ASSOCIATION",
+      "grantee": "KNIGHT MARVA",
+      "legal_description": "Lot: 7 Block: A    ROBINSWOOD SECTION TEN",
+      "property_address": "Lot: 7 Block: A    ROBINSWOOD SECTION TEN",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858963Z"
+    },
+    {
+      "document_number": "20260197696",
+      "file_date": "04/07/2026 10:47 AM",
+      "grantor": "MIDFIRST BANK",
+      "grantee": "RODRIGUEZ IVONNE LIZETTE, SUAREZ IVONNE L, ORTIZ MIGUEL A, SUAREZ JAN CARLOS, SUAREZ RODRIGUEZ ORLANDO RAFAEL",
+      "legal_description": "Lot: 33B    BRIDGE CREEK",
+      "property_address": "Lot: 33B    BRIDGE CREEK",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858968Z"
+    },
+    {
+      "document_number": "20260196986",
+      "file_date": "04/07/2026 08:42 AM",
+      "grantor": "MIDFIRST BANK",
+      "grantee": "RIVERA NICOLAS NIEVES, RIVERA NICOLAS, GARCIA ANGELES MALDONADO, GARCIA ANGELES, STOREY PARK COMMUNITY ASSOCIATION INC",
+      "legal_description": "Lot: 530    STOREY PARK PARCEL K PHASE 3",
+      "property_address": "Lot: 530    STOREY PARK PARCEL K PHASE 3",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858975Z"
+    },
+    {
+      "document_number": "20260196974",
+      "file_date": "04/07/2026 08:39 AM",
+      "grantor": "LAKEVIEW LOAN SERVICING LLC",
+      "grantee": "HILL CECELIA, ORANGE COUNTY, STATE OF FLORIDA",
+      "legal_description": "Lot: 30 Block: 10    TANGELO PARK SECTION ONE",
+      "property_address": "Lot: 30 Block: 10    TANGELO PARK SECTION ONE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858979Z"
+    },
+    {
+      "document_number": "20260196969",
+      "file_date": "04/07/2026 08:38 AM",
+      "grantor": "MIDFIRST BANK",
+      "grantee": "MIRO OLMEDO EMILIO, MIRO OLMEDO, ASYN ALEXANDRIA, UNITED STATES OF AMERICA, SECRETARY OF HOUSING AND URBAN DEVELOPMENT",
+      "legal_description": "Lot: 218    GINGER MILL PHASE II",
+      "property_address": "Lot: 218    GINGER MILL PHASE II",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858986Z"
+    },
+    {
+      "document_number": "20260196579",
+      "file_date": "04/07/2026 07:37 AM",
+      "grantor": "PENNYMAC LOAN SERVICES LLC",
+      "grantee": "JONES DANIEL AUBREY SR, JONES TRUST, RIO PINAR LAKES HOMEOWNER S ASSOCIATION INC, US DEPARTMENT OF HOUSING URBAN DEVELOPMENT, FOUNDATION FINANCE COMPANY LLC",
+      "legal_description": "Lot: 60    RIO PINAR LAKES UNIT THREE",
+      "property_address": "Lot: 60    RIO PINAR LAKES UNIT THREE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858990Z"
+    },
+    {
+      "document_number": "20260196568",
+      "file_date": "04/07/2026 07:32 AM",
+      "grantor": "PENNYMAC LOAN SERVICES LLC",
+      "grantee": "NUNEZ ANDRES FELIPE BENAVIDES, USUGA JOHANNA BELINA ORELLANA, STOREY PARK COMMUNITY ASSOCIATION INC, SUNNOVA TE MANAGEMENT LLC",
+      "legal_description": "Lot: 276    STOREY PARK PARCEL K PHASE 2",
+      "property_address": "Lot: 276    STOREY PARK PARCEL K PHASE 2",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.858998Z"
+    },
+    {
+      "document_number": "20260196450",
+      "file_date": "04/06/2026 03:18 PM",
+      "grantor": "CITIBANK N A, NEW RESIDENTIAL MORTGAGE LOAN TRUST 2024 RPL1",
+      "grantee": "BERLUS JAMES D, BERLUS JAMES DAVID, BERLUS JUDINE, VILLA CAPRI AT METROWEST ASSOCIATION INC, ALLIANT CREDIT UNION",
+      "legal_description": "Lot: 12    VILLA CAPRI AT METROWEST",
+      "property_address": "Lot: 12    VILLA CAPRI AT METROWEST",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859002Z"
+    },
+    {
+      "document_number": "20260196256",
+      "file_date": "04/06/2026 02:41 PM",
+      "grantor": "NEWREZ LLC",
+      "grantee": "ORELUS JEAN, ORELUS KATTIANA, GOODLEAP LLC, ORANGE COUNTY",
+      "legal_description": "Lot: 35    AMERICAN HERITAGE ESTATES",
+      "property_address": "Lot: 35    AMERICAN HERITAGE ESTATES",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859007Z"
+    },
+    {
+      "document_number": "20260195235",
+      "file_date": "04/06/2026 09:49 AM",
+      "grantor": "WILMINGTON SAVINGS FUND SOCIETY FSB, RESIDENTIAL CREDIT OPPORTUNITIES TRUST II",
+      "grantee": "IBNE RASA TAMIM AHMAD, T H PARTNERS INC, COPLEY SQUARE HOMEOWNERS ASSOCIATION INC",
+      "legal_description": "Lot: 62    COPLEY SQUARE A REPLAT",
+      "property_address": "Lot: 62    COPLEY SQUARE A REPLAT",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859011Z"
+    },
+    {
+      "document_number": "20260195075",
+      "file_date": "04/06/2026 09:31 AM",
+      "grantor": "UNITED STATE OF AMERICA, U S DEPARTMENT OF HOUSING AND URBAN DEVELOPMENT",
+      "grantee": "STEWART BERNICE F, WHITE HELEN D, DICKSON CONNIE F, O HARA VERNA FREDERICK, FUNDERBURK ANGELA FREDERICK",
+      "legal_description": "Lot: 14 Block: 15    RICHMOND HEIGHTS UNIT FOUR",
+      "property_address": "Lot: 14 Block: 15    RICHMOND HEIGHTS UNIT FOUR",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859016Z"
+    },
+    {
+      "document_number": "20260194999",
+      "file_date": "04/06/2026 09:20 AM",
+      "grantor": "TH MSR HOLDINGS LLC",
+      "grantee": "OSTERRIEDER PETER",
+      "legal_description": "Lot: 8 Block: A    SCHOOL TERRACE",
+      "property_address": "Lot: 8 Block: A    SCHOOL TERRACE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859020Z"
+    },
+    {
+      "document_number": "20260194884",
+      "file_date": "04/06/2026 08:59 AM",
+      "grantor": "SELENE FINANCE LP",
+      "grantee": "DODGE LINDA S, LINDA S DODGE REVOCABLE TRUST, KINGSWOOD MANOR ASSOCIATION INC",
+      "legal_description": "Lot: 39    KINGSWOOD MANOR SEVENTH ADDITION",
+      "property_address": "Lot: 39    KINGSWOOD MANOR SEVENTH ADDITION",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859024Z"
+    },
+    {
+      "document_number": "20260193502",
+      "file_date": "04/03/2026 10:24 AM",
+      "grantor": "U S BANK NATIONAL ASSOCIATION",
+      "grantee": "SHARP KATHLEEN MARIE, SHARP KATHY, SHARP KATHLEEN M, SECRETARY OF HOUSING AND URBAN DEVELOPMENT",
+      "legal_description": "Lot: 21 Block: B    HIWASSA PARK",
+      "property_address": "Lot: 21 Block: B    HIWASSA PARK",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859028Z"
+    },
+    {
+      "document_number": "20260193236",
+      "file_date": "04/03/2026 09:34 AM",
+      "grantor": "HOMEOWNERS ASSOCIATION OF EAGLE CREEK INC",
+      "grantee": "VEGA FRANCISCO ADAIN",
+      "legal_description": "Lot: 372    EAGLE CREEK VILLAGE J K PHASE 2B1",
+      "property_address": "Lot: 372    EAGLE CREEK VILLAGE J K PHASE 2B1",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859033Z"
+    },
+    {
+      "document_number": "20260193046",
+      "file_date": "04/03/2026 08:59 AM",
+      "grantor": "FLEX COLLECTION LLC",
+      "grantee": "KELLEY CHRISTOPHER WILLIAM, KELLEY NICOLE LEANN, FLEX COLLECTION OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859053Z"
+    },
+    {
+      "document_number": "20260193038",
+      "file_date": "04/03/2026 08:59 AM",
+      "grantor": "FLEX COLLECTION LLC",
+      "grantee": "CHIPPENDALE RAY THOMAS",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859057Z"
+    },
+    {
+      "document_number": "20260193035",
+      "file_date": "04/03/2026 08:58 AM",
+      "grantor": "FLEX COLLECTION LLC",
+      "grantee": "QUADER UZMA MOBIN, QUADER ZAFAR, FLEX COLLECTION OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859065Z"
+    },
+    {
+      "document_number": "20260193010",
+      "file_date": "04/03/2026 08:56 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "HOWARD KIMBERLY ANN, HOWARD MICHAEL DEAN, FLEX VACATIONS OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859069Z"
+    },
+    {
+      "document_number": "20260192829",
+      "file_date": "04/03/2026 08:26 AM",
+      "grantor": "U S BANK NATIONAL ASSOCIATION",
+      "grantee": "LADUE TARLA J, DOCKSIDE AT VENTURA CONDOMINIUM ASSOCIATION INC, FORIDA HOUSING FINANCE CORPORATION, MLS REALTY INC, SFR SERVICES L L C",
+      "legal_description": "Unit: 203    DOCKSIDE",
+      "property_address": "Unit: 203    DOCKSIDE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859073Z"
+    },
+    {
+      "document_number": "20260192582",
+      "file_date": "04/03/2026 07:42 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "SIMPSON FIRMIE, ALEXIS JEAN ROSEMOND, MACDONALD SONYA J, FLEX VACATIONS OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859078Z"
+    },
+    {
+      "document_number": "20260192376",
+      "file_date": "04/02/2026 03:30 PM",
+      "grantor": "HOMEOWNERS ASSOCIATION OF EAGLE CREEK INC",
+      "grantee": "LI GUIYING",
+      "legal_description": "Lot: 48    EAGLE CREEK PHASE 1B",
+      "property_address": "Lot: 48    EAGLE CREEK PHASE 1B",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859085Z"
+    },
+    {
+      "document_number": "20260192040",
+      "file_date": "04/02/2026 01:47 PM",
+      "grantor": "ERGS TIMESHARE LLC",
+      "grantee": "REYES VIRGIL TUBANA, REYES KELLI, LP VACATION SUITES OWNERS ASSOCIATION INC",
+      "legal_description": "TS: LP VACATION SUITES",
+      "property_address": "TS: LP VACATION SUITES",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859092Z"
+    },
+    {
+      "document_number": "20260191878",
+      "file_date": "04/02/2026 01:18 PM",
+      "grantor": "BANK OF NEW YORK MELLON, BANK OF NEW YORK, CWALT INC ALTERNATIVE LOAN TRUST 2006 OA 19",
+      "grantee": "RAMNARINE IRMA, RAMNARINE IRMA D, WESMERE MAINTENANCE ASSOCIATION INC",
+      "legal_description": "Lot: 5 Block: A    WESMERE AT OCOEE UNIT ONE",
+      "property_address": "Lot: 5 Block: A    WESMERE AT OCOEE UNIT ONE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859097Z"
+    },
+    {
+      "document_number": "20260191664",
+      "file_date": "04/02/2026 12:42 PM",
+      "grantor": "M M PRIVATE LENDING GROUP LLC",
+      "grantee": "LAMAR MARY R, HARMESON LESLIE, CAMACHO LAURIE, ROLLING R RANCH LTD",
+      "legal_description": "Section: 6 Township: 22 Range: 32",
+      "property_address": "Section: 6 Township: 22 Range: 32",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859101Z"
+    },
+    {
+      "document_number": "20260191346",
+      "file_date": "04/02/2026 11:05 AM",
+      "grantor": "RESERVE AT HUNTERS GLEN HOMEOWNERS ASSOCIATION INC",
+      "grantee": "GOMEZ CAROLINA",
+      "legal_description": "Lot: 62    SOUTHCHASE PHASE 1A",
+      "property_address": "Lot: 62    SOUTHCHASE PHASE 1A",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859105Z"
+    },
+    {
+      "document_number": "20260191200",
+      "file_date": "04/02/2026 10:23 AM",
+      "grantor": "NEWREZ LLC",
+      "grantee": "HERNANDEZ JOSE ROMAN, VISCARDI MIRELA, PINES OF WEKIVA HOMEOWNERS ASSOCIATION INC, ISPC, CORNING FEDERAL CREDIT UNION",
+      "legal_description": "Lot: 33    PINES OF WEKIVA SECTION II PHASE I TRACT E",
+      "property_address": "Lot: 33    PINES OF WEKIVA SECTION II PHASE I TRACT E",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859110Z"
+    },
+    {
+      "document_number": "20260191134",
+      "file_date": "04/02/2026 09:51 AM",
+      "grantor": "SOUTHPORT HOMEOWNERS ASSOCIATION INC",
+      "grantee": "ARROYO CRISTINA",
+      "legal_description": "Lot: 37 Block: 2    VILLAGES OF SOUTHPORT PHASE 1B",
+      "property_address": "Lot: 37 Block: 2    VILLAGES OF SOUTHPORT PHASE 1B",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859114Z"
+    },
+    {
+      "document_number": "20260191060",
+      "file_date": "04/02/2026 09:34 AM",
+      "grantor": "YELLOW SKIES LLC",
+      "grantee": "CARRILLO FRANCISCO J GONZALEZ, DOE JANE JOHN, WILLIAMSBURG HOMEOWNERS ASSOCIATION INC, FOUNDATION FINANCE COMPANY LLC",
+      "legal_description": "Lot: 286    WINDMILL POINTE WILLIAMSBURG AT ORANGEWOOD",
+      "property_address": "Lot: 286    WINDMILL POINTE WILLIAMSBURG AT ORANGEWOOD",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859121Z"
+    },
+    {
+      "document_number": "20260190875",
+      "file_date": "04/02/2026 09:14 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "FRAZIER RICHARD C, FRAZIER SCOT, FRAZIER DANIELLE, HARRIS ANIKA",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859125Z"
+    },
+    {
+      "document_number": "20260190524",
+      "file_date": "04/02/2026 08:47 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "PENDER MARVIN RAY JR, PENDER ERICA WINETTA, FLEX VACATIONS OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859129Z"
+    },
+    {
+      "document_number": "20260190517",
+      "file_date": "04/02/2026 08:46 AM",
+      "grantor": "VISTANA FOUNTAINS II CONDOMINIUM ASSOCIATION INC",
+      "grantee": "MADDEN MARY ELLEN, CHAMBERS THERESA, MADDEN CHARLES W, ZINKE ELIZABETH, WHITE KATHLEEN",
+      "legal_description": "TS: VISTANA FOUNTAINS II CONDOMINIUM",
+      "property_address": "TS: VISTANA FOUNTAINS II CONDOMINIUM",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859135Z"
+    },
+    {
+      "document_number": "20260190515",
+      "file_date": "04/02/2026 08:46 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "GLINZ DALE NORMAN, PALMERTON AMY PATRICIA, FLEX VACATIONS OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859141Z"
+    },
+    {
+      "document_number": "20260190514",
+      "file_date": "04/02/2026 08:46 AM",
+      "grantor": "METROPOLITAN LIFE INSURANCE COMPANY",
+      "grantee": "MOMPLAISIR RUBIN, RUBY PROPERTY INVESTMENT LLC, ORANGE COUNTY, SOLAR MOSAIC LLC",
+      "legal_description": "Lot: 29 Block: C    ROBINSWOOD SECTION ONE",
+      "property_address": "Lot: 29 Block: C    ROBINSWOOD SECTION ONE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859147Z"
+    },
+    {
+      "document_number": "20260190513",
+      "file_date": "04/02/2026 08:46 AM",
+      "grantor": "VISTANA FOUNTAINS II CONDOMINIUM ASSOCIATION INC",
+      "grantee": "MADDEN ELLEN MARY, CHAMBERS THERESA, MADDEN CHARLES W, ZINKE ELIZABETH, WHITE KATHLEEN",
+      "legal_description": "TS: VISTANA FOUNTAINS II CONDOMINIUM",
+      "property_address": "TS: VISTANA FOUNTAINS II CONDOMINIUM",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859154Z"
+    },
+    {
+      "document_number": "20260190501",
+      "file_date": "04/02/2026 08:45 AM",
+      "grantor": "PALM FINANCIAL SERVICES LLC",
+      "grantee": "LAM ROBERT, GORDON INEZ CARDOZA",
+      "legal_description": "TS: DISNEY S POLYNESIAN VILLAS BUNGALOWS",
+      "property_address": "TS: DISNEY S POLYNESIAN VILLAS BUNGALOWS",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859160Z"
+    },
+    {
+      "document_number": "20260190496",
+      "file_date": "04/02/2026 08:44 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "ANELE TERRY MELISSA HANAH ENYIDICHI, TERRY DELANEY CORTEZ, FLEX VACATIONS OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859167Z"
+    },
+    {
+      "document_number": "20260190374",
+      "file_date": "04/02/2026 08:28 AM",
+      "grantor": "COMPUTERSHARE DELAWARE TRUST COMPANY, EASY STREET LOAN TRUST 2025 RTL1",
+      "grantee": "RODRIGUEZ EMMA RANGEL, 722 CARLSON DRIVE LLC",
+      "legal_description": "Lot: 5 Block: E    SUNSHINE GARDENS ETC",
+      "property_address": "Lot: 5 Block: E    SUNSHINE GARDENS ETC",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859172Z"
+    },
+    {
+      "document_number": "20260190363",
+      "file_date": "04/02/2026 08:24 AM",
+      "grantor": "FLEX COLLECTION LLC",
+      "grantee": "DELANEY KOLBY JAMES ALLEN, DELANEY KOLBY PERRY LEE, FLEX COLLECTION OWNERS ASSOCIATION INC",
+      "legal_description": "TS:",
+      "property_address": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859178Z"
+    },
+    {
+      "document_number": "20260190325",
+      "file_date": "04/02/2026 08:16 AM",
+      "grantor": "UNITED STATES OF AMERICA, RURAL HOUSING SERVICE, UNITED STATES DEPARTMENT OF AGRICULTURE",
+      "grantee": "FLOWERS JANETTE E, CORNING FEDERAL CREDIT UNION",
+      "legal_description": "Lot: 41    LAKEWOOD MANOR",
+      "property_address": "Lot: 41    LAKEWOOD MANOR",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859182Z"
+    },
+    {
+      "document_number": "20260190312",
+      "file_date": "04/02/2026 08:15 AM",
+      "grantor": "LAKE JESSAMINIE ESTATES PHASE 2 HOMEOWNERS ASSOCIATION INC",
+      "grantee": "VALLES JERRY",
+      "legal_description": "Lot: 8    LAKE JESSAMINE ESTATES PHASE 2",
+      "property_address": "Lot: 8    LAKE JESSAMINE ESTATES PHASE 2",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859189Z"
+    },
+    {
+      "document_number": "20260190285",
+      "file_date": "04/02/2026 08:11 AM",
+      "grantor": "MIDFIRST BANK",
+      "grantee": "JONES LETAH M, ORANGE COUNTY, SECRETARY OF HOUSING AND URBAN DEVELOPMENT",
+      "legal_description": "Lot: 7 Block: A    WESTWOOD HEIGHTS",
+      "property_address": "Lot: 7 Block: A    WESTWOOD HEIGHTS",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859196Z"
+    },
+    {
+      "document_number": "20260190153",
+      "file_date": "04/02/2026 07:58 AM",
+      "grantor": "HSBC BANK USA NATIONAL ASSOCIATION, NOMURA HOME EQUITY LOAN INC",
+      "grantee": "FOURNIER RAMON F, ORAMA RAMON FERNANDO FOURNIER, CRUZ ELOISA, 3245 OAK BLUFF LAND TRUST, CITY OF ORLANDO",
+      "legal_description": "Lot: 102 Block: 3    VILLAGES OF SOUTHPORT PHASE 1C",
+      "property_address": "Lot: 102 Block: 3    VILLAGES OF SOUTHPORT PHASE 1C",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859201Z"
+    },
+    {
+      "document_number": "20260190051",
+      "file_date": "04/02/2026 07:44 AM",
+      "grantor": "MIDFIRST BANK",
+      "grantee": "REYES JOSE, BROWN JILLIAN FRANCES, REYES JILLIAN, REYES JILLIAN F, ADMIRAL POINTE HOMEOWNERS ASSOCIATION INC",
+      "legal_description": "Lot: 103    ADMIRAL POINTE",
+      "property_address": "Lot: 103    ADMIRAL POINTE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859211Z"
+    },
+    {
+      "document_number": "20260190031",
+      "file_date": "04/02/2026 07:41 AM",
+      "grantor": "AVAIL HOLDING LLC",
+      "grantee": "CORNEJO EDDISON, CORNEJO EDDISON FRANK, CORNEJO PATRICIA ANABELL, CEPEDA SANDRA, CEPEDA SANDRA AYME",
+      "legal_description": "Lot: 190    WOODLAND LAKES TWO UNIT 2B",
+      "property_address": "Lot: 190    WOODLAND LAKES TWO UNIT 2B",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859216Z"
+    },
+    {
+      "document_number": "20260190015",
+      "file_date": "04/02/2026 07:38 AM",
+      "grantor": "MIDFIRST BANK",
+      "grantee": "DESUE QUEENIE M LYONS, DESUE QUEENIE, DESUE DONNALLA MORECER, DESUE DONNALLA, US DEPARTMENT OF HOUSING URBAN DEVELOPMENT",
+      "legal_description": "Lot: 7    AVENTURA ESTATES",
+      "property_address": "Lot: 7    AVENTURA ESTATES",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859221Z"
+    },
+    {
+      "document_number": "20260189970",
+      "file_date": "04/02/2026 07:27 AM",
+      "grantor": "NEWREZ LLC, SHELLPOINT MORTGAGE SERVICING",
+      "grantee": "PUSKARICH MICHAEL WILLIAM, MASTROIANNI REGINA JAYNE, SUMMERLAKE COMMUNITY ASSOCIATION INC",
+      "legal_description": "Lot: 19    SUMMERLAKE PD PHASE 4A",
+      "property_address": "Lot: 19    SUMMERLAKE PD PHASE 4A",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859225Z"
+    },
+    {
+      "document_number": "20260189904",
+      "file_date": "04/01/2026 03:55 PM",
+      "grantor": "TRUIST BANK, BRANCH BANKING AND TRUST COMPANY",
+      "grantee": "MUSTELIER MANUEL ALEJANDRO, UNITED STATES OF AMERICA DEPARTMENT OF HOUSING AND URBAN DEVELOPMENT",
+      "legal_description": "Section: 22 Township: 22 Range: 31",
+      "property_address": "Section: 22 Township: 22 Range: 31",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859232Z"
+    },
+    {
+      "document_number": "20260189719",
+      "file_date": "04/01/2026 02:41 PM",
+      "grantor": "LAUREATE PARK MASTER ASSOCIATION INC",
+      "grantee": "SMART RAZELL OCTAVIS, SMART SARA FRANCES",
+      "legal_description": "Lot: 335    LAUREATE PARK PHASE 5B",
+      "property_address": "Lot: 335    LAUREATE PARK PHASE 5B",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859236Z"
+    },
+    {
+      "document_number": "20260189685",
+      "file_date": "04/01/2026 02:36 PM",
+      "grantor": "WESTWOOD OF ORANGE COUNTY CONDOMINIUM ASSOCIATION INC",
+      "grantee": "JOHNSON GONZALEZ CHARDANAE SARIA",
+      "legal_description": "Unit: 2 103    WESTWOOD CONDOMINIUM II",
+      "property_address": "Unit: 2 103    WESTWOOD CONDOMINIUM II",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859243Z"
+    },
+    {
+      "document_number": "20260189208",
+      "file_date": "04/01/2026 01:43 PM",
+      "grantor": "LIEN LIQUIDATORS OF FL LIT 8 LLC, TRANSPARENT ROOF SOLUTIONS LLC, REINFORCEMENT ROOFING",
+      "grantee": "EXPERTS TEAM REALTY INC",
+      "legal_description": "Lot: 16 Block: 18   Parcel: 32 22 29 9004 18 160  WASHINGTON PARK SECTION NO 1",
+      "property_address": "Lot: 16 Block: 18   Parcel: 32 22 29 9004 18 160  WASHINGTON PARK SECTION NO 1",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859248Z"
+    },
+    {
+      "document_number": "20260189078",
+      "file_date": "04/01/2026 01:18 PM",
+      "grantor": "LAUREATE PARK MASTER ASSOCIATION INC",
+      "grantee": "OSORIO JUAN PABLO",
+      "legal_description": "Lot: 91    LAUREATE PARK PHASE 2A",
+      "property_address": "Lot: 91    LAUREATE PARK PHASE 2A",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859252Z"
+    },
+    {
+      "document_number": "20260188920",
+      "file_date": "04/01/2026 12:58 PM",
+      "grantor": "SELECT PORTFOLIO SERVICING INC",
+      "grantee": "BROWN CALVIN JR , BROWN CYNTHIA, BROWN YOLANDA, JACKSON MICHELLE",
+      "legal_description": "Lot: 14 Block: D    AZALEA PARK SECTION THIRTY THREE",
+      "property_address": "Lot: 14 Block: D    AZALEA PARK SECTION THIRTY THREE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859259Z"
+    },
+    {
+      "document_number": "20260188520",
+      "file_date": "04/01/2026 11:41 AM",
+      "grantor": "HUNTINGTON NATIONAL BANK",
+      "grantee": "NIEDERST MICHAEL D, NIEDERST DAVID B, NIEDERST ADRINA, NIEDERST ADRINA ANN, MWAD PHASE II LLC",
+      "legal_description": "Lot: 2   Parcel: 28 21 29 5499 02000  MAITLAND WEST",
+      "property_address": "Lot: 2   Parcel: 28 21 29 5499 02000  MAITLAND WEST",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859264Z"
+    },
+    {
+      "document_number": "20260188416",
+      "file_date": "04/01/2026 11:32 AM",
+      "grantor": "RANDAL PARK RESIDENTIAL PROPERTY OWNERS ASSOCIATION INC",
+      "grantee": "RODRIGUEZ EDGAR A",
+      "legal_description": "Lot: 278    RANDAL PARK PHASE 4",
+      "property_address": "Lot: 278    RANDAL PARK PHASE 4",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859268Z"
+    },
+    {
+      "document_number": "20260188020",
+      "file_date": "04/01/2026 10:56 AM",
+      "grantor": "CROSSCOUNTRY MORTGAGE LLC",
+      "grantee": "REYES JORGE R, REYES CLARA RAMONA, WELL DONE MITIGATION LLC",
+      "legal_description": "Lot: 11 Block: B    WEST COLONIAL HEIGHTS",
+      "property_address": "Lot: 11 Block: B    WEST COLONIAL HEIGHTS",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859272Z"
+    },
+    {
+      "document_number": "20260187962",
+      "file_date": "04/01/2026 10:50 AM",
+      "grantor": "LAKEVIEW LOAN SERVICING LLC",
+      "grantee": "ALEZI VILICIA JEANVIL, ALEZI VILICIA J, JEANVIL JOSEPH EXANCIL, SYNCHRONY BANK",
+      "legal_description": "Lot: 30 Block: F    WESTSIDE MANOR SECTION 1",
+      "property_address": "Lot: 30 Block: F    WESTSIDE MANOR SECTION 1",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859276Z"
+    },
+    {
+      "document_number": "20260187854",
+      "file_date": "04/01/2026 10:40 AM",
+      "grantor": "LAKEVIEW LOAN SERVICING LLC",
+      "grantee": "OSTERRIEDER PETER",
+      "legal_description": "Lot: 8 Block: B    GLENCOE SUBDIVISION ETC",
+      "property_address": "Lot: 8 Block: B    GLENCOE SUBDIVISION ETC",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859280Z"
+    },
+    {
+      "document_number": "20260187392",
+      "file_date": "04/01/2026 09:48 AM",
+      "grantor": "PINES OF WEKIVA HOMEOWNERS ASSOCIATION INC",
+      "grantee": "VALDES DANIEL DIAZ",
+      "legal_description": "Lot: 8    PINES OF WEKIVA TRACT F",
+      "property_address": "Lot: 8    PINES OF WEKIVA TRACT F",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859284Z"
+    },
+    {
+      "document_number": "20260186817",
+      "file_date": "04/01/2026 09:01 AM",
+      "grantor": "RANDAL PARK RESIDENTIAL PROPERTY OWNERS ASSOCIATION INC",
+      "grantee": "PHILLIPS LEIGH A",
+      "legal_description": "Lot: 101    RANDAL PARK PHASE 1A",
+      "property_address": "Lot: 101    RANDAL PARK PHASE 1A",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859288Z"
+    },
+    {
+      "document_number": "20260186797",
+      "file_date": "04/01/2026 08:59 AM",
+      "grantor": "SGC HOLDINGS USA LLC",
+      "grantee": "LYKKEBAK DONALD ALAN, LYKKEBANK DONALD ALAN, LYKKEBAK LINDA MARY",
+      "legal_description": "Lot: 16 Block: Q   Parcel: 14 22 29 0160 18 161  ANDERSON PARK SUBDIVISION ETC",
+      "property_address": "Lot: 16 Block: Q   Parcel: 14 22 29 0160 18 161  ANDERSON PARK SUBDIVISION ETC",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859295Z"
+    },
+    {
+      "document_number": "20260186348",
+      "file_date": "04/01/2026 08:21 AM",
+      "grantor": "RANDAL PARK RESIDENTIAL PROPERTY OWNERS ASSOCIATION INC",
+      "grantee": "RODRIGUEZ JUAN MANUEL MARTINEZ",
+      "legal_description": "Lot: 16    RANDAL PARK PHASE 3C",
+      "property_address": "Lot: 16    RANDAL PARK PHASE 3C",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859299Z"
+    },
+    {
+      "document_number": "20260186318",
+      "file_date": "04/01/2026 08:16 AM",
+      "grantor": "LAKEVIEW LOAN SERVICING LLC",
+      "grantee": "BAEZ ADRIANA, BAEZ JOSE, LENNAR HOMES LLC, UNITED STATES OF AMERICA, SECRETARY OF HOUSING AND URBAN DEVELOPMENT",
+      "legal_description": "Lot: 374    SIGNATURE LAKES PARCEL 1C",
+      "property_address": "Lot: 374    SIGNATURE LAKES PARCEL 1C",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859308Z"
+    },
+    {
+      "document_number": "20260186194",
+      "file_date": "04/01/2026 08:01 AM",
+      "grantor": "WILMINGTON SAVINGS FUND SOCIETY FSB, CSMC 2019 RPL5 TRUST",
+      "grantee": "TRAWICK JOVON, TRAWICK JOVON KENTAE, ONEMAIN HOME EQUITY INC, AMERICAN GENERAL HOME EQUITY INC",
+      "legal_description": "Lot: 2 Block: 1    RICHMOND HEIGHTS UNIT ONE",
+      "property_address": "Lot: 2 Block: 1    RICHMOND HEIGHTS UNIT ONE",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859313Z"
+    },
+    {
+      "document_number": "20260186164",
+      "file_date": "04/01/2026 07:58 AM",
+      "grantor": "ROCKET MORTGAGE LLC, QUICKEN LOANS LLC",
+      "grantee": "JOHNSON DAMON, JACKSON PARK 2 CONDOMINIUM ASSOCIATION INC",
+      "legal_description": "Unit: 3    JACKSON PARK 2",
+      "property_address": "Unit: 3    JACKSON PARK 2",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859320Z"
+    },
+    {
+      "document_number": "20260186153",
+      "file_date": "04/01/2026 07:56 AM",
+      "grantor": "PARK TREE INVESTMENTS 24 LLC",
+      "grantee": "RING DIRK, SOUTHCHASE PARCELS 1 AND 6 MASTER ASSOCIATION INC, SOUTHCHASE PARCEL 6 COMMUNITY ASSOCIATION INC, WETHERBEE ROAD ASSOCIATION INC, ORANGE COUNTY",
+      "legal_description": "Lot: 66    SOUTHCHASE UNIT 8",
+      "property_address": "Lot: 66    SOUTHCHASE UNIT 8",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859325Z"
+    },
+    {
+      "document_number": "20260186116",
+      "file_date": "04/01/2026 07:53 AM",
+      "grantor": "SOUTHPORT HOMEOWNERS ASSOCIATION INC",
+      "grantee": "MCFARLAND MARIA MERCEDES, MCFARLAND MERCHE M, MCFARLAND MARY",
+      "legal_description": "Lot: 112 Block: 3    VILLAGES OF SOUTHPORT PHASE 1C",
+      "property_address": "Lot: 112 Block: 3    VILLAGES OF SOUTHPORT PHASE 1C",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "scraped_at": "2026-04-14T02:15:19.859330Z"
+    }
+  ]
 }
