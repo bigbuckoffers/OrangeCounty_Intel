@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-14T14:08:20.911673Z",
-  "total_records": 1609,
+  "generated_at": "2026-04-14T14:09:22.844444Z",
+  "total_records": 1610,
   "date_range": "04/07/2026 to 04/14/2026",
   "leads": [
     {
@@ -4986,6 +4986,20 @@
         "probate"
       ],
       "scraped_at": "2026-04-14T14:08:14.240484Z"
+    },
+    {
+      "document_number": "20260210866",
+      "file_date": "04/14/2026 10:03 AM",
+      "grantor": "WALKER LONNIE B",
+      "grantee": "",
+      "legal_description": "Case: 2026 CP 001027 O",
+      "property_address": "Case: 2026 CP 001027 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:09:15.940336Z"
     },
     {
       "document_number": "20260210651",
