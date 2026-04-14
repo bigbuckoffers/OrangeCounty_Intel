@@ -6,7 +6,7 @@
 <title>OC Motivated Seller Leads</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root {--bg:#0d0f14;--surface:#151820;--border:#1e2330;--accent:#e84040;--accent2:#f5a623;--text:#e8eaf0;--muted:#5a6070;--card:#181c26}
+  :root{--bg:#0d0f14;--surface:#151820;--border:#1e2330;--accent:#e84040;--accent2:#f5a623;--text:#e8eaf0;--muted:#5a6070;--card:#181c26}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'IBM Plex Mono',monospace;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px}
   header{background:linear-gradient(135deg,#0d0f14 0%,#131928 100%);border-bottom:1px solid var(--border);padding:32px 48px 28px;display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap}
@@ -40,21 +40,22 @@
   small.muted{display:block;margin-top:3px}
   .score-cell{text-align:center}
   .score-ring{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:2px solid var(--c,#38a169);color:var(--c,#38a169);font-family:'Syne',sans-serif;font-weight:800;font-size:15px}
+  .loading{text-align:center;padding:60px;color:var(--muted)}
   footer{margin-top:40px;text-align:center;font-size:11px;color:var(--muted)}
 </style>
 </head>
 <body>
 <header>
   <div><h1>ORANGE COUNTY <span>FL</span><br>MOTIVATED SELLERS</h1></div>
-  <div class="meta">Generated: 2026-04-14 02:16 UTC<br>Apr 1–13, 2026 · Lis Pendens Records<br>Source: Orange County Comptroller</div>
+  <div class="meta" id="meta">Loading data...<br>Source: Orange County Comptroller<br>Scored by distress signal analysis</div>
 </header>
 <div class="stats">
-  <div class="stat-card red"><div class="num">110</div><div class="label">Total Leads</div></div>
-  <div class="stat-card gold"><div class="num">110</div><div class="label">Lis Pendens 🔥</div></div>
-  <div class="stat-card green"><div class="num">Apr 1–13</div><div class="label">Date Range</div></div>
+  <div class="stat-card red"><div class="num" id="totalLeads">-</div><div class="label">Total Leads</div></div>
+  <div class="stat-card gold"><div class="num" id="hotLeads">-</div><div class="label">Lis Pendens</div></div>
+  <div class="stat-card green"><div class="num" id="dateRange">-</div><div class="label">Date Range</div></div>
 </div>
 <div class="toolbar">
-  <input type="text" id="searchBox" placeholder="Search name, address, legal …" oninput="filterTable()">
+  <input type="text" id="searchBox" placeholder="Search name, address, legal ..." oninput="filterTable()">
   <label>Search:</label>
 </div>
 <div class="table-wrap">
@@ -71,42 +72,35 @@
       </tr>
     </thead>
     <tbody id="tableBody">
-        <tr class="lead-row" style="--row-i:1"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208883</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 01:12 PM</td><td>PLANET HOME LENDING LLC</td><td>NAVARRO JOSEPH, EASTWOOD COMMUNITY ASSOCIATION INC, CAPITAL ONE BANK USA N A, VELOCITY INVESTMENTS LLC</td><td class="address-col">Lot: 146   Parcel: 36 22 31 7987 01460  SHERWOOD PHASE TWO</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:2"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208471</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 10:08 AM</td><td>ONITY MORTGAGE CORPORATION, PHH MORTGAGE CORPORATION</td><td>RUIZ ELIZA, RUIZ LUIS, SECRETARY OF HOUSING AND URBAN DEVELOPMENT</td><td class="address-col">Lot: 212    SKY LAKE OAK RIDGE SECTION UNIT THREE</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:3"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208468</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 10:08 AM</td><td>ROCKET MORTGAGE LLC</td><td>DOBBS KATHLEEN, CROSSINGS AT CONWAY CONDOMINIUM ASSOCIATION INC</td><td class="address-col">Unit: 4111    CROSSINGS AT CONWAY</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:4"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208372</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 09:42 AM</td><td>GITSIT SOLUTIONS LLC, GV TRUST 2026 1</td><td>TORRES GLADYS I, TORRES FRANCISCO JR, TORRES NELSON, TORRES NEREIDA, TORRES MICHAEL</td><td class="address-col">Lot: 119   Parcel: 14 23 30 1250 01190  CHARLIN PARK SECOND ADDITION</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:5"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208224</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 09:20 AM</td><td>FLINTSTONE LENDING LLC</td><td>GREEN HERBERT</td><td class="address-col">Lot: 5    EATON ESTATES UNIT TWO</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:6"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260207787</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 08:28 AM</td><td>VIZCAYA AT WATERFORD HOMEOWNERS ASSOCIATION INC</td><td>BURGOS MIRIAM ALVARADO, DOE JOHN, DOE JANE</td><td class="address-col">Lot: 42    VIZCAYA AT WATERFORD</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:7"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260207230</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 03:44 PM</td><td>U S BANK TRUST COMPANY NATIONAL ASSOCIATION</td><td>DAVIS CORINNE A, DAVIS GLENN A, DAVIS GLENN</td><td class="address-col">Lot: 545    EAGLE CREEK PHASE 1A</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:8"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260206600</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 01:17 PM</td><td>PLANET HOME LENDING LLC</td><td>CAMPINOSE JESSICA, SECRETARY OF HOUSING AND URBAN DEVELOPMENT</td><td class="address-col">Lot: 55   Parcel: 23 21 28 1775 00 550  COUNTRY ADDRESS PHASE 1</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:9"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260205656</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 09:05 AM</td><td>WELLS FARGO BANK N A</td><td>MORALES PETER J, MORALES CARMEN L</td><td class="address-col">Lot: 619    PARK MANOR ESTATES UNIT TWELVE C</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
-        <tr class="lead-row" style="--row-i:10"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260205570</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 08:51 AM</td><td>ASSOCIATION RESOURCES LLC</td><td>SANTANA JOSHUA</td><td class="address-col">Unit: D    MILLENNIUM PALMS</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+      <tr><td colspan="7" class="loading">Loading leads...</td></tr>
     </tbody>
   </table>
 </div>
-<footer>Orange County Comptroller public records · Lis Pendens · For investment research only</footer>
+<footer>Orange County Comptroller public records - Lis Pendens - For investment research only</footer>
 <script>
-  function filterTable(){
-    const q=document.getElementById('searchBox').value.toLowerCase();
-    document.querySelectorAll('.lead-row').forEach(row=>{
-      row.style.display=!q||row.innerText.toLowerCase().includes(q)?'':'none';
-    });
-  }
-  let sortDir={};
-  function sortTable(col){
-    const tbody=document.getElementById('tableBody');
-    const rows=Array.from(tbody.querySelectorAll('.lead-row'));
-    const asc=!sortDir[col];sortDir={[col]:asc};
-    rows.sort((a,b)=>{
-      const av=a.cells[col]?.innerText.trim()||'';
-      const bv=b.cells[col]?.innerText.trim()||'';
-      const an=parseFloat(av),bn=parseFloat(bv);
-      if(!isNaN(an)&&!isNaN(bn))return asc?an-bn:bn-an;
-      return asc?av.localeCompare(bv):bv.localeCompare(av);
-    });
-    rows.forEach(r=>tbody.appendChild(r));
-    document.querySelectorAll('thead th').forEach((th,i)=>th.classList.toggle('sorted',i===col));
-  }
+var JSON_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/main/data/output.json';
+function scoreColor(s){return s>=25?'#e53e3e':s>=15?'#d69e2e':'#38a169'}
+function badge(flag){var m={lis_pendens:['LIS PENDENS','#e53e3e'],tax_delinquency:['TAX DEED','#e53e3e'],multiple_liens:['LIEN','#3182ce'],judgment:['JUDGMENT','#d69e2e'],probate:['PROBATE','#805ad5'],divorce_bankruptcy:['DIVORCE','#319795']};var lb=m[flag]||[flag.toUpperCase(),'#718096'];return '<span style="background:'+lb[1]+';color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">'+lb[0]+'</span>';}
+function trunc(s,n){return s&&s.length>n?s.slice(0,n)+'...':s||'-'}
+function loadLeads(){
+  fetch(JSON_URL+'?t='+Date.now())
+  .then(function(r){return r.json()})
+  .then(function(data){
+    var leads=data.leads||[];
+    document.getElementById('totalLeads').textContent=leads.length;
+    document.getElementById('hotLeads').textContent=leads.filter(function(l){return l.seller_score>=25}).length;
+    document.getElementById('meta').innerHTML='Generated: '+(data.generated_at||'').slice(0,16).replace('T',' ')+' UTC<br>Source: Orange County Comptroller<br>Scored by distress signal analysis';
+    if(leads.length>0){var dates=leads.map(function(l){return l.file_date}).filter(Boolean).sort();document.getElementById('dateRange').textContent=(dates[0]||'').slice(0,5)+' - '+(dates[dates.length-1]||'').slice(0,5);}
+    var tbody=document.getElementById('tableBody');
+    if(!leads.length){tbody.innerHTML='<tr><td colspan="7" class="loading">No records found</td></tr>';return;}
+    tbody.innerHTML=leads.map(function(l,i){return '<tr class="lead-row" style="--row-i:'+(i+1)+'"><td class="score-cell"><div class="score-ring" style="--c:'+scoreColor(l.seller_score)+'"><span>'+l.seller_score+'</span></div></td><td><strong>'+(l.document_number||'-')+'</strong><br><small class="muted">'+(l.document_type||'')+'</small></td><td>'+(l.file_date||'-')+'</td><td>'+trunc(l.grantor,50)+'</td><td>'+trunc(l.grantee,60)+'</td><td class="address-col">'+trunc(l.legal_description,80)+'</td><td>'+((l.distress_flags||[]).map(badge).join('')||'-')+'</td></tr>';}).join('');
+  })
+  .catch(function(e){document.getElementById('tableBody').innerHTML='<tr><td colspan="7" class="loading">Error: '+e.message+'</td></tr>';});
+}
+function filterTable(){var q=document.getElementById('searchBox').value.toLowerCase();document.querySelectorAll('.lead-row').forEach(function(row){row.style.display=!q||row.innerText.toLowerCase().includes(q)?'':'none';});}
+var sortDir={};
+function sortTable(col){var tbody=document.getElementById('tableBody');var rows=Array.from(tbody.querySelectorAll('.lead-row'));var asc=!sortDir[col];sortDir={};sortDir[col]=asc;rows.sort(function(a,b){var av=a.cells[col]?a.cells[col].innerText.trim():'';var bv=b.cells[col]?b.cells[col].innerText.trim():'';var an=parseFloat(av),bn=parseFloat(bv);if(!isNaN(an)&&!isNaN(bn))return asc?an-bn:bn-an;return asc?av.localeCompare(bv):bv.localeCompare(av);});rows.forEach(function(r){tbody.appendChild(r);});document.querySelectorAll('thead th').forEach(function(th,i){th.classList.toggle('sorted',i===col);});}
+loadLeads();
 </script>
 </body>
 </html>
