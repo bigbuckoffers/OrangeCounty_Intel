@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-14T13:37:11.851060Z",
-  "total_records": 1569,
+  "generated_at": "2026-04-14T13:54:23.197887Z",
+  "total_records": 1594,
   "date_range": "04/07/2026 to 04/14/2026",
   "leads": [
     {
@@ -4790,6 +4790,76 @@
         "probate"
       ],
       "scraped_at": "2026-04-14T13:37:05.014844Z"
+    },
+    {
+      "document_number": "20260210826",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "BROWN JAMES",
+      "grantee": "BROWN BRIANNA",
+      "legal_description": "Unit: 3707 7   Parcel: 09 22 29 0310 07 070 Case: 2026 CP 000588 O ASHLEY COURT",
+      "property_address": "Unit: 3707 7   Parcel: 09 22 29 0310 07 070 Case: 2026 CP 000588 O ASHLEY COURT",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T13:54:15.888701Z"
+    },
+    {
+      "document_number": "20260210815",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "TIMMERMANS RONALD JAY",
+      "grantee": "ZIMMER BRIAN K",
+      "legal_description": "Case: 2026 CP 001114 O",
+      "property_address": "Case: 2026 CP 001114 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T13:54:15.888721Z"
+    },
+    {
+      "document_number": "20260210813",
+      "file_date": "04/14/2026 09:48 AM",
+      "grantor": "TIMMERMANS RONALD JAY",
+      "grantee": "",
+      "legal_description": "Case: 2026 CP 001114 O",
+      "property_address": "Case: 2026 CP 001114 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T13:54:15.888734Z"
+    },
+    {
+      "document_number": "20260210809",
+      "file_date": "04/14/2026 09:46 AM",
+      "grantor": "BROWN JAMES",
+      "grantee": "BROWN BRIANNA",
+      "legal_description": "Unit: 3707 Section: 7  Case: 2026 CP 000588 O ASHLEY COURT",
+      "property_address": "Unit: 3707 Section: 7  Case: 2026 CP 000588 O ASHLEY COURT",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T13:54:15.888746Z"
+    },
+    {
+      "document_number": "20260210798",
+      "file_date": "04/14/2026 09:45 AM",
+      "grantor": "GOTTLIEB JOHN ROBERT",
+      "grantee": "GOTTLIEB JOHN ROBERT III, PIPPIN JON DENNIS",
+      "legal_description": "Lot: 19 Block: B4   Parcel: 07 23 30 2696 04 191 Case: 2025 CP 001823 O FERNWAY ETC",
+      "property_address": "Lot: 19 Block: B4   Parcel: 07 23 30 2696 04 191 Case: 2025 CP 001823 O FERNWAY ETC",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T13:54:15.888759Z"
     },
     {
       "document_number": "20260210651",
@@ -21968,6 +22038,286 @@
         "judgment"
       ],
       "scraped_at": "2026-04-14T13:36:59.293427Z"
+    },
+    {
+      "document_number": "20260210838",
+      "file_date": "04/14/2026 09:53 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "GRR FOOD SERVICE LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811320Z"
+    },
+    {
+      "document_number": "20260210834",
+      "file_date": "04/14/2026 09:53 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "BEYOND TOMORROW EDUCATION INC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811343Z"
+    },
+    {
+      "document_number": "20260210833",
+      "file_date": "04/14/2026 09:53 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "ATLANTIC WEST CLEARING LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811356Z"
+    },
+    {
+      "document_number": "20260210832",
+      "file_date": "04/14/2026 09:53 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "WEAVER NEHEMIAH",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811367Z"
+    },
+    {
+      "document_number": "20260210831",
+      "file_date": "04/14/2026 09:53 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "DIESEL QUALITY TRUCK REPAIR CORP",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811378Z"
+    },
+    {
+      "document_number": "20260210825",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "NOEL SERVICES INC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811389Z"
+    },
+    {
+      "document_number": "20260210824",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "URDANETA S AUTO SALES LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811399Z"
+    },
+    {
+      "document_number": "20260210823",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "CAR STORE OF WEST ORANGE INC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811410Z"
+    },
+    {
+      "document_number": "20260210822",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "DIESEL QUALITY TRUCK REPAIR CORP",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811421Z"
+    },
+    {
+      "document_number": "20260210821",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "SAMANTHA PATRICK DESIGN LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811432Z"
+    },
+    {
+      "document_number": "20260210820",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "REMODELING REIMAGINED LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811443Z"
+    },
+    {
+      "document_number": "20260210819",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "MEAT AND POTATO MOTORSPORTS",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811454Z"
+    },
+    {
+      "document_number": "20260210818",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "TRINITY PROTECTION SYSTEMS LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811464Z"
+    },
+    {
+      "document_number": "20260210817",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "MCML VENTURES LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811475Z"
+    },
+    {
+      "document_number": "20260210816",
+      "file_date": "04/14/2026 09:49 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "MEAT AND POTATO MOTORSPORTS",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811485Z"
+    },
+    {
+      "document_number": "20260210806",
+      "file_date": "04/14/2026 09:45 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "MEF FOOD INC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811495Z"
+    },
+    {
+      "document_number": "20260210805",
+      "file_date": "04/14/2026 09:45 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "VINCI CONSTRUCTION USA",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811506Z"
+    },
+    {
+      "document_number": "20260210804",
+      "file_date": "04/14/2026 09:45 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "URBAN RENAISSANCE ACADEMY MICROSCHOOL",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811515Z"
+    },
+    {
+      "document_number": "20260210803",
+      "file_date": "04/14/2026 09:45 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "MCML VENTURES LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T13:54:02.811524Z"
+    },
+    {
+      "document_number": "20260210770",
+      "file_date": "04/14/2026 09:40 AM",
+      "grantor": "PALM FINANCIAL SERVICES LLC",
+      "grantee": "CORNING JULIE",
+      "legal_description": "Case: 2025 CA 004566 O TS: DISNEY S SARATOGA SPRINGS RESORT",
+      "property_address": "Case: 2025 CA 004566 O TS: DISNEY S SARATOGA SPRINGS RESORT",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "scraped_at": "2026-04-14T13:54:09.921230Z"
     }
   ]
 }
