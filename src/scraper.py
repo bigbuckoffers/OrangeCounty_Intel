@@ -2,7 +2,7 @@
 scraper.py — Orange County FL Automated Motivated Seller Scraper
 Uses Selenium to do the search, then grabs session cookies to download CSV directly.
 """
-import json, logging, os, time, csv, io, shutil, requests
+import json, logging, os, time, csv, io, requests
 from dataclasses import dataclass, asdict, field
 from datetime import datetime, timedelta
 from selenium import webdriver
@@ -15,8 +15,8 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
 
-BASE_URL   = "https://selfservice.or.occompt.com/ssweb/search/DOCSEARCH2950S1"
-CSV_URL    = "https://selfservice.or.occompt.com/ssweb/viewSearchResultsReport/DOCSEARCH2950S1/CSV"
+BASE_URL    = "https://selfservice.or.occompt.com/ssweb/search/DOCSEARCH2950S1"
+CSV_URL     = "https://selfservice.or.occompt.com/ssweb/viewSearchResultsReport/DOCSEARCH2950S1/CSV"
 OUTPUT_PATH = "data/output.json"
 
 END_DATE   = datetime.today()
@@ -68,166 +68,199 @@ def make_driver():
     driver.set_page_load_timeout(30)
     return driver
 
+def dump_page_info(driver, label):
+    """Log all input fields found on page for debugging."""
+    log.info("=== PAGE DUMP: %s ===", label)
+    log.info("URL: %s", driver.current_url)
+    log.info("Title: %s", driver.title)
+    inputs = driver.find_elements(By.TAG_NAME, "input")
+    log.info("Found %d input elements:", len(inputs))
+    for i, el in enumerate(inputs):
+        try:
+            log.info("  input[%d]: type=%s id=%s name=%s placeholder=%s class=%s visible=%s",
+                i, el.get_attribute("type"), el.get_attribute("id"),
+                el.get_attribute("name"), el.get_attribute("placeholder"),
+                el.get_attribute("class"), el.is_displayed())
+        except Exception:
+            pass
+    buttons = driver.find_elements(By.TAG_NAME, "button")
+    log.info("Found %d button elements:", len(buttons))
+    for i, b in enumerate(buttons[:10]):
+        try:
+            log.info("  button[%d]: text=%s id=%s class=%s visible=%s",
+                i, b.text[:50], b.get_attribute("id"),
+                b.get_attribute("class"), b.is_displayed())
+        except Exception:
+            pass
+
 def accept_disclaimer(driver, wait):
-    """Accept any disclaimer/terms popup if present."""
     try:
-        accept_btn = wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//button[contains(text(),'Accept') or contains(text(),'agree') or contains(text(),'Continue') or contains(text(),'OK')]")
-        ), timeout=5)
+        accept_btn = WebDriverWait(driver, 5).until(EC.element_to_be_clickable(
+            (By.XPATH, "//button[contains(text(),'Accept') or contains(text(),'agree') or contains(text(),'Continue') or contains(text(),'OK') or contains(text(),'I Agree')]")
+        ))
         driver.execute_script("arguments[0].click();", accept_btn)
         log.info("Accepted disclaimer")
         time.sleep(2)
     except Exception:
-        pass  # No disclaimer, continue
+        pass
 
-def do_search(driver, wait, doc_type):
-    """Navigate to search page, fill dates, select doc type, submit search."""
-    log.info("Loading search page...")
+def fill_input_js(driver, element, value):
+    """Fill input using JavaScript to bypass any framework bindings."""
+    driver.execute_script("""
+        var el = arguments[0];
+        var val = arguments[1];
+        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+        nativeInputValueSetter.call(el, val);
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+        el.dispatchEvent(new Event('blur', { bubbles: true }));
+    """, element, value)
+
+def do_search(driver, doc_type):
+    log.info("Loading search page for: %s", doc_type)
     driver.get(BASE_URL)
-    time.sleep(3)
+    time.sleep(4)
 
-    # Accept disclaimer if shown
-    accept_disclaimer(driver, wait)
-
-    # Set disclaimerAccepted cookie just in case
-    driver.add_cookie({"name": "disclaimerAccepted", "value": "true", "domain": "selfservice.or.occompt.com"})
-
-    # Find date fields — try multiple selector strategies
-    date_start_filled = False
-    date_end_filled = False
-
-    # Strategy 1: placeholder
+    # Set cookie
     try:
-        inputs = driver.find_elements(By.CSS_SELECTOR, "input[placeholder*='mm/dd/yyyy']")
-        if len(inputs) >= 2:
-            inputs[0].clear(); inputs[0].send_keys(DATE_START)
-            inputs[1].clear(); inputs[1].send_keys(DATE_END)
-            date_start_filled = date_end_filled = True
-            log.info("Filled dates via placeholder selector")
+        driver.add_cookie({"name": "disclaimerAccepted", "value": "true",
+                          "domain": "selfservice.or.occompt.com"})
     except Exception:
         pass
 
-    # Strategy 2: id contains Date
-    if not date_start_filled:
-        try:
-            start_el = driver.find_element(By.XPATH, "//input[contains(@id,'start') or contains(@id,'Start') or contains(@name,'start')]")
-            end_el   = driver.find_element(By.XPATH, "//input[contains(@id,'end')   or contains(@id,'End')   or contains(@name,'end')]")
-            start_el.clear(); start_el.send_keys(DATE_START)
-            end_el.clear();   end_el.send_keys(DATE_END)
-            date_start_filled = date_end_filled = True
-            log.info("Filled dates via id/name selector")
-        except Exception:
-            pass
+    accept_disclaimer(driver, None)
+    time.sleep(2)
 
-    # Strategy 3: all visible text inputs
-    if not date_start_filled:
-        try:
-            inputs = driver.find_elements(By.CSS_SELECTOR, "input[type='text']")
-            visible = [i for i in inputs if i.is_displayed()]
-            if len(visible) >= 2:
-                visible[0].clear(); visible[0].send_keys(DATE_START)
-                visible[1].clear(); visible[1].send_keys(DATE_END)
-                date_start_filled = date_end_filled = True
-                log.info("Filled dates via visible text inputs")
-        except Exception:
-            pass
+    # Dump all inputs for debugging
+    dump_page_info(driver, f"before_fill_{doc_type}")
 
-    if not date_start_filled:
-        log.error("Could not find date input fields!")
-        driver.save_screenshot(f"debug_no_dates_{doc_type.replace(' ','_')}.png")
+    # Get ALL input elements
+    all_inputs = driver.find_elements(By.TAG_NAME, "input")
+    visible_inputs = [el for el in all_inputs if el.is_displayed()]
+    text_inputs = [el for el in visible_inputs if el.get_attribute("type") in ("text", "date", "", None)]
+
+    log.info("Visible inputs: %d, Text inputs: %d", len(visible_inputs), len(text_inputs))
+
+    filled = False
+
+    # Try by placeholder
+    for el in all_inputs:
+        ph = (el.get_attribute("placeholder") or "").lower()
+        nm = (el.get_attribute("name") or "").lower()
+        eid = (el.get_attribute("id") or "").lower()
+        if any(x in ph or x in nm or x in eid for x in ["start", "from", "begin", "recordingstart", "datestart"]):
+            try:
+                fill_input_js(driver, el, DATE_START)
+                log.info("Filled start date in: id=%s name=%s", el.get_attribute("id"), el.get_attribute("name"))
+                filled = True
+            except Exception as e:
+                log.warning("Could not fill start: %s", e)
+
+        if any(x in ph or x in nm or x in eid for x in ["end", "to", "thru", "recordingend", "dateend"]):
+            try:
+                fill_input_js(driver, el, DATE_END)
+                log.info("Filled end date in: id=%s name=%s", el.get_attribute("id"), el.get_attribute("name"))
+            except Exception as e:
+                log.warning("Could not fill end: %s", e)
+
+    # Fallback: use first two visible text inputs
+    if not filled and len(text_inputs) >= 2:
+        log.info("Fallback: filling first two visible text inputs")
+        fill_input_js(driver, text_inputs[0], DATE_START)
+        fill_input_js(driver, text_inputs[1], DATE_END)
+        filled = True
+
+    if not filled:
+        log.error("COULD NOT FILL ANY DATE INPUTS for %s", doc_type)
+        driver.save_screenshot(f"debug_nodates_{doc_type.replace(' ','_')}.png")
         return False
 
-    # Select document type in search form if available
-    try:
-        # Look for a doc type dropdown or checkbox
-        doc_select = driver.find_elements(By.XPATH,
-            f"//select | //input[@type='checkbox'][contains(following-sibling::*,'{doc_type}')] | //label[contains(text(),'{doc_type}')]"
-        )
-        for el in doc_select:
-            tag = el.tag_name.lower()
-            if tag == "select":
-                from selenium.webdriver.support.ui import Select
-                sel = Select(el)
-                try:
-                    sel.select_by_visible_text(doc_type)
-                    log.info("Selected doc type in dropdown: %s", doc_type)
-                    break
-                except Exception:
-                    pass
-            elif tag in ("input", "label"):
-                driver.execute_script("arguments[0].click();", el)
-                log.info("Clicked doc type checkbox/label: %s", doc_type)
+    time.sleep(1)
+
+    # Click search button
+    search_clicked = False
+    # Try multiple strategies
+    for xpath in [
+        "//button[contains(translate(text(),'SEARCH','search'),'search')]",
+        "//input[@type='submit']",
+        "//button[@type='submit']",
+        "//button[contains(@class,'search')]",
+        "//input[@value='Search']",
+        "//button[contains(@id,'search') or contains(@id,'Search')]",
+    ]:
+        try:
+            btn = driver.find_element(By.XPATH, xpath)
+            if btn.is_displayed():
+                driver.execute_script("arguments[0].click();", btn)
+                log.info("Clicked search button via: %s", xpath)
+                search_clicked = True
                 break
-    except Exception:
-        pass  # Will filter by sidebar after search
+        except Exception:
+            continue
 
-    # Click Search button
-    try:
-        search_btn = wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//button[contains(text(),'Search')] | //input[@value='Search'] | //button[@type='submit']")
-        ))
-        driver.execute_script("arguments[0].click();", search_btn)
-        log.info("Clicked search button")
-    except Exception as e:
-        log.error("Could not find search button: %s", e)
-        driver.save_screenshot(f"debug_no_searchbtn_{doc_type.replace(' ','_')}.png")
+    if not search_clicked:
+        # Last resort: find any visible button and click it
+        btns = driver.find_elements(By.TAG_NAME, "button")
+        for b in btns:
+            if b.is_displayed() and b.text.strip():
+                log.info("Last resort: clicking button with text: %s", b.text)
+                driver.execute_script("arguments[0].click();", b)
+                search_clicked = True
+                break
+
+    if not search_clicked:
+        log.error("Could not find search button for %s", doc_type)
+        driver.save_screenshot(f"debug_nosearchbtn_{doc_type.replace(' ','_')}.png")
         return False
 
-    # Wait for results to load
-    time.sleep(5)
+    log.info("Waiting for results...")
+    time.sleep(6)
 
-    # Try clicking sidebar filter for this doc type
+    # Try clicking sidebar filter
     try:
-        sidebar_filter = driver.find_element(By.XPATH,
-            f"//*[contains(@class,'filter') or contains(@class,'facet') or contains(@class,'sidebar')]//*[contains(text(),'{doc_type}')]"
+        filter_el = driver.find_element(By.XPATH,
+            f"//*[contains(@class,'filter') or contains(@class,'facet') or contains(@class,'sidebar') or contains(@class,'refine')]//*[contains(text(),'{doc_type}')]"
         )
-        driver.execute_script("arguments[0].click();", sidebar_filter)
-        log.info("Clicked sidebar filter for: %s", doc_type)
+        driver.execute_script("arguments[0].click();", filter_el)
+        log.info("Clicked sidebar filter: %s", doc_type)
         time.sleep(3)
     except NoSuchElementException:
-        log.info("No sidebar filter found for %s — exporting all results", doc_type)
+        log.info("No sidebar filter for %s", doc_type)
 
+    dump_page_info(driver, f"after_search_{doc_type}")
     return True
 
 def get_csv_via_cookies(driver):
-    """Extract cookies from Selenium and use requests to download the CSV."""
     selenium_cookies = driver.get_cookies()
     session = requests.Session()
-
-    for cookie in selenium_cookies:
-        session.cookies.set(cookie["name"], cookie["value"])
-
-    # Ensure disclaimerAccepted is set
+    for c in selenium_cookies:
+        session.cookies.set(c["name"], c["value"])
     session.cookies.set("disclaimerAccepted", "true")
 
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Referer": BASE_URL,
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept": "text/csv,text/html,*/*",
     }
+    log.info("Fetching CSV...")
+    resp = session.get(CSV_URL, headers=headers, timeout=30)
+    log.info("CSV status: %d | size: %d bytes | content-type: %s",
+             resp.status_code, len(resp.content),
+             resp.headers.get("content-type","?"))
+    log.info("CSV preview: %s", resp.text[:300])
 
-    log.info("Requesting CSV from: %s", CSV_URL)
-    response = session.get(CSV_URL, headers=headers, timeout=30)
-    log.info("CSV response status: %d, size: %d bytes", response.status_code, len(response.content))
-
-    if response.status_code == 200 and len(response.content) > 100:
-        return response.text
-    else:
-        log.warning("CSV response was empty or error. Body: %s", response.text[:500])
-        return None
+    if resp.status_code == 200 and len(resp.content) > 200:
+        return resp.text
+    return None
 
 def parse_csv_text(csv_text, doc_type, base_score):
-    """Parse raw CSV text into Lead objects."""
     leads = []
     lines = csv_text.splitlines()
-
-    # Find header row
     header_idx = 0
     for i, line in enumerate(lines):
-        if "Document #" in line or "Document" in line:
+        if "Document" in line and ("Grantor" in line or "Recording" in line):
             header_idx = i
             break
-
     reader = csv.DictReader(io.StringIO("\n".join(lines[header_idx:])))
     for row in reader:
         doc_num = (row.get("Document #") or row.get("Document") or "").strip().strip('"')
@@ -248,27 +281,7 @@ def parse_csv_text(csv_text, doc_type, base_score):
         ))
     return leads
 
-def scrape_doc_type(driver, doc_type, base_score):
-    log.info("=== Scraping: %s ===", doc_type)
-    wait = WebDriverWait(driver, 20)
-
-    success = do_search(driver, wait, doc_type)
-    if not success:
-        log.error("Search failed for %s", doc_type)
-        return []
-
-    csv_text = get_csv_via_cookies(driver)
-    if not csv_text:
-        log.error("No CSV data for %s", doc_type)
-        driver.save_screenshot(f"debug_no_csv_{doc_type.replace(' ','_')}.png")
-        return []
-
-    leads = parse_csv_text(csv_text, doc_type, base_score)
-    log.info("Got %d leads for %s", len(leads), doc_type)
-    return leads
-
 def load_existing(path):
-    """Load existing leads so we don't lose historical data."""
     if not os.path.exists(path):
         return []
     try:
@@ -299,13 +312,22 @@ def main():
 
     try:
         for doc_type, base_score in TARGET_DOC_TYPES:
-            leads = scrape_doc_type(driver, doc_type, base_score)
-            new_leads.extend(leads)
+            try:
+                success = do_search(driver, doc_type)
+                if success:
+                    csv_text = get_csv_via_cookies(driver)
+                    if csv_text:
+                        leads = parse_csv_text(csv_text, doc_type, base_score)
+                        log.info("Got %d leads for %s", len(leads), doc_type)
+                        new_leads.extend(leads)
+                    else:
+                        log.error("No CSV data for %s", doc_type)
+            except Exception as e:
+                log.error("Error on %s: %s", doc_type, e)
             time.sleep(3)
     finally:
         driver.quit()
 
-    # Merge with existing data (keep history, no duplicates)
     existing = load_existing(OUTPUT_PATH)
     existing_nums = {l["document_number"] if isinstance(l, dict) else l.document_number for l in existing}
 
@@ -317,7 +339,6 @@ def main():
             existing_nums.add(lead.document_number)
             added += 1
 
-    # Sort by score
     def get_score(l):
         return l["seller_score"] if isinstance(l, dict) else l.seller_score
     merged.sort(key=get_score, reverse=True)
@@ -328,3 +349,96 @@ def main():
 
 if __name__ == "__main__":
     main()
+Also — go to .github/workflows/scraper.yml and paste it here so I can check it too. The workflow needs to upload the debug screenshots as artifacts so we can actually see what Chrome is seeing on that page.# .github/workflows/scraper.yml
+# ─────────────────────────────────────────────────────────────────────────────
+# Automated Motivated Seller Lead Scraper — Orange County, FL
+# Runs on a schedule (daily at 6 AM ET) and on manual dispatch.
+# Outputs are committed back to the repository so the dashboarpastedhere is the raw9:04 AMThe workflow is missing two critical things:
+
+Chrome isn't being installed — it relies on whatever Chrome happens to be on the Ubuntu runner, which may not match the chromedriver
+Debug screenshots aren't being uploaded so we can't see what the browser sees
+
+Here's the updated scraper.yml — replace the whole file with this:
+yamlname: Scrape OC Motivated Seller Leads
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    name: Scrape & Generate Dashboard
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Chrome
+        run: |
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          google-chrome --version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 lxml selenium webdriver-manager
+
+      - name: Create output directories
+        run: mkdir -p data dashboard
+
+      - name: Run scraper
+        run: python src/scraper.py
+        env:
+          PYTHONUNBUFFERED: "1"
+
+      - name: Validate outputs
+        run: |
+          python - <<'EOF'
+          import json, sys, os
+          path = "data/output.json"
+          if not os.path.exists(path):
+              print("ERROR: data/output.json not found"); sys.exit(1)
+          with open(path) as f:
+              data = json.load(f)
+          n = data.get("total_records", 0)
+          print(f"✓ JSON valid — {n} records")
+          if not os.path.exists("dashboard/index.html"):
+              print("ERROR: dashboard/index.html not found"); sys.exit(1)
+          print("✓ Dashboard HTML present")
+          EOF
+
+      - name: Commit results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/output.json dashboard/index.html
+          git diff --cached --quiet || git commit -m "chore: auto-update leads $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts and debug screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lead-output-${{ github.run_id }}
+          path: |
+            data/output.json
+            dashboard/index.html
+            debug_*.png
+          retention-days: 30
