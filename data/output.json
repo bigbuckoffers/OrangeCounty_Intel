@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-14T13:54:23.197887Z",
-  "total_records": 1594,
+  "generated_at": "2026-04-14T14:08:20.911673Z",
+  "total_records": 1609,
   "date_range": "04/07/2026 to 04/14/2026",
   "leads": [
     {
@@ -4860,6 +4860,132 @@
         "probate"
       ],
       "scraped_at": "2026-04-14T13:54:15.888759Z"
+    },
+    {
+      "document_number": "20260210881",
+      "file_date": "04/14/2026 10:07 AM",
+      "grantor": "WALKER LONNIE B, WALKER LONNIE BERNARD",
+      "grantee": "ALLEN DONNA E",
+      "legal_description": "Case: 2026 CP 001027 O",
+      "property_address": "Case: 2026 CP 001027 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240378Z"
+    },
+    {
+      "document_number": "20260210876",
+      "file_date": "04/14/2026 10:06 AM",
+      "grantor": "MILLER RONALD E",
+      "grantee": "",
+      "legal_description": "Case: 2026 CP 000586 O",
+      "property_address": "Case: 2026 CP 000586 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240398Z"
+    },
+    {
+      "document_number": "20260210875",
+      "file_date": "04/14/2026 10:06 AM",
+      "grantor": "MILLER RONALD E",
+      "grantee": "MILLER LINDA S, MILLER FAMILY REVOCABLE TRUST",
+      "legal_description": "Case: 2026 CP 000586 O",
+      "property_address": "Case: 2026 CP 000586 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240411Z"
+    },
+    {
+      "document_number": "20260210873",
+      "file_date": "04/14/2026 10:05 AM",
+      "grantor": "PARKER CAROLE MERRICK",
+      "grantee": "PARKER KEVIN",
+      "legal_description": "Case: 2026 CP 000815 O",
+      "property_address": "Case: 2026 CP 000815 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240422Z"
+    },
+    {
+      "document_number": "20260210871",
+      "file_date": "04/14/2026 10:04 AM",
+      "grantor": "SOME PATRICE MALIDOMA",
+      "grantee": "",
+      "legal_description": "Case: 2022 CP 000579 O",
+      "property_address": "Case: 2022 CP 000579 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240432Z"
+    },
+    {
+      "document_number": "20260210858",
+      "file_date": "04/14/2026 10:01 AM",
+      "grantor": "WALKER LONNIE B, WALKER LONNIE BERNARD",
+      "grantee": "ALLEN DONNA E",
+      "legal_description": "Case: 2026 CP 001027 O",
+      "property_address": "Case: 2026 CP 001027 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240443Z"
+    },
+    {
+      "document_number": "20260210848",
+      "file_date": "04/14/2026 09:58 AM",
+      "grantor": "TIMMERMANS RONALD JAY",
+      "grantee": "TIMMERMANS RONALD JAY, ZIMMER BRIAN K",
+      "legal_description": "Case: 2026 CP 001114 O",
+      "property_address": "Case: 2026 CP 001114 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240455Z"
+    },
+    {
+      "document_number": "20260210841",
+      "file_date": "04/14/2026 09:54 AM",
+      "grantor": "DOWNS BESSIE JEAN, DOWNS BESSIE MAXWELL",
+      "grantee": "PARSONS DONALD MILTON, PARSONS JAMES CAMERON",
+      "legal_description": "Lot: 4 Block: H   Parcel: 15 23 30 5306 08 040 LYNNWOOD ESTATES FIRST ADDITION MOBILE HOME SUBDIVISION",
+      "property_address": "Lot: 4 Block: H   Parcel: 15 23 30 5306 08 040 LYNNWOOD ESTATES FIRST ADDITION MOBILE HOME SUBDIVISION",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240469Z"
+    },
+    {
+      "document_number": "20260210840",
+      "file_date": "04/14/2026 09:54 AM",
+      "grantor": "DOWNS BESSIE JEAN, DOWNS BESSIE MAXWELL",
+      "grantee": "PARSONS DONALD MILTON, PARSONS JAMES CAMERON",
+      "legal_description": "Lot: 4 Block: H   Parcel: 15 23 30 5306 08 040 LYNNWOOD ESTATES FIRST ADDITION MOBILE HOME SUBDIVISION",
+      "property_address": "Lot: 4 Block: H   Parcel: 15 23 30 5306 08 040 LYNNWOOD ESTATES FIRST ADDITION MOBILE HOME SUBDIVISION",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "scraped_at": "2026-04-14T14:08:14.240484Z"
     },
     {
       "document_number": "20260210651",
@@ -22318,6 +22444,90 @@
         "judgment"
       ],
       "scraped_at": "2026-04-14T13:54:09.921230Z"
+    },
+    {
+      "document_number": "20260210853",
+      "file_date": "04/14/2026 09:58 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "IWC UCF LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T14:08:01.913015Z"
+    },
+    {
+      "document_number": "20260210852",
+      "file_date": "04/14/2026 09:58 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "SANDRA KEEGAN DENNIS PROFESSIONAL TAX SERVICE",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T14:08:01.913034Z"
+    },
+    {
+      "document_number": "20260210851",
+      "file_date": "04/14/2026 09:58 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "BISTRO PARADISE LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T14:08:01.913043Z"
+    },
+    {
+      "document_number": "20260210850",
+      "file_date": "04/14/2026 09:58 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "PHILLIPS DEVELOPMENT EVENTS LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T14:08:01.913052Z"
+    },
+    {
+      "document_number": "20260210849",
+      "file_date": "04/14/2026 09:58 AM",
+      "grantor": "FLORIDA DEPARTMENT OF REVENUE",
+      "grantee": "AMERICA FRESH AIR HEAT LLC",
+      "legal_description": "",
+      "property_address": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "scraped_at": "2026-04-14T14:08:01.913059Z"
+    },
+    {
+      "document_number": "20260210843",
+      "file_date": "04/14/2026 09:55 AM",
+      "grantor": "MIDLAND CREDIT MANAGEMENT INC",
+      "grantee": "SMITH KIM, BANK OF AMERICA NA",
+      "legal_description": "Case: 2024 SC 009115 O",
+      "property_address": "Case: 2024 SC 009115 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "scraped_at": "2026-04-14T14:08:08.617911Z"
     }
   ]
 }
