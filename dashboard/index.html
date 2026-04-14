@@ -6,11 +6,7 @@
 <title>OC Motivated Seller Leads</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:#0d0f14;--surface:#151820;--border:#1e2330;
-    --accent:#e84040;--accent2:#f5a623;--text:#e8eaf0;
-    --muted:#5a6070;--card:#181c26;
-  }
+  :root {--bg:#0d0f14;--surface:#151820;--border:#1e2330;--accent:#e84040;--accent2:#f5a623;--text:#e8eaf0;--muted:#5a6070;--card:#181c26}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'IBM Plex Mono',monospace;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px}
   header{background:linear-gradient(135deg,#0d0f14 0%,#131928 100%);border-bottom:1px solid var(--border);padding:32px 48px 28px;display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap}
@@ -28,14 +24,13 @@
   .toolbar{padding:24px 48px 0;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   .toolbar input{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:13px;padding:10px 16px;width:280px;outline:none}
   .toolbar input:focus{border-color:var(--accent)}
-  .toolbar select{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:13px;padding:10px 14px;outline:none;cursor:pointer}
   .toolbar label{font-size:12px;color:var(--muted)}
   .table-wrap{margin:24px 48px 0;border:1px solid var(--border);border-radius:12px;overflow:auto}
   table{width:100%;border-collapse:collapse;font-size:12.5px}
   thead th{background:var(--surface);padding:14px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
   thead th:hover{color:var(--text)}
   thead th.sorted{color:var(--accent)}
-  .lead-row{border-bottom:1px solid var(--border);animation:fadeUp .4s ease both;animation-delay:calc(var(--row-i)*30ms)}
+  .lead-row{border-bottom:1px solid var(--border);animation:fadeUp .4s ease both;animation-delay:calc(var(--row-i)*20ms)}
   @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
   .lead-row:last-child{border-bottom:none}
   .lead-row:hover td{background:#1a1f2e}
@@ -51,33 +46,16 @@
 <body>
 <header>
   <div><h1>ORANGE COUNTY <span>FL</span><br>MOTIVATED SELLERS</h1></div>
-  <div class="meta">Generated: 2026-04-14 02:04 UTC<br>Source: Orange County Comptroller Public Records<br>Scored by distress signal analysis</div>
+  <div class="meta">Generated: 2026-04-14 02:16 UTC<br>Apr 1–13, 2026 · Lis Pendens Records<br>Source: Orange County Comptroller</div>
 </header>
 <div class="stats">
-  <div class="stat-card red"><div class="num">0</div><div class="label">Total Leads</div></div>
-  <div class="stat-card gold"><div class="num">0</div><div class="label">Hot Leads</div></div>
-  <div class="stat-card green"><div class="num">0</div><div class="label">Warm Leads</div></div>
+  <div class="stat-card red"><div class="num">110</div><div class="label">Total Leads</div></div>
+  <div class="stat-card gold"><div class="num">110</div><div class="label">Lis Pendens 🔥</div></div>
+  <div class="stat-card green"><div class="num">Apr 1–13</div><div class="label">Date Range</div></div>
 </div>
 <div class="toolbar">
-  <input type="text" id="searchBox" placeholder="Search grantor, grantee, legal …" oninput="filterTable()">
-  <label>Min score:</label>
-  <select id="minScore" onchange="filterTable()">
-    <option value="0">All</option>
-    <option value="10">10+</option>
-    <option value="15">15+</option>
-    <option value="20">20+</option>
-    <option value="30">30+</option>
-  </select>
-  <label>Type:</label>
-  <select id="flagFilter" onchange="filterTable()">
-    <option value="">All types</option>
-    <option value="LIS PENDENS">Lis Pendens</option>
-    <option value="LIEN">Lien</option>
-    <option value="JUDGMENT">Judgment</option>
-    <option value="PROBATE">Probate</option>
-    <option value="DIVORCE">Divorce</option>
-    <option value="TAX DEED">Tax Deed</option>
-  </select>
+  <input type="text" id="searchBox" placeholder="Search name, address, legal …" oninput="filterTable()">
+  <label>Search:</label>
 </div>
 <div class="table-wrap">
   <table id="leadsTable">
@@ -86,28 +64,32 @@
         <th onclick="sortTable(0)">Score</th>
         <th onclick="sortTable(1)">Doc #</th>
         <th onclick="sortTable(2)">File Date</th>
-        <th onclick="sortTable(3)">Grantor</th>
-        <th onclick="sortTable(4)">Grantee (Seller)</th>
+        <th onclick="sortTable(3)">Grantor (Lender)</th>
+        <th onclick="sortTable(4)">Grantee (Owner/Seller)</th>
         <th onclick="sortTable(5)">Legal Description</th>
         <th>Type</th>
       </tr>
     </thead>
     <tbody id="tableBody">
-<tr><td colspan="7" style="text-align:center;padding:60px;color:#5a6070">No records found — scraper is running</td></tr>
+        <tr class="lead-row" style="--row-i:1"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208883</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 01:12 PM</td><td>PLANET HOME LENDING LLC</td><td>NAVARRO JOSEPH, EASTWOOD COMMUNITY ASSOCIATION INC, CAPITAL ONE BANK USA N A, VELOCITY INVESTMENTS LLC</td><td class="address-col">Lot: 146   Parcel: 36 22 31 7987 01460  SHERWOOD PHASE TWO</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:2"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208471</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 10:08 AM</td><td>ONITY MORTGAGE CORPORATION, PHH MORTGAGE CORPORATION</td><td>RUIZ ELIZA, RUIZ LUIS, SECRETARY OF HOUSING AND URBAN DEVELOPMENT</td><td class="address-col">Lot: 212    SKY LAKE OAK RIDGE SECTION UNIT THREE</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:3"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208468</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 10:08 AM</td><td>ROCKET MORTGAGE LLC</td><td>DOBBS KATHLEEN, CROSSINGS AT CONWAY CONDOMINIUM ASSOCIATION INC</td><td class="address-col">Unit: 4111    CROSSINGS AT CONWAY</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:4"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208372</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 09:42 AM</td><td>GITSIT SOLUTIONS LLC, GV TRUST 2026 1</td><td>TORRES GLADYS I, TORRES FRANCISCO JR, TORRES NELSON, TORRES NEREIDA, TORRES MICHAEL</td><td class="address-col">Lot: 119   Parcel: 14 23 30 1250 01190  CHARLIN PARK SECOND ADDITION</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:5"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260208224</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 09:20 AM</td><td>FLINTSTONE LENDING LLC</td><td>GREEN HERBERT</td><td class="address-col">Lot: 5    EATON ESTATES UNIT TWO</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:6"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260207787</strong><br><small class="muted">Lis Pendens</small></td><td>04/13/2026 08:28 AM</td><td>VIZCAYA AT WATERFORD HOMEOWNERS ASSOCIATION INC</td><td>BURGOS MIRIAM ALVARADO, DOE JOHN, DOE JANE</td><td class="address-col">Lot: 42    VIZCAYA AT WATERFORD</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:7"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260207230</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 03:44 PM</td><td>U S BANK TRUST COMPANY NATIONAL ASSOCIATION</td><td>DAVIS CORINNE A, DAVIS GLENN A, DAVIS GLENN</td><td class="address-col">Lot: 545    EAGLE CREEK PHASE 1A</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:8"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260206600</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 01:17 PM</td><td>PLANET HOME LENDING LLC</td><td>CAMPINOSE JESSICA, SECRETARY OF HOUSING AND URBAN DEVELOPMENT</td><td class="address-col">Lot: 55   Parcel: 23 21 28 1775 00 550  COUNTRY ADDRESS PHASE 1</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:9"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260205656</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 09:05 AM</td><td>WELLS FARGO BANK N A</td><td>MORALES PETER J, MORALES CARMEN L</td><td class="address-col">Lot: 619    PARK MANOR ESTATES UNIT TWELVE C</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
+        <tr class="lead-row" style="--row-i:10"><td class="score-cell"><div class="score-ring" style="--c:#e53e3e"><span>30</span></div></td><td><strong>20260205570</strong><br><small class="muted">Lis Pendens</small></td><td>04/10/2026 08:51 AM</td><td>ASSOCIATION RESOURCES LLC</td><td>SANTANA JOSHUA</td><td class="address-col">Unit: D    MILLENNIUM PALMS</td><td><span style="background:#e53e3e;color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">LIS PENDENS</span></td></tr>
     </tbody>
   </table>
 </div>
-<footer>Orange County Comptroller public records &nbsp;|&nbsp; For investment research only</footer>
+<footer>Orange County Comptroller public records · Lis Pendens · For investment research only</footer>
 <script>
   function filterTable(){
     const q=document.getElementById('searchBox').value.toLowerCase();
-    const minScore=parseInt(document.getElementById('minScore').value)||0;
-    const flagFilter=document.getElementById('flagFilter').value;
     document.querySelectorAll('.lead-row').forEach(row=>{
-      const text=row.innerText.toLowerCase();
-      const score=parseInt(row.querySelector('.score-ring span').textContent)||0;
-      const badges=row.querySelector('td:last-child').innerText;
-      row.style.display=(!q||text.includes(q))&&score>=minScore&&(!flagFilter||badges.includes(flagFilter))?'':'none';
+      row.style.display=!q||row.innerText.toLowerCase().includes(q)?'':'none';
     });
   }
   let sortDir={};
