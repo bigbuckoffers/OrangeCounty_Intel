@@ -25,11 +25,12 @@ DATE_START = START_DATE.strftime("%m/%d/%Y")
 DATE_END   = END_DATE.strftime("%m/%d/%Y")
 
 TARGET_DOC_TYPES = [
-    ("Lis Pendens", 30),
-    ("Lien",        15),
-    ("Judgment",    15),
-    ("Probate Court Paper", 20),
-    ("Domestic Relations Deed", 10),
+    ("Lis Pendens",              30),
+    ("Deed",                     25),
+    ("Lien",                     15),
+    ("Judgment",                 15),
+    ("Probate Court Paper",      20),
+    ("Domestic Relations Deed",  10),
 ]
 
 @dataclass
