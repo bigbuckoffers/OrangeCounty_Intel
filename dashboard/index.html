@@ -25,6 +25,8 @@
   .toolbar input{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:13px;padding:10px 16px;width:280px;outline:none}
   .toolbar input:focus{border-color:var(--accent)}
   .toolbar label{font-size:12px;color:var(--muted)}
+  .btn-export{background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:10px 20px;cursor:pointer;letter-spacing:.5px;transition:opacity .2s}
+  .btn-export:hover{opacity:.85}
   .table-wrap{margin:24px 48px 0;border:1px solid var(--border);border-radius:12px;overflow:auto}
   table{width:100%;border-collapse:collapse;font-size:12.5px}
   thead th{background:var(--surface);padding:14px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
@@ -57,6 +59,7 @@
 <div class="toolbar">
   <input type="text" id="searchBox" placeholder="Search name, address, legal ..." oninput="filterTable()">
   <label>Search:</label>
+  <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
 </div>
 <div class="table-wrap">
   <table id="leadsTable">
@@ -79,6 +82,7 @@
 <footer>Orange County Comptroller public records - Lis Pendens - For investment research only</footer>
 <script>
 var JSON_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/main/data/output.json';
+var allLeads=[];
 function scoreColor(s){return s>=25?'#e53e3e':s>=15?'#d69e2e':'#38a169'}
 function badge(flag){var m={lis_pendens:['LIS PENDENS','#e53e3e'],tax_delinquency:['TAX DEED','#e53e3e'],multiple_liens:['LIEN','#3182ce'],judgment:['JUDGMENT','#d69e2e'],probate:['PROBATE','#805ad5'],divorce_bankruptcy:['DIVORCE','#319795']};var lb=m[flag]||[flag.toUpperCase(),'#718096'];return '<span style="background:'+lb[1]+';color:#fff;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700;margin-right:4px">'+lb[0]+'</span>';}
 function trunc(s,n){return s&&s.length>n?s.slice(0,n)+'...':s||'-'}
@@ -86,20 +90,63 @@ function loadLeads(){
   fetch(JSON_URL+'?t='+Date.now())
   .then(function(r){return r.json()})
   .then(function(data){
-    var leads=data.leads||[];
-    document.getElementById('totalLeads').textContent=leads.length;
-    document.getElementById('hotLeads').textContent=leads.filter(function(l){return l.seller_score>=25}).length;
+    allLeads=data.leads||[];
+    document.getElementById('totalLeads').textContent=allLeads.length;
+    document.getElementById('hotLeads').textContent=allLeads.filter(function(l){return l.seller_score>=25}).length;
     document.getElementById('meta').innerHTML='Generated: '+(data.generated_at||'').slice(0,16).replace('T',' ')+' UTC<br>Source: Orange County Comptroller<br>Scored by distress signal analysis';
-    if(leads.length>0){var dates=leads.map(function(l){return l.file_date}).filter(Boolean).sort();document.getElementById('dateRange').textContent=(dates[0]||'').slice(0,5)+' - '+(dates[dates.length-1]||'').slice(0,5);}
-    var tbody=document.getElementById('tableBody');
-    if(!leads.length){tbody.innerHTML='<tr><td colspan="7" class="loading">No records found</td></tr>';return;}
-    tbody.innerHTML=leads.map(function(l,i){return '<tr class="lead-row" style="--row-i:'+(i+1)+'"><td class="score-cell"><div class="score-ring" style="--c:'+scoreColor(l.seller_score)+'"><span>'+l.seller_score+'</span></div></td><td><strong>'+(l.document_number||'-')+'</strong><br><small class="muted">'+(l.document_type||'')+'</small></td><td>'+(l.file_date||'-')+'</td><td>'+trunc(l.grantor,50)+'</td><td>'+trunc(l.grantee,60)+'</td><td class="address-col">'+trunc(l.legal_description,80)+'</td><td>'+((l.distress_flags||[]).map(badge).join('')||'-')+'</td></tr>';}).join('');
+    if(allLeads.length>0){var dates=allLeads.map(function(l){return l.file_date}).filter(Boolean).sort();document.getElementById('dateRange').textContent=(dates[0]||'').slice(0,5)+' - '+(dates[dates.length-1]||'').slice(0,5);}
+    renderTable(allLeads);
   })
   .catch(function(e){document.getElementById('tableBody').innerHTML='<tr><td colspan="7" class="loading">Error: '+e.message+'</td></tr>';});
 }
-function filterTable(){var q=document.getElementById('searchBox').value.toLowerCase();document.querySelectorAll('.lead-row').forEach(function(row){row.style.display=!q||row.innerText.toLowerCase().includes(q)?'':'none';});}
+function renderTable(leads){
+  var tbody=document.getElementById('tableBody');
+  if(!leads.length){tbody.innerHTML='<tr><td colspan="7" class="loading">No records found</td></tr>';return;}
+  tbody.innerHTML=leads.map(function(l,i){return '<tr class="lead-row" style="--row-i:'+(i+1)+'"><td class="score-cell"><div class="score-ring" style="--c:'+scoreColor(l.seller_score)+'"><span>'+l.seller_score+'</span></div></td><td><strong>'+(l.document_number||'-')+'</strong><br><small class="muted">'+(l.document_type||'')+'</small></td><td>'+(l.file_date||'-')+'</td><td>'+trunc(l.grantor,50)+'</td><td>'+trunc(l.grantee,60)+'</td><td class="address-col">'+trunc(l.legal_description,80)+'</td><td>'+((l.distress_flags||[]).map(badge).join('')||'-')+'</td></tr>';}).join('');
+}
+function filterTable(){
+  var q=document.getElementById('searchBox').value.toLowerCase();
+  var filtered=!q?allLeads:allLeads.filter(function(l){
+    return (l.document_number+l.grantor+l.grantee+l.legal_description+l.document_type).toLowerCase().includes(q);
+  });
+  renderTable(filtered);
+}
+function exportCSV(){
+  var q=document.getElementById('searchBox').value.toLowerCase();
+  var leads=!q?allLeads:allLeads.filter(function(l){
+    return (l.document_number+l.grantor+l.grantee+l.legal_description+l.document_type).toLowerCase().includes(q);
+  });
+  var headers=['Score','Document #','File Date','Grantor','Grantee','Legal Description','Document Type','Distress Flags'];
+  var rows=leads.map(function(l){
+    return [
+      l.seller_score,
+      l.document_number,
+      l.file_date,
+      l.grantor,
+      l.grantee,
+      l.legal_description,
+      l.document_type,
+      (l.distress_flags||[]).join(', ')
+    ].map(function(v){return '"'+(String(v||'').replace(/"/g,'""'))+'"';}).join(',');
+  });
+  var csv=[headers.join(',')].concat(rows).join('\n');
+  var blob=new Blob([csv],{type:'text/csv'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='oc_motivated_sellers_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
 var sortDir={};
-function sortTable(col){var tbody=document.getElementById('tableBody');var rows=Array.from(tbody.querySelectorAll('.lead-row'));var asc=!sortDir[col];sortDir={};sortDir[col]=asc;rows.sort(function(a,b){var av=a.cells[col]?a.cells[col].innerText.trim():'';var bv=b.cells[col]?b.cells[col].innerText.trim():'';var an=parseFloat(av),bn=parseFloat(bv);if(!isNaN(an)&&!isNaN(bn))return asc?an-bn:bn-an;return asc?av.localeCompare(bv):bv.localeCompare(av);});rows.forEach(function(r){tbody.appendChild(r);});document.querySelectorAll('thead th').forEach(function(th,i){th.classList.toggle('sorted',i===col);});}
+function sortTable(col){
+  var tbody=document.getElementById('tableBody');
+  var rows=Array.from(tbody.querySelectorAll('.lead-row'));
+  var asc=!sortDir[col];sortDir={};sortDir[col]=asc;
+  rows.sort(function(a,b){var av=a.cells[col]?a.cells[col].innerText.trim():'';var bv=b.cells[col]?b.cells[col].innerText.trim():'';var an=parseFloat(av),bn=parseFloat(bv);if(!isNaN(an)&&!isNaN(bn))return asc?an-bn:bn-an;return asc?av.localeCompare(bv):bv.localeCompare(av);});
+  rows.forEach(function(r){tbody.appendChild(r);});
+  document.querySelectorAll('thead th').forEach(function(th,i){th.classList.toggle('sorted',i===col);});
+}
 loadLeads();
 </script>
 </body>
