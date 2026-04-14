@@ -24,18 +24,10 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
-      - name: Install Chrome
-        run: |
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          google-chrome --version
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 lxml selenium webdriver-manager
+          pip install requests
 
       - name: Create output directories
         run: mkdir -p data dashboard
@@ -71,7 +63,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload artifacts and debug screenshots
+      - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -79,5 +71,4 @@ jobs:
           path: |
             data/output.json
             dashboard/index.html
-            debug_*.png
           retention-days: 30
