@@ -1,21 +1,17 @@
 """
 scraper.py — Orange County FL Automated Motivated Seller Scraper
-Uses Selenium to do the search, then grabs session cookies to download CSV directly.
+Pure requests-based scraper. No Selenium, no Chrome, no browser needed.
+Uses the Tyler Technologies JSON API directly.
 """
-import json, logging, os, time, csv, io, requests
+import json, logging, os, csv, io, requests, time
 from dataclasses import dataclass, asdict, field
 from datetime import datetime, timedelta
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
 
-BASE_URL    = "https://selfservice.or.occompt.com/ssweb/search/DOCSEARCH2950S1"
+SEARCH_URL  = "https://selfservice.or.occompt.com/ssweb/searchPost/DOCSEARCH2950S1"
+RESULTS_URL = "https://selfservice.or.occompt.com/ssweb/search/DOCSEARCH2950S1"
 CSV_URL     = "https://selfservice.or.occompt.com/ssweb/viewSearchResultsReport/DOCSEARCH2950S1/CSV"
 OUTPUT_PATH = "data/output.json"
 
@@ -25,12 +21,22 @@ DATE_START = START_DATE.strftime("%m/%d/%Y")
 DATE_END   = END_DATE.strftime("%m/%d/%Y")
 
 TARGET_DOC_TYPES = [
-    ("Lis Pendens",             30),
-    ("Lien",                    15),
-    ("Judgment",                15),
-    ("Probate Court Paper",     20),
-    ("Domestic Relations Deed", 10),
+    ("Lis Pendens",             "LP",   30),
+    ("Lien",                    "LN",   15),
+    ("Judgment",                "J",    15),
+    ("Probate Court Paper",     "PRCP", 20),
+    ("Domestic Relations Deed", "DRD",  10),
 ]
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "X-Requested-With": "XMLHttpRequest",
+    "Origin": "https://selfservice.or.occompt.com",
+    "Referer": "https://selfservice.or.occompt.com/ssweb/search/DOCSEARCH2950S1",
+}
 
 @dataclass
 class Lead:
@@ -56,202 +62,72 @@ def score_lead(doc_type, base_score):
     if "domestic"    in dt: flags.append("divorce_bankruptcy")
     return min(score, 100), flags
 
-def make_driver():
-    opts = Options()
-    opts.add_argument("--headless")
-    opts.add_argument("--no-sandbox")
-    opts.add_argument("--disable-dev-shm-usage")
-    opts.add_argument("--disable-gpu")
-    opts.add_argument("--window-size=1920,1080")
-    opts.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-    driver = webdriver.Chrome(options=opts)
-    driver.set_page_load_timeout(30)
-    return driver
-
-def dump_page_info(driver, label):
-    """Log all input fields found on page for debugging."""
-    log.info("=== PAGE DUMP: %s ===", label)
-    log.info("URL: %s", driver.current_url)
-    log.info("Title: %s", driver.title)
-    inputs = driver.find_elements(By.TAG_NAME, "input")
-    log.info("Found %d input elements:", len(inputs))
-    for i, el in enumerate(inputs):
-        try:
-            log.info("  input[%d]: type=%s id=%s name=%s placeholder=%s class=%s visible=%s",
-                i, el.get_attribute("type"), el.get_attribute("id"),
-                el.get_attribute("name"), el.get_attribute("placeholder"),
-                el.get_attribute("class"), el.is_displayed())
-        except Exception:
-            pass
-    buttons = driver.find_elements(By.TAG_NAME, "button")
-    log.info("Found %d button elements:", len(buttons))
-    for i, b in enumerate(buttons[:10]):
-        try:
-            log.info("  button[%d]: text=%s id=%s class=%s visible=%s",
-                i, b.text[:50], b.get_attribute("id"),
-                b.get_attribute("class"), b.is_displayed())
-        except Exception:
-            pass
-
-def accept_disclaimer(driver, wait):
+def make_session():
+    """Create a requests session and initialize cookies by visiting the search page."""
+    session = requests.Session()
+    session.headers.update(HEADERS)
+    
+    log.info("Initializing session...")
     try:
-        accept_btn = WebDriverWait(driver, 5).until(EC.element_to_be_clickable(
-            (By.XPATH, "//button[contains(text(),'Accept') or contains(text(),'agree') or contains(text(),'Continue') or contains(text(),'OK') or contains(text(),'I Agree')]")
-        ))
-        driver.execute_script("arguments[0].click();", accept_btn)
-        log.info("Accepted disclaimer")
-        time.sleep(2)
-    except Exception:
-        pass
+        resp = session.get(RESULTS_URL, timeout=30)
+        log.info("Session init status: %d", resp.status_code)
+        session.cookies.set("disclaimerAccepted", "true")
+        log.info("Cookies: %s", dict(session.cookies))
+    except Exception as e:
+        log.error("Session init failed: %s", e)
+    
+    return session
 
-def fill_input_js(driver, element, value):
-    """Fill input using JavaScript to bypass any framework bindings."""
-    driver.execute_script("""
-        var el = arguments[0];
-        var val = arguments[1];
-        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-        nativeInputValueSetter.call(el, val);
-        el.dispatchEvent(new Event('input', { bubbles: true }));
-        el.dispatchEvent(new Event('change', { bubbles: true }));
-        el.dispatchEvent(new Event('blur', { bubbles: true }));
-    """, element, value)
+def search_and_get_csv(session, doc_type, doc_code, doc_label):
+    """POST search for a specific doc type, then download CSV."""
+    log.info("Searching for: %s (%s)", doc_type, doc_code)
+    
+    payload = {
+        "field_RecordingDateID_DOT_StartDate": DATE_START,
+        "field_RecordingDateID_DOT_EndDate":   DATE_END,
+        "field_DocumentID":                    "",
+        "field_BothNamesID-containsInput":     "Contains Any",
+        "field_BothNamesID":                   "",
+        "field_GrantorID-containsInput":       "Contains Any",
+        "field_GrantorID":                     "",
+        "field_GranteeID-containsInput":       "Contains Any",
+        "field_GranteeID":                     "",
+        "field_BookPageID_DOT_Book":           "",
+        "field_BookPageID_DOT_Page":           "",
+        "field_selfservice_documentTypes-holderInput":  doc_code,
+        "field_selfservice_documentTypes-holderValue":  doc_label,
+        "field_selfservice_documentTypes-containsInput": "Contains Any",
+        "field_selfservice_documentTypes":     "",
+        "field_UseAdvancedSearch":             "",
+    }
 
-def do_search(driver, doc_type):
-    log.info("Loading search page for: %s", doc_type)
-    driver.get(BASE_URL)
-    time.sleep(4)
-
-    # Set cookie
+    # POST the search
     try:
-        driver.add_cookie({"name": "disclaimerAccepted", "value": "true",
-                          "domain": "selfservice.or.occompt.com"})
-    except Exception:
-        pass
+        resp = session.post(SEARCH_URL, data=payload, timeout=30)
+        log.info("Search POST status: %d | size: %d bytes", resp.status_code, len(resp.content))
+        log.info("Search response preview: %s", resp.text[:200])
+    except Exception as e:
+        log.error("Search POST failed: %s", e)
+        return None
 
-    accept_disclaimer(driver, None)
     time.sleep(2)
 
-    # Dump all inputs for debugging
-    dump_page_info(driver, f"before_fill_{doc_type}")
-
-    # Get ALL input elements
-    all_inputs = driver.find_elements(By.TAG_NAME, "input")
-    visible_inputs = [el for el in all_inputs if el.is_displayed()]
-    text_inputs = [el for el in visible_inputs if el.get_attribute("type") in ("text", "date", "", None)]
-
-    log.info("Visible inputs: %d, Text inputs: %d", len(visible_inputs), len(text_inputs))
-
-    filled = False
-
-    # Try by placeholder
-    for el in all_inputs:
-        ph = (el.get_attribute("placeholder") or "").lower()
-        nm = (el.get_attribute("name") or "").lower()
-        eid = (el.get_attribute("id") or "").lower()
-        if any(x in ph or x in nm or x in eid for x in ["start", "from", "begin", "recordingstart", "datestart"]):
-            try:
-                fill_input_js(driver, el, DATE_START)
-                log.info("Filled start date in: id=%s name=%s", el.get_attribute("id"), el.get_attribute("name"))
-                filled = True
-            except Exception as e:
-                log.warning("Could not fill start: %s", e)
-
-        if any(x in ph or x in nm or x in eid for x in ["end", "to", "thru", "recordingend", "dateend"]):
-            try:
-                fill_input_js(driver, el, DATE_END)
-                log.info("Filled end date in: id=%s name=%s", el.get_attribute("id"), el.get_attribute("name"))
-            except Exception as e:
-                log.warning("Could not fill end: %s", e)
-
-    # Fallback: use first two visible text inputs
-    if not filled and len(text_inputs) >= 2:
-        log.info("Fallback: filling first two visible text inputs")
-        fill_input_js(driver, text_inputs[0], DATE_START)
-        fill_input_js(driver, text_inputs[1], DATE_END)
-        filled = True
-
-    if not filled:
-        log.error("COULD NOT FILL ANY DATE INPUTS for %s", doc_type)
-        driver.save_screenshot(f"debug_nodates_{doc_type.replace(' ','_')}.png")
-        return False
-
-    time.sleep(1)
-
-    # Click search button
-    search_clicked = False
-    # Try multiple strategies
-    for xpath in [
-        "//button[contains(translate(text(),'SEARCH','search'),'search')]",
-        "//input[@type='submit']",
-        "//button[@type='submit']",
-        "//button[contains(@class,'search')]",
-        "//input[@value='Search']",
-        "//button[contains(@id,'search') or contains(@id,'Search')]",
-    ]:
-        try:
-            btn = driver.find_element(By.XPATH, xpath)
-            if btn.is_displayed():
-                driver.execute_script("arguments[0].click();", btn)
-                log.info("Clicked search button via: %s", xpath)
-                search_clicked = True
-                break
-        except Exception:
-            continue
-
-    if not search_clicked:
-        # Last resort: find any visible button and click it
-        btns = driver.find_elements(By.TAG_NAME, "button")
-        for b in btns:
-            if b.is_displayed() and b.text.strip():
-                log.info("Last resort: clicking button with text: %s", b.text)
-                driver.execute_script("arguments[0].click();", b)
-                search_clicked = True
-                break
-
-    if not search_clicked:
-        log.error("Could not find search button for %s", doc_type)
-        driver.save_screenshot(f"debug_nosearchbtn_{doc_type.replace(' ','_')}.png")
-        return False
-
-    log.info("Waiting for results...")
-    time.sleep(6)
-
-    # Try clicking sidebar filter
+    # Download CSV using same session (session holds the search state)
     try:
-        filter_el = driver.find_element(By.XPATH,
-            f"//*[contains(@class,'filter') or contains(@class,'facet') or contains(@class,'sidebar') or contains(@class,'refine')]//*[contains(text(),'{doc_type}')]"
-        )
-        driver.execute_script("arguments[0].click();", filter_el)
-        log.info("Clicked sidebar filter: %s", doc_type)
-        time.sleep(3)
-    except NoSuchElementException:
-        log.info("No sidebar filter for %s", doc_type)
-
-    dump_page_info(driver, f"after_search_{doc_type}")
-    return True
-
-def get_csv_via_cookies(driver):
-    selenium_cookies = driver.get_cookies()
-    session = requests.Session()
-    for c in selenium_cookies:
-        session.cookies.set(c["name"], c["value"])
-    session.cookies.set("disclaimerAccepted", "true")
-
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Referer": BASE_URL,
-        "Accept": "text/csv,text/html,*/*",
-    }
-    log.info("Fetching CSV...")
-    resp = session.get(CSV_URL, headers=headers, timeout=30)
-    log.info("CSV status: %d | size: %d bytes | content-type: %s",
-             resp.status_code, len(resp.content),
-             resp.headers.get("content-type","?"))
-    log.info("CSV preview: %s", resp.text[:300])
-
-    if resp.status_code == 200 and len(resp.content) > 200:
-        return resp.text
-    return None
+        csv_resp = session.get(CSV_URL, timeout=30)
+        log.info("CSV status: %d | size: %d bytes | type: %s",
+                 csv_resp.status_code, len(csv_resp.content),
+                 csv_resp.headers.get("content-type", "?"))
+        log.info("CSV preview: %s", csv_resp.text[:300])
+        
+        if csv_resp.status_code == 200 and len(csv_resp.content) > 200:
+            return csv_resp.text
+        else:
+            log.warning("CSV empty or error")
+            return None
+    except Exception as e:
+        log.error("CSV download failed: %s", e)
+        return None
 
 def parse_csv_text(csv_text, doc_type, base_score):
     leads = []
@@ -261,6 +137,7 @@ def parse_csv_text(csv_text, doc_type, base_score):
         if "Document" in line and ("Grantor" in line or "Recording" in line):
             header_idx = i
             break
+    
     reader = csv.DictReader(io.StringIO("\n".join(lines[header_idx:])))
     for row in reader:
         doc_num = (row.get("Document #") or row.get("Document") or "").strip().strip('"')
@@ -304,33 +181,30 @@ def save_json(leads):
     log.info("Saved %d records to %s", len(leads), OUTPUT_PATH)
 
 def main():
-    log.info("=== OC Motivated Seller Scraper ===")
+    log.info("=== OC Motivated Seller Scraper (No-Browser Mode) ===")
     log.info("Date range: %s to %s", DATE_START, DATE_END)
 
-    driver = make_driver()
     new_leads = []
 
-    try:
-        for doc_type, base_score in TARGET_DOC_TYPES:
-            try:
-                success = do_search(driver, doc_type)
-                if success:
-                    csv_text = get_csv_via_cookies(driver)
-                    if csv_text:
-                        leads = parse_csv_text(csv_text, doc_type, base_score)
-                        log.info("Got %d leads for %s", len(leads), doc_type)
-                        new_leads.extend(leads)
-                    else:
-                        log.error("No CSV data for %s", doc_type)
-            except Exception as e:
-                log.error("Error on %s: %s", doc_type, e)
-            time.sleep(3)
-    finally:
-        driver.quit()
+    for doc_type, doc_code, base_score in TARGET_DOC_TYPES:
+        # Each doc type gets its own fresh session to avoid state bleed
+        session = make_session()
+        try:
+            csv_text = search_and_get_csv(session, doc_type, doc_code, doc_type)
+            if csv_text:
+                leads = parse_csv_text(csv_text, doc_type, base_score)
+                log.info("Got %d leads for %s", len(leads), doc_type)
+                new_leads.extend(leads)
+            else:
+                log.error("No CSV data for %s", doc_type)
+        except Exception as e:
+            log.error("Error on %s: %s", doc_type, e)
+        time.sleep(2)
 
+    # Merge with existing
     existing = load_existing(OUTPUT_PATH)
-    existing_nums = {l["document_number"] if isinstance(l, dict) else l.document_number for l in existing}
-
+    existing_nums = {l["document_number"] if isinstance(l, dict) else l.document_number
+                     for l in existing}
     merged = list(existing)
     added = 0
     for lead in new_leads:
@@ -339,9 +213,8 @@ def main():
             existing_nums.add(lead.document_number)
             added += 1
 
-    def get_score(l):
-        return l["seller_score"] if isinstance(l, dict) else l.seller_score
-    merged.sort(key=get_score, reverse=True)
+    merged.sort(key=lambda l: l["seller_score"] if isinstance(l, dict) else l.seller_score,
+                reverse=True)
 
     log.info("New leads added: %d | Total: %d", added, len(merged))
     save_json(merged)
