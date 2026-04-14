@@ -4,260 +4,81 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OC Motivated Seller Leads</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d0f14;
-    --surface: #151820;
-    --border: #1e2330;
-    --accent: #e84040;
-    --accent2: #f5a623;
-    --text: #e8eaf0;
-    --muted: #5a6070;
-    --card: #181c26;
+    --bg:#0d0f14;--surface:#151820;--border:#1e2330;
+    --accent:#e84040;--accent2:#f5a623;--text:#e8eaf0;
+    --muted:#5a6070;--card:#181c26;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'IBM Plex Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: 60px;
-  }
-
-  /* ── Header ── */
-  header {
-    background: linear-gradient(135deg, #0d0f14 0%, #131928 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 32px 48px 28px;
-    display: flex;
-    align-items: flex-end;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-  header h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2rem;
-    line-height: 1;
-    color: #fff;
-    letter-spacing: -1px;
-  }
-  header h1 span { color: var(--accent); }
-  header .meta {
-    font-size: 11px;
-    color: var(--muted);
-    margin-left: auto;
-    text-align: right;
-    line-height: 1.8;
-  }
-
-  /* ── Stat cards ── */
-  .stats {
-    display: flex;
-    gap: 16px;
-    padding: 28px 48px 0;
-    flex-wrap: wrap;
-  }
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px 28px;
-    min-width: 160px;
-    position: relative;
-    overflow: hidden;
-  }
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-  }
-  .stat-card.red::before  { background: var(--accent); }
-  .stat-card.gold::before { background: var(--accent2); }
-  .stat-card.green::before { background: #38a169; }
-  .stat-card .num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.4rem;
-    font-weight: 800;
-    line-height: 1;
-    color: #fff;
-  }
-  .stat-card .label {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 6px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* ── Search / filter bar ── */
-  .toolbar {
-    padding: 24px 48px 0;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .toolbar input {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 13px;
-    padding: 10px 16px;
-    width: 280px;
-    outline: none;
-    transition: border-color .2s;
-  }
-  .toolbar input:focus { border-color: var(--accent); }
-  .toolbar select {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-family: inherit;
-    font-size: 13px;
-    padding: 10px 14px;
-    outline: none;
-    cursor: pointer;
-  }
-  .toolbar label { font-size: 12px; color: var(--muted); }
-
-  /* ── Table ── */
-  .table-wrap {
-    margin: 24px 48px 0;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: auto;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-  }
-  thead th {
-    background: var(--surface);
-    padding: 14px 16px;
-    text-align: left;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-    cursor: pointer;
-    user-select: none;
-  }
-  thead th:hover { color: var(--text); }
-  thead th.sorted { color: var(--accent); }
-  .lead-row {
-    border-bottom: 1px solid var(--border);
-    animation: fadeUp .4s ease both;
-    animation-delay: calc(var(--row-i) * 30ms);
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .lead-row:last-child { border-bottom: none; }
-  .lead-row:hover td { background: #1a1f2e; }
-  td {
-    padding: 14px 16px;
-    vertical-align: top;
-    transition: background .15s;
-  }
-  .address-col { max-width: 220px; }
-  .muted { color: var(--muted); font-size: 11px; }
-  small.muted { display: block; margin-top: 3px; }
-
-  /* ── Score ring ── */
-  .score-cell { text-align: center; }
-  .score-ring {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 2px solid var(--c, #38a169);
-    color: var(--c, #38a169);
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 15px;
-  }
-
-  /* ── Empty state ── */
-  .empty {
-    text-align: center;
-    padding: 80px 0;
-    color: var(--muted);
-    font-size: 14px;
-  }
-  .empty h2 { font-family: 'Syne',sans-serif; font-size: 1.5rem; color: var(--text); margin-bottom: 8px; }
-
-  /* ── Footer ── */
-  footer {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 11px;
-    color: var(--muted);
-  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'IBM Plex Mono',monospace;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px}
+  header{background:linear-gradient(135deg,#0d0f14 0%,#131928 100%);border-bottom:1px solid var(--border);padding:32px 48px 28px;display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap}
+  header h1{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1;color:#fff;letter-spacing:-1px}
+  header h1 span{color:var(--accent)}
+  header .meta{font-size:11px;color:var(--muted);margin-left:auto;text-align:right;line-height:1.8}
+  .stats{display:flex;gap:16px;padding:28px 48px 0;flex-wrap:wrap}
+  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 28px;min-width:160px;position:relative;overflow:hidden}
+  .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+  .stat-card.red::before{background:var(--accent)}
+  .stat-card.gold::before{background:var(--accent2)}
+  .stat-card.green::before{background:#38a169}
+  .stat-card .num{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;line-height:1;color:#fff}
+  .stat-card .label{font-size:10px;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+  .toolbar{padding:24px 48px 0;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .toolbar input{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:13px;padding:10px 16px;width:280px;outline:none}
+  .toolbar input:focus{border-color:var(--accent)}
+  .toolbar select{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:13px;padding:10px 14px;outline:none;cursor:pointer}
+  .toolbar label{font-size:12px;color:var(--muted)}
+  .table-wrap{margin:24px 48px 0;border:1px solid var(--border);border-radius:12px;overflow:auto}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  thead th{background:var(--surface);padding:14px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+  thead th:hover{color:var(--text)}
+  thead th.sorted{color:var(--accent)}
+  .lead-row{border-bottom:1px solid var(--border);animation:fadeUp .4s ease both;animation-delay:calc(var(--row-i)*30ms)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .lead-row:last-child{border-bottom:none}
+  .lead-row:hover td{background:#1a1f2e}
+  td{padding:14px 16px;vertical-align:top;transition:background .15s}
+  .address-col{max-width:220px}
+  .muted{color:var(--muted);font-size:11px}
+  small.muted{display:block;margin-top:3px}
+  .score-cell{text-align:center}
+  .score-ring{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:2px solid var(--c,#38a169);color:var(--c,#38a169);font-family:'Syne',sans-serif;font-weight:800;font-size:15px}
+  footer{margin-top:40px;text-align:center;font-size:11px;color:var(--muted)}
 </style>
 </head>
 <body>
-
 <header>
-  <div>
-    <h1>ORANGE COUNTY <span>FL</span><br>MOTIVATED SELLERS</h1>
-  </div>
-  <div class="meta">
-    Generated: 2026-04-14 01:24 UTC<br>
-    Source: Orange County Comptroller Public Records<br>
-    Scored by distress signal analysis
-  </div>
+  <div><h1>ORANGE COUNTY <span>FL</span><br>MOTIVATED SELLERS</h1></div>
+  <div class="meta">Generated: 2026-04-14 02:04 UTC<br>Source: Orange County Comptroller Public Records<br>Scored by distress signal analysis</div>
 </header>
-
 <div class="stats">
-  <div class="stat-card red">
-    <div class="num">0</div>
-    <div class="label">Total Leads</div>
-  </div>
-  <div class="stat-card gold">
-    <div class="num">0</div>
-    <div class="label">Hot Leads ≥50</div>
-  </div>
-  <div class="stat-card green">
-    <div class="num">0</div>
-    <div class="label">Warm Leads &lt;50</div>
-  </div>
+  <div class="stat-card red"><div class="num">0</div><div class="label">Total Leads</div></div>
+  <div class="stat-card gold"><div class="num">0</div><div class="label">Hot Leads</div></div>
+  <div class="stat-card green"><div class="num">0</div><div class="label">Warm Leads</div></div>
 </div>
-
 <div class="toolbar">
-  <input type="text" id="searchBox" placeholder="Search grantor, grantee, address …" oninput="filterTable()">
+  <input type="text" id="searchBox" placeholder="Search grantor, grantee, legal …" oninput="filterTable()">
   <label>Min score:</label>
   <select id="minScore" onchange="filterTable()">
     <option value="0">All</option>
     <option value="10">10+</option>
-    <option value="25">25+</option>
-    <option value="50">50+</option>
-    <option value="70">70+</option>
+    <option value="15">15+</option>
+    <option value="20">20+</option>
+    <option value="30">30+</option>
   </select>
-  <label>Flag:</label>
+  <label>Type:</label>
   <select id="flagFilter" onchange="filterTable()">
-    <option value="">All flags</option>
-    <option value="tax_delinquency">Tax Lien</option>
-    <option value="code_violation">Code Violation</option>
-    <option value="probate">Probate</option>
-    <option value="multiple_liens">Multiple Liens</option>
-    <option value="divorce_bankruptcy">Divorce / Bankruptcy</option>
+    <option value="">All types</option>
+    <option value="LIS PENDENS">Lis Pendens</option>
+    <option value="LIEN">Lien</option>
+    <option value="JUDGMENT">Judgment</option>
+    <option value="PROBATE">Probate</option>
+    <option value="DIVORCE">Divorce</option>
+    <option value="TAX DEED">Tax Deed</option>
   </select>
 </div>
-
 <div class="table-wrap">
   <table id="leadsTable">
     <thead>
@@ -265,58 +86,44 @@
         <th onclick="sortTable(0)">Score</th>
         <th onclick="sortTable(1)">Doc #</th>
         <th onclick="sortTable(2)">File Date</th>
-        <th onclick="sortTable(3)">Grantor (Seller)</th>
-        <th onclick="sortTable(4)">Grantee (Buyer)</th>
-        <th onclick="sortTable(5)">Property Address</th>
-        <th>Distress Flags</th>
+        <th onclick="sortTable(3)">Grantor</th>
+        <th onclick="sortTable(4)">Grantee (Seller)</th>
+        <th onclick="sortTable(5)">Legal Description</th>
+        <th>Type</th>
       </tr>
     </thead>
     <tbody id="tableBody">
-<tr><td colspan="7" class="empty"><h2>No records found</h2>Run scraper.py to populate data.</td></tr>
+<tr><td colspan="7" style="text-align:center;padding:60px;color:#5a6070">No records found — scraper is running</td></tr>
     </tbody>
   </table>
 </div>
-
-<footer>
-  Data sourced from Orange County Comptroller public records portal &nbsp;|&nbsp; For investment research only
-</footer>
-
+<footer>Orange County Comptroller public records &nbsp;|&nbsp; For investment research only</footer>
 <script>
-  // ── Search / filter ──────────────────────────────────────────────────────
-  function filterTable() {
-    const q = document.getElementById('searchBox').value.toLowerCase();
-    const minScore = parseInt(document.getElementById('minScore').value) || 0;
-    const flagFilter = document.getElementById('flagFilter').value;
-    const rows = document.querySelectorAll('.lead-row');
-    rows.forEach(row => {
-      const text = row.innerText.toLowerCase();
-      const score = parseInt(row.querySelector('.score-ring span').textContent) || 0;
-      const badges = row.querySelector('td:last-child').innerText.toLowerCase();
-      const matchText = !q || text.includes(q);
-      const matchScore = score >= minScore;
-      const matchFlag = !flagFilter || badges.includes(flagFilter.replace('_',' '));
-      row.style.display = (matchText && matchScore && matchFlag) ? '' : 'none';
+  function filterTable(){
+    const q=document.getElementById('searchBox').value.toLowerCase();
+    const minScore=parseInt(document.getElementById('minScore').value)||0;
+    const flagFilter=document.getElementById('flagFilter').value;
+    document.querySelectorAll('.lead-row').forEach(row=>{
+      const text=row.innerText.toLowerCase();
+      const score=parseInt(row.querySelector('.score-ring span').textContent)||0;
+      const badges=row.querySelector('td:last-child').innerText;
+      row.style.display=(!q||text.includes(q))&&score>=minScore&&(!flagFilter||badges.includes(flagFilter))?'':'none';
     });
   }
-
-  // ── Sort ─────────────────────────────────────────────────────────────────
-  let sortDir = {};
-  function sortTable(col) {
-    const tbody = document.getElementById('tableBody');
-    const rows = Array.from(tbody.querySelectorAll('.lead-row'));
-    const asc = !sortDir[col];
-    sortDir = {[col]: asc};
-    rows.sort((a, b) => {
-      const av = a.cells[col]?.innerText.trim() || '';
-      const bv = b.cells[col]?.innerText.trim() || '';
-      const an = parseFloat(av), bn = parseFloat(bv);
-      if (!isNaN(an) && !isNaN(bn)) return asc ? an - bn : bn - an;
-      return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+  let sortDir={};
+  function sortTable(col){
+    const tbody=document.getElementById('tableBody');
+    const rows=Array.from(tbody.querySelectorAll('.lead-row'));
+    const asc=!sortDir[col];sortDir={[col]:asc};
+    rows.sort((a,b)=>{
+      const av=a.cells[col]?.innerText.trim()||'';
+      const bv=b.cells[col]?.innerText.trim()||'';
+      const an=parseFloat(av),bn=parseFloat(bv);
+      if(!isNaN(an)&&!isNaN(bn))return asc?an-bn:bn-an;
+      return asc?av.localeCompare(bv):bv.localeCompare(av);
     });
-    rows.forEach(r => tbody.appendChild(r));
-    document.querySelectorAll('thead th').forEach((th, i) => {
-      th.classList.toggle('sorted', i === col);
-    });
+    rows.forEach(r=>tbody.appendChild(r));
+    document.querySelectorAll('thead th').forEach((th,i)=>th.classList.toggle('sorted',i===col));
   }
 </script>
 </body>
