@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-15T13:13:03.873738Z",
-  "total_records": 2085,
+  "generated_at": "2026-04-15T13:46:26.080011Z",
+  "total_records": 2117,
   "date_range": "04/08/2026 to 04/15/2026",
   "leads": [
     {
@@ -6755,6 +6755,27 @@
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=DUCATTE",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T13:05:22.657136Z"
+    },
+    {
+      "document_number": "20260213525",
+      "file_date": "04/15/2026 09:13 AM",
+      "grantor": "GOPAUL ARNOLD",
+      "grantee": "RAMNANAN SHANWELL BENJAMIN, RAMNANAN SIMON PETER",
+      "legal_description": "Lot: 66   Parcel: 01 22 28 4743 00 660 LAKE SPARLING HEIGHTS UNIT TWO ETC",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "4524 RICHFIELD ST, Orlando, FL 32808",
+      "mailing_address": "4524 RICHFIELD ST, ORLANDO, FLORIDA 32808",
+      "owner_name": "NORONHA WANDA",
+      "assessed_value": "$127,058",
+      "match_confidence": "LOW",
+      "match_reason": "Subdiv only: LAKE SPARLING HEIGHTS -> 108 parcels",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=RAMNANAN",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:59.590356Z"
     },
     {
       "document_number": "20260210651",
@@ -31431,6 +31452,657 @@
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=LVNV",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T13:05:16.048449Z"
+    },
+    {
+      "document_number": "20260213624",
+      "file_date": "04/15/2026 09:22 AM",
+      "grantor": "SRS DISTRIBUTION",
+      "grantee": "YENTSCH BARBARA FRYE LIFE ESTATE",
+      "legal_description": "Lot: 2 Block: A   Parcel: 03 22 29 0900 01 012  BREWER COURT ETC",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "6320 INTERNATIONAL DR, Orlando, FL 32819",
+      "mailing_address": "16790 RUSTY ANCHOR RD, WINTER GARDEN, FLORIDA 34787",
+      "owner_name": "DISTRIBUTION 7021 MCS INC",
+      "assessed_value": "$1,583,125",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=SRS",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:44.974442Z"
+    },
+    {
+      "document_number": "20260213572",
+      "file_date": "04/15/2026 09:14 AM",
+      "grantor": "LAKE GLORIA PRESERVE HOMEOWNERS ASSOCIATION INC",
+      "grantee": "DEBARDELEBEN TAYLOR ELIZABETH",
+      "legal_description": "Lot: 79    LAKE GLORIA PRESERVE",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "CHERRY GROVE CIR, Orlando, FL 32809",
+      "mailing_address": "6835 CHERRY GROVE CIR, ORLANDO, FLORIDA 32809",
+      "owner_name": "LAKE GLORIA PRESERVE-ORLANDO L",
+      "assessed_value": "$100",
+      "match_confidence": "LOW",
+      "match_reason": "Subdiv only: LAKE GLORIA PRESERVE -> 274 parcels",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=LAKE",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:44.974462Z"
+    },
+    {
+      "document_number": "20260213543",
+      "file_date": "04/15/2026 09:13 AM",
+      "grantor": "CELLIS USA SERVICES LLC",
+      "grantee": "CAMPARI MEXICO S A DE C V",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CELLIS",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:44.974474Z"
+    },
+    {
+      "document_number": "20260213532",
+      "file_date": "04/15/2026 09:13 AM",
+      "grantor": "CELLIS USA SERVICES LLC",
+      "grantee": "CITROTEC INTERNATIONAL INC",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CELLIS",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:44.974483Z"
+    },
+    {
+      "document_number": "20260213519",
+      "file_date": "04/15/2026 09:11 AM",
+      "grantor": "COLONIES CONDOMINIUM ASSOCIATION INC",
+      "grantee": "JT FLORIDA CLEANERS LLC",
+      "legal_description": "Unit: L 3    COLONIES",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=COLONIES",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:44.974491Z"
+    },
+    {
+      "document_number": "20260213710",
+      "file_date": "04/15/2026 09:29 AM",
+      "grantor": "CYCLEONE FINANCIAL INC",
+      "grantee": "MORALES ROBERT JOHN, HENDERSON RAY C III",
+      "legal_description": "Case: 2025 CC 001022 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CYCLEONE",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977134Z"
+    },
+    {
+      "document_number": "20260213680",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "PORTFOLIO RECOVERY ASSOCIATES LLC",
+      "grantee": "DALY DERMOT",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=PORTFOLIO",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977150Z"
+    },
+    {
+      "document_number": "20260213679",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "BANK OF AMERICA N A",
+      "grantee": "FERRERO LUCA",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "6329 W COLONIAL DR, Orlando, FL 32818",
+      "mailing_address": "101 N TRYON ST NC10010381, CHARLOTTE, NORTH CAROLINA 28246",
+      "owner_name": "BANK OF AMERICA N A",
+      "assessed_value": "$1,490,119",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=BANK",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977157Z"
+    },
+    {
+      "document_number": "20260213678",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "EF MORTGAGE LLC",
+      "grantee": "CITY OF ORLANDO",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=EF",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977163Z"
+    },
+    {
+      "document_number": "20260213677",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "MIDLAND CREDIT MANAGMENT INC",
+      "grantee": "RESULTS COMPANIES LLC",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=MIDLAND",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977169Z"
+    },
+    {
+      "document_number": "20260213675",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "AMERICAN EXPRESS NATIONAL BANK",
+      "grantee": "JPMORGAN CHASE BANK N A",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=AMERICAN",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977176Z"
+    },
+    {
+      "document_number": "20260213671",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "SAND LAKE ACQUISITION LP",
+      "grantee": "DOS SANTOS JULIO FIDALGO",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "7118 ALTIS WAY, Orlando, FL 32836",
+      "mailing_address": "2424 RIDGE RD, ROCKWALL, TEXAS 75087",
+      "owner_name": "SAND LAKE ACQUISITION LP 90% I",
+      "assessed_value": "$55,429,474",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=SAND",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977182Z"
+    },
+    {
+      "document_number": "20260213670",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "HELIOS INVESTMENT PROPERTIES LLC",
+      "grantee": "VASQUEZ HUGO",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "620 LAKE DOT CIR, Orlando, FL 32801",
+      "mailing_address": "620 LAKE DOT CIR, ORLANDO, FLORIDA 32801",
+      "owner_name": "HELLENIC INVESTMENT PROPERTIES",
+      "assessed_value": "$301,510",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=HELIOS",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977188Z"
+    },
+    {
+      "document_number": "20260213666",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "CACH LLC",
+      "grantee": "TAYLOR KERIN C",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CACH",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977193Z"
+    },
+    {
+      "document_number": "20260213663",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "JPMORGAN CHASE BANK N A",
+      "grantee": "RAMOS LILLIAN",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "4655 S KIRKMAN RD, ORLANDO, FL 32811",
+      "mailing_address": "1111 POLARIS PKWY MAIL CODE OH1-0241, COLUMBUS, OHIO 43240",
+      "owner_name": "JPMORGAN CHASE BANK N A",
+      "assessed_value": "$1,257,980",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=JPMORGAN",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977199Z"
+    },
+    {
+      "document_number": "20260213661",
+      "file_date": "04/15/2026 09:26 AM",
+      "grantor": "CIG FINANCIAL LLC",
+      "grantee": "MARRERO FRANCISCO",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CIG",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977204Z"
+    },
+    {
+      "document_number": "20260213623",
+      "file_date": "04/15/2026 09:22 AM",
+      "grantor": "MIDLAND CREDIT MANAGEMENT INC",
+      "grantee": "THOMAS TASASHA",
+      "legal_description": "Case: 2025 SC 031811 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=MIDLAND",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977211Z"
+    },
+    {
+      "document_number": "20260213622",
+      "file_date": "04/15/2026 09:22 AM",
+      "grantor": "MIDLAND CREDIT MANAGEMENT INC",
+      "grantee": "FELDER DEMETRIUS",
+      "legal_description": "Case: 2025 SC 035224 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=MIDLAND",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977216Z"
+    },
+    {
+      "document_number": "20260213618",
+      "file_date": "04/15/2026 09:21 AM",
+      "grantor": "4300 CLARCONA OCOEE ROAD LLC",
+      "grantee": "PLUS CAFE LLC",
+      "legal_description": "Case: 2026 CC 004691 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "4611 CLARCONA OCOEE RD, Orlando, FL 32810",
+      "mailing_address": "1380 GENE ST, WINTER PARK, FLORIDA 32789",
+      "owner_name": "4611 CLARCONA OCOEE ROAD TRUST",
+      "assessed_value": "$94,224",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=4300",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977222Z"
+    },
+    {
+      "document_number": "20260213552",
+      "file_date": "04/15/2026 09:13 AM",
+      "grantor": "SREIT FALCON TRACE LLC",
+      "grantee": "MORALES MARTA",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "PEREGRINE FALCONS WAY, Orlando, FL 32837",
+      "mailing_address": "1255 23RD ST NW SUITE 250, WASHINGTON, DISTRICT OF COLUMBIA 20037",
+      "owner_name": "SREIT FALCON TRACE LLC",
+      "assessed_value": "$100",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=SREIT",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977231Z"
+    },
+    {
+      "document_number": "20260213535",
+      "file_date": "04/15/2026 09:13 AM",
+      "grantor": "PORTFOLIO RECOVERY ASSOCIATIES LLC",
+      "grantee": "LAJARA DEYANIRIS",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=PORTFOLIO",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977238Z"
+    },
+    {
+      "document_number": "20260213534",
+      "file_date": "04/15/2026 09:13 AM",
+      "grantor": "DISCOVER BANK",
+      "grantee": "MACMORRAN JACKALYN",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=DISCOVER",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977243Z"
+    },
+    {
+      "document_number": "20260213533",
+      "file_date": "04/15/2026 09:13 AM",
+      "grantor": "OASIS AT CROSSTOWN LLC",
+      "grantee": "RAMOS MAGDELONE",
+      "legal_description": "",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "200 S GOLDENROD RD, Orlando, FL 32807",
+      "mailing_address": "6191 N STATE HIGHWAY 161 STE 100, IRVING, TEXAS 75038",
+      "owner_name": "OASIS AT CROSSTOWN LLC",
+      "assessed_value": "$69,259,913",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=OASIS",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977249Z"
+    },
+    {
+      "document_number": "20260213488",
+      "file_date": "04/15/2026 09:07 AM",
+      "grantor": "ORLANDO 301 VENTURE LLC, ALVISTA METROWEST",
+      "grantee": "JEAN AUDE FARAH",
+      "legal_description": "Case: 2026 CC 004414 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "2207 LAKE DEBRA DR, Orlando, FL 32835",
+      "mailing_address": "551 MADISON AVE FL 8, NEW YORK, NEW YORK 10022",
+      "owner_name": "ORLANDO 301 VENTURE LLC",
+      "assessed_value": "$48,472,836",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=ORLANDO",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977255Z"
+    },
+    {
+      "document_number": "20260213483",
+      "file_date": "04/15/2026 09:07 AM",
+      "grantor": "CITIBANK N A",
+      "grantee": "RING KRISTINA",
+      "legal_description": "Case: 2025 SC 035153 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "3151 S BUMBY AVE, Orlando, FL 32806",
+      "mailing_address": "PO BOX 10826, GREENVILLE, SOUTH CAROLINA 29603",
+      "owner_name": "CITIBANK N A TRUSTEE",
+      "assessed_value": "$279,422",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CITIBANK",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977261Z"
+    },
+    {
+      "document_number": "20260213481",
+      "file_date": "04/15/2026 09:07 AM",
+      "grantor": "ONEMAIN FINANCIAL GROUP LLC",
+      "grantee": "PATTERSON PHILIP A, PATTERSON PHILIP, ADVENTIST HEALTH SYSTEM SUNBELT INC, ADVENTHEALTH ORLANDO",
+      "legal_description": "Case: 2024 CC 013421 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=ONEMAIN",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977270Z"
+    },
+    {
+      "document_number": "20260213478",
+      "file_date": "04/15/2026 09:06 AM",
+      "grantor": "CAPITAL ONE N A",
+      "grantee": "MENDOZA LUIS J",
+      "legal_description": "Case: 2024 SC 038076 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "10244 E COLONIAL DR, Orlando, FL 32817",
+      "mailing_address": "PO BOX 679432, ORLANDO, FLORIDA 32867",
+      "owner_name": "ACF CAPITAL ONE LLC",
+      "assessed_value": "$100",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CAPITAL",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977276Z"
+    },
+    {
+      "document_number": "20260213477",
+      "file_date": "04/15/2026 09:06 AM",
+      "grantor": "PENNYMAC LOAN SERVICES LLC",
+      "grantee": "ELMAHDI TAREK, ELMAHDI JASMINE, L E, GOMEZ MISAEL, BEACON PARK MASTER HOMEOWNERS ASSOCIATION INC",
+      "legal_description": "Case: 2024 CA 007298 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=PENNYMAC",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977283Z"
+    },
+    {
+      "document_number": "20260213464",
+      "file_date": "04/15/2026 09:05 AM",
+      "grantor": "TURNER DEVIN",
+      "grantee": "MINA JOHN, ORANGE COUNTY SHERIFF",
+      "legal_description": "Case: 2023 CA 013226 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "9383 JUNIPER MOSS CIR, Orlando, FL 32832",
+      "mailing_address": "9383 JUNIPER MOSS CIR, ORLANDO, FLORIDA 32832",
+      "owner_name": "TURNER KEVIN",
+      "assessed_value": "$363,631",
+      "match_confidence": "LOW",
+      "match_reason": "Name-only match (no legal description hit)",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=TURNER",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977289Z"
+    },
+    {
+      "document_number": "20260213456",
+      "file_date": "04/15/2026 09:04 AM",
+      "grantor": "MIDLAND CREDIT MANAGEMENT INC",
+      "grantee": "MORGAN SABRI, CARNIVAL CORPORATION",
+      "legal_description": "Case: 2025 SC 009085 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=MIDLAND",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977307Z"
+    },
+    {
+      "document_number": "20260213454",
+      "file_date": "04/15/2026 09:04 AM",
+      "grantor": "",
+      "grantee": "CABALLERO LEANNELYS HERNANDEZ, CROFFET HERIBERTO MARQUEZ, CABALLERO TRANSPORTATION INC",
+      "legal_description": "Case: 2026 CA 001013 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "match_confidence": "NONE",
+      "match_reason": "No match found - use county_search_url for manual lookup",
+      "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CABALLERO",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T13:37:52.977312Z"
     }
   ]
 }
