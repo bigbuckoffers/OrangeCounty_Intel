@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-15T02:07:20.575669Z",
-  "total_records": 1866,
+  "generated_at": "2026-04-15T12:40:58.189216Z",
+  "total_records": 1937,
   "date_range": "04/08/2026 to 04/15/2026",
   "leads": [
     {
@@ -912,6 +912,132 @@
       "assessed_value": "",
       "needs_enrichment": false,
       "scraped_at": "2026-04-15T01:13:57.029386Z"
+    },
+    {
+      "document_number": "20260212739",
+      "file_date": "04/15/2026 07:47 AM",
+      "grantor": "U S BANK NATIONAL ASSOCIATION",
+      "grantee": "TURNER RAY JR",
+      "legal_description": "",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:11.813882Z"
+    },
+    {
+      "document_number": "20260212718",
+      "file_date": "04/15/2026 07:40 AM",
+      "grantor": "HSBC BANK USA N A, RENAISSANCE HOME EQUITY LOAN TRUST 2006 2",
+      "grantee": "THOMAS NEVILLE E, THOMAS CARLENE A, CITRUS COVE HOMEOWNERS ASSOCIATION INC",
+      "legal_description": "Lot: 65    CITRUS COVE UNIT 1",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:11.813910Z"
+    },
+    {
+      "document_number": "20260212715",
+      "file_date": "04/15/2026 07:39 AM",
+      "grantor": "U S BANK NATIONAL ASSOCIATION",
+      "grantee": "DIAZ JORGE A",
+      "legal_description": "",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:11.813926Z"
+    },
+    {
+      "document_number": "20260212706",
+      "file_date": "04/15/2026 07:37 AM",
+      "grantor": "CROSSCOUNTRY MORTGAGE LLC",
+      "grantee": "ORBISI ORNOSE",
+      "legal_description": "",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:11.813942Z"
+    },
+    {
+      "document_number": "20260212692",
+      "file_date": "04/15/2026 07:35 AM",
+      "grantor": "CV3 ALPHA TRUST",
+      "grantee": "MTCB AND JT MULTISERVICES LLC",
+      "legal_description": "",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:11.813955Z"
+    },
+    {
+      "document_number": "20260212675",
+      "file_date": "04/15/2026 07:32 AM",
+      "grantor": "PINGORA LOAN SERVICING LLC",
+      "grantee": "HARRIS ROBERT LEE JR",
+      "legal_description": "",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:11.813968Z"
+    },
+    {
+      "document_number": "20260212668",
+      "file_date": "04/15/2026 07:27 AM",
+      "grantor": "WILMINGTON SAVINGS FUND SOCIETY FSB",
+      "grantee": "HAMADI PATRICK MUFOLO",
+      "legal_description": "",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:11.813987Z"
     },
     {
       "document_number": "20260210421",
@@ -6260,6 +6386,276 @@
       "assessed_value": "",
       "needs_enrichment": false,
       "scraped_at": "2026-04-15T01:14:21.363883Z"
+    },
+    {
+      "document_number": "20260212985",
+      "file_date": "04/15/2026 08:23 AM",
+      "grantor": "NELSON DOROTHY",
+      "grantee": "",
+      "legal_description": "Case: 2018 MH 002998 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110816Z"
+    },
+    {
+      "document_number": "20260212899",
+      "file_date": "04/15/2026 08:12 AM",
+      "grantor": "SMITH ERNESTINE TUCKER",
+      "grantee": "JOHNSON RACHEL TUCKER",
+      "legal_description": "Case: 2025 CP 003771 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110835Z"
+    },
+    {
+      "document_number": "20260212879",
+      "file_date": "04/15/2026 08:10 AM",
+      "grantor": "RIGSBY SCOTT M JR",
+      "grantee": "TAPIA JAMI",
+      "legal_description": "Case: 2026 CP 000664 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110846Z"
+    },
+    {
+      "document_number": "20260212850",
+      "file_date": "04/15/2026 08:07 AM",
+      "grantor": "DOUGLASS RALPH",
+      "grantee": "",
+      "legal_description": "Case: 2023 MH 002206 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110854Z"
+    },
+    {
+      "document_number": "20260212822",
+      "file_date": "04/15/2026 08:01 AM",
+      "grantor": "DARLING MONIQUE ANNE",
+      "grantee": "",
+      "legal_description": "Case: 2025 MH 003033 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110862Z"
+    },
+    {
+      "document_number": "20260212800",
+      "file_date": "04/15/2026 07:57 AM",
+      "grantor": "COOK JAMES WILLIAM",
+      "grantee": "",
+      "legal_description": "Case: 2026 CP 001210 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110870Z"
+    },
+    {
+      "document_number": "20260212799",
+      "file_date": "04/15/2026 07:57 AM",
+      "grantor": "TUCKER BETTY W, TUCKER BETTY WALLACE",
+      "grantee": "TUCKER MARTHA S",
+      "legal_description": "Case: 2026 CP 001020 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110877Z"
+    },
+    {
+      "document_number": "20260212798",
+      "file_date": "04/15/2026 07:57 AM",
+      "grantor": "MCGINNIS DOROTHY",
+      "grantee": "CROMWELL CHRISTOPHER",
+      "legal_description": "Case: 2025 CP 003787 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110885Z"
+    },
+    {
+      "document_number": "20260212782",
+      "file_date": "04/15/2026 07:56 AM",
+      "grantor": "MCGINNIS DOROTHY",
+      "grantee": "CROMWELL CHRISTOPHER",
+      "legal_description": "Case: 2025 CP 003787 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110892Z"
+    },
+    {
+      "document_number": "20260212766",
+      "file_date": "04/15/2026 07:53 AM",
+      "grantor": "TUCKER BETTY W, TUCKER BETTY WALLACE",
+      "grantee": "TUCKER MARTHA S",
+      "legal_description": "Case: 2026 CP 001020 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110900Z"
+    },
+    {
+      "document_number": "20260212737",
+      "file_date": "04/15/2026 07:46 AM",
+      "grantor": "SCHMER PETER CHRISTIAN, SCHMER PETER C",
+      "grantee": "SCHMER GOTTFRIED",
+      "legal_description": "Case: 2022 CP 002441 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110907Z"
+    },
+    {
+      "document_number": "20260212709",
+      "file_date": "04/15/2026 07:38 AM",
+      "grantor": "CATLIN RUTH CAROL",
+      "grantee": "SCHMITT RAYMON FREDRICK, LOYACK VIRGINIA LEE, SCHMITT WILLIAM RICHARD",
+      "legal_description": "Lot: 20   LAKE CANE ESTATES",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110915Z"
+    },
+    {
+      "document_number": "20260212708",
+      "file_date": "04/15/2026 07:38 AM",
+      "grantor": "CATLIN RUTH CAROL",
+      "grantee": "SCHMITT WILLIAM RICHARD, SCHMITT RAYMON FREDRICK, LOYACK VIRGINIA LEE",
+      "legal_description": "Lot: 20   LAKE CANE ESTATES",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110922Z"
+    },
+    {
+      "document_number": "20260212707",
+      "file_date": "04/15/2026 07:38 AM",
+      "grantor": "CATLIN RUTH CAROL",
+      "grantee": "SCHMITT WILLIAM RICHARD, SCHMITT RAYMON FREDRICK, LOYACK VIRGINIA LEE",
+      "legal_description": "Lot: 20   LAKE CANE ESTATES",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110930Z"
+    },
+    {
+      "document_number": "20260212667",
+      "file_date": "04/15/2026 07:26 AM",
+      "grantor": "BUCK RENE S, BUCK RENE SUZANNE, BUCK RENE",
+      "grantee": "HAINES VICTORIA LYNN",
+      "legal_description": "Case: 2026 CP 001024 O",
+      "document_type": "Probate Court Paper",
+      "seller_score": 20,
+      "distress_flags": [
+        "probate"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:35.110938Z"
     },
     {
       "document_number": "20260210651",
@@ -27150,6 +27546,888 @@
       "assessed_value": "",
       "needs_enrichment": false,
       "scraped_at": "2026-04-15T01:14:14.547764Z"
+    },
+    {
+      "document_number": "20260213084",
+      "file_date": "04/15/2026 08:36 AM",
+      "grantor": "ORLANDO HEALTH HEALTH CENTRAL HOSPITAL",
+      "grantee": "CEDILLOS DAMIAN",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:19.665709Z"
+    },
+    {
+      "document_number": "20260213083",
+      "file_date": "04/15/2026 08:36 AM",
+      "grantor": "ORLANDO HEALTH ORLANDO REGIONAL MEDICAL CENTER",
+      "grantee": "SADEH MASOUD",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:19.665728Z"
+    },
+    {
+      "document_number": "20260213082",
+      "file_date": "04/15/2026 08:36 AM",
+      "grantor": "ORLANDO HEALTH ORLANDO REGIONAL MEDICAL CENTER",
+      "grantee": "ORTIZ YASEL LEADY",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:19.665738Z"
+    },
+    {
+      "document_number": "20260212815",
+      "file_date": "04/15/2026 08:01 AM",
+      "grantor": "PAR VIEW PRESERVE HOMEOWNERS ASSOCIATION INC",
+      "grantee": "LESTER SHELDON",
+      "legal_description": "Lot: 248    PARK VIEW PRESERVE PHASE 2",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "3998 CAPITAL REEF WAY, Apopka, FL 32712",
+      "mailing_address": "1631 E VINE ST STE 300, KISSIMMEE, FLORIDA 34744",
+      "owner_name": "PARK VIEW PRESERVE HOMEOWNERS",
+      "assessed_value": "$100",
+      "needs_enrichment": false,
+      "scraped_at": "2026-04-15T12:40:19.665748Z"
+    },
+    {
+      "document_number": "20260212779",
+      "file_date": "04/15/2026 07:55 AM",
+      "grantor": "PARK VIEW PRESERVE HOMEOWNERS ASSOCIATION INC",
+      "grantee": "SANCHEZ MONSERRATE CAROLINE",
+      "legal_description": "Lot: 141    PARK VIEW PRESERVE PHASE 1",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "3998 CAPITAL REEF WAY, Apopka, FL 32712",
+      "mailing_address": "1631 E VINE ST STE 300, KISSIMMEE, FLORIDA 34744",
+      "owner_name": "PARK VIEW PRESERVE HOMEOWNERS",
+      "assessed_value": "$100",
+      "needs_enrichment": false,
+      "scraped_at": "2026-04-15T12:40:19.665757Z"
+    },
+    {
+      "document_number": "20260212755",
+      "file_date": "04/15/2026 07:49 AM",
+      "grantor": "7B BUILDING AND DEVELOPMENT LLC",
+      "grantee": "7237 CURRY FORD ROAD LLC",
+      "legal_description": "Lot: 117   Parcel: 302302302801170  GOLDEN ACRES SEC A EXTENDED",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:19.665766Z"
+    },
+    {
+      "document_number": "20260212693",
+      "file_date": "04/15/2026 07:36 AM",
+      "grantor": "7B BUILDING AND DEVELOPMENT LLC",
+      "grantee": "3700 SOUTH ORANGE BLOSSOM LLC",
+      "legal_description": "Lot: 1 Block: 100   Parcel: 292303018310010  ANGEBILT ADDITION NO 2 ETC",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:19.665775Z"
+    },
+    {
+      "document_number": "20260213097",
+      "file_date": "04/15/2026 08:38 AM",
+      "grantor": "TD BANK USA N A",
+      "grantee": "SNEAD DERREK A",
+      "legal_description": "Case: 2025 SC 033975 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050252Z"
+    },
+    {
+      "document_number": "20260213095",
+      "file_date": "04/15/2026 08:38 AM",
+      "grantor": "MILLENIA DEVELOPMENT GROUP LLLP, FOUNTAINS AT MILLENIA",
+      "grantee": "COLLINS SHEMAR",
+      "legal_description": "Case: 2026 CC 006853 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050270Z"
+    },
+    {
+      "document_number": "20260213094",
+      "file_date": "04/15/2026 08:38 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "RIVAS LUIGI ANTONIO ROMANO, RIVAS LUIGI ROMANO",
+      "legal_description": "Case: 2026 CT 401995 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050279Z"
+    },
+    {
+      "document_number": "20260213093",
+      "file_date": "04/15/2026 08:38 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "ALMONTE JUSTIN MICHAEL",
+      "legal_description": "Case: 2023 CF 004025 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050286Z"
+    },
+    {
+      "document_number": "20260213091",
+      "file_date": "04/15/2026 08:37 AM",
+      "grantor": "TAVERAS FAUSTO LAVANDIER",
+      "grantee": "HICIANO MARGARITA E SANCHEZ",
+      "legal_description": "Case: 2026 DR 003097 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050293Z"
+    },
+    {
+      "document_number": "20260213090",
+      "file_date": "04/15/2026 08:37 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "ALMONTE JUSTIN MICHAEL",
+      "legal_description": "Case: 2023 CF 004025 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050301Z"
+    },
+    {
+      "document_number": "20260213086",
+      "file_date": "04/15/2026 08:36 AM",
+      "grantor": "BCDPF JUNO WINTER PARK LLC, JUNO WINTER PARK",
+      "grantee": "TAYLOR PARIS",
+      "legal_description": "Case: 2026 CC 006629 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050308Z"
+    },
+    {
+      "document_number": "20260213079",
+      "file_date": "04/15/2026 08:35 AM",
+      "grantor": "CITIBANK N A",
+      "grantee": "LORENZO JHORLADY",
+      "legal_description": "Case: 2025 SC 036723 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050314Z"
+    },
+    {
+      "document_number": "20260213045",
+      "file_date": "04/15/2026 08:31 AM",
+      "grantor": "LVNV FUNDING LLC",
+      "grantee": "TUNSTALL DON, CREATIVE CONCEPTS OF ORLANDO INC",
+      "legal_description": "Case: 2024 SC 034196 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050323Z"
+    },
+    {
+      "document_number": "20260213002",
+      "file_date": "04/15/2026 08:27 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "MULLINS GINA MARIE, MULLINS GINA",
+      "legal_description": "Case: 2025 CF 011166 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050330Z"
+    },
+    {
+      "document_number": "20260212996",
+      "file_date": "04/15/2026 08:27 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "HISLE AKAREE LAVON, HISLE AKAREE",
+      "legal_description": "Case: 2025 CF 014767 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050336Z"
+    },
+    {
+      "document_number": "20260212990",
+      "file_date": "04/15/2026 08:24 AM",
+      "grantor": "BANK OF AMERICA N A",
+      "grantee": "DEQUEVEDO ALISSA A",
+      "legal_description": "Case: 2025 SC 017936 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050343Z"
+    },
+    {
+      "document_number": "20260212961",
+      "file_date": "04/15/2026 08:19 AM",
+      "grantor": "PORTFOLIO RECOVERY ASSOCIATES LLC",
+      "grantee": "CONNELLY SHANNON",
+      "legal_description": "Case: 2026 SC 003200 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050348Z"
+    },
+    {
+      "document_number": "20260212933",
+      "file_date": "04/15/2026 08:14 AM",
+      "grantor": "LAKE RIDGE VILLAGE CLUB ASSOCIATION INC",
+      "grantee": "MCMILLAN AUGUSTUS, MCMILLAN ALICIA, CAINE BARBARA",
+      "legal_description": "Lot: 136    Case: 2025 CC 005115 O LAKE RIDGE VILLAGE WILLIAMSBURG AT ORANGEWOOD",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050356Z"
+    },
+    {
+      "document_number": "20260212932",
+      "file_date": "04/15/2026 08:14 AM",
+      "grantor": "MIDLAND CREDIT MANAGEMENT INC",
+      "grantee": "FORD NATALIE",
+      "legal_description": "Case: 2024 SC 033213 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050362Z"
+    },
+    {
+      "document_number": "20260212882",
+      "file_date": "04/15/2026 08:10 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "CARCAMO GUSTAVE ADALIB",
+      "legal_description": "Case: 2026 CT 401129 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050368Z"
+    },
+    {
+      "document_number": "20260212881",
+      "file_date": "04/15/2026 08:10 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "TURNER ROBERT BERTRAM",
+      "legal_description": "Case: 2025 CF 013760 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050374Z"
+    },
+    {
+      "document_number": "20260212878",
+      "file_date": "04/15/2026 08:10 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "MEDINA CRISTOBAL MEDINA JR, MEDINA CRISTOBAL MEDINA",
+      "legal_description": "Case: 2023 CF 004540 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050380Z"
+    },
+    {
+      "document_number": "20260212877",
+      "file_date": "04/15/2026 08:10 AM",
+      "grantor": "ORLANDO TERRACE APTS LLC",
+      "grantee": "PRICE TANEICE",
+      "legal_description": "Case: 2026 CC 007060 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050389Z"
+    },
+    {
+      "document_number": "20260212876",
+      "file_date": "04/15/2026 08:10 AM",
+      "grantor": "JEFFERSON CAPITAL SYSTEMS LLC",
+      "grantee": "HUDLEY ANDREW N, COASTAL MECHANICAL SERVICES LLC",
+      "legal_description": "Case: 2025 SC 016763 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050395Z"
+    },
+    {
+      "document_number": "20260212863",
+      "file_date": "04/15/2026 08:08 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "KEY BRIAN DEWON",
+      "legal_description": "Case: 2025 CF 014289 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050403Z"
+    },
+    {
+      "document_number": "20260212861",
+      "file_date": "04/15/2026 08:08 AM",
+      "grantor": "LVNV FUNDING LLC",
+      "grantee": "JONES JACARIE, DISNEY WORLDWIDE SERVICES INC",
+      "legal_description": "Case: 2022 SC 005857 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050410Z"
+    },
+    {
+      "document_number": "20260212859",
+      "file_date": "04/15/2026 08:08 AM",
+      "grantor": "VELOCITY INVESTMENTS LLC",
+      "grantee": "FANSLER JODI",
+      "legal_description": "Case: 2025 CC 014783 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050415Z"
+    },
+    {
+      "document_number": "20260212854",
+      "file_date": "04/15/2026 08:07 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "WILSON COURTNEY DESHAWN, WILSON COURTNEY",
+      "legal_description": "Case: 2025 CF 005229 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050421Z"
+    },
+    {
+      "document_number": "20260212847",
+      "file_date": "04/15/2026 08:06 AM",
+      "grantor": "ONEMAIN FINANCIAL GROUP LLC",
+      "grantee": "LOZANO DIEGO A, LOZANO DIEGO",
+      "legal_description": "Case: 2025 SC 011616 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050427Z"
+    },
+    {
+      "document_number": "20260212841",
+      "file_date": "04/15/2026 08:06 AM",
+      "grantor": "CINTAS CORPORATION NO 2, CINTAS CORPORATION",
+      "grantee": "MAGNOLIA BREEZE RESTAURANT LLC",
+      "legal_description": "Case: 2025 CC 025874 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050434Z"
+    },
+    {
+      "document_number": "20260212838",
+      "file_date": "04/15/2026 08:06 AM",
+      "grantor": "AVANATH CITY VIEW LLC",
+      "grantee": "YOUNG CURTIS",
+      "legal_description": "Case: 2026 CC 007101 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050440Z"
+    },
+    {
+      "document_number": "20260212834",
+      "file_date": "04/15/2026 08:04 AM",
+      "grantor": "CAPITAL ONE N A",
+      "grantee": "LACES MAGDALENA",
+      "legal_description": "Case: 2025 SC 030194 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050445Z"
+    },
+    {
+      "document_number": "20260212833",
+      "file_date": "04/15/2026 08:03 AM",
+      "grantor": "BELL VALUE ADD FUND VIII AVALON PARK OWNER LLC",
+      "grantee": "RINCONES ROYSIS",
+      "legal_description": "Case: 2026 CC 000601 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050451Z"
+    },
+    {
+      "document_number": "20260212831",
+      "file_date": "04/15/2026 08:03 AM",
+      "grantor": "8700 OBT ORLANDO HOLDINGS LLC, STAYABLE ORLANDO",
+      "grantee": "HOOVER DEAN",
+      "legal_description": "Case: 2026 CC 006545 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050457Z"
+    },
+    {
+      "document_number": "20260212823",
+      "file_date": "04/15/2026 08:01 AM",
+      "grantor": "MIDLAND CREDIT MANAGEMENT INC",
+      "grantee": "RODRIGUEZ JANESSI Y",
+      "legal_description": "Case: 2026 SC 003182 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050463Z"
+    },
+    {
+      "document_number": "20260212816",
+      "file_date": "04/15/2026 08:01 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "RASHID RAZIA",
+      "legal_description": "Case: 2026 CT 400032 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050469Z"
+    },
+    {
+      "document_number": "20260212791",
+      "file_date": "04/15/2026 07:56 AM",
+      "grantor": "LEE VISTA APARTMENTS LLC, CAMDEN LAGO VISTA",
+      "grantee": "RAMIREZ DAVID",
+      "legal_description": "Case: 2026 CC 006744 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050475Z"
+    },
+    {
+      "document_number": "20260212786",
+      "file_date": "04/15/2026 07:56 AM",
+      "grantor": "GRE JV ORLANDO LLC, PAVILION AT LAKE EVE",
+      "grantee": "CASTILLO CARLOS",
+      "legal_description": "Case: 2026 CC 006567 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050481Z"
+    },
+    {
+      "document_number": "20260212777",
+      "file_date": "04/15/2026 07:55 AM",
+      "grantor": "MIDLAND FUNDING LLC",
+      "grantee": "SILVA LUIS, JPMORGAN CHASE BANK N A",
+      "legal_description": "Case: 2019 SC 011311 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050489Z"
+    },
+    {
+      "document_number": "20260212759",
+      "file_date": "04/15/2026 07:50 AM",
+      "grantor": "MAGNOLIA COURT LLC, MELINA AT MAITLAND",
+      "grantee": "RIVERA BRIANNA, CURETON DOMINIC, AVIER",
+      "legal_description": "Case: 2026 CC 006580 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050496Z"
+    },
+    {
+      "document_number": "20260212745",
+      "file_date": "04/15/2026 07:47 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "WILLIAMS JACARRIO TRANARD",
+      "legal_description": "Case: 2025 CF 015089 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050502Z"
+    },
+    {
+      "document_number": "20260212740",
+      "file_date": "04/15/2026 07:47 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "CHARLE SAMUEL OGLIS DAVID ANTHONY, CHARLE SAMUEL",
+      "legal_description": "Case: 2025 CF 004344 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050508Z"
+    },
+    {
+      "document_number": "20260212721",
+      "file_date": "04/15/2026 07:40 AM",
+      "grantor": "TRUIST BANK",
+      "grantee": "FIELDS JOSEPH C, DAG FIELDS LLC",
+      "legal_description": "Case: 2024 CC 025929 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050515Z"
+    },
+    {
+      "document_number": "20260212673",
+      "file_date": "04/15/2026 07:30 AM",
+      "grantor": "CITY ELECTRIC SUPPLY COMPANY",
+      "grantee": "COASTAL ELECTRIC PC LLC",
+      "legal_description": "Case: 2026 CC 004217 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050521Z"
+    },
+    {
+      "document_number": "20260212671",
+      "file_date": "04/15/2026 07:29 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "BUSH ALTONEKA LASHAE",
+      "legal_description": "Case: 2025 CF 014470 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050527Z"
+    },
+    {
+      "document_number": "20260212669",
+      "file_date": "04/15/2026 07:29 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "BUGDA CHRISTA LYNN",
+      "legal_description": "Case: 2025 CF 010313 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:40:28.050534Z"
     }
   ]
 }
