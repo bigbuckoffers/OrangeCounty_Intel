@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-15T12:40:58.189216Z",
-  "total_records": 1937,
+  "generated_at": "2026-04-15T12:49:41.547320Z",
+  "total_records": 1972,
   "date_range": "04/08/2026 to 04/15/2026",
   "leads": [
     {
@@ -1038,6 +1038,42 @@
       "assessed_value": "",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T12:40:11.813987Z"
+    },
+    {
+      "document_number": "20260213202",
+      "file_date": "04/15/2026 08:47 AM",
+      "grantor": "SHERATON FLEX VACATIONS LLC",
+      "grantee": "VIVEROS DANIEL I RUIZ",
+      "legal_description": "TS:",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:48:58.132208Z"
+    },
+    {
+      "document_number": "20260213199",
+      "file_date": "04/15/2026 08:47 AM",
+      "grantor": "PALM FINANCIAL SERVICES LLC",
+      "grantee": "DVORCHAK MATTHEW, DVORCHAK MARY K",
+      "legal_description": "TS: DISNEY S SARATOGA SPRINGS RESORT",
+      "document_type": "Lis Pendens",
+      "seller_score": 30,
+      "distress_flags": [
+        "lis_pendens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:48:58.132230Z"
     },
     {
       "document_number": "20260210421",
@@ -28428,6 +28464,600 @@
       "assessed_value": "",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T12:40:28.050534Z"
+    },
+    {
+      "document_number": "20260213140",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "CEDILLOS DAMIAN",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.797999Z"
+    },
+    {
+      "document_number": "20260213139",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "ANDERSON JOHNNY JOHN",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798016Z"
+    },
+    {
+      "document_number": "20260213138",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "MARTINEZ AYDEE LOPEZ",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798023Z"
+    },
+    {
+      "document_number": "20260213137",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "ESSAMAOUAL DEBORAH",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798029Z"
+    },
+    {
+      "document_number": "20260213136",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "SCHAFF DENNIS",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798035Z"
+    },
+    {
+      "document_number": "20260213135",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "ROSA CHRISTIAN",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798041Z"
+    },
+    {
+      "document_number": "20260213134",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "SOUZA DIEGO",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798047Z"
+    },
+    {
+      "document_number": "20260213133",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "SANDER SHEILA",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798052Z"
+    },
+    {
+      "document_number": "20260213132",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "CARRASQUILLO CORAYMA REYES",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798058Z"
+    },
+    {
+      "document_number": "20260213131",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "GRIFFITH ABIGAIL",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798063Z"
+    },
+    {
+      "document_number": "20260213130",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "PADILLA OSCAR",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798069Z"
+    },
+    {
+      "document_number": "20260213129",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "EMR PETER",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798074Z"
+    },
+    {
+      "document_number": "20260213128",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "EMR PETER",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798080Z"
+    },
+    {
+      "document_number": "20260213127",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "GLOVER JOHNNIE",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798085Z"
+    },
+    {
+      "document_number": "20260213126",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "ESSAMAOUAL DEBORAH",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798090Z"
+    },
+    {
+      "document_number": "20260213125",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "LANDAZURY MILENIS",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798096Z"
+    },
+    {
+      "document_number": "20260213124",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "MCCOMBS STEPHEN",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798101Z"
+    },
+    {
+      "document_number": "20260213123",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "VALE DAVID",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798106Z"
+    },
+    {
+      "document_number": "20260213122",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "MCCOMBS STEPHEN",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798111Z"
+    },
+    {
+      "document_number": "20260213121",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "HAMLET EDWIN",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798116Z"
+    },
+    {
+      "document_number": "20260213120",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "HAINES MARK",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798121Z"
+    },
+    {
+      "document_number": "20260213119",
+      "file_date": "04/15/2026 08:40 AM",
+      "grantor": "ADVENTHEALTH ORLANDO",
+      "grantee": "CASSOLA YANSEMI GARCES",
+      "legal_description": "",
+      "document_type": "Lien",
+      "seller_score": 15,
+      "distress_flags": [
+        "multiple_liens"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:05.798127Z"
+    },
+    {
+      "document_number": "20260213210",
+      "file_date": "04/15/2026 08:47 AM",
+      "grantor": "U S BANK NATIONAL ASSOCIATION",
+      "grantee": "HAUCK WILLIAM T",
+      "legal_description": "Case: 2023 CC 015023 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205298Z"
+    },
+    {
+      "document_number": "20260213197",
+      "file_date": "04/15/2026 08:46 AM",
+      "grantor": "ALMSRI HAMID",
+      "grantee": "ALSOUDANI NIJMEH",
+      "legal_description": "Case: 2026 CC 006145 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205314Z"
+    },
+    {
+      "document_number": "20260213196",
+      "file_date": "04/15/2026 08:46 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "CUNNINGHAM KYLE DIONDRE, CUNNINGHAM KYLE",
+      "legal_description": "Case: 2024 CT 405262 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205322Z"
+    },
+    {
+      "document_number": "20260213195",
+      "file_date": "04/15/2026 08:45 AM",
+      "grantor": "BONIFACE JAMES",
+      "grantee": "LAHDE IAN",
+      "legal_description": "Case: 2025 SC 039249 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205328Z"
+    },
+    {
+      "document_number": "20260213191",
+      "file_date": "04/15/2026 08:45 AM",
+      "grantor": "WATERFORD EAST PARTNERS LTD, WATERFORD EAST APARTMENT HOMES",
+      "grantee": "TRINIDAD ANNETCHKA",
+      "legal_description": "Case: 2026 CC 006295 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205335Z"
+    },
+    {
+      "document_number": "20260213186",
+      "file_date": "04/15/2026 08:45 AM",
+      "grantor": "STATE OF FLORIDA",
+      "grantee": "GOMEZ ELVIN BLADIMIR, GOMEZ ELVIN",
+      "legal_description": "Case: 2026 CT 400979 A O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205341Z"
+    },
+    {
+      "document_number": "20260213185",
+      "file_date": "04/15/2026 08:45 AM",
+      "grantor": "PALM FINANCIAL SERVICES LLC",
+      "grantee": "SEAY UNITY CHRISTINA, SEAY JOHN WILLIAM",
+      "legal_description": "Case: 2025 CA 008328 O TS: COPPER CREEK VILLAS CABINS AT DISNEY S WILDERNESS LODGE",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205348Z"
+    },
+    {
+      "document_number": "20260213170",
+      "file_date": "04/15/2026 08:43 AM",
+      "grantor": "PAPAGEORGIOU THEODORE",
+      "grantee": "BROWN KAMESHA",
+      "legal_description": "Case: 2026 CC 007118 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205355Z"
+    },
+    {
+      "document_number": "20260213152",
+      "file_date": "04/15/2026 08:41 AM",
+      "grantor": "CAMPUS USA CREDIT UNION",
+      "grantee": "RINGEL ANGELA LEECY, RINGEL DONALD LEE, FEDERAL EXPRESS CORPORATION",
+      "legal_description": "Case: 2025 CC 000258 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205361Z"
+    },
+    {
+      "document_number": "20260213109",
+      "file_date": "04/15/2026 08:39 AM",
+      "grantor": "FINWISE BANK",
+      "grantee": "LOPEZ SAMUEL",
+      "legal_description": "Case: 2025 SC 032730 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205367Z"
+    },
+    {
+      "document_number": "20260213058",
+      "file_date": "04/15/2026 08:34 AM",
+      "grantor": "LVNV FUNDING LLC",
+      "grantee": "LYNN JOHN W, AIRPORT CHRYSLER DODGE JEEP RAM",
+      "legal_description": "Case: 2024 SC 003194 O",
+      "document_type": "Judgment",
+      "seller_score": 15,
+      "distress_flags": [
+        "judgment"
+      ],
+      "property_address": "",
+      "mailing_address": "",
+      "owner_name": "",
+      "assessed_value": "",
+      "needs_enrichment": true,
+      "scraped_at": "2026-04-15T12:49:14.205423Z"
     }
   ]
 }
