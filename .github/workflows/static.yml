@@ -12,7 +12,7 @@ jobs:
   scrape:
     name: Scrape & Generate Dashboard
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Checkout repository
@@ -24,21 +24,10 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
-      - name: Install Chrome
-        run: |
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update -q
-          sudo apt-get install -y google-chrome-stable
-
       - name: Install dependencies
         run: |
-          pip install selenium webdriver-manager requests beautifulsoup4 lxml
-
-      - name: Setup ChromeDriver
-        run: |
-          pip install webdriver-manager
-          python -c "from webdriver_manager.chrome import ChromeDriverManager; ChromeDriverManager().install()"
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 rapidfuzz
 
       - name: Create output directories
         run: mkdir -p data dashboard
@@ -48,19 +37,40 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
 
+      - name: Validate outputs
+        run: |
+          python - <<'EOF'
+          import json, sys, os
+          path = "data/output.json"
+          if not os.path.exists(path):
+              print("ERROR: data/output.json not found"); sys.exit(1)
+          with open(path) as f:
+              data = json.load(f)
+          n = data.get("total_records", 0)
+          print(f"✓ JSON valid — {n} records")
+          if not os.path.exists("dashboard/index.html"):
+              print("ERROR: dashboard/index.html not found"); sys.exit(1)
+          print("✓ Dashboard HTML present")
+          EOF
+
       - name: Commit results
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/output.json
+          git pull --rebase origin main
+          git add data/output.json data/output.csv dashboard/index.html
           git diff --cached --quiet || git commit -m "chore: auto-update leads $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lead-output-${{ github.run_id }}
-          path: data/output.json
+          path: |
+            data/output.json
+            data/output.csv
+            dashboard/index.html
           retention-days: 30
