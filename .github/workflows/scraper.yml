@@ -2,10 +2,8 @@ name: Scrape OC Motivated Seller Leads
 
 on:
   schedule:
-    - cron: "0 11 * * *"
+    - cron: "0 12 * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   contents: write
