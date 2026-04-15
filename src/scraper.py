@@ -93,8 +93,7 @@ def download_nal_file():
         gdown.download(
             f"https://drive.google.com/uc?id={NAL_GDRIVE_ID}",
             NAL_LOCAL_PATH,
-            quiet=False,
-            fuzzy=True
+            quiet=False
         )
         size = os.path.getsize(NAL_LOCAL_PATH)
         log.info("NAL file downloaded: %d MB", size // (1024*1024))
