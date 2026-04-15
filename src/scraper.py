@@ -6,11 +6,11 @@ from the Orange County NAL appraisal dataset stored on Google Drive.
 Match confidence system (4 strategies):
   HIGH   — Legal description matched exactly one parcel (lot + subdivision)
   MEDIUM — Legal description matched subdivision + owner name confirmed
-  LOW    — Legal description matched subdivision but multiple parcels found
-            OR name matched but no legal description hit
+  LOW    — Subdivision matched but multiple parcels / name unconfirmed
+            OR name-only match with no legal description hit
   NONE   — No match; county search URL provided for manual lookup
 """
-import json, logging, os, csv, io, requests, time, re
+import json, logging, os, csv, io, requests, time, re, urllib.parse
 from dataclasses import dataclass, asdict, field
 from datetime import datetime, timedelta
 from rapidfuzz import fuzz
@@ -24,7 +24,6 @@ RESULTS_URL = f"{BASE_URL}/ssweb/search/DOCSEARCH2950S1"
 CSV_URL     = f"{BASE_URL}/ssweb/viewSearchResultsReport/DOCSEARCH2950S1/CSV"
 OUTPUT_PATH = "data/output.json"
 
-# Orange County Property Appraiser search URL for manual fallback lookups
 OC_APPRAISER_SEARCH = "https://www.ocpafl.org/searches/ParcelSearch.aspx"
 
 NAL_GDRIVE_ID  = "1X1nZkK07FJV3BmUFHUFvpZA1hLEl4UP9"
@@ -43,24 +42,19 @@ TARGET_DOC_TYPES = [
     ("Domestic Relations Deed", "DRD",  10),
 ]
 
-# For doc-type-aware name matching:
-# LP = match grantee (homeowner being sued) as primary, grantor secondary
-# Lien/Judgment = match grantor (debtor) as primary
-# Probate/DRD = try both
 DOC_TYPE_PRIMARY_NAME = {
-    "lis pendens":          "grantee",
-    "lp":                   "grantee",
-    "lien":                 "grantor",
-    "ln":                   "grantor",
-    "judgment":             "grantor",
-    "j":                    "grantor",
-    "probate court paper":  "both",
-    "prcp":                 "both",
-    "domestic relations":   "both",
-    "drd":                  "both",
+    "lis pendens": "grantee",
+    "lp":          "grantee",
+    "lien":        "grantor",
+    "ln":          "grantor",
+    "judgment":    "grantor",
+    "j":           "grantor",
+    "probate":     "both",
+    "prcp":        "both",
+    "domestic":    "both",
+    "drd":         "both",
 }
 
-# Name similarity threshold (0–100). 85 = ~97% sensitivity per Jaro-Winkler research.
 NAME_MATCH_THRESHOLD = 85
 
 HEADERS = {
@@ -88,9 +82,9 @@ class Lead:
     mailing_address:   str  = ""
     owner_name:        str  = ""
     assessed_value:    str  = ""
-    match_confidence:  str  = "NONE"   # HIGH / MEDIUM / LOW / NONE
-    match_reason:      str  = ""       # human-readable explanation
-    county_search_url: str  = ""       # fallback manual lookup URL
+    match_confidence:  str  = "NONE"
+    match_reason:      str  = ""
+    county_search_url: str  = ""
     needs_enrichment:  bool = False
     scraped_at:        str  = field(default_factory=lambda: datetime.utcnow().isoformat()+"Z")
 
@@ -112,56 +106,45 @@ def score_lead(doc_type, base_score):
 
 
 # ---------------------------------------------------------------------------
-# Name normalization helpers
+# Name normalization
 # ---------------------------------------------------------------------------
 
 _ABBREV = {
     r'\bWM\b': 'WILLIAM', r'\bBILL\b': 'WILLIAM', r'\bROB\b': 'ROBERT',
-    r'\bBOB\b': 'ROBERT', r'\bJIM\b': 'JAMES',   r'\bTOM\b': 'THOMAS',
+    r'\bBOB\b': 'ROBERT', r'\bJIM\b': 'JAMES',    r'\bTOM\b': 'THOMAS',
     r'\bRICH\b': 'RICHARD', r'\bDAN\b': 'DANIEL', r'\bMIKE\b': 'MICHAEL',
-    r'\bJOE\b': 'JOSEPH',  r'\bAL\b': 'ALBERT',  r'\bLIZ\b': 'ELIZABETH',
-    r'\bBET\b': 'ELIZABETH',
+    r'\bJOE\b': 'JOSEPH',  r'\bAL\b': 'ALBERT',   r'\bLIZ\b': 'ELIZABETH',
 }
 
-def normalize_name(raw: str) -> str:
-    """Uppercase, strip punctuation, expand common abbreviations, sort tokens."""
+def normalize_name(raw):
     if not raw:
         return ""
     name = raw.upper().strip()
-    # remove suffixes
     name = re.sub(r'\b(JR|SR|II|III|IV|ESQ|TRUSTEE|TRUST|LLC|INC|CORP|LTD|ET\s+AL|ET\s+UX)\b', '', name)
-    # strip punctuation except spaces
     name = re.sub(r'[^A-Z\s]', ' ', name)
-    # expand abbreviations
     for pattern, replacement in _ABBREV.items():
         name = re.sub(pattern, replacement, name)
-    # collapse whitespace
     name = ' '.join(name.split())
-    # sort tokens so "SMITH JOHN" == "JOHN SMITH"
     return ' '.join(sorted(name.split()))
 
-def split_co_owners(raw: str) -> list[str]:
-    """Split 'BREWER JULIA LANG, BREWER GARY ALAN' into individual names."""
+def split_co_owners(raw):
     if not raw:
         return []
-    # split on comma, ampersand, ' AND ', ' & '
     parts = re.split(r',|&|\bAND\b', raw.upper())
     return [p.strip() for p in parts if p.strip()]
 
-def name_score(name_a: str, name_b: str) -> int:
-    """Return 0-100 similarity using token_sort_ratio (handles word order)."""
-    a = normalize_name(name_a)
-    b = normalize_name(name_b)
-    if not a or not b:
+def name_score(a, b):
+    na = normalize_name(a)
+    nb = normalize_name(b)
+    if not na or not nb:
         return 0
-    return fuzz.token_sort_ratio(a, b)
+    return fuzz.token_sort_ratio(na, nb)
 
-def best_name_score(candidates_a: list[str], candidates_b: list[str]) -> int:
-    """Return highest name score across all pairings of two name lists."""
+def best_name_score(list_a, list_b):
     best = 0
-    for na in candidates_a:
-        for nb in candidates_b:
-            s = name_score(na, nb)
+    for a in list_a:
+        for b in list_b:
+            s = name_score(a, b)
             if s > best:
                 best = s
     return best
@@ -169,32 +152,38 @@ def best_name_score(candidates_a: list[str], candidates_b: list[str]) -> int:
 
 # ---------------------------------------------------------------------------
 # Legal description helpers
+# KEY FIX: LOT:? and UNIT:? now handle "Lot: 181" format (with colon)
+# LOT matched before UNIT to avoid grabbing subdivision unit numbers
+# e.g. "Lot: 212 SKY LAKE OAK RIDGE SECTION UNIT THREE" -> LOT 212 not UNIT THREE
 # ---------------------------------------------------------------------------
 
-def extract_subdivision(legal_desc: str) -> str:
+def extract_subdivision(legal_desc):
     if not legal_desc:
         return ""
     legal = legal_desc.upper().strip()
-    # strip leading lot/unit/block/parcel references
-    legal = re.sub(r'^(LOT|LOTS|UNIT|UNITS|PARCEL|TRACT|BLOCK)\s*[\w\d\-]+\s*', '', legal)
-    legal = re.sub(r'^(LOT|LOTS|UNIT|UNITS|PARCEL|TRACT|BLOCK)\s*[\w\d\-]+\s*(BLOCK\s*[\w\d]+\s*)?', '', legal)
-    # strip township/range survey numbers
+    legal = re.sub(r'^(LOT|LOTS|UNIT|UNITS|PARCEL|TRACT|BLOCK):?\s*[\w\d\-]+\s*', '', legal)
+    legal = re.sub(r'^(LOT|LOTS|UNIT|UNITS|PARCEL|TRACT|BLOCK):?\s*[\w\d\-]+\s*(BLOCK:?\s*[\w\d]+\s*)?', '', legal)
     legal = re.sub(r'\b\d{2}\s+\d{2}\s+\d{2}\s+[\d\s]+', '', legal)
-    # strip trailing phase/unit/section qualifiers
-    legal = re.sub(r'\s+(PHASE|PH|UNIT|SECTION|SEC)\s+[\w\d]+$', '', legal)
-    legal = re.sub(r'\s+(PHASE|PH|UNIT|SECTION|SEC)\s+[\w\d]+\s+[\w\d]+$', '', legal)
+    legal = re.sub(r'\s+(PHASE|PH|UNIT|SECTION|SEC):?\s+[\w\d]+$', '', legal)
+    legal = re.sub(r'\s+(PHASE|PH|UNIT|SECTION|SEC):?\s+[\w\d]+\s+[\w\d]+$', '', legal)
     legal = legal.strip().strip(',').strip()
     if len(legal) < 3 or legal.isdigit():
         return ""
     return legal
 
-def extract_lot_number(legal_desc: str) -> str:
-    m = re.search(r'\bLOT\s+(\w+)', legal_desc.upper())
+def extract_lot_number(legal_desc):
+    upper = legal_desc.upper()
+    m = re.search(r'\bLOT:?\s+(\w+)', upper)
     if m:
         return f"LOT {m.group(1)}"
-    m = re.search(r'\bUNIT\s+(\w+)', legal_desc.upper())
+    m = re.search(r'\bUNIT:?\s+(\w+)', upper)
     if m:
         return f"UNIT {m.group(1)}"
+    m = re.search(r'\bPARCEL:?\s+([\w]+)', upper)
+    if m:
+        val = m.group(1)
+        if not val.isdigit() or len(val) > 4:
+            return f"PARCEL {val}"
     return ""
 
 
@@ -238,13 +227,6 @@ def download_nal_file():
         return False
 
 def load_nal_index():
-    """
-    Build two indexes from the NAL file:
-      subdiv_index : subdivision_key -> list of records
-      name_index   : normalized_owner_name -> list of records
-    Each record also stores normalized s_legal and the raw owner name
-    so we can do name matching during enrichment.
-    """
     log.info("Building NAL index...")
     subdiv_index = {}
     name_index   = {}
@@ -302,14 +284,13 @@ def load_nal_index():
                     "owner_name_norm":  normalize_name(own_name),
                     "assessed_value":   assessed,
                     "s_legal":          s_legal,
+                    "s_lot":            extract_lot_number(s_legal),
                 }
 
-                # --- subdivision index ---
                 subdiv = extract_subdivision(s_legal)
                 if subdiv:
                     subdiv_index.setdefault(subdiv, []).append(record)
 
-                # --- owner name index (skip blank or very short names) ---
                 name_norm = normalize_name(own_name)
                 if len(name_norm) >= 4:
                     name_index.setdefault(name_norm, []).append(record)
@@ -329,154 +310,93 @@ def load_nal_index():
 
 
 # ---------------------------------------------------------------------------
-# 4-Strategy matching engine
+# Doc-type-aware name selection
 # ---------------------------------------------------------------------------
 
-def get_primary_names(lead: Lead) -> list[str]:
-    """
-    Return the names to match against OWN_NAME based on doc type.
-    For LP → grantee (owner being sued).
-    For Lien/Judgment → grantor (debtor).
-    For others → try both.
-    """
+def get_primary_names(lead):
     dt = lead.document_type.lower()
     primary = "both"
     for key, val in DOC_TYPE_PRIMARY_NAME.items():
         if key in dt:
             primary = val
             break
-
     grantee_names = split_co_owners(lead.grantee)
     grantor_names = split_co_owners(lead.grantor)
-
     if primary == "grantee":
         return grantee_names or grantor_names
     if primary == "grantor":
         return grantor_names or grantee_names
-    return grantee_names + grantor_names   # both
+    return grantee_names + grantor_names
 
 
-def build_county_search_url(lead: Lead) -> str:
-    """Generate a direct OC Property Appraiser URL for manual fallback."""
-    # Try to build a name search URL using the most useful name we have
+def build_county_search_url(lead):
     names = get_primary_names(lead)
     if names:
-        # Use first name token as last name guess (county search uses last name)
-        raw = names[0]
-        parts = raw.split()
-        last = parts[0] if parts else raw
-        import urllib.parse
+        parts = names[0].split()
+        last = parts[0] if parts else names[0]
         return (
-            f"https://www.ocpafl.org/searches/ParcelSearch.aspx"
+            "https://www.ocpafl.org/searches/ParcelSearch.aspx"
             f"?SearchType=owner&SearchValue={urllib.parse.quote(last)}"
         )
     return OC_APPRAISER_SEARCH
 
 
-def match_lead_to_nal(lead: Lead, subdiv_index: dict, name_index: dict) -> dict:
-    """
-    4-strategy matching. Returns a result dict:
-      {
-        match_confidence: HIGH|MEDIUM|LOW|NONE,
-        match_reason: str,
-        property_address: str,
-        mailing_address: str,
-        owner_name: str,
-        assessed_value: str,
-        candidates: int,   # number of NAL records considered
-      }
-    """
+# ---------------------------------------------------------------------------
+# 4-Strategy matching engine
+# ---------------------------------------------------------------------------
+
+def match_lead_to_nal(lead, subdiv_index, name_index):
     legal      = (lead.legal_description or "").upper().strip()
     subdiv     = extract_subdivision(legal)
     lot        = extract_lot_number(legal)
-    lead_names = get_primary_names(lead)     # names from comptroller CSV
+    lead_names = get_primary_names(lead)
 
-    # -----------------------------------------------------------------------
-    # Strategy 1 — Exact lot + subdivision match → HIGH confidence
-    # -----------------------------------------------------------------------
-    if subdiv and lot and subdiv in subdiv_index:
-        lot_matches = [r for r in subdiv_index[subdiv] if lot in r["s_legal"]]
-        if len(lot_matches) == 1:
-            rec = lot_matches[0]
-            return {
-                "match_confidence": "HIGH",
-                "match_reason":     f"Legal match: {subdiv} {lot} → 1 parcel",
-                **_pick_fields(rec),
-                "candidates":       1,
-            }
-        if len(lot_matches) > 1:
-            # Narrow by name before falling through
-            name_narrowed = _narrow_by_name(lot_matches, lead_names)
-            if name_narrowed:
-                return {
-                    "match_confidence": "HIGH",
-                    "match_reason":     f"Legal match: {subdiv} {lot} + name confirmed",
-                    **_pick_fields(name_narrowed),
-                    "candidates":       len(lot_matches),
-                }
-            # Multiple lot matches, can't disambiguate → LOW
-            return {
-                "match_confidence": "LOW",
-                "match_reason":     f"Legal match: {subdiv} {lot} → {len(lot_matches)} parcels, name ambiguous",
-                **_pick_fields(lot_matches[0]),
-                "candidates":       len(lot_matches),
-            }
+    # Strategy 1: exact lot + subdivision -> HIGH
+    if subdiv and lot:
+        candidates = subdiv_index.get(subdiv, [])
+        if not candidates:
+            for key in subdiv_index:
+                if len(key) >= 8 and key in legal:
+                    candidates = subdiv_index[key]
+                    subdiv = key
+                    break
+        if candidates:
+            lot_matches = [r for r in candidates if r.get("s_lot") == lot or lot in r["s_legal"]]
+            if len(lot_matches) == 1:
+                return _result("HIGH", f"Lot+subdiv: {subdiv} {lot} -> 1 parcel", lot_matches[0], 1)
+            if len(lot_matches) > 1:
+                narrowed = _narrow_by_name(lot_matches, lead_names)
+                if narrowed:
+                    return _result("HIGH", f"Lot+subdiv+name: {subdiv} {lot}", narrowed, len(lot_matches))
+                return _result("LOW", f"Lot+subdiv: {subdiv} {lot} -> {len(lot_matches)} parcels, name ambiguous", lot_matches[0], len(lot_matches))
 
-    # -----------------------------------------------------------------------
-    # Strategy 2 — Subdivision match + name confirmation → MEDIUM confidence
-    # -----------------------------------------------------------------------
-    subdiv_records = []
-    if subdiv and subdiv in subdiv_index:
-        subdiv_records = subdiv_index[subdiv]
-    else:
-        # try partial key match (for long subdivisions)
+    # Strategy 2: subdivision + name confirmation -> MEDIUM
+    subdiv_records = subdiv_index.get(subdiv, []) if subdiv else []
+    if not subdiv_records and subdiv:
         for key in subdiv_index:
             if len(key) >= 8 and key in legal:
                 subdiv_records = subdiv_index[key]
                 subdiv = key
                 break
-
     if subdiv_records and lead_names:
-        name_narrowed = _narrow_by_name(subdiv_records, lead_names)
-        if name_narrowed:
-            return {
-                "match_confidence": "MEDIUM",
-                "match_reason":     f"Subdiv match: {subdiv} + name confirmed",
-                **_pick_fields(name_narrowed),
-                "candidates":       len(subdiv_records),
-            }
+        narrowed = _narrow_by_name(subdiv_records, lead_names)
+        if narrowed:
+            return _result("MEDIUM", f"Subdiv+name: {subdiv}", narrowed, len(subdiv_records))
 
-    # -----------------------------------------------------------------------
-    # Strategy 3 — Subdivision match only (no lot, name unconfirmed) → LOW
-    # -----------------------------------------------------------------------
+    # Strategy 3a: subdivision only -> LOW
     if subdiv_records:
-        n = len(subdiv_records)
-        return {
-            "match_confidence": "LOW",
-            "match_reason":     f"Subdiv match: {subdiv} → {n} parcels, name unconfirmed",
-            **_pick_fields(subdiv_records[0]),
-            "candidates":       n,
-        }
+        return _result("LOW", f"Subdiv only: {subdiv} -> {len(subdiv_records)} parcels", subdiv_records[0], len(subdiv_records))
 
-    # -----------------------------------------------------------------------
-    # Strategy 3b — Name-only match (no legal hit at all) → LOW
-    # -----------------------------------------------------------------------
+    # Strategy 3b: name-only fallback -> LOW
     if lead_names:
         name_rec = _search_name_index(lead_names, name_index)
         if name_rec:
-            return {
-                "match_confidence": "LOW",
-                "match_reason":     "Name-only match (no legal description hit)",
-                **_pick_fields(name_rec),
-                "candidates":       1,
-            }
+            return _result("LOW", "Name-only match (no legal description hit)", name_rec, 1)
 
-    # -----------------------------------------------------------------------
-    # Strategy 4 — No match → NONE, provide manual search URL
-    # -----------------------------------------------------------------------
+    # Strategy 4: no match -> NONE
     return {
         "match_confidence": "NONE",
-        "match_reason":     "No match found; use county_search_url for manual lookup",
+        "match_reason":     "No match found - use county_search_url for manual lookup",
         "property_address": "",
         "mailing_address":  "",
         "owner_name":       "",
@@ -485,21 +405,18 @@ def match_lead_to_nal(lead: Lead, subdiv_index: dict, name_index: dict) -> dict:
     }
 
 
-def _pick_fields(rec: dict) -> dict:
+def _result(confidence, reason, rec, candidates):
     return {
+        "match_confidence": confidence,
+        "match_reason":     reason,
         "property_address": rec["property_address"],
         "mailing_address":  rec["mailing_address"],
         "owner_name":       rec["owner_name"],
         "assessed_value":   rec["assessed_value"],
+        "candidates":       candidates,
     }
 
-
-def _narrow_by_name(records: list, lead_names: list[str]) -> dict | None:
-    """
-    From a list of NAL records, return the best name match above threshold.
-    Tries grantee names first, then grantor names.
-    Returns None if nothing clears the threshold.
-    """
+def _narrow_by_name(records, lead_names):
     best_rec, best_score = None, 0
     for rec in records:
         nal_names = split_co_owners(rec["owner_name"])
@@ -507,27 +424,17 @@ def _narrow_by_name(records: list, lead_names: list[str]) -> dict | None:
         if s > best_score:
             best_score = s
             best_rec = rec
-    if best_score >= NAME_MATCH_THRESHOLD:
-        return best_rec
-    return None
+    return best_rec if best_score >= NAME_MATCH_THRESHOLD else None
 
-
-def _search_name_index(lead_names: list[str], name_index: dict) -> dict | None:
-    """
-    Search the name index for any lead name that matches above threshold.
-    Returns the best matching NAL record or None.
-    """
+def _search_name_index(lead_names, name_index):
     best_rec, best_score = None, 0
-    # Limit to checking top 2 lead names to avoid O(n) full scan
     for lead_name in lead_names[:2]:
         norm = normalize_name(lead_name)
         if not norm:
             continue
-        # Only check name_index keys that share at least one token
         lead_tokens = set(norm.split())
         for key, records in name_index.items():
-            key_tokens = set(key.split())
-            if not lead_tokens & key_tokens:
+            if not lead_tokens & set(key.split()):
                 continue
             s = fuzz.token_sort_ratio(norm, key)
             if s > best_score and s >= NAME_MATCH_THRESHOLD:
@@ -540,11 +447,10 @@ def _search_name_index(lead_names: list[str], name_index: dict) -> dict | None:
 # Enrichment
 # ---------------------------------------------------------------------------
 
-def enrich_leads_with_nal(leads: list, subdiv_index: dict, name_index: dict) -> list:
+def enrich_leads_with_nal(leads, subdiv_index, name_index):
     counts = {"HIGH": 0, "MEDIUM": 0, "LOW": 0, "NONE": 0}
     for lead in leads:
         result = match_lead_to_nal(lead, subdiv_index, name_index)
-
         lead.match_confidence  = result["match_confidence"]
         lead.match_reason      = result["match_reason"]
         lead.property_address  = result.get("property_address", "")
@@ -553,11 +459,9 @@ def enrich_leads_with_nal(leads: list, subdiv_index: dict, name_index: dict) -> 
         lead.assessed_value    = result.get("assessed_value",    "")
         lead.county_search_url = build_county_search_url(lead)
         lead.needs_enrichment  = lead.match_confidence in ("LOW", "NONE")
-
         counts[lead.match_confidence] += 1
-
     log.info(
-        "NAL match results → HIGH:%d  MEDIUM:%d  LOW:%d  NONE:%d",
+        "NAL match results -> HIGH:%d  MEDIUM:%d  LOW:%d  NONE:%d",
         counts["HIGH"], counts["MEDIUM"], counts["LOW"], counts["NONE"]
     )
     return leads
@@ -603,7 +507,6 @@ def search_and_get_data(session, doc_type, doc_code, doc_label):
     except Exception as e:
         log.error("CSV fetch failed: %s", e)
         return None
-
 
 def parse_csv_text(csv_text, doc_type, base_score):
     leads = []
@@ -659,7 +562,6 @@ def save_csv(leads, path="data/output.csv"):
             writer.writerow(row)
     log.info("CSV saved: %s", path)
 
-
 def load_existing(path):
     if not os.path.exists(path):
         return []
@@ -669,7 +571,6 @@ def load_existing(path):
         return data.get("leads", [])
     except Exception:
         return []
-
 
 def save_json(leads):
     os.makedirs("data", exist_ok=True)
@@ -696,7 +597,7 @@ def main():
     if download_nal_file():
         subdiv_index, name_index = load_nal_index()
     else:
-        log.warning("NAL unavailable — all leads will be NONE confidence")
+        log.warning("NAL unavailable - all leads will be NONE confidence")
 
     new_leads = []
     for doc_type, doc_code, base_score in TARGET_DOC_TYPES:
