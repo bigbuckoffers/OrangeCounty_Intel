@@ -152,9 +152,6 @@ def best_name_score(list_a, list_b):
 
 # ---------------------------------------------------------------------------
 # Legal description helpers
-# KEY FIX: LOT:? and UNIT:? now handle "Lot: 181" format (with colon)
-# LOT matched before UNIT to avoid grabbing subdivision unit numbers
-# e.g. "Lot: 212 SKY LAKE OAK RIDGE SECTION UNIT THREE" -> LOT 212 not UNIT THREE
 # ---------------------------------------------------------------------------
 
 def extract_subdivision(legal_desc):
@@ -593,11 +590,25 @@ def main():
     log.info("=== OC Motivated Seller Scraper ===")
     log.info("Date range: %s to %s", DATE_START, DATE_END)
 
-    subdiv_index, name_index = {}, {}
     if download_nal_file():
+        log.info("=== NAL SAMPLES ===")
+        try:
+            with open(NAL_LOCAL_PATH, encoding="utf-8", errors="replace") as f:
+                reader = csv.DictReader(f)
+                count = 0
+                for row in reader:
+                    s_legal = (row.get("S_LEGAL") or "").strip()
+                    if s_legal and count < 20:
+                        log.info("NAL: %s", s_legal[:100])
+                        count += 1
+                    if count >= 20:
+                        break
+        except Exception as e:
+            log.error("Debug failed: %s", e)
         subdiv_index, name_index = load_nal_index()
     else:
         log.warning("NAL unavailable - all leads will be NONE confidence")
+        subdiv_index, name_index = {}, {}
 
     new_leads = []
     for doc_type, doc_code, base_score in TARGET_DOC_TYPES:
@@ -607,6 +618,10 @@ def main():
             if csv_text:
                 leads = parse_csv_text(csv_text, doc_type, base_score)
                 log.info("Got %d leads for %s", len(leads), doc_type)
+                if doc_type == "Lis Pendens" and leads:
+                    log.info("=== COMPTROLLER SAMPLES ===")
+                    for l in leads[:10]:
+                        log.info("COMP: grantee=%s | legal=%s", l.grantee[:30], l.legal_description[:80])
                 new_leads.extend(leads)
             else:
                 log.error("No CSV for %s", doc_type)
