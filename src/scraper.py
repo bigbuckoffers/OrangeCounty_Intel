@@ -24,7 +24,7 @@ Stage 2 — Weighted scoring per candidate:
   -15  no parcel anchor (no lot, no unit)
 
 Labels:
-  HIGH   = score >= 85 AND parcel anchor AND subdivision confirmed
+  HIGH   = score >= 85 AND parcel anchor AND strong subdiv (80%+ token overlap or exact legal)
   MEDIUM = score 65-84
   LOW    = score 40-64
   NONE   = score < 40
@@ -532,17 +532,20 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal, lead_surnames, rec)
     return score, " | ".join(notes)
 
 
-def label_match(score, lead_parsed, notes):
+def label_match(score, parsed, notes):
     """
     HIGH requires ALL THREE:
       1. score >= 85
-      2. parcel anchor (exact lot or unit match in notes)
-      3. subdivision confirmation (subdiv token overlap or fuzzy match in notes)
-    Without subdivision confirmation, lot-only matches get capped at MEDIUM.
+      2. exact parcel anchor (lot+ or unit+ in notes)
+      3. STRONG subdivision confirmation only:
+         - subdiv_tok+35 = 80%+ token overlap, OR
+         - exact_legal+10 = normalized strings match exactly
+         Weak/moderate subdiv overlap (subdiv_tok+20, subdiv_tok+10, fuzzy)
+         is NOT sufficient for HIGH — prevents lot-only cross-subdivision false matches.
     """
-    has_anchor = "lot+" in notes or "unit+" in notes
-    has_subdiv = "subdiv_tok+" in notes or "fuzzy+" in notes or "exact_legal" in notes
-    if score >= 85 and has_anchor and has_subdiv:
+    has_anchor       = "lot+" in notes or "unit+" in notes
+    has_strong_subdiv = "subdiv_tok+35" in notes or "exact_legal+10" in notes
+    if score >= 85 and has_anchor and has_strong_subdiv:
         return "HIGH"
     if score >= 65:
         return "MEDIUM"
