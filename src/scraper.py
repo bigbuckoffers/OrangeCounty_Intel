@@ -138,16 +138,28 @@ _RESORT_PATTERN = re.compile(
     re.IGNORECASE
 )
 
+# FIX 2: Added SECRETARY as standalone token to prevent HUD/govt plaintiff
+# from leaking into surname matching
 _LENDER_NOISE = re.compile(
     r'\b(JPMORGAN|JMORGAN|PMORGAN|CHASE|BANK\s+OF|WELLS\s+FARGO|'
     r'CITIBANK|COUNTRYWIDE|NATIONSTAR|OCWEN|SETERUS|PHH\s+MORTGAGE|'
     r'QUICKEN|ROCKET\s+MORTGAGE|PENNYMAC|FREEDOM\s+MORTGAGE|'
     r'MORTGAGE\s+CORP|MORTGAGE\s+LLC|SERVICING|SERVICER|'
     r'FEDERAL\s+NATIONAL|FEDERAL\s+HOME|FANNIE\s+MAE|FREDDIE\s+MAC|'
-    r'SECRETARY\s+OF\s+HOUSING|HOUSING\s+AND\s+UR|HUD\b|'
+    r'SECRETARY\s+OF\s+HOUSING|SECRETARY\s+OF|SECRETARY|'
+    r'HOUSING\s+AND\s+UR|HUD\b|URBAN\s+DEVELOPMENT|'
     r'HOMEOWNERS\s+ASSOCIATION|HOA\b|COMMUNITY\s+ASSOCIATION)\b',
     re.IGNORECASE
 )
+
+# Spelled-out numbers that appear as subdivision qualifiers not unit IDs
+# e.g. "SKY LAKE OAK RIDGE SECTION UNIT THREE" — THREE is part of the name
+_SPELLED_NUMBERS = {
+    'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX',
+    'SEVEN', 'EIGHT', 'NINE', 'TEN', 'ELEVEN', 'TWELVE',
+    'FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH',
+    'SIXTH', 'SEVENTH', 'EIGHTH', 'NINTH', 'TENTH',
+}
 
 
 # ---------------------------------------------------------------------------
@@ -237,9 +249,13 @@ def parse_legal(norm_legal):
     if m:
         parsed["block"] = m.group(1)
 
+    # FIX 1: Skip unit extraction when value is a spelled-out number —
+    # these are subdivision name qualifiers e.g. "SKY LAKE OAK RIDGE SECTION UNIT THREE"
     m = re.search(r'\bUNIT\s+(\w+)', text)
     if m:
-        parsed["unit"] = m.group(1)
+        val = m.group(1)
+        if val not in _SPELLED_NUMBERS:
+            parsed["unit"] = val
 
     m = re.search(r'\bSECTION\s+(\w+)', text)
     if m:
@@ -253,7 +269,7 @@ def parse_legal(norm_legal):
     subdiv = text
     subdiv = re.sub(r'\bLOT\s+\w+\s*', '', subdiv)
     subdiv = re.sub(r'\bBLOCK\s+\w+\s*', '', subdiv)
-    subdiv = re.sub(r'^\s*UNIT\s+\w+\s+', '', subdiv)  # leading unit ref only
+    subdiv = re.sub(r'^\s*UNIT\s+\w+\s+', '', subdiv)
     subdiv = re.sub(r'\bPARCEL\s+[\w\s]+', '', subdiv)
     subdiv = re.sub(r'\bSECTION\s+\w+\s*', '', subdiv)
     subdiv = re.sub(r'\bPHASE\s+\w+\s*', '', subdiv)
@@ -428,23 +444,19 @@ def generate_candidates(lead_parsed, lead_type, lead_surnames, nal_idx, max_cand
     block  = lead_parsed.get("block", "")
     subdiv = lead_parsed.get("subdivision", "")
 
-    # Lot candidates
     if lot:
         for nid in nal_idx.lot_index.get(lot, []):
             candidates.add(nid)
 
-    # Unit candidates
     if unit:
         for nid in nal_idx.unit_index.get(unit, []):
             candidates.add(nid)
 
-    # Block + lot intersection
     if block and lot:
         block_set = set(nal_idx.block_index.get(block, []))
         lot_set   = set(nal_idx.lot_index.get(lot, []))
         candidates.update(block_set & lot_set)
 
-    # Subdivision token intersection
     if subdiv:
         subdiv_tokens = [t for t in subdiv.split()
                          if t not in _STOPWORDS and len(t) >= 4]
@@ -463,10 +475,8 @@ def generate_candidates(lead_parsed, lead_type, lead_surnames, nal_idx, max_cand
                 if intersection:
                     candidates.update(intersection)
                 elif len(token_sets) >= 2:
-                    # Fall back to union of first 2 tokens if intersection empty
                     candidates.update(token_sets[0] | token_sets[1])
 
-    # Surname fallback
     if len(candidates) < 5 and lead_surnames:
         for surname in lead_surnames:
             for nid in nal_idx.surname_index.get(surname, []):
@@ -481,8 +491,7 @@ def generate_candidates(lead_parsed, lead_type, lead_surnames, nal_idx, max_cand
 # WEIGHTED SCORING
 # ===========================================================================
 
-def score_candidate(lead_parsed, lead_type, lead_norm_legal,
-                    lead_surnames, rec):
+def score_candidate(lead_parsed, lead_type, lead_norm_legal, lead_surnames, rec):
     score = 0
     notes = []
 
@@ -491,7 +500,6 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal,
     r_norm     = rec["norm_legal"]
     r_surnames = rec["surnames"]
 
-    # Legal type
     if lead_type == r_type:
         score += 40
         notes.append("type+40")
@@ -502,22 +510,18 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal,
         score -= 10
         notes.append("type_mismatch-10")
 
-    # Exact lot
     if lead_parsed.get("lot") and lead_parsed["lot"] == r_parsed.get("lot"):
         score += 30
         notes.append(f"lot+30({lead_parsed['lot']})")
 
-    # Exact unit
     if lead_parsed.get("unit") and lead_parsed["unit"] == r_parsed.get("unit"):
         score += 30
         notes.append(f"unit+30({lead_parsed['unit']})")
 
-    # Exact block
     if lead_parsed.get("block") and lead_parsed["block"] == r_parsed.get("block"):
         score += 25
         notes.append(f"block+25({lead_parsed['block']})")
 
-    # Subdivision token overlap
     lead_subdiv = lead_parsed.get("subdivision", "")
     r_subdiv    = r_parsed.get("subdivision", "")
     if lead_subdiv and r_subdiv:
@@ -535,7 +539,6 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal,
                 score += 10
                 notes.append(f"subdiv_tok+10({overlap:.0%})")
 
-        # Fuzzy as supporting feature only
         fs = fuzz.token_sort_ratio(lead_subdiv, r_subdiv)
         if fs >= 90:
             score += 20
@@ -544,12 +547,10 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal,
             score += 10
             notes.append(f"fuzzy+10({fs})")
 
-    # Exact normalized legal
     if lead_norm_legal and r_norm and lead_norm_legal == r_norm:
         score += 10
         notes.append("exact_legal+10")
 
-    # Owner surname
     if lead_surnames and r_surnames:
         common = lead_surnames & r_surnames
         if common:
@@ -559,7 +560,6 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal,
                 score += 10
                 notes.append("co_owner+10")
 
-    # No anchor penalty
     if not lead_parsed.get("lot") and not lead_parsed.get("unit"):
         score -= 15
         notes.append("no_anchor-15")
@@ -610,7 +610,6 @@ def match_lead(lead, nal_idx):
     scored.sort(key=lambda x: x[0], reverse=True)
     best_score, best_notes, best_rec = scored[0]
 
-    # Ambiguity penalty
     if len(scored) >= 2 and (best_score - scored[1][0]) < 15:
         best_score -= 20
         best_notes += " | ambiguous-20"
