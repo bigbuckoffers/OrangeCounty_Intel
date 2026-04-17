@@ -308,15 +308,15 @@ def score_candidate(parsed, legal_type, norm_legal, surnames, rec):
         rt2 = {t for t in rs.split() if t not in _STOPWORDS and len(t) >= 3}
         if lt2 and rt2:
             ov = len(lt2 & rt2) / max(len(lt2), 1)
-            if ov >= 0.8:   score += 35; notes.append(f"subdiv+35({ov:.0%})")
-            elif ov >= 0.5: score += 20; notes.append(f"subdiv+20({ov:.0%})")
-            elif ov >= 0.25:score += 10; notes.append(f"subdiv+10({ov:.0%})")
+            if ov >= 0.8:   score += 35; notes.append(f"subdiv_tok+35({ov:.0%})")
+            elif ov >= 0.5: score += 20; notes.append(f"subdiv_tok+20({ov:.0%})")
+            elif ov >= 0.25:score += 10; notes.append(f"subdiv_tok+10({ov:.0%})")
         fs = fuzz.token_sort_ratio(ls, rs)
         if fs >= 90:   score += 20; notes.append(f"fuzzy+20({fs})")
         elif fs >= 80: score += 10; notes.append(f"fuzzy+10({fs})")
 
     if norm_legal and rec["norm_legal"] and norm_legal == rec["norm_legal"]:
-        score += 10; notes.append("exact+10")
+        score += 10; notes.append("exact_legal+10")
 
     if surnames and rec["surnames"]:
         common = surnames & rec["surnames"]
@@ -333,13 +333,15 @@ def label_match(score, parsed, notes):
     """
     HIGH requires ALL THREE:
       1. score >= 85
-      2. parcel anchor confirmed (lot+ or unit+ in notes)
-      3. subdivision confirmed (subdiv_tok+, fuzzy+, or exact in notes)
-    Lot-only matches without subdivision confirmation cap at MEDIUM.
+      2. exact parcel anchor (lot+ or unit+ in notes)
+      3. STRONG subdivision confirmation only:
+         - subdiv_tok+35 = 80%+ token overlap, OR
+         - exact_legal+10 = normalized strings match exactly
+         Weak/moderate subdiv overlap is NOT sufficient for HIGH.
     """
-    has_anchor = "lot+" in notes or "unit+" in notes
-    has_subdiv = "subdiv+" in notes or "fuzzy+" in notes or "exact+" in notes
-    if score >= 85 and has_anchor and has_subdiv:
+    has_anchor        = "lot+" in notes or "unit+" in notes
+    has_strong_subdiv = "subdiv_tok+35" in notes or "exact_legal+10" in notes
+    if score >= 85 and has_anchor and has_strong_subdiv:
         return "HIGH"
     if score >= 65:
         return "MEDIUM"
