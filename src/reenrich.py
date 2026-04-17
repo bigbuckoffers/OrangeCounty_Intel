@@ -60,16 +60,26 @@ _RESORT_PATTERN = re.compile(
     r'BOARDWALK|SARATOGA|OLD\s+KEY\s+WEST)\b', re.IGNORECASE
 )
 
+# FIX 2: Added SECRETARY as standalone token
 _LENDER_NOISE = re.compile(
     r'\b(JPMORGAN|JMORGAN|PMORGAN|CHASE|BANK\s+OF|WELLS\s+FARGO|'
     r'CITIBANK|COUNTRYWIDE|NATIONSTAR|OCWEN|SETERUS|PHH\s+MORTGAGE|'
     r'QUICKEN|ROCKET\s+MORTGAGE|PENNYMAC|FREEDOM\s+MORTGAGE|'
     r'MORTGAGE\s+CORP|MORTGAGE\s+LLC|SERVICING|SERVICER|'
     r'FEDERAL\s+NATIONAL|FEDERAL\s+HOME|FANNIE\s+MAE|FREDDIE\s+MAC|'
-    r'SECRETARY\s+OF\s+HOUSING|HOUSING\s+AND\s+UR|HUD\b|'
+    r'SECRETARY\s+OF\s+HOUSING|SECRETARY\s+OF|SECRETARY|'
+    r'HOUSING\s+AND\s+UR|HUD\b|URBAN\s+DEVELOPMENT|'
     r'HOMEOWNERS\s+ASSOCIATION|HOA\b|COMMUNITY\s+ASSOCIATION)\b',
     re.IGNORECASE
 )
+
+# FIX 1: Spelled-out numbers are subdivision name qualifiers not unit IDs
+_SPELLED_NUMBERS = {
+    'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX',
+    'SEVEN', 'EIGHT', 'NINE', 'TEN', 'ELEVEN', 'TWELVE',
+    'FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH',
+    'SIXTH', 'SEVENTH', 'EIGHTH', 'NINTH', 'TENTH',
+}
 
 
 # ---------------------------------------------------------------------------
@@ -99,11 +109,26 @@ def classify_legal(norm):
 def parse_legal(norm):
     p = {"lot":"","block":"","unit":"","section":"","phase":"","subdivision":""}
     if not norm: return p
-    m = re.search(r'\bLOT\s+(\w+)', norm);   p["lot"]     = m.group(1) if m else ""
-    m = re.search(r'\bBLOCK\s+(\w+)', norm); p["block"]   = m.group(1) if m else ""
-    m = re.search(r'\bUNIT\s+(\w+)', norm);  p["unit"]    = m.group(1) if m else ""
-    m = re.search(r'\bSECTION\s+(\w+)', norm); p["section"] = m.group(1) if m else ""
-    m = re.search(r'\bPHASE\s+(\w+)', norm); p["phase"]   = m.group(1) if m else ""
+
+    m = re.search(r'\bLOT\s+(\w+)', norm)
+    if m: p["lot"] = m.group(1)
+
+    m = re.search(r'\bBLOCK\s+(\w+)', norm)
+    if m: p["block"] = m.group(1)
+
+    # FIX 1: Skip spelled-out numbers as unit values
+    m = re.search(r'\bUNIT\s+(\w+)', norm)
+    if m:
+        val = m.group(1)
+        if val not in _SPELLED_NUMBERS:
+            p["unit"] = val
+
+    m = re.search(r'\bSECTION\s+(\w+)', norm)
+    if m: p["section"] = m.group(1)
+
+    m = re.search(r'\bPHASE\s+(\w+)', norm)
+    if m: p["phase"] = m.group(1)
+
     subdiv = norm
     subdiv = re.sub(r'\bLOT\s+\w+\s*', '', subdiv)
     subdiv = re.sub(r'\bBLOCK\s+\w+\s*', '', subdiv)
@@ -464,7 +489,6 @@ def main():
         json.dump(data, f, indent=2)
     log.info("Saved %d re-enriched leads to %s", len(leads), OUTPUT_PATH)
 
-    # Also save CSV
     os.makedirs("data", exist_ok=True)
     fields = [
         "seller_score","document_number","file_date","document_type",
