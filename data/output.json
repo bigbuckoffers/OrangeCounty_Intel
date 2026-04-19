@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-18T14:13:44.993354Z",
+  "generated_at": "2026-04-19T14:13:29.474100Z",
   "total_records": 2719,
-  "date_range": "04/11/2026 to 04/18/2026",
+  "date_range": "04/12/2026 to 04/19/2026",
   "leads": [
     {
       "document_number": "20260210267",
@@ -1493,7 +1493,7 @@
       "scraped_at": "2026-04-15T12:40:11.813955Z",
       "match_confidence": "LOW",
       "match_score": 55,
-      "match_reason": "score=55 | type+40 | surname+20(JT,MTCB) | co_owner+10 | no_anchor-15",
+      "match_reason": "score=55 | type+40 | surname+20(MTCB,JT) | co_owner+10 | no_anchor-15",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=JT"
     },
     {
@@ -2181,7 +2181,7 @@
       "grantor": "WOODS KENNETH",
       "grantee": "WATSON GWENDOLYN DENISE",
       "legal_description": "Case: 2025 CP 001313 O",
-      "property_address": "14547 CLARKSON DR, Orlando, FL 32828",
+      "property_address": "4849 WILLOW RUN W, Orlando, FL 32808",
       "document_type": "Probate Court Paper",
       "seller_score": 20,
       "distress_flags": [
@@ -2190,10 +2190,10 @@
       "scraped_at": "2026-04-14T13:37:05.012923Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(WOODS) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "14547 CLARKSON DR, ORLANDO, FLORIDA 32828",
-      "owner_name": "WOODS ERIKA SUSY",
-      "assessed_value": "$224,911",
+      "match_reason": "score=25 | type+40 | surname+20(WATSON) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "4849 WILLOW RUN W, ORLANDO, FLORIDA 32808",
+      "owner_name": "WATSON RONALD",
+      "assessed_value": "$60,612",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=WATSON"
     },
@@ -2511,7 +2511,7 @@
       "grantor": "VAN MITCHELL PAUL",
       "grantee": "MITCHELL DEBBY",
       "legal_description": "Case: 2025 CP 002829 O",
-      "property_address": "18272 HEWLETT RD, Orlando, FL 32820",
+      "property_address": "753 MELLOWOOD AVE, Orlando, FL 32825",
       "document_type": "Probate Court Paper",
       "seller_score": 20,
       "distress_flags": [
@@ -2520,10 +2520,10 @@
       "scraped_at": "2026-04-14T13:37:05.013067Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(VAN) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "18272 HEWLETT RD, ORLANDO, FLORIDA 32820",
-      "owner_name": "VAN HORN DANIEL WYAT",
-      "assessed_value": "$38,585",
+      "match_reason": "score=25 | type+40 | surname+20(MITCHELL) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "753 MELLOWOOD AVE, ORLANDO, FLORIDA 32825",
+      "owner_name": "MITCHELL JOSEPH M",
+      "assessed_value": "$164,911",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=MITCHELL"
     },
@@ -3017,7 +3017,7 @@
       "grantor": "LUGO MARIA",
       "grantee": "VELEZ NYDIA IRIZARRY, PEREZ NYDIA",
       "legal_description": "",
-      "property_address": "445 PINEY CROFT LN, Maitland, FL 32751",
+      "property_address": "1931 BREEZY HILL DR, Windermere, FL 34786",
       "document_type": "Probate Court Paper",
       "seller_score": 20,
       "distress_flags": [
@@ -3026,10 +3026,10 @@
       "scraped_at": "2026-04-14T13:37:05.013228Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(LUGO) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "445 PINEY CROFT LN, MAITLAND, FLORIDA 32751",
-      "owner_name": "LUGO DILONE ESTEBAN",
-      "assessed_value": "$777,091",
+      "match_reason": "score=25 | type+40 | surname+20(VELEZ) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "1931 BREEZY HILL DR, WINDERMERE, FLORIDA 34786",
+      "owner_name": "VELEZ-LEON OSVALDO",
+      "assessed_value": "$353,875",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=LUGO"
     },
@@ -5888,7 +5888,7 @@
       "grantor": "GARZA EDUARDO, MORA EDUARDO GARZA",
       "grantee": "TORRES ANA CECILIA VILLALOBOS",
       "legal_description": "Case: 2024 CP 000115 O",
-      "property_address": "9429 ASHMORE LN, Orlando, FL 32825",
+      "property_address": "1700 W WASHINGTON ST, Orlando, FL 32805",
       "document_type": "Probate Court Paper",
       "seller_score": 20,
       "distress_flags": [
@@ -5897,10 +5897,10 @@
       "scraped_at": "2026-04-14T13:37:05.014089Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(TORRES) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "9429 ASHMORE LN, ORLANDO, FLORIDA 32825",
-      "owner_name": "TORRES PEDRO L",
-      "assessed_value": "$408,471",
+      "match_reason": "score=25 | type+40 | surname+20(MORA) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "1700 W WASHINGTON ST, ORLANDO, FLORIDA 32805",
+      "owner_name": "MORA ALEXANDRA E",
+      "assessed_value": "$202,014",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=GARZA"
     },
@@ -7092,7 +7092,7 @@
       "grantor": "SANTANA MANUEL ANTONIO RONDON, RONDON MANUEL",
       "grantee": "VALDEZ GLENY JORTUNA",
       "legal_description": "Case: 2025 CP 003841 O",
-      "property_address": "959 APOPKA BLVD, Apopka, FL 32703",
+      "property_address": "5301 WHITE CLIFF LN (UNIT 1008) APT 8, Orlando, FL 32812",
       "document_type": "Probate Court Paper",
       "seller_score": 20,
       "distress_flags": [
@@ -7101,10 +7101,10 @@
       "scraped_at": "2026-04-14T13:37:05.014438Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(VALDEZ) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "2071 EAGLES REST DR, APOPKA, FLORIDA 32712",
-      "owner_name": "VALDEZ MARISELA",
-      "assessed_value": "$142,039",
+      "match_reason": "score=25 | type+40 | surname+20(SANTANA) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "OO2 CALLE 512, CAROLINA, PUERTO RICO 00982",
+      "owner_name": "SANTANA RIVERA MANUEL A",
+      "assessed_value": "$205,600",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=RONDON"
     },
@@ -7925,7 +7925,7 @@
       "grantor": "VAN MITCHELL PAUL",
       "grantee": "MITCHELL DEBBY",
       "legal_description": "Case: 2025 CP 002829 O",
-      "property_address": "18272 HEWLETT RD, Orlando, FL 32820",
+      "property_address": "753 MELLOWOOD AVE, Orlando, FL 32825",
       "document_type": "Probate Court Paper",
       "seller_score": 20,
       "distress_flags": [
@@ -7934,10 +7934,10 @@
       "scraped_at": "2026-04-14T13:37:05.014713Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(VAN) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "18272 HEWLETT RD, ORLANDO, FLORIDA 32820",
-      "owner_name": "VAN HORN DANIEL WYAT",
-      "assessed_value": "$38,585",
+      "match_reason": "score=25 | type+40 | surname+20(MITCHELL) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "753 MELLOWOOD AVE, ORLANDO, FLORIDA 32825",
+      "owner_name": "MITCHELL JOSEPH M",
+      "assessed_value": "$164,911",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=MITCHELL"
     },
@@ -8785,15 +8785,15 @@
       "distress_flags": [
         "probate"
       ],
-      "property_address": "6601 HAWKSMOOR DR, Orlando, FL 32818",
-      "mailing_address": "6601 HAWKSMOOR DR, ORLANDO, FLORIDA 32818",
-      "owner_name": "REED TONNY JAMES",
-      "assessed_value": "$375,149",
+      "property_address": "MERCATOR DR, Orlando, FL 32807",
+      "mailing_address": "415 PARK LAKE DR, WINTER SPRINGS, FLORIDA 32708",
+      "owner_name": "CUNNINGHAM JAYNE LIFE ESTATE",
+      "assessed_value": "$194,107",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T01:14:21.363376Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(REED) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(CUNNINGHAM) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CUNNINGHAM"
     },
     {
@@ -8807,15 +8807,15 @@
       "distress_flags": [
         "probate"
       ],
-      "property_address": "3719 BEAVER RIDGE DR, Orlando, FL 32829",
-      "mailing_address": "3719 BEAVER RIDGE DR, ORLANDO, FLORIDA 32829",
-      "owner_name": "ADKINS JANICE M LIFE ESTATE",
-      "assessed_value": "$196,753",
+      "property_address": "860 LAKE CATHERINE DR, Maitland, FL 32751",
+      "mailing_address": "860 LAKE CATHERINE DR, MAITLAND, FLORIDA 32751",
+      "owner_name": "BUTLER FAMILY TRUST",
+      "assessed_value": "$817,758",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T01:14:21.363383Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(ADKINS) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(BUTLER) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=ADKINS"
     },
     {
@@ -8873,15 +8873,15 @@
       "distress_flags": [
         "probate"
       ],
-      "property_address": "9494 PRINCE HARRY DR, Orlando, FL 32836",
-      "mailing_address": "9494 PRINCE HARRY DR, ORLANDO, FLORIDA 32836",
-      "owner_name": "JONES KATHRYN KISTLER",
-      "assessed_value": "$521,331",
+      "property_address": "9318 SHADOW PINAR CT, Orlando, FL 32825",
+      "mailing_address": "9318 SHADOW PINAR CT, ORLANDO, FLORIDA 32825",
+      "owner_name": "ALEXANDER STEVEN",
+      "assessed_value": "$251,182",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T01:14:21.363406Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(JONES) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(ALEXANDER) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=ALEXANDER"
     },
     {
@@ -10083,15 +10083,15 @@
       "distress_flags": [
         "probate"
       ],
-      "property_address": "5825 ABERCORN DR, Orlando, FL 32812",
-      "mailing_address": "5825 ABERCORN DR, ORLANDO, FLORIDA 32812",
-      "owner_name": "JOHNSON SHANNON ALYSSA",
-      "assessed_value": "$242,886",
+      "property_address": "5418 SUNRISE BLVD, Orlando, FL 32803",
+      "mailing_address": "5418 SUNRISE BLVD, ORLANDO, FLORIDA 32803",
+      "owner_name": "SMITH TODD MICHAEL",
+      "assessed_value": "$423,840",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T12:40:35.110835Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(JOHNSON) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(SMITH) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=JOHNSON"
     },
     {
@@ -11469,13 +11469,13 @@
       "distress_flags": [
         "probate"
       ],
-      "property_address": "5825 ABERCORN DR, Orlando, FL 32812",
-      "mailing_address": "5825 ABERCORN DR, ORLANDO, FLORIDA 32812",
-      "owner_name": "JOHNSON SHANNON ALYSSA",
-      "assessed_value": "$242,886",
+      "property_address": "5418 SUNRISE BLVD, Orlando, FL 32803",
+      "mailing_address": "5418 SUNRISE BLVD, ORLANDO, FLORIDA 32803",
+      "owner_name": "SMITH TODD MICHAEL",
+      "assessed_value": "$423,840",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(JOHNSON) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(SMITH) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=JOHNSON",
       "needs_enrichment": true,
       "scraped_at": "2026-04-17T15:41:50.559501Z"
@@ -11491,13 +11491,13 @@
       "distress_flags": [
         "probate"
       ],
-      "property_address": "5825 ABERCORN DR, Orlando, FL 32812",
-      "mailing_address": "5825 ABERCORN DR, ORLANDO, FLORIDA 32812",
-      "owner_name": "JOHNSON SHANNON ALYSSA",
-      "assessed_value": "$242,886",
+      "property_address": "5418 SUNRISE BLVD, Orlando, FL 32803",
+      "mailing_address": "5418 SUNRISE BLVD, ORLANDO, FLORIDA 32803",
+      "owner_name": "SMITH TODD MICHAEL",
+      "assessed_value": "$423,840",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(JOHNSON) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(SMITH) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=JOHNSON",
       "needs_enrichment": true,
       "scraped_at": "2026-04-17T15:41:50.559509Z"
@@ -11513,13 +11513,13 @@
       "distress_flags": [
         "probate"
       ],
-      "property_address": "262 LOVELL LN, Apopka, FL 32703",
-      "mailing_address": "262 LOVELL LN, APOPKA, FLORIDA 32703",
-      "owner_name": "RENO VIRGINIA B",
-      "assessed_value": "$43,364",
+      "property_address": "4216 KINGBIRD CT, Orlando, FL 32826",
+      "mailing_address": "4216 KINGBIRD CT, ORLANDO, FLORIDA 32826",
+      "owner_name": "WALDEN MURPHY SPENCER",
+      "assessed_value": "$318,964",
       "match_confidence": "LOW",
       "match_score": 40,
-      "match_reason": "score=40 | type+40 | surname+20(RENO) | ambiguous-20",
+      "match_reason": "score=40 | type+40 | surname+20(WALDEN) | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=BEACH",
       "needs_enrichment": true,
       "scraped_at": "2026-04-17T15:41:50.559517Z"
@@ -15950,7 +15950,7 @@
       "grantor": "FRANCIS EPHESIAN, FRANCIS STACY, FRANCIS ASHTON, FRANCIS KELSEY, JACKSON SHIANNE",
       "grantee": "BYRNE MIA",
       "legal_description": "Case: 2023 CA 014450 O",
-      "property_address": "3709 BUNCHE ST, Orlando, FL 32805",
+      "property_address": "13538 VILLAGE PARK DR UNIT J-270, Orlando, FL 32837",
       "document_type": "Lien",
       "seller_score": 15,
       "distress_flags": [
@@ -15959,10 +15959,10 @@
       "scraped_at": "2026-04-14T13:36:52.209237Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(JACKSON) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "3405 ROGERS DR, ORLANDO, FLORIDA 32805",
-      "owner_name": "JACKSON LEONA B",
-      "assessed_value": "$100",
+      "match_reason": "score=25 | type+40 | surname+20(FRANCIS) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "14024 ISLAMORADA DR, ORLANDO, FLORIDA 32837",
+      "owner_name": "FRANCIS ANN",
+      "assessed_value": "$251,000",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=FRANCIS"
     },
@@ -26743,7 +26743,7 @@
       "grantor": "NONA PLACE ACQUSITION LLC, RETREAT AT NONA PLACE",
       "grantee": "RODRIGUEZ JAMES J RUIZ, ARENAS ALANA RAMOS",
       "legal_description": "Case: 2026 CC 006252 O",
-      "property_address": "11998 MOSS PARK RD, Orlando, FL 32832",
+      "property_address": "DOMENICO PAUL WAY, Orlando, FL 32810",
       "document_type": "Judgment",
       "seller_score": 15,
       "distress_flags": [
@@ -26752,10 +26752,10 @@
       "scraped_at": "2026-04-14T13:36:59.290073Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(NONA) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "11221 JOHN WYCLIFFE BLVD, ORLANDO, FLORIDA 32832",
-      "owner_name": "NONA CHURCH INC",
-      "assessed_value": "$335,252",
+      "match_reason": "score=25 | type+40 | surname+20(RETREAT) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "1000 PINE HOLLOW PT, ALTAMONTE SPRINGS, FLORIDA 32714",
+      "owner_name": "RETREAT AT LAKE BOSSE COMMUNIT",
+      "assessed_value": "$100",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=NONA"
     },
@@ -33123,7 +33123,7 @@
       "grantor": "3149 LANDTREE OWNER LLC, SKYE AT CONWAY",
       "grantee": "NEGRON JEANETTE, ANTONETTY EDWIN",
       "legal_description": "Case: 2026 CC 006379 O",
-      "property_address": "2301 HICKORY LN, Orlando, FL 32803",
+      "property_address": "3149 LANDTREE PL, Orlando, FL 32812",
       "document_type": "Judgment",
       "seller_score": 15,
       "distress_flags": [
@@ -33132,10 +33132,10 @@
       "scraped_at": "2026-04-14T13:36:59.291949Z",
       "match_confidence": "NONE",
       "match_score": -15,
-      "match_reason": "score=-15 | surname+20(SKYE) | no_anchor-15 | ambiguous-20",
-      "mailing_address": "2301 HICKORY LN, ORLANDO, FLORIDA 32803",
-      "owner_name": "SKYE HARPER LLC",
-      "assessed_value": "$385,720",
+      "match_reason": "score=-15 | surname+20(LANDTREE) | no_anchor-15 | ambiguous-20",
+      "mailing_address": "2002 N TAMPA ST STE 110, TAMPA, FLORIDA 33602",
+      "owner_name": "3149 LANDTREE OWNER LLC",
+      "assessed_value": "$25,146,938",
       "needs_enrichment": true,
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=LANDTREE"
     },
@@ -40211,15 +40211,15 @@
       "distress_flags": [
         "multiple_liens"
       ],
-      "property_address": "2911 E ROBINSON ST, Orlando, FL 32803",
-      "mailing_address": "400 S ORANGE AVE LBBY, ORLANDO, FLORIDA 32801",
-      "owner_name": "CITY OF ORLANDO",
-      "assessed_value": "$2,301,116",
+      "property_address": "802 W CHURCH ST, Orlando, FL 32805",
+      "mailing_address": "814 W CHURCH ST, ORLANDO, FLORIDA 32805",
+      "owner_name": "814 CHURCH PARTNERS LLC",
+      "assessed_value": "$130,000",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T01:14:06.057273Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(CITY) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(CHURCH) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CHURCH"
     },
     {
@@ -40233,15 +40233,15 @@
       "distress_flags": [
         "multiple_liens"
       ],
-      "property_address": "2911 E ROBINSON ST, Orlando, FL 32803",
-      "mailing_address": "400 S ORANGE AVE LBBY, ORLANDO, FLORIDA 32801",
-      "owner_name": "CITY OF ORLANDO",
-      "assessed_value": "$2,301,116",
+      "property_address": "4572 THORNLEA RD, Orlando, FL 32817",
+      "mailing_address": "4572 THORNLEA RD, ORLANDO, FLORIDA 32817",
+      "owner_name": "ANDREWS CYNTHIA A",
+      "assessed_value": "$496,362",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T01:14:06.057282Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(CITY) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(ANDREWS) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=ANDREWS"
     },
     {
@@ -40277,15 +40277,15 @@
       "distress_flags": [
         "multiple_liens"
       ],
-      "property_address": "4724 KEMPSTON DR, Orlando, FL 32812",
-      "mailing_address": "4724 KEMPSTON DR, ORLANDO, FLORIDA 32812",
-      "owner_name": "LOPEZ JOHN",
-      "assessed_value": "$69,049",
+      "property_address": "2911 E ROBINSON ST, Orlando, FL 32803",
+      "mailing_address": "400 S ORANGE AVE LBBY, ORLANDO, FLORIDA 32801",
+      "owner_name": "CITY OF ORLANDO",
+      "assessed_value": "$2,301,116",
       "needs_enrichment": true,
       "scraped_at": "2026-04-15T01:14:06.057300Z",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(LOPEZ) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(CITY) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=CITY"
     },
     {
@@ -53279,13 +53279,13 @@
       "distress_flags": [
         "judgment"
       ],
-      "property_address": "1808 KNAVE DR, Orlando, FL 32810",
-      "mailing_address": "1808 KNAVE DR, ORLANDO, FLORIDA 32810",
-      "owner_name": "GRANT DERRICK L",
-      "assessed_value": "$172,128",
+      "property_address": "115 WEKIVA POINTE CIR, Apopka, FL 32712",
+      "mailing_address": "115 WEKIVA POINTE CIR, APOPKA, FLORIDA 32712",
+      "owner_name": "TAYLOR JEFFERY J",
+      "assessed_value": "$209,121",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(GRANT) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(TAYLOR) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=GRANT",
       "needs_enrichment": true,
       "scraped_at": "2026-04-16T16:57:26.327175Z"
@@ -53939,13 +53939,13 @@
       "distress_flags": [
         "judgment"
       ],
-      "property_address": "1659 SHAWNEE TRL, Maitland, FL 32751",
-      "mailing_address": "1659 SHAWNEE TRL, MAITLAND, FLORIDA 32751",
-      "owner_name": "GREEN SARAH C",
-      "assessed_value": "$166,515",
+      "property_address": "1617 W CENTRAL BLVD, Orlando, FL 32805",
+      "mailing_address": "390 N BUMBY AVE, ORLANDO, FLORIDA 32803",
+      "owner_name": "HOUSING AUTHORITY OF CITY OF O",
+      "assessed_value": "$2,509,433",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(GREEN) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(HOUSING) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=GREEN",
       "needs_enrichment": true,
       "scraped_at": "2026-04-16T16:57:26.327388Z"
@@ -57569,13 +57569,13 @@
       "distress_flags": [
         "judgment"
       ],
-      "property_address": "6005 SILK OAK DR, Orlando, FL 32819",
-      "mailing_address": "6005 SILK OAK DR, ORLANDO, FLORIDA 32819",
-      "owner_name": "HENRY ANNE ELIZABETH",
-      "assessed_value": "$427,560",
+      "property_address": "2523 SAINT IGNATIUS CT, Orlando, FL 32835",
+      "mailing_address": "2523 SAINT IGNATIUS CT, ORLANDO, FLORIDA 32835",
+      "owner_name": "WYNN THOMAS E",
+      "assessed_value": "$372,017",
       "match_confidence": "NONE",
       "match_score": 25,
-      "match_reason": "score=25 | type+40 | surname+20(HENRY) | no_anchor-15 | ambiguous-20",
+      "match_reason": "score=25 | type+40 | surname+20(WYNN) | no_anchor-15 | ambiguous-20",
       "county_search_url": "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=owner&SearchValue=HENRY",
       "needs_enrichment": true,
       "scraped_at": "2026-04-17T15:41:43.234260Z"
