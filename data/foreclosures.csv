@@ -1,1 +1,1 @@
-status,days_until_auction,auction_date,address,opening_bid,case_number,parcel_id,detail_url,source,scraped_at
+status,days_until_auction,auction_date,auction_time,address,owner_name,mailing_address,homestead,absentee_owner,final_judgment,assessed_value,case_number,parcel_id,legal_description,ocpa_url,auction_url,matched_lead,scraped_at
