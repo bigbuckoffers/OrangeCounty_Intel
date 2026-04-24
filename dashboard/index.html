@@ -14,19 +14,18 @@
   header h1 span{color:var(--accent)}
   header .meta{font-size:11px;color:var(--muted);margin-left:auto;text-align:right;line-height:1.8}
   .stats{display:flex;gap:16px;padding:28px 48px 0;flex-wrap:wrap}
-  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 28px;min-width:140px;position:relative;overflow:hidden}
+  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 28px;min-width:120px;position:relative;overflow:hidden}
   .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
   .stat-card.red::before{background:var(--accent)}
   .stat-card.gold::before{background:var(--accent2)}
   .stat-card.green::before{background:#38a169}
   .stat-card.blue::before{background:#3182ce}
-  .stat-card.purple::before{background:#805ad5}
+  .stat-card.purple::before{background:#6b46c1}
   .stat-card .num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;line-height:1;color:#fff}
   .stat-card .label{font-size:10px;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:1px}
   .toolbar{padding:20px 48px 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .toolbar input{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:13px;padding:10px 16px;width:260px;outline:none}
   .toolbar input:focus{border-color:var(--accent)}
-  .toolbar label{font-size:12px;color:var(--muted)}
   .filter-group{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
   .filter-btn{background:var(--card);border:1px solid var(--border);border-radius:5px;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:7px 13px;cursor:pointer;letter-spacing:.5px;transition:all .15s}
   .filter-btn:hover{border-color:var(--text);color:var(--text)}
@@ -44,6 +43,7 @@
   thead th:hover{color:var(--text)}
   thead th.sorted{color:var(--accent)}
   .lead-row{border-bottom:1px solid var(--border);animation:fadeUp .4s ease both;animation-delay:calc(var(--row-i)*15ms)}
+  .stacked-row{border-left:3px solid #6b46c1}
   @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
   .lead-row:last-child{border-bottom:none}
   .lead-row:hover td{background:#1a1f2e}
@@ -73,23 +73,24 @@
 </header>
 
 <div class="stats">
-  <div class="stat-card red">  <div class="num" id="totalLeads">-</div><div class="label">Total Leads</div></div>
-  <div class="stat-card gold"> <div class="num" id="hotLeads">-</div> <div class="label">Lis Pendens</div></div>
-  <div class="stat-card green"><div class="num" id="highCount">-</div> <div class="label">HIGH Match</div></div>
-  <div class="stat-card blue"> <div class="num" id="medCount">-</div>  <div class="label">MEDIUM Match</div></div>
-  <div class="stat-card red">  <div class="num" id="noneCount">-</div> <div class="label">No Match</div></div>
-  <div class="stat-card green"><div class="num" id="dateRange">-</div> <div class="label">Date Range</div></div>
+  <div class="stat-card red">   <div class="num" id="totalLeads">-</div> <div class="label">Total Leads</div></div>
+  <div class="stat-card gold">  <div class="num" id="hotLeads">-</div>   <div class="label">Lis Pendens</div></div>
+  <div class="stat-card purple"><div class="num" id="stackedCount">-</div><div class="label">Stacked</div></div>
+  <div class="stat-card green"> <div class="num" id="highCount">-</div>   <div class="label">HIGH Match</div></div>
+  <div class="stat-card blue">  <div class="num" id="medCount">-</div>    <div class="label">MEDIUM Match</div></div>
+  <div class="stat-card red">   <div class="num" id="noneCount">-</div>   <div class="label">No Match</div></div>
+  <div class="stat-card green"> <div class="num" id="dateRange">-</div>   <div class="label">Date Range</div></div>
 </div>
 
 <div class="toolbar">
   <input type="text" id="searchBox" placeholder="Search name, address, legal ..." oninput="applyFilters()">
   <div class="filter-group">
     <label>Match:</label>
-    <button class="filter-btn f-all active"    onclick="setConf('ALL')">All</button>
-    <button class="filter-btn f-high"   onclick="setConf('HIGH')">HIGH</button>
-    <button class="filter-btn f-medium" onclick="setConf('MEDIUM')">MEDIUM</button>
-    <button class="filter-btn f-low"    onclick="setConf('LOW')">LOW</button>
-    <button class="filter-btn f-none"   onclick="setConf('NONE')">NONE</button>
+    <button class="filter-btn f-all active"  onclick="setConf('ALL')">All</button>
+    <button class="filter-btn f-high"        onclick="setConf('HIGH')">HIGH</button>
+    <button class="filter-btn f-medium"      onclick="setConf('MEDIUM')">MEDIUM</button>
+    <button class="filter-btn f-low"         onclick="setConf('LOW')">LOW</button>
+    <button class="filter-btn f-none"        onclick="setConf('NONE')">NONE</button>
   </div>
   <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
 </div>
@@ -124,26 +125,40 @@ var JSON_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel
 var allLeads=[];
 var activeConf='ALL';
 
-function scoreColor(s){return s>=25?'#e53e3e':s>=15?'#d69e2e':'#38a169'}
+function scoreColor(s){
+  if(s>=70) return '#c53030';
+  if(s>=40) return '#e53e3e';
+  if(s>=25) return '#d69e2e';
+  return '#38a169';
+}
 
 function badge(flag){
   var m={
     lis_pendens:['LIS PENDENS','#e53e3e'],
-    tax_delinquency:['TAX DEED','#e53e3e'],
+    tax_deed:['TAX DEED','#c53030'],
+    lien:['LIEN','#3182ce'],
     multiple_liens:['LIEN','#3182ce'],
     judgment:['JUDGMENT','#d69e2e'],
     probate:['PROBATE','#805ad5'],
-    divorce_bankruptcy:['DIVORCE','#319795']
+    divorce:['DIVORCE','#319795'],
+    divorce_bankruptcy:['DIVORCE','#319795'],
+    death_certificate:['DEATH CERT','#1a202c'],
+    notice_of_commencement:['NOC','#718096'],
   };
   var lb=m[flag]||[flag.toUpperCase(),'#718096'];
   return '<span style="background:'+lb[1]+';color:#fff;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:700;margin-right:3px">'+lb[0]+'</span>';
+}
+
+function stackedBadge(lead){
+  if(!lead.stacked) return '';
+  return '<span style="background:#6b46c1;color:#fff;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;margin-right:3px">🔥 '+(lead.motivation_count||2)+'x STACKED</span>';
 }
 
 function trunc(s,n){return s&&s.length>n?s.slice(0,n)+'...':s||''}
 
 function addrCell(addr,fallbackUrl){
   if(addr&&addr.trim()){return '<span>'+trunc(addr,55)+'</span>';}
-  if(fallbackUrl){return '<span class="missing">—</span><a class="lookup-link" href="'+fallbackUrl+'" target="_blank" rel="noopener">🔍 lookup on county site</a>';}
+  if(fallbackUrl){return '<span class="missing">—</span><a class="lookup-link" href="'+fallbackUrl+'" target="_blank" rel="noopener">🔍 lookup</a>';}
   return '<span class="missing">—</span>';
 }
 
@@ -163,6 +178,7 @@ function loadLeads(){
     document.getElementById('highCount').textContent=allLeads.filter(function(l){return l.match_confidence==='HIGH'}).length;
     document.getElementById('medCount').textContent=allLeads.filter(function(l){return l.match_confidence==='MEDIUM'}).length;
     document.getElementById('noneCount').textContent=allLeads.filter(function(l){return l.match_confidence==='NONE'}).length;
+    document.getElementById('stackedCount').textContent=allLeads.filter(function(l){return l.stacked}).length;
     document.getElementById('meta').innerHTML='Generated: '+(data.generated_at||'').slice(0,16).replace('T',' ')+' UTC<br>Source: Orange County Comptroller<br>Scored by distress signal analysis';
     if(allLeads.length>0){
       var dates=allLeads.map(function(l){return l.file_date}).filter(Boolean).sort();
@@ -198,9 +214,11 @@ function renderTable(leads){
   if(!leads.length){tbody.innerHTML='<tr><td colspan="12" class="loading">No records found</td></tr>';return;}
   tbody.innerHTML=leads.map(function(l,i){
     var searchUrl=l.county_search_url||'';
-    return '<tr class="lead-row" style="--row-i:'+(i+1)+'">'
-      +'<td class="score-cell"><div class="score-ring" style="--c:'+scoreColor(l.seller_score)+'">'+l.seller_score+'</div></td>'
-      +'<td><strong>'+(l.document_number||'-')+'</strong><small class="muted">'+(l.document_type||'')+'</small></td>'
+    var flags=(l.distress_flags||[]);
+    if(typeof flags==='string') flags=flags.split(',').map(function(f){return f.trim();});
+    return '<tr class="lead-row'+(l.stacked?' stacked-row':'')+'" style="--row-i:'+(i+1)+'">'
+      +'<td class="score-cell"><div class="score-ring" style="--c:'+scoreColor(l.seller_score)+'">'+l.seller_score+'</div>'+(l.stacked?'<div style="font-size:9px;color:#9f7aea;margin-top:2px">'+(l.motivation_count||2)+'x</div>':'')+'</td>'
+      +'<td><strong>'+(l.document_number||'-')+'</strong><small class="muted">'+(l.document_type||'')+'</small>'+(l.stacked?'<br>'+stackedBadge(l):'')+'</td>'
       +'<td>'+(l.file_date||'-')+'</td>'
       +'<td>'+trunc(l.grantor,45)+'</td>'
       +'<td>'+trunc(l.grantee,50)+'</td>'
@@ -210,7 +228,7 @@ function renderTable(leads){
       +'<td>'+(l.assessed_value||'<span class="missing">—</span>')+'</td>'
       +'<td>'+(l.amount_owed||'<span class="missing">—</span>')+'</td>'
       +'<td>'+confBadge(l.match_confidence,l.match_reason)+'</td>'
-      +'<td>'+((l.distress_flags||[]).map(badge).join('')||'-')+'</td>'
+      +'<td>'+flags.map(badge).join('')+'</td>'
       +'</tr>';
   }).join('');
 }
@@ -223,14 +241,28 @@ function exportCSV(){
     if(!q)return true;
     return((l.document_number||'')+(l.grantor||'')+(l.grantee||'')+(l.legal_description||'')+(l.document_type||'')+(l.property_address||'')+(l.mailing_address||'')+(l.owner_name||'')).toLowerCase().includes(q);
   });
-  var headers=['Score','Document #','File Date','Grantor','Grantee','Property Address','Mailing Address','Owner Name','Legal Description','Assessed Value','Amount Owed','Document Type','Distress Flags','Match Confidence','Match Reason','County Search URL'];
+  var headers=['Score','Motivation Count','Stacked','Document #','File Date','Document Type','Stacked Types','Grantor','Grantee','Property Address','Mailing Address','Owner Name','Legal Description','Assessed Value','Amount Owed','Distress Flags','Match Confidence','Match Reason','County Search URL'];
   var rows=leads.map(function(l){
-    return[l.seller_score,l.document_number,l.file_date,l.grantor,l.grantee,l.property_address,l.mailing_address,l.owner_name,l.legal_description,l.assessed_value,l.amount_owed,l.document_type,(l.distress_flags||[]).join(', '),l.match_confidence,l.match_reason,l.county_search_url].map(function(v){return'"'+(String(v||'').replace(/"/g,'""'))+'"';}).join(',');
+    var flags=(l.distress_flags||[]);
+    if(typeof flags==='string') flags=flags.split(',').map(function(f){return f.trim();});
+    var stypes=(l.stacked_types||[]);
+    if(typeof stypes==='string') stypes=[stypes];
+    return[
+      l.seller_score,l.motivation_count||1,l.stacked?'YES':'NO',
+      l.document_number,l.file_date,l.document_type,stypes.join(' + '),
+      l.grantor,l.grantee,l.property_address,l.mailing_address,
+      l.owner_name,l.legal_description,l.assessed_value,l.amount_owed,
+      flags.join(', '),l.match_confidence,l.match_reason,l.county_search_url
+    ].map(function(v){return'"'+(String(v||'').replace(/"/g,'""'))+'"';}).join(',');
   });
   var csv=[headers.join(',')].concat(rows).join('\n');
   var blob=new Blob([csv],{type:'text/csv'});
   var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');a.href=url;a.download='oc_motivated_sellers_'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(url);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='oc_motivated_sellers_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 var sortDir={};
