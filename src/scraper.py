@@ -1,33 +1,17 @@
 """
 scraper.py — Orange County FL Automated Motivated Seller Scraper
 
-Matching architecture (2-stage retrieval + weighted scoring):
+STACKING SYSTEM:
+  After scraping all doc types, leads are grouped by normalized owner name.
+  All distress signals for the same owner are combined into one stacked lead.
+  Scores are summed (capped at 100). Multiple doc types show as stacked_flags.
 
-Stage 1 — Candidate generation using inverted indexes (no O(n^2)):
-  lot_index / unit_index / block_index / subdiv token index / surname index
+  Score thresholds:
+    70+  = highly motivated (multiple signals)
+    40-69 = moderately motivated
+    <40  = single signal only
 
-Stage 2 — Weighted scoring per candidate:
-  +40  legal type match
-  +30  exact lot match
-  +30  exact unit match
-  +25  exact block match
-  +35  strong subdivision token containment (>=80%)
-  +20  moderate subdivision token containment (>=50%)
-  +10  weak subdivision token containment (>=25%)
-  +20  fuzzy subdivision similarity >= 90
-  +10  fuzzy subdivision similarity 80-89
-  +20  owner surname overlap
-  +10  co-owner overlap (2+ surnames match)
-  +10  exact normalized legal match
-  -35  lead=subdivision but NAL=metes_bounds
-  -20  multiple competing candidates with close scores (ambiguous)
-  -15  no parcel anchor (no lot, no unit)
-
-Labels:
-  HIGH   = score >= 85 AND parcel anchor AND strong subdiv (80%+ token overlap or exact legal)
-  MEDIUM = score 65-84
-  LOW    = score 40-64
-  NONE   = score < 40
+MATCHING: 2-stage retrieval + weighted scoring (unchanged)
 """
 import json, logging, os, csv, io, requests, time, re, urllib.parse
 from collections import defaultdict
@@ -54,12 +38,18 @@ START_DATE = END_DATE - timedelta(days=7)
 DATE_START = START_DATE.strftime("%m/%d/%Y")
 DATE_END   = END_DATE.strftime("%m/%d/%Y")
 
+# ---------------------------------------------------------------------------
+# ALL doc types we scrape — expanded for stacking
+# ---------------------------------------------------------------------------
 TARGET_DOC_TYPES = [
     ("Lis Pendens",             "LP",   30),
     ("Lien",                    "LN",   15),
     ("Judgment",                "J",    15),
     ("Probate Court Paper",     "PRCP", 20),
     ("Domestic Relations Deed", "DRD",  10),
+    ("Tax Deed",                "TD",   35),
+    ("Death Certificate",       "DC",   25),
+    ("Notice of Commencement",  "NOC",  10),
 ]
 
 DOC_TYPE_PRIMARY_NAME = {
@@ -73,6 +63,12 @@ DOC_TYPE_PRIMARY_NAME = {
     "prcp":        "both",
     "domestic":    "both",
     "drd":         "both",
+    "tax deed":    "grantee",
+    "td":          "grantee",
+    "death":       "grantee",
+    "dc":          "grantee",
+    "notice":      "grantor",
+    "noc":         "grantor",
 }
 
 HEADERS = {
@@ -154,6 +150,10 @@ _SPELLED_NUMBERS = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Lead dataclass — now includes stacking fields
+# ---------------------------------------------------------------------------
+
 @dataclass
 class Lead:
     document_number:   str  = ""
@@ -164,6 +164,12 @@ class Lead:
     document_type:     str  = ""
     seller_score:      int  = 0
     distress_flags:    list = field(default_factory=list)
+    # Stacking fields
+    stacked:           bool = False
+    stacked_docs:      list = field(default_factory=list)  # all doc numbers stacked
+    stacked_types:     list = field(default_factory=list)  # all doc types stacked
+    motivation_count:  int  = 1                            # number of signals
+    # Match fields
     property_address:  str  = ""
     mailing_address:   str  = ""
     owner_name:        str  = ""
@@ -176,17 +182,142 @@ class Lead:
     scraped_at:        str  = field(default_factory=lambda: datetime.utcnow().isoformat()+"Z")
 
 
+# ---------------------------------------------------------------------------
+# Distress scoring
+# ---------------------------------------------------------------------------
+
 def score_lead(doc_type, base_score):
     dt = doc_type.lower()
     flags, score = [], base_score
     if "lis pendens" in dt: flags.append("lis_pendens")
-    if "tax deed"    in dt: flags.append("tax_delinquency"); score = max(score, 30)
-    if "lien"        in dt: flags.append("multiple_liens")
+    if "tax deed"    in dt: flags.append("tax_deed"); score = max(score, 35)
+    if "lien"        in dt: flags.append("lien")
     if "judgment"    in dt: flags.append("judgment")
     if "probate"     in dt: flags.append("probate")
-    if "domestic"    in dt: flags.append("divorce_bankruptcy")
+    if "domestic"    in dt: flags.append("divorce")
+    if "death"       in dt: flags.append("death_certificate")
+    if "notice of"   in dt: flags.append("notice_of_commencement")
     return min(score, 100), flags
 
+
+# ---------------------------------------------------------------------------
+# Name normalization for stacking
+# ---------------------------------------------------------------------------
+
+def normalize_owner_for_stacking(raw):
+    """
+    Produce a stable key for grouping leads by owner.
+    Strips noise, uppercases, sorts tokens so
+    'SMITH JOHN' and 'JOHN SMITH' produce the same key.
+    """
+    if not raw:
+        return ""
+    text = raw.upper().strip()
+    text = _LENDER_NOISE.sub('', text)
+    text = re.sub(r'[^A-Z\s]', ' ', text)
+    text = ' '.join(text.split())
+    # Sort tokens for order-independence
+    tokens = sorted(text.split())
+    # Keep only tokens >= 3 chars to drop noise
+    tokens = [t for t in tokens if len(t) >= 3]
+    return ' '.join(tokens)
+
+
+# ===========================================================================
+# STACKING ENGINE
+# ===========================================================================
+
+def stack_leads(all_leads):
+    """
+    Group leads by normalized owner name.
+    For each group, create one primary lead with:
+      - highest-scoring doc as the base
+      - all scores summed (capped at 100)
+      - all distress flags combined
+      - all doc numbers and types listed
+      - motivation_count = number of signals
+    Single-signal leads pass through unchanged.
+    """
+    # Group by normalized grantee name (primary owner field)
+    groups = defaultdict(list)
+    ungrouped = []
+
+    for lead in all_leads:
+        # Use grantee as primary grouping key (the property owner)
+        key = normalize_owner_for_stacking(lead.grantee)
+        if key and len(key) >= 6:
+            groups[key].append(lead)
+        else:
+            ungrouped.append(lead)
+
+    stacked_leads = []
+
+    for key, group in groups.items():
+        if len(group) == 1:
+            # Single signal — pass through, mark as not stacked
+            stacked_leads.append(group[0])
+            continue
+
+        # Multiple signals for same owner — stack them
+        # Sort by score descending, use highest as primary
+        group.sort(key=lambda l: l.seller_score, reverse=True)
+        primary = group[0]
+
+        # Sum all scores, cap at 100
+        total_score = min(sum(l.seller_score for l in group), 100)
+
+        # Combine all distress flags (deduplicated)
+        all_flags = []
+        seen_flags = set()
+        for lead in group:
+            for flag in lead.distress_flags:
+                if flag not in seen_flags:
+                    all_flags.append(flag)
+                    seen_flags.add(flag)
+
+        # Collect all doc numbers and types
+        all_doc_nums  = [l.document_number for l in group]
+        all_doc_types = list(dict.fromkeys([l.document_type for l in group]))
+
+        # Use most recent legal description (first by file date)
+        group_by_date = sorted(group, key=lambda l: l.file_date, reverse=True)
+        best_legal = next((l.legal_description for l in group_by_date if l.legal_description), primary.legal_description)
+        best_grantee = primary.grantee
+        best_grantor = primary.grantor
+
+        primary.seller_score     = total_score
+        primary.distress_flags   = all_flags
+        primary.stacked          = True
+        primary.stacked_docs     = all_doc_nums
+        primary.stacked_types    = all_doc_types
+        primary.motivation_count = len(group)
+        primary.legal_description = best_legal
+        primary.grantee          = best_grantee
+        primary.grantor          = best_grantor
+        primary.document_type    = " + ".join(all_doc_types)
+
+        stacked_leads.append(primary)
+        log.info(
+            "Stacked %d signals for '%s' -> score %d | types: %s",
+            len(group), key[:40], total_score, ", ".join(all_doc_types)
+        )
+
+    stacked_leads.extend(ungrouped)
+
+    # Sort by score
+    stacked_leads.sort(key=lambda l: l.seller_score, reverse=True)
+
+    stacked_count = sum(1 for l in stacked_leads if l.stacked)
+    log.info(
+        "Stacking complete: %d total leads | %d stacked owners | %d single-signal",
+        len(stacked_leads), stacked_count, len(stacked_leads) - stacked_count
+    )
+    return stacked_leads
+
+
+# ===========================================================================
+# PREPROCESSING
+# ===========================================================================
 
 def normalize_legal(raw):
     if not raw:
@@ -287,6 +418,10 @@ def extract_surnames(owners):
             surnames.add(parts[0])
     return surnames
 
+
+# ===========================================================================
+# NAL INDEXING
+# ===========================================================================
 
 class NALIndex:
     def __init__(self):
@@ -405,6 +540,10 @@ def load_nal_index(path):
     return idx
 
 
+# ===========================================================================
+# CANDIDATE GENERATION
+# ===========================================================================
+
 def generate_candidates(lead_parsed, lead_type, lead_surnames, nal_idx, max_candidates=100):
     candidates = set()
 
@@ -455,6 +594,10 @@ def generate_candidates(lead_parsed, lead_type, lead_surnames, nal_idx, max_cand
 
     return candidates
 
+
+# ===========================================================================
+# WEIGHTED SCORING
+# ===========================================================================
 
 def score_candidate(lead_parsed, lead_type, lead_norm_legal, lead_surnames, rec):
     score = 0
@@ -533,17 +676,7 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal, lead_surnames, rec)
 
 
 def label_match(score, parsed, notes):
-    """
-    HIGH requires ALL THREE:
-      1. score >= 85
-      2. exact parcel anchor (lot+ or unit+ in notes)
-      3. STRONG subdivision confirmation only:
-         - subdiv_tok+35 = 80%+ token overlap, OR
-         - exact_legal+10 = normalized strings match exactly
-         Weak/moderate subdiv overlap (subdiv_tok+20, subdiv_tok+10, fuzzy)
-         is NOT sufficient for HIGH — prevents lot-only cross-subdivision false matches.
-    """
-    has_anchor       = "lot+" in notes or "unit+" in notes
+    has_anchor        = "lot+" in notes or "unit+" in notes
     has_strong_subdiv = "subdiv_tok+35" in notes or "exact_legal+10" in notes
     if score >= 85 and has_anchor and has_strong_subdiv:
         return "HIGH"
@@ -553,6 +686,10 @@ def label_match(score, parsed, notes):
         return "LOW"
     return "NONE"
 
+
+# ===========================================================================
+# MAIN MATCH FUNCTION
+# ===========================================================================
 
 def match_lead(lead, nal_idx):
     norm_legal = normalize_legal(lead.legal_description or "")
@@ -638,6 +775,10 @@ def build_county_search_url(lead):
     return OC_APPRAISER_SEARCH
 
 
+# ===========================================================================
+# ENRICHMENT
+# ===========================================================================
+
 def enrich_leads(leads, nal_idx):
     counts = {"HIGH": 0, "MEDIUM": 0, "LOW": 0, "NONE": 0}
     for lead in leads:
@@ -658,6 +799,10 @@ def enrich_leads(leads, nal_idx):
     )
     return leads
 
+
+# ===========================================================================
+# COMPTROLLER FETCH
+# ===========================================================================
 
 def make_session():
     session = requests.Session()
@@ -760,10 +905,15 @@ def parse_csv_text(csv_text, doc_type, base_score):
     return leads
 
 
+# ===========================================================================
+# PERSISTENCE
+# ===========================================================================
+
 def save_csv(leads, path="data/output.csv"):
     os.makedirs("data", exist_ok=True)
     fields = [
-        "seller_score", "document_number", "file_date", "document_type",
+        "seller_score", "motivation_count", "document_number", "file_date",
+        "document_type", "stacked", "stacked_types",
         "grantor", "grantee", "legal_description",
         "property_address", "mailing_address", "owner_name", "assessed_value",
         "match_confidence", "match_score", "match_reason", "county_search_url",
@@ -776,6 +926,8 @@ def save_csv(leads, path="data/output.csv"):
             row = asdict(lead) if isinstance(lead, Lead) else dict(lead)
             if isinstance(row.get("distress_flags"), list):
                 row["distress_flags"] = ", ".join(row["distress_flags"])
+            if isinstance(row.get("stacked_types"), list):
+                row["stacked_types"] = " + ".join(row["stacked_types"])
             writer.writerow(row)
     log.info("CSV saved: %s", path)
 
@@ -804,6 +956,10 @@ def save_json(leads):
     log.info("Saved %d records to %s", len(leads), OUTPUT_PATH)
 
 
+# ===========================================================================
+# MAIN
+# ===========================================================================
+
 def main():
     log.info("=== OC Motivated Seller Scraper ===")
     log.info("Date range: %s to %s", DATE_START, DATE_END)
@@ -814,6 +970,7 @@ def main():
     else:
         log.warning("NAL unavailable - all leads will be NONE confidence")
 
+    # Scrape all doc types
     new_leads = []
     for doc_type, doc_code, base_score in TARGET_DOC_TYPES:
         session = make_session()
@@ -829,22 +986,39 @@ def main():
             log.error("Error on %s: %s", doc_type, e)
         time.sleep(3)
 
+    # Stack signals for same owner
+    if new_leads:
+        log.info("Stacking %d raw leads...", len(new_leads))
+        new_leads = stack_leads(new_leads)
+        log.info("After stacking: %d unique owner leads", len(new_leads))
+
+    # Enrich with NAL addresses
     if new_leads and nal_idx:
         new_leads = enrich_leads(new_leads, nal_idx)
 
+    # Merge with existing, deduplicate by document number
     existing = load_existing(OUTPUT_PATH)
-    existing_nums = {
-        l["document_number"] if isinstance(l, dict) else l.document_number
-        for l in existing
-    }
+    existing_nums = set()
+    for l in existing:
+        doc = l["document_number"] if isinstance(l, dict) else l.document_number
+        existing_nums.add(doc)
+        # Also add stacked doc numbers
+        stacked = l.get("stacked_docs", []) if isinstance(l, dict) else getattr(l, "stacked_docs", [])
+        for d in stacked:
+            existing_nums.add(d)
+
     merged = list(existing)
     seen   = set(existing_nums)
     added  = 0
     for lead in new_leads:
         doc_num = lead.document_number
-        if doc_num not in seen:
+        # Check if this lead or any of its stacked docs already exist
+        stacked_docs = lead.stacked_docs if hasattr(lead, 'stacked_docs') else []
+        all_nums = [doc_num] + stacked_docs
+        if not any(n in seen for n in all_nums):
             merged.append(lead)
-            seen.add(doc_num)
+            for n in all_nums:
+                seen.add(n)
             added += 1
 
     merged.sort(
