@@ -44,6 +44,11 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
 
+      - name: Scrape foreclosure auctions
+        run: python src/foreclosure.py
+        env:
+          PYTHONUNBUFFERED: "1"
+
       - name: Live lookup for NONE leads
         run: python src/lookup.py
         env:
@@ -73,7 +78,7 @@ jobs:
           git stash
           git pull --rebase origin main
           git stash pop
-          git add data/output.json data/output.csv dashboard/index.html
+          git add data/output.json data/output.csv data/foreclosures.json data/foreclosures.csv dashboard/index.html
           git diff --cached --quiet || git commit -m "chore: auto-update leads $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
         env:
@@ -95,5 +100,9 @@ jobs:
           path: |
             data/output.json
             data/output.csv
+            data/foreclosures.json
+            data/foreclosures.csv
+            dashboard/index.html
+          retention-days: 30
             dashboard/index.html
           retention-days: 30
