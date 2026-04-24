@@ -44,6 +44,11 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
 
+      - name: Live lookup for NONE leads
+        run: python src/lookup.py
+        env:
+          PYTHONUNBUFFERED: "1"
+
       - name: Validate outputs
         run: |
           python - <<'EOF'
