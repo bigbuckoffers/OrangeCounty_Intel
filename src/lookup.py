@@ -6,7 +6,7 @@ that couldn't be matched against the NAL dataset.
 Run after reenrich.py. Only processes NONE leads that have a grantee name.
 Rate-limited to avoid overloading. Saves progress incrementally.
 """
-import json, logging, os, time, re, urllib.parse
+import json, logging, os, time, re
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -34,19 +34,16 @@ def clean_name(raw):
         return ""
     text = LENDER_NOISE.sub('', raw.upper().strip())
     text = re.sub(r'[^A-Z\s,]', ' ', text)
-    # Take first two comma-separated names only
     parts = [p.strip() for p in text.split(',') if p.strip() and len(p.strip()) >= 4]
     return ', '.join(parts[:2])
 
 
 def build_prompt(lead):
-    """Build a focused prompt for Claude to find the property address."""
-    grantee = clean_name(lead.get("grantee", "") or "")
-    grantor = clean_name(lead.get("grantor", "") or "")
-    legal   = (lead.get("legal_description", "") or "").strip()
+    grantee  = clean_name(lead.get("grantee", "") or "")
+    grantor  = clean_name(lead.get("grantor", "") or "")
+    legal    = (lead.get("legal_description", "") or "").strip()
     doc_type = (lead.get("document_type", "") or "").strip()
 
-    # Pick the most useful name
     owner_name = grantee or grantor
     if not owner_name:
         return None
@@ -80,7 +77,11 @@ def call_claude_with_search(prompt):
         import requests as req
         response = req.post(
             "https://api.anthropic.com/v1/messages",
-            headers={"Content-Type": "application/json"},
+            headers={
+                "Content-Type": "application/json",
+                "x-api-key": os.environ.get("ANTHROPIC_API_KEY", ""),
+                "anthropic-version": "2023-06-01"
+            },
             json={
                 "model": "claude-sonnet-4-20250514",
                 "max_tokens": 200,
@@ -94,7 +95,6 @@ def call_claude_with_search(prompt):
             return None
 
         data = response.json()
-        # Extract text from content blocks
         text = ""
         for block in data.get("content", []):
             if block.get("type") == "text":
@@ -107,7 +107,6 @@ def call_claude_with_search(prompt):
 
 
 def parse_response(text):
-    """Parse Claude's structured response."""
     if not text:
         return None
 
@@ -127,11 +126,9 @@ def parse_response(text):
     if not address or address.upper() in ("NOT FOUND", "UNKNOWN", ""):
         return None
 
-    # Basic sanity check — must look like a Florida address
     if "FL" not in address.upper() and "FLORIDA" not in address.upper():
-        # Add FL if it looks like a real address
         if re.search(r'\d+.*\w+.*\d{5}', address):
-            pass  # has zip, probably fine
+            pass
         else:
             return None
 
@@ -159,19 +156,17 @@ def main():
     leads = data.get("leads", [])
     log.info("Loaded %d leads", len(leads))
 
-    # Find NONE leads that have a usable grantee name
+    # Find NONE leads with a usable name
     none_leads = []
     for i, lead in enumerate(leads):
         if lead.get("match_confidence") != "NONE":
             continue
         grantee = lead.get("grantee", "") or ""
         grantor = lead.get("grantor", "") or ""
-        # Skip if only lender noise remains after cleaning
-        clean_g = clean_name(grantee)
+        clean_g  = clean_name(grantee)
         clean_gr = clean_name(grantor)
         if not clean_g and not clean_gr:
             continue
-        # Skip blank legal + blank name combos
         legal = (lead.get("legal_description", "") or "").strip()
         if not clean_g and not legal:
             continue
@@ -181,7 +176,7 @@ def main():
     to_process = none_leads[:MAX_LOOKUPS]
     log.info("Processing %d leads this run (max %d)", len(to_process), MAX_LOOKUPS)
 
-    found = 0
+    found  = 0
     failed = 0
 
     for idx, (lead_idx, lead) in enumerate(to_process):
@@ -196,14 +191,14 @@ def main():
         parsed = parse_response(response_text)
 
         if parsed:
-            leads[lead_idx]["property_address"]  = parsed["property_address"]
-            leads[lead_idx]["mailing_address"]    = parsed.get("mailing_address", "")
-            leads[lead_idx]["owner_name"]         = parsed.get("owner_name", "")
-            leads[lead_idx]["assessed_value"]     = parsed.get("assessed_value", "")
-            leads[lead_idx]["match_confidence"]   = parsed["match_confidence"]
-            leads[lead_idx]["match_score"]        = parsed["match_score"]
-            leads[lead_idx]["match_reason"]       = parsed["match_reason"]
-            leads[lead_idx]["needs_enrichment"]   = True  # still flag for review
+            leads[lead_idx]["property_address"] = parsed["property_address"]
+            leads[lead_idx]["mailing_address"]   = parsed.get("mailing_address", "")
+            leads[lead_idx]["owner_name"]        = parsed.get("owner_name", "")
+            leads[lead_idx]["assessed_value"]    = parsed.get("assessed_value", "")
+            leads[lead_idx]["match_confidence"]  = parsed["match_confidence"]
+            leads[lead_idx]["match_score"]       = parsed["match_score"]
+            leads[lead_idx]["match_reason"]      = parsed["match_reason"]
+            leads[lead_idx]["needs_enrichment"]  = True
             found += 1
             log.info("  Found: %s", parsed["property_address"])
         else:
@@ -227,8 +222,12 @@ def main():
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
 
-    log.info("Done: %d found | %d not found | %d processed", found, failed, len(to_process))
+    log.info("Done: %d found | %d not found | %d processed",
+             found, failed, len(to_process))
 
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
