@@ -6,12 +6,11 @@ STACKING SYSTEM:
   All distress signals for the same owner are combined into one stacked lead.
   Scores are summed (capped at 100). Multiple doc types show as stacked_flags.
 
-  Score thresholds:
-    70+  = highly motivated (multiple signals)
-    40-69 = moderately motivated
-    <40  = single signal only
-
-MATCHING: 2-stage retrieval + weighted scoring (unchanged)
+MATCHING: 2-stage retrieval + weighted scoring
+  HIGH   = score >= 85 AND parcel anchor AND strong subdiv (80%+ token overlap)
+  MEDIUM = score 65-84
+  LOW    = score 30-64
+  NONE   = score < 30
 """
 import json, logging, os, csv, io, requests, time, re, urllib.parse
 from collections import defaultdict
@@ -38,9 +37,6 @@ START_DATE = END_DATE - timedelta(days=7)
 DATE_START = START_DATE.strftime("%m/%d/%Y")
 DATE_END   = END_DATE.strftime("%m/%d/%Y")
 
-# ---------------------------------------------------------------------------
-# ALL doc types we scrape — expanded for stacking
-# ---------------------------------------------------------------------------
 TARGET_DOC_TYPES = [
     ("Lis Pendens",             "LP",   30),
     ("Lien",                    "LN",   15),
@@ -150,10 +146,6 @@ _SPELLED_NUMBERS = {
 }
 
 
-# ---------------------------------------------------------------------------
-# Lead dataclass — now includes stacking fields
-# ---------------------------------------------------------------------------
-
 @dataclass
 class Lead:
     document_number:   str  = ""
@@ -164,12 +156,10 @@ class Lead:
     document_type:     str  = ""
     seller_score:      int  = 0
     distress_flags:    list = field(default_factory=list)
-    # Stacking fields
     stacked:           bool = False
-    stacked_docs:      list = field(default_factory=list)  # all doc numbers stacked
-    stacked_types:     list = field(default_factory=list)  # all doc types stacked
-    motivation_count:  int  = 1                            # number of signals
-    # Match fields
+    stacked_docs:      list = field(default_factory=list)
+    stacked_types:     list = field(default_factory=list)
+    motivation_count:  int  = 1
     property_address:  str  = ""
     mailing_address:   str  = ""
     owner_name:        str  = ""
@@ -181,10 +171,6 @@ class Lead:
     needs_enrichment:  bool = False
     scraped_at:        str  = field(default_factory=lambda: datetime.utcnow().isoformat()+"Z")
 
-
-# ---------------------------------------------------------------------------
-# Distress scoring
-# ---------------------------------------------------------------------------
 
 def score_lead(doc_type, base_score):
     dt = doc_type.lower()
@@ -200,50 +186,23 @@ def score_lead(doc_type, base_score):
     return min(score, 100), flags
 
 
-# ---------------------------------------------------------------------------
-# Name normalization for stacking
-# ---------------------------------------------------------------------------
-
 def normalize_owner_for_stacking(raw):
-    """
-    Produce a stable key for grouping leads by owner.
-    Strips noise, uppercases, sorts tokens so
-    'SMITH JOHN' and 'JOHN SMITH' produce the same key.
-    """
     if not raw:
         return ""
     text = raw.upper().strip()
     text = _LENDER_NOISE.sub('', text)
     text = re.sub(r'[^A-Z\s]', ' ', text)
     text = ' '.join(text.split())
-    # Sort tokens for order-independence
     tokens = sorted(text.split())
-    # Keep only tokens >= 3 chars to drop noise
     tokens = [t for t in tokens if len(t) >= 3]
     return ' '.join(tokens)
 
 
-# ===========================================================================
-# STACKING ENGINE
-# ===========================================================================
-
 def stack_leads(all_leads):
-    """
-    Group leads by normalized owner name.
-    For each group, create one primary lead with:
-      - highest-scoring doc as the base
-      - all scores summed (capped at 100)
-      - all distress flags combined
-      - all doc numbers and types listed
-      - motivation_count = number of signals
-    Single-signal leads pass through unchanged.
-    """
-    # Group by normalized grantee name (primary owner field)
     groups = defaultdict(list)
     ungrouped = []
 
     for lead in all_leads:
-        # Use grantee as primary grouping key (the property owner)
         key = normalize_owner_for_stacking(lead.grantee)
         if key and len(key) >= 6:
             groups[key].append(lead)
@@ -254,19 +213,14 @@ def stack_leads(all_leads):
 
     for key, group in groups.items():
         if len(group) == 1:
-            # Single signal — pass through, mark as not stacked
             stacked_leads.append(group[0])
             continue
 
-        # Multiple signals for same owner — stack them
-        # Sort by score descending, use highest as primary
         group.sort(key=lambda l: l.seller_score, reverse=True)
         primary = group[0]
 
-        # Sum all scores, cap at 100
         total_score = min(sum(l.seller_score for l in group), 100)
 
-        # Combine all distress flags (deduplicated)
         all_flags = []
         seen_flags = set()
         for lead in group:
@@ -275,49 +229,33 @@ def stack_leads(all_leads):
                     all_flags.append(flag)
                     seen_flags.add(flag)
 
-        # Collect all doc numbers and types
         all_doc_nums  = [l.document_number for l in group]
         all_doc_types = list(dict.fromkeys([l.document_type for l in group]))
 
-        # Use most recent legal description (first by file date)
         group_by_date = sorted(group, key=lambda l: l.file_date, reverse=True)
         best_legal = next((l.legal_description for l in group_by_date if l.legal_description), primary.legal_description)
-        best_grantee = primary.grantee
-        best_grantor = primary.grantor
 
-        primary.seller_score     = total_score
-        primary.distress_flags   = all_flags
-        primary.stacked          = True
-        primary.stacked_docs     = all_doc_nums
-        primary.stacked_types    = all_doc_types
-        primary.motivation_count = len(group)
+        primary.seller_score      = total_score
+        primary.distress_flags    = all_flags
+        primary.stacked           = True
+        primary.stacked_docs      = all_doc_nums
+        primary.stacked_types     = all_doc_types
+        primary.motivation_count  = len(group)
         primary.legal_description = best_legal
-        primary.grantee          = best_grantee
-        primary.grantor          = best_grantor
-        primary.document_type    = " + ".join(all_doc_types)
+        primary.document_type     = " + ".join(all_doc_types)
 
         stacked_leads.append(primary)
-        log.info(
-            "Stacked %d signals for '%s' -> score %d | types: %s",
-            len(group), key[:40], total_score, ", ".join(all_doc_types)
-        )
+        log.info("Stacked %d signals for '%s' -> score %d | %s",
+                 len(group), key[:40], total_score, ", ".join(all_doc_types))
 
     stacked_leads.extend(ungrouped)
-
-    # Sort by score
     stacked_leads.sort(key=lambda l: l.seller_score, reverse=True)
 
     stacked_count = sum(1 for l in stacked_leads if l.stacked)
-    log.info(
-        "Stacking complete: %d total leads | %d stacked owners | %d single-signal",
-        len(stacked_leads), stacked_count, len(stacked_leads) - stacked_count
-    )
+    log.info("Stacking: %d total | %d stacked | %d single",
+             len(stacked_leads), stacked_count, len(stacked_leads) - stacked_count)
     return stacked_leads
 
-
-# ===========================================================================
-# PREPROCESSING
-# ===========================================================================
 
 def normalize_legal(raw):
     if not raw:
@@ -381,6 +319,8 @@ def parse_legal(norm_legal):
     subdiv = re.sub(r'\bPARCEL\s+[\w\s]+', '', subdiv)
     subdiv = re.sub(r'\bSECTION\s+\w+\s*', '', subdiv)
     subdiv = re.sub(r'\bPHASE\s+\w+\s*', '', subdiv)
+    # Strip case numbers e.g. "Case: 2026 CP 000588 O"
+    subdiv = re.sub(r'\bCASE\s*:\s*[\w\s]+', '', subdiv)
     subdiv = ' '.join(subdiv.split()).strip()
     if len(subdiv) >= 3 and not subdiv.isdigit():
         parsed["subdivision"] = subdiv
@@ -418,10 +358,6 @@ def extract_surnames(owners):
             surnames.add(parts[0])
     return surnames
 
-
-# ===========================================================================
-# NAL INDEXING
-# ===========================================================================
 
 class NALIndex:
     def __init__(self):
@@ -540,10 +476,6 @@ def load_nal_index(path):
     return idx
 
 
-# ===========================================================================
-# CANDIDATE GENERATION
-# ===========================================================================
-
 def generate_candidates(lead_parsed, lead_type, lead_surnames, nal_idx, max_candidates=100):
     candidates = set()
 
@@ -595,10 +527,6 @@ def generate_candidates(lead_parsed, lead_type, lead_surnames, nal_idx, max_cand
     return candidates
 
 
-# ===========================================================================
-# WEIGHTED SCORING
-# ===========================================================================
-
 def score_candidate(lead_parsed, lead_type, lead_norm_legal, lead_surnames, rec):
     score = 0
     notes = []
@@ -608,6 +536,7 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal, lead_surnames, rec)
     r_norm     = rec["norm_legal"]
     r_surnames = rec["surnames"]
 
+    # FIX 2: Don't penalize condo vs subdivision — NAL classifies inconsistently
     if lead_type == r_type:
         score += 40
         notes.append("type+40")
@@ -615,8 +544,9 @@ def score_candidate(lead_parsed, lead_type, lead_norm_legal, lead_surnames, rec)
         score -= 35
         notes.append("metes_mismatch-35")
     elif lead_type not in ("unknown",) and r_type not in ("unknown",) and lead_type != r_type:
-        score -= 10
-        notes.append("type_mismatch-10")
+        if not (lead_type in ("condo", "subdivision") and r_type in ("condo", "subdivision")):
+            score -= 10
+            notes.append("type_mismatch-10")
 
     if lead_parsed.get("lot") and lead_parsed["lot"] == r_parsed.get("lot"):
         score += 30
@@ -682,14 +612,11 @@ def label_match(score, parsed, notes):
         return "HIGH"
     if score >= 65:
         return "MEDIUM"
-    if score >= 40:
+    # FIX 3: Lower floor to 30
+    if score >= 30:
         return "LOW"
     return "NONE"
 
-
-# ===========================================================================
-# MAIN MATCH FUNCTION
-# ===========================================================================
 
 def match_lead(lead, nal_idx):
     norm_legal = normalize_legal(lead.legal_description or "")
@@ -719,9 +646,14 @@ def match_lead(lead, nal_idx):
     scored.sort(key=lambda x: x[0], reverse=True)
     best_score, best_notes, best_rec = scored[0]
 
+    # FIX 1: Reduce ambiguity penalty when subdivision strongly confirmed
     if len(scored) >= 2 and (best_score - scored[1][0]) < 15:
-        best_score -= 20
-        best_notes += " | ambiguous-20"
+        if "subdiv_tok+35" in best_notes:
+            best_score -= 10
+            best_notes += " | ambiguous-10"
+        else:
+            best_score -= 20
+            best_notes += " | ambiguous-20"
 
     label = label_match(best_score, parsed, best_notes)
 
@@ -775,10 +707,6 @@ def build_county_search_url(lead):
     return OC_APPRAISER_SEARCH
 
 
-# ===========================================================================
-# ENRICHMENT
-# ===========================================================================
-
 def enrich_leads(leads, nal_idx):
     counts = {"HIGH": 0, "MEDIUM": 0, "LOW": 0, "NONE": 0}
     for lead in leads:
@@ -799,10 +727,6 @@ def enrich_leads(leads, nal_idx):
     )
     return leads
 
-
-# ===========================================================================
-# COMPTROLLER FETCH
-# ===========================================================================
 
 def make_session():
     session = requests.Session()
@@ -905,10 +829,6 @@ def parse_csv_text(csv_text, doc_type, base_score):
     return leads
 
 
-# ===========================================================================
-# PERSISTENCE
-# ===========================================================================
-
 def save_csv(leads, path="data/output.csv"):
     os.makedirs("data", exist_ok=True)
     fields = [
@@ -956,10 +876,6 @@ def save_json(leads):
     log.info("Saved %d records to %s", len(leads), OUTPUT_PATH)
 
 
-# ===========================================================================
-# MAIN
-# ===========================================================================
-
 def main():
     log.info("=== OC Motivated Seller Scraper ===")
     log.info("Date range: %s to %s", DATE_START, DATE_END)
@@ -970,7 +886,6 @@ def main():
     else:
         log.warning("NAL unavailable - all leads will be NONE confidence")
 
-    # Scrape all doc types
     new_leads = []
     for doc_type, doc_code, base_score in TARGET_DOC_TYPES:
         session = make_session()
@@ -986,23 +901,18 @@ def main():
             log.error("Error on %s: %s", doc_type, e)
         time.sleep(3)
 
-    # Stack signals for same owner
     if new_leads:
         log.info("Stacking %d raw leads...", len(new_leads))
         new_leads = stack_leads(new_leads)
-        log.info("After stacking: %d unique owner leads", len(new_leads))
 
-    # Enrich with NAL addresses
     if new_leads and nal_idx:
         new_leads = enrich_leads(new_leads, nal_idx)
 
-    # Merge with existing, deduplicate by document number
     existing = load_existing(OUTPUT_PATH)
     existing_nums = set()
     for l in existing:
         doc = l["document_number"] if isinstance(l, dict) else l.document_number
         existing_nums.add(doc)
-        # Also add stacked doc numbers
         stacked = l.get("stacked_docs", []) if isinstance(l, dict) else getattr(l, "stacked_docs", [])
         for d in stacked:
             existing_nums.add(d)
@@ -1012,7 +922,6 @@ def main():
     added  = 0
     for lead in new_leads:
         doc_num = lead.document_number
-        # Check if this lead or any of its stacked docs already exist
         stacked_docs = lead.stacked_docs if hasattr(lead, 'stacked_docs') else []
         all_nums = [doc_num] + stacked_docs
         if not any(n in seen for n in all_nums):
