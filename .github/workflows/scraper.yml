@@ -104,5 +104,3 @@ jobs:
             data/foreclosures.csv
             dashboard/index.html
           retention-days: 30
-            dashboard/index.html
-          retention-days: 30
