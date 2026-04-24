@@ -1,6 +1,5 @@
 """
 reenrich.py — Re-run matching engine against all existing leads in output.json
-Run once to backfill property addresses for leads already collected.
 """
 import json, logging, os, csv, re, urllib.parse
 from collections import defaultdict
@@ -22,6 +21,9 @@ DOC_TYPE_PRIMARY_NAME = {
     "judgment": "grantor",    "j":  "grantor",
     "probate": "both",        "prcp": "both",
     "domestic": "both",       "drd": "both",
+    "tax deed": "grantee",    "td":  "grantee",
+    "death":    "grantee",    "dc":  "grantee",
+    "notice":   "grantor",    "noc": "grantor",
 }
 
 _LEGAL_ABBREV = [
@@ -129,6 +131,8 @@ def parse_legal(norm):
     subdiv = re.sub(r'\bPARCEL\s+[\w\s]+', '', subdiv)
     subdiv = re.sub(r'\bSECTION\s+\w+\s*', '', subdiv)
     subdiv = re.sub(r'\bPHASE\s+\w+\s*', '', subdiv)
+    # Strip case numbers
+    subdiv = re.sub(r'\bCASE\s*:\s*[\w\s]+', '', subdiv)
     subdiv = ' '.join(subdiv.split()).strip()
     if len(subdiv) >= 3 and not subdiv.isdigit():
         p["subdivision"] = subdiv
@@ -287,12 +291,14 @@ def score_candidate(parsed, legal_type, norm_legal, surnames, rec):
     rp = rec["parsed"]
     rt = rec["legal_type"]
 
+    # FIX 2: Don't penalize condo vs subdivision
     if legal_type == rt:
         score += 40; notes.append("type+40")
     elif legal_type == "subdivision" and rt == "metes_bounds":
         score -= 35; notes.append("metes-35")
     elif legal_type not in ("unknown",) and rt not in ("unknown",) and legal_type != rt:
-        score -= 10; notes.append("type_mismatch-10")
+        if not (legal_type in ("condo", "subdivision") and rt in ("condo", "subdivision")):
+            score -= 10; notes.append("type_mismatch-10")
 
     if parsed.get("lot") and parsed["lot"] == rp.get("lot"):
         score += 30; notes.append(f"lot+30({parsed['lot']})")
@@ -330,22 +336,14 @@ def score_candidate(parsed, legal_type, norm_legal, surnames, rec):
     return score, " | ".join(notes)
 
 def label_match(score, parsed, notes):
-    """
-    HIGH requires ALL THREE:
-      1. score >= 85
-      2. exact parcel anchor (lot+ or unit+ in notes)
-      3. STRONG subdivision confirmation only:
-         - subdiv_tok+35 = 80%+ token overlap, OR
-         - exact_legal+10 = normalized strings match exactly
-         Weak/moderate subdiv overlap is NOT sufficient for HIGH.
-    """
     has_anchor        = "lot+" in notes or "unit+" in notes
     has_strong_subdiv = "subdiv_tok+35" in notes or "exact_legal+10" in notes
     if score >= 85 and has_anchor and has_strong_subdiv:
         return "HIGH"
     if score >= 65:
         return "MEDIUM"
-    if score >= 40:
+    # FIX 3: Lower floor to 30
+    if score >= 30:
         return "LOW"
     return "NONE"
 
@@ -399,9 +397,14 @@ def match_lead(lead, nal_idx):
     scored.sort(key=lambda x: x[0], reverse=True)
     best_score, best_notes, best_rec = scored[0]
 
+    # FIX 1: Reduce ambiguity penalty when subdivision strongly confirmed
     if len(scored) >= 2 and (best_score - scored[1][0]) < 15:
-        best_score -= 20
-        best_notes += " | ambiguous-20"
+        if "subdiv_tok+35" in best_notes:
+            best_score -= 10
+            best_notes += " | ambiguous-10"
+        else:
+            best_score -= 20
+            best_notes += " | ambiguous-20"
 
     label = label_match(best_score, parsed, best_notes)
     return {
@@ -485,7 +488,8 @@ def main():
 
     os.makedirs("data", exist_ok=True)
     fields = [
-        "seller_score","document_number","file_date","document_type",
+        "seller_score","motivation_count","document_number","file_date",
+        "document_type","stacked","stacked_types",
         "grantor","grantee","legal_description",
         "property_address","mailing_address","owner_name","assessed_value",
         "match_confidence","match_score","match_reason","county_search_url",
@@ -497,6 +501,8 @@ def main():
         for lead in leads:
             if isinstance(lead.get("distress_flags"), list):
                 lead["distress_flags"] = ", ".join(lead["distress_flags"])
+            if isinstance(lead.get("stacked_types"), list):
+                lead["stacked_types"] = " + ".join(lead["stacked_types"])
             writer.writerow({k: lead.get(k,"") for k in fields})
     log.info("CSV saved.")
 
