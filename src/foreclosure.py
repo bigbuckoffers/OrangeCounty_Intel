@@ -1,22 +1,14 @@
 """
 foreclosure.py — Orange County FL Foreclosure Auction Scraper
-Source: myorangeclerk.realforeclose.com
+Source: myorangeclerk.realforeclose.com + ocpaweb.ocpafl.org
 
-HOW THE SITE WORKS (reverse engineered from auction.js):
-  1. Initial page load returns HTML shell with div#ALB containing auction IDs
-  2. JS calls /index.cfm?zaction=AUCTION&Zmethod=UPDATE&FNC=LOAD&AREA=W (Waiting)
-     and AREA=R (Running) and AREA=C (Closed) via AJAX JSON
-  3. JSON response contains compressed HTML with @A/@B tokens
-  4. JS decompresses and injects into DOM
-
-  We bypass the JS and call the AJAX endpoints directly with session cookies.
-  AREA=W = Auctions Waiting (upcoming) — this is what we want
-  AREA=C = Auctions Closed/Cancelled
-
-  The JSON also has a RESET endpoint that takes the ALB auction ID list:
-  /index.cfm?zaction=AUCTION&ZMETHOD=UPDATE&FNC=RESET&ALB=1495934,1497084,1496924
+Step 1: Scrape realforeclose.com for auction listings
+  - Gets: case #, parcel ID, address, assessed value, final judgment
+Step 2: For each parcel ID, fetch ocpaweb.ocpafl.org to get:
+  - Owner name, mailing address, homestead status
+  URL pattern: https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/{parcel_id}
 """
-import json, logging, os, csv, re, time, requests
+import json, logging, os, csv, re, time, requests, urllib.parse
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 
@@ -25,10 +17,6 @@ log = logging.getLogger(__name__)
 
 BASE_URL     = "https://myorangeclerk.realforeclose.com"
 CALENDAR_URL = f"{BASE_URL}/index.cfm"
-OCPA_API_URL = (
-    "https://vgispublic.ocpafl.org/server/rest/services"
-    "/DYNAMIC/Dynamic_Parcels/MapServer/0/query"
-)
 OCPA_WEB_URL = "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/{}"
 
 OUTPUT_PATH = "data/foreclosures.json"
@@ -48,34 +36,21 @@ HEADERS = {
     "Referer":         BASE_URL,
 }
 
-# Token replacements used by auction.js LoadNewArea()
 TOKEN_MAP = [
-    ('@A', '<div class="'),
-    ('@B', '</div>'),
-    ('@C', 'class="'),
-    ('@D', '<div>'),
-    ('@E', 'AUCTION'),
-    ('@F', '</td><td'),
-    ('@G', '</td></tr>'),
-    ('@H', '<tr><td '),
-    ('@I', 'table'),
-    ('@J', 'p_back="NextCheck='),
-    ('@K', 'style="Display:none"'),
+    ('@A', '<div class="'), ('@B', '</div>'), ('@C', 'class="'),
+    ('@D', '<div>'), ('@E', 'AUCTION'), ('@F', '</td><td'),
+    ('@G', '</td></tr>'), ('@H', '<tr><td '), ('@I', 'table'),
+    ('@J', 'p_back="NextCheck='), ('@K', 'style="Display:none"'),
     ('@L', '/index.cfm?zaction=auction&zmethod=details&AID='),
 ]
 
 
 def decompress_html(compressed):
-    """Apply the same token replacements as auction.js LoadNewArea()."""
     html = compressed
     for token, replacement in TOKEN_MAP:
         html = html.replace(token, replacement)
     return html
 
-
-# ---------------------------------------------------------------------------
-# Session init
-# ---------------------------------------------------------------------------
 
 def make_session():
     session = requests.Session()
@@ -91,14 +66,97 @@ def make_session():
 
 
 # ---------------------------------------------------------------------------
-# Step 1 — Calendar: find auction dates
+# OCPA enrichment — scrape owner name + mailing address from property card
+# ---------------------------------------------------------------------------
+
+def enrich_from_ocpa_web(session, auction):
+    """
+    Fetch ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/{parcel_id}
+    and scrape owner name, mailing address, homestead status.
+    Uses plain text parsing — same data visible on screen.
+    """
+    parcel_id = auction.get("parcel_id", "")
+    if not parcel_id or not parcel_id.strip().isdigit():
+        return auction
+
+    url = OCPA_WEB_URL.format(urllib.parse.quote(parcel_id))
+    try:
+        resp = requests.get(url, headers={
+            "User-Agent": HEADERS["User-Agent"],
+            "Accept":     "text/html,application/xhtml+xml,*/*;q=0.9",
+        }, timeout=20)
+        if resp.status_code != 200:
+            log.debug("OCPA web HTTP %d for %s", resp.status_code, parcel_id)
+            return auction
+
+        # Parse the plain text — same structure we confirmed in browser
+        lines = [l.strip() for l in resp.text.replace('\r','').split('\n')
+                 if l.strip()]
+
+        owner_name   = ""
+        mail_addr    = ""
+        prop_addr    = ""
+        city_zip     = ""
+        homestead    = False
+        absentee     = False
+
+        for i, line in enumerate(lines):
+            if line == "Name(s):" and i+1 < len(lines):
+                owner_name = lines[i+1]
+
+            elif line == "Physical Street Address:" and i+1 < len(lines):
+                if not prop_addr:
+                    prop_addr = lines[i+1]
+
+            elif line == "Mailing Address On File:" and i+1 < len(lines):
+                # Mailing address is next 1-2 lines until "Incorrect Mailing"
+                mail_lines = []
+                j = i + 1
+                while j < len(lines) and "Incorrect Mailing" not in lines[j] and j < i+4:
+                    mail_lines.append(lines[j])
+                    j += 1
+                mail_addr = " ".join(mail_lines).strip()
+
+            elif line == "Postal City and Zip:" and i+1 < len(lines):
+                city_zip = lines[i+1]
+
+            elif "Has Homestead" in line:
+                homestead = True
+
+        # Build full property address with city/zip
+        if prop_addr and city_zip and not auction.get("address"):
+            auction["address"] = f"{prop_addr}, {city_zip}"
+
+        # Absentee = mailing city differs from property city
+        if mail_addr and city_zip:
+            city_part = city_zip.split(",")[0].strip().upper()
+            if city_part and city_part not in mail_addr.upper():
+                absentee = True
+
+        if owner_name:
+            auction["owner_name"] = owner_name
+        if mail_addr:
+            auction["mailing_address"] = mail_addr
+        auction["homestead"]     = homestead
+        auction["absentee_owner"] = absentee
+        auction["ocpa_url"]      = url
+
+        log.debug("OCPA: %s | owner=%s | mail=%s | homestead=%s",
+                  parcel_id, owner_name, mail_addr[:30], homestead)
+
+    except Exception as e:
+        log.debug("OCPA web failed %s: %s", parcel_id, e)
+
+    return auction
+
+
+# ---------------------------------------------------------------------------
+# Calendar
 # ---------------------------------------------------------------------------
 
 def fetch_auction_dates(session, days_ahead=90):
     today = datetime.today().date()
     auction_dates = set()
-
-    # Always check next 14 days as safety net
     for i in range(14):
         auction_dates.add(today + timedelta(days=i))
 
@@ -121,7 +179,7 @@ def fetch_auction_dates(session, days_ahead=90):
                 auction_dates.update(valid)
                 log.info("Calendar %d-%02d: %d dates", year, month, len(valid))
         except Exception as e:
-            log.error("Calendar %d-%02d failed: %s", year, month, e)
+            log.error("Calendar %d-%02d: %s", year, month, e)
         time.sleep(1)
 
     return auction_dates
@@ -130,8 +188,6 @@ def fetch_auction_dates(session, days_ahead=90):
 def parse_calendar_html(html):
     soup = BeautifulSoup(html, "html.parser")
     dates = set()
-
-    # Links with title="May-01-2026" near Foreclosure text
     for a in soup.find_all("a", title=True):
         title = a.get("title", "")
         cell_text = a.get_text() + (a.parent.get_text() if a.parent else "")
@@ -143,8 +199,6 @@ def parse_calendar_html(html):
                 break
             except:
                 pass
-
-    # Also try AUCTIONDATE in href
     for a in soup.find_all("a", href=True):
         href = a.get("href", "")
         m = re.search(r'AUCTIONDATE=(\d{2}/\d{2}/\d{4})', href, re.IGNORECASE)
@@ -156,129 +210,83 @@ def parse_calendar_html(html):
                 dates.add(datetime.strptime(m.group(1), "%m/%d/%Y").date())
             except:
                 pass
-
     return dates
 
 
 # ---------------------------------------------------------------------------
-# Step 2 — Fetch auction listings via AJAX endpoint
+# Preview page + AJAX
 # ---------------------------------------------------------------------------
 
-def fetch_listings_for_date(session, date):
-    """
-    Load the preview page first to get session context,
-    then call the AJAX LOAD endpoint for area W (Waiting auctions).
-    """
+def fetch_preview_page(session, date):
     date_str = date.strftime("%m/%d/%Y")
-
-    # Step A: Load the preview page to set server-side session context
-    page_params = {
-        "zaction":     "AUCTION",
-        "Zmethod":     "PREVIEW",
-        "AUCTIONDATE": date_str,
-    }
+    params = {"zaction": "AUCTION", "Zmethod": "PREVIEW", "AUCTIONDATE": date_str}
     try:
-        page_resp = session.get(CALENDAR_URL, params=page_params, timeout=30)
+        page_resp = session.get(CALENDAR_URL, params=params, timeout=30)
         if page_resp.status_code != 200:
             return []
-
-        # Extract ALB (auction ID list) from page HTML
-        soup = BeautifulSoup(page_resp.text, "html.parser")
-        alb_el = soup.find(id="ALB")
-        alb = alb_el.get_text(strip=True) if alb_el else ""
-        log.debug("  %s ALB: %s", date_str, alb[:50])
-
     except Exception as e:
         log.error("Page load failed %s: %s", date_str, e)
         return []
 
     time.sleep(0.5)
-
-    # Step B: Call the AJAX LOAD endpoint for Waiting auctions
     listings = []
     ts = int(datetime.now().timestamp() * 1000)
 
-    for area in ["W", "R"]:  # W=Waiting, R=Running
+    for area in ["W", "R"]:
         ajax_params = {
-            "zaction":    "AUCTION",
-            "Zmethod":    "UPDATE",
-            "FNC":        "LOAD",
-            "AREA":       area,
-            "PageDir":    "0",
-            "doR":        "1",
-            "tx":         str(ts),
-            "bypassPage": "0",
+            "zaction": "AUCTION", "Zmethod": "UPDATE", "FNC": "LOAD",
+            "AREA": area, "PageDir": "0", "doR": "1",
+            "tx": str(ts), "bypassPage": "0",
         }
         ajax_headers = {
             **HEADERS,
-            "Accept":  "application/json, text/javascript, */*; q=0.01",
+            "Accept": "application/json, text/javascript, */*; q=0.01",
             "X-Requested-With": "XMLHttpRequest",
             "Referer": f"{CALENDAR_URL}?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE={date_str}",
         }
         try:
-            ajax_resp = session.get(
-                CALENDAR_URL,
-                params=ajax_params,
-                headers=ajax_headers,
-                timeout=30
-            )
+            ajax_resp = session.get(CALENDAR_URL, params=ajax_params,
+                                    headers=ajax_headers, timeout=30)
             if ajax_resp.status_code != 200:
                 continue
-
             data = ajax_resp.json()
             compressed_html = data.get("retHTML", "")
             if not compressed_html:
                 continue
-
-            # Decompress using same token map as auction.js
             html = decompress_html(compressed_html)
             area_listings = parse_auction_html(html, date)
             listings.extend(area_listings)
-            log.debug("  AREA=%s: %d listings", area, len(area_listings))
-
         except Exception as e:
-            log.debug("AJAX %s area=%s failed: %s", date_str, area, e)
-
+            log.debug("AJAX %s area=%s: %s", date_str, area, e)
         time.sleep(0.3)
 
     if listings:
         log.info("  %s: %d listings", date_str, len(listings))
-
     return listings
 
 
 def parse_auction_html(html, date):
-    """Parse decompressed auction HTML using .AUCTION_ITEM / .AD_LBL / .AD_DTA."""
     soup = BeautifulSoup(html, "html.parser")
     listings = []
-
     for item in soup.find_all("div", class_="AUCTION_ITEM"):
         listing = parse_auction_item(item, date)
         if listing:
             listings.append(listing)
-
     return listings
 
 
 def parse_auction_item(item, date):
-    # Auction time
-    time_el = item.find(class_=re.compile(r'Astat_DATA', re.I))
-    auction_time = time_el.get_text(strip=True) if time_el else \
-                   f"{date.strftime('%m/%d/%Y')} 11:00 AM ET"
-
     labels = item.find_all("div", class_="AD_LBL")
     values = item.find_all("div", class_="AD_DTA")
-
     fields = {}
     addr_lines = []
     collecting_addr = False
 
     for i, lbl in enumerate(labels):
-        label = lbl.get_text(strip=True).rstrip(":").strip().upper()
+        label  = lbl.get_text(strip=True).rstrip(":").strip().upper()
         val_el = values[i] if i < len(values) else None
         if not val_el:
             continue
-
         val      = val_el.get_text(strip=True)
         val_link = val_el.find("a")
 
@@ -294,6 +302,9 @@ def parse_auction_item(item, date):
             fields["parcel_id"] = val
             if val_link:
                 fields["ocpa_url"] = val_link.get("href", "")
+            else:
+                fields["ocpa_url"] = OCPA_WEB_URL.format(
+                    urllib.parse.quote(val)) if val and val.isdigit() else ""
             collecting_addr = False
         elif label == "PROPERTY ADDRESS":
             addr_lines = [val]
@@ -322,7 +333,7 @@ def parse_auction_item(item, date):
 
     return {
         "auction_date":       date.strftime("%Y-%m-%d"),
-        "auction_time":       auction_time,
+        "auction_time":       "11:00 AM ET",
         "case_number":        case_num,
         "parcel_id":          parcel_id,
         "address":            address,
@@ -333,8 +344,7 @@ def parse_auction_item(item, date):
         "mailing_address":    "",
         "homestead":          False,
         "absentee_owner":     False,
-        "ocpa_url":           fields.get("ocpa_url",
-                                OCPA_WEB_URL.format(parcel_id) if parcel_id else ""),
+        "ocpa_url":           fields.get("ocpa_url", ""),
         "comptroller_url":    fields.get("comptroller_url", ""),
         "auction_url":        (f"{CALENDAR_URL}?zaction=AUCTION&Zmethod=PREVIEW"
                                f"&AUCTIONDATE={date.strftime('%m/%d/%Y')}"),
@@ -347,78 +357,13 @@ def parse_auction_item(item, date):
 
 
 # ---------------------------------------------------------------------------
-# Step 3 — OCPA enrichment
-# ---------------------------------------------------------------------------
-
-def enrich_from_ocpa(session, auction):
-    parcel_id = re.sub(r'[-\s]', '', auction.get("parcel_id", ""))
-    if not parcel_id:
-        return auction
-    try:
-        params = {
-            "where":          f"PARCEL='{parcel_id}'",
-            "outFields":      ("PARCEL,NAME1,NAME2,SITE_ADDR,SITE_CITY,SITE_ZIP,"
-                               "MAIL_ADDR1,MAIL_ADDR2,MAIL_CITY,MAIL_STATE,MAIL_ZIPCD,"
-                               "TOTAL_ASSD,EXEMPT_CODE"),
-            "returnGeometry": "false",
-            "f":              "json",
-        }
-        resp = session.get(OCPA_API_URL, params=params, timeout=15)
-        if resp.status_code != 200:
-            return auction
-        features = resp.json().get("features", [])
-        if not features:
-            return auction
-        a = features[0].get("attributes", {})
-
-        n1 = (a.get("NAME1") or "").strip()
-        n2 = (a.get("NAME2") or "").strip()
-        auction["owner_name"] = f"{n1} {n2}".strip()
-
-        site_addr = (a.get("SITE_ADDR") or "").strip()
-        site_city = (a.get("SITE_CITY") or "").strip()
-        site_zip  = str(a.get("SITE_ZIP") or "").strip()[:5]
-        if site_addr and site_city and not auction["address"]:
-            auction["address"] = f"{site_addr}, {site_city}, FL {site_zip}"
-
-        parts = [
-            (a.get("MAIL_ADDR1") or "").strip(),
-            (a.get("MAIL_ADDR2") or "").strip(),
-            (a.get("MAIL_CITY")  or "").strip(),
-            (a.get("MAIL_STATE") or "FL").strip(),
-            str(a.get("MAIL_ZIPCD") or "").strip()[:5],
-        ]
-        auction["mailing_address"] = " ".join(p for p in parts if p).strip()
-
-        if not auction["assessed_value"]:
-            try:
-                av = int(float(a.get("TOTAL_ASSD") or 0))
-                if av > 0:
-                    auction["assessed_value"] = f"${av:,}"
-            except:
-                pass
-
-        exempt = str(a.get("EXEMPT_CODE") or "").strip().lstrip("0") or "0"
-        auction["homestead"] = exempt in ("1","2","3","4","5","6")
-
-        mail_city = (a.get("MAIL_CITY") or "").strip().upper()
-        if mail_city and site_city:
-            auction["absentee_owner"] = mail_city != site_city.upper()
-
-    except Exception as e:
-        log.debug("OCPA enrich failed %s: %s", parcel_id, e)
-
-    return auction
-
-
-# ---------------------------------------------------------------------------
-# Step 4 — Classify
+# Classify
 # ---------------------------------------------------------------------------
 
 def classify_auction(auction, today):
     try:
-        d     = datetime.strptime(auction["auction_date"], "%Y-%m-%d").date()
-        days  = (d - today).days
+        d    = datetime.strptime(auction["auction_date"], "%Y-%m-%d").date()
+        days = (d - today).days
         auction["days_until_auction"] = days
         if days < 0:
             auction["status"] = "EXPIRED"
@@ -432,7 +377,7 @@ def classify_auction(auction, today):
 
 
 # ---------------------------------------------------------------------------
-# Step 5 — Cross-reference with existing leads
+# Cross-reference with leads
 # ---------------------------------------------------------------------------
 
 def cross_reference_leads(foreclosures, leads_path):
@@ -459,11 +404,9 @@ def cross_reference_leads(foreclosures, leads_path):
     matched = 0
     for fc in foreclosures:
         lead_idx = None
-
         fc_pid = re.sub(r'[-\s]', '', fc.get("parcel_id", ""))
         if fc_pid and fc_pid in parcel_idx:
             lead_idx = parcel_idx[fc_pid]
-
         if lead_idx is None:
             fc_key = (fc.get("address","") or "").upper().strip().split(",")[0].strip()
             if fc_key and fc_key in addr_idx:
@@ -480,8 +423,7 @@ def cross_reference_leads(foreclosures, leads_path):
                 leads[lead_idx]["parcel_id"]          = fc["parcel_id"]
                 leads[lead_idx]["county_search_url"]  = fc.get("ocpa_url","")
             leads[lead_idx]["seller_score"] = min(
-                leads[lead_idx].get("seller_score",0) + 35, 100
-            )
+                leads[lead_idx].get("seller_score", 0) + 35, 100)
             fc["matched_lead"] = True
             matched += 1
             log.info("Matched: %s", fc.get("address","")[:60])
@@ -550,11 +492,12 @@ def main():
 
     all_listings = []
     for date in sorted(auction_dates):
-        listings = fetch_listings_for_date(session, date)
+        listings = fetch_preview_page(session, date)
         for listing in listings:
-            if listing.get("parcel_id"):
-                listing = enrich_from_ocpa(session, listing)
-                time.sleep(0.3)
+            # Enrich from OCPA web page using parcel ID
+            if listing.get("parcel_id") and listing["parcel_id"].isdigit():
+                listing = enrich_from_ocpa_web(session, listing)
+                time.sleep(0.5)
             all_listings.append(classify_auction(listing, today))
         if listings:
             time.sleep(0.5)
