@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-25T13:48:45.647534Z",
+  "generated_at": "2026-04-25T14:23:21.180533Z",
   "total_records": 32,
   "active": 30,
   "expired": 0,
@@ -7,7 +7,7 @@
   "foreclosures": [
     {
       "auction_date": "2026-04-27",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-007146-O",
       "parcel_id": "312229668802200",
       "address": "10436 JANE EYRE DR, ORLANDO, 32825",
@@ -25,11 +25,11 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:03.574000Z"
+      "scraped_at": "2026-04-25T14:22:43.666998Z"
     },
     {
       "auction_date": "2026-04-27",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-010076-O",
       "parcel_id": "282213923802040",
       "address": "2707 GRASSMERE LN, ORLANDO, 32808",
@@ -47,11 +47,11 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:03.574334Z"
+      "scraped_at": "2026-04-25T14:22:43.667298Z"
     },
     {
       "auction_date": "2026-04-28",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-011315-O",
       "parcel_id": "TIMESHARE",
       "address": "",
@@ -69,11 +69,11 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:06.337332Z"
+      "scraped_at": "2026-04-25T14:22:46.618617Z"
     },
     {
       "auction_date": "2026-04-28",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-005717-O",
       "parcel_id": "292416816600610",
       "address": "2943 WOOLRIDGE DR, ORLANDO, 32837",
@@ -90,12 +90,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 3,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:06.338209Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:46.619337Z"
     },
     {
       "auction_date": "2026-04-28",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-008843-O",
       "parcel_id": "292302314600140",
       "address": "101 W GRANT ST, ORLANDO, 32806",
@@ -112,12 +112,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 3,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:06.338773Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:46.619842Z"
     },
     {
       "auction_date": "2026-04-29",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-001315-O",
       "parcel_id": "MULTIPLE PARCELS",
       "address": "",
@@ -134,12 +134,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 4,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:11.405711Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:49.314126Z"
     },
     {
       "auction_date": "2026-04-29",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-002251-O",
       "parcel_id": "282316389900290",
       "address": "5001 LATROBE DR, WINDERMERE, 34786",
@@ -156,12 +156,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 4,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:11.406075Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:49.314414Z"
     },
     {
       "auction_date": "2026-04-29",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-005904-O",
       "parcel_id": "282202755701060",
       "address": "7921 RIFFLE LN, ORLANDO, 32818",
@@ -178,12 +178,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 4,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:11.406382Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:49.314733Z"
     },
     {
       "auction_date": "2026-04-29",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-006502-O",
       "parcel_id": "282226922400560",
       "address": "143 BRIGADOON PT, ORLANDO, 32835",
@@ -200,12 +200,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 4,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:11.406689Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:49.315005Z"
     },
     {
       "auction_date": "2026-04-30",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2019-CA-013607-O",
       "parcel_id": "302324898000970",
       "address": "8228 SOMMERVILLE DR, ORLANDO, 32829",
@@ -222,12 +222,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 5,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:16.826621Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:52.575696Z"
     },
     {
       "auction_date": "2026-04-30",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CC-004025-O",
       "parcel_id": "312225873501210",
       "address": "12043 WHITE WAVE PT, ORLANDO, 32828",
@@ -244,12 +244,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 5,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:16.827210Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:52.576207Z"
     },
     {
       "auction_date": "2026-05-01",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-006165-O",
       "parcel_id": "312218022401890",
       "address": "2533 BRAMPTON CT, ORLANDO, 32817",
@@ -266,12 +266,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 6,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:19.546684Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:55.232106Z"
     },
     {
       "auction_date": "2026-05-01",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-005675-O",
       "parcel_id": "302406555901010",
       "address": "9925 RED CLOVER AVE, ORLANDO, 32824",
@@ -288,12 +288,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 6,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:19.547025Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:22:55.232389Z"
     },
     {
       "auction_date": "2026-05-04",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2023-CA-012700-O",
       "parcel_id": "282121363201490",
       "address": "962 GRAND HILLTOP DR, APOPKA, 32703",
@@ -310,12 +310,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 9,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:26.525319Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:03.117053Z"
     },
     {
       "auction_date": "2026-05-04",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-009057-O",
       "parcel_id": "Property Appraiser",
       "address": "",
@@ -332,12 +332,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 9,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:26.525577Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:03.117271Z"
     },
     {
       "auction_date": "2026-05-05",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2015-CA-010814-O",
       "parcel_id": "282202243100410",
       "address": "7101 WHITE TRILLIUM CIR, ORLANDO, 32818",
@@ -354,12 +354,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 10,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:28.874289Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:05.158986Z"
     },
     {
       "auction_date": "2026-05-05",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2017-CA-002998-O",
       "parcel_id": "282303566201490",
       "address": "7866 BARDMOOR HILL CIR, ORLANDO, 32835",
@@ -376,12 +376,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 10,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:28.874613Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:05.159271Z"
     },
     {
       "auction_date": "2026-05-05",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2023-CA-011611-O",
       "parcel_id": "292211069206150",
       "address": "4025 SHORECREST DR, ORLANDO, 32804",
@@ -398,12 +398,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 10,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:28.874945Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:05.159573Z"
     },
     {
       "auction_date": "2026-05-05",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2023-CA-011632-O",
       "parcel_id": "312409512901190",
       "address": "10244 SANDY MARSH LN, ORLANDO, 32832",
@@ -420,12 +420,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 10,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:28.875244Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:05.159850Z"
     },
     {
       "auction_date": "2026-05-06",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2022-CA-003757-O",
       "parcel_id": "312207380001620",
       "address": "9923 CASTLETON ST, ORLANDO, 32817",
@@ -442,12 +442,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 11,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:34.621691Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:09.037671Z"
     },
     {
       "auction_date": "2026-05-06",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-009392-O",
       "parcel_id": "302433495701190",
       "address": "3243 STONEWYCK ST, ORLANDO, 32824",
@@ -464,12 +464,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 11,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:34.622318Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:09.038205Z"
     },
     {
       "auction_date": "2026-05-06",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-009541-O",
       "parcel_id": "292307565079632",
       "address": "5263 CORAL CT UNIT 632, ORLANDO, 32811",
@@ -486,12 +486,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 11,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:34.623365Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:09.039123Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2022-CA-005715-O",
       "parcel_id": "312214653910053",
       "address": "2213 BONNEVILLE DR, ORLANDO, 32826",
@@ -508,12 +508,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.924777Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.339824Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2023-CA-014748-O",
       "parcel_id": "282226393000110",
       "address": "7133 TALLOWTREE LN, ORLANDO, 32835",
@@ -530,12 +530,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.925105Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.340107Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-001014-O",
       "parcel_id": "282222889200430",
       "address": "1504 ST LAWRENCE ST, ORLANDO, 32818",
@@ -552,12 +552,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.925414Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.340379Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-005626-O",
       "parcel_id": "282204627400500",
       "address": "1984 CASABA COVE AVE, OCOEE, 34761",
@@ -574,12 +574,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.925717Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.340663Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2024-CA-010848-O",
       "parcel_id": "292407935903090",
       "address": "10633 WATERTOWN CT, ORLANDO, 32821",
@@ -596,12 +596,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.926045Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.340931Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-002731-O",
       "parcel_id": "282018609901110",
       "address": "2461 WOODBARK ST, APOPKA, 32712",
@@ -618,12 +618,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.926636Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.341446Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-003935-O",
       "parcel_id": "282105646149020",
       "address": "430 ASHLEY BROOKE CT, APOPKA, 32712",
@@ -640,12 +640,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.926959Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.341736Z"
     },
     {
       "auction_date": "2026-05-07",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-009407-O",
       "parcel_id": "282106718802020",
       "address": "449 LAKE VIEW DR, APOPKA, 32703",
@@ -662,12 +662,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 12,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:38.927260Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:12.342002Z"
     },
     {
       "auction_date": "2026-05-08",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2017-CA-003909-O",
       "parcel_id": "282327052700150",
       "address": "6201 DARTMOOR CT, ORLANDO, 32819",
@@ -684,12 +684,12 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:43.957520Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:18.939419Z"
     },
     {
       "auction_date": "2026-05-08",
-      "auction_time": "",
+      "auction_time": "11:00 AM ET",
       "case_number": "2025-CC-011967-O",
       "parcel_id": "292309499822107",
       "address": "2487 LAKEWAY BRANCH DR UNIT 21, ORLANDO, 32839",
@@ -706,8 +706,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-04-25T13:48:43.957861Z"
+      "matched_lead": true,
+      "scraped_at": "2026-04-25T14:23:18.939734Z"
     }
   ]
 }
