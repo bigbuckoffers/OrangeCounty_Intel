@@ -48,6 +48,11 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
 
+      - name: Merge foreclosures into leads
+        run: python src/merger.py
+        env:
+          PYTHONUNBUFFERED: "1"
+
       - name: Validate outputs
         run: |
           python - <<'EOF'
