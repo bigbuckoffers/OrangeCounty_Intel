@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-26T14:34:48.585161Z",
+  "generated_at": "2026-04-26T15:45:00.259348Z",
   "total_records": 32,
   "active": 27,
   "expired": 0,
@@ -14,8 +14,9 @@
       "final_judgment": "$233,018.61",
       "assessed_value": "$303,087.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "LINARES NORA A ESTATE",
+      "mailing_address": "10436 Jane Eyre Dr, Orlando, FL 32825-6665",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312229668802200",
@@ -25,7 +26,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-04-26T14:34:08.441558Z"
+      "scraped_at": "2026-04-26T15:44:18.014599Z"
     },
     {
       "auction_date": "2026-04-27",
@@ -36,8 +37,9 @@
       "final_judgment": "$353,453.90",
       "assessed_value": "$348,790.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "REDMOND CHARLENE, REDMOND CHARLENE",
+      "mailing_address": "2707 Grassmere Ln, Orlando, FL 32808-3303",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282213923802040",
@@ -47,7 +49,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-04-26T14:34:08.441852Z"
+      "scraped_at": "2026-04-26T15:44:18.014905Z"
     },
     {
       "auction_date": "2026-04-28",
@@ -60,6 +62,7 @@
       "opening_bid": "",
       "owner_name": "",
       "mailing_address": "",
+      "property_type": "",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
@@ -69,7 +72,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-04-26T14:34:11.068086Z"
+      "scraped_at": "2026-04-26T15:44:20.822382Z"
     },
     {
       "auction_date": "2026-04-28",
@@ -80,8 +83,9 @@
       "final_judgment": "$135,021.21",
       "assessed_value": "$112,760.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "SAFADY SANDRA K",
+      "mailing_address": "2943 Woolridge Dr, Orlando, FL 32837-9072",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292416816600610",
@@ -91,7 +95,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:11.068827Z"
+      "scraped_at": "2026-04-26T15:44:20.823100Z"
     },
     {
       "auction_date": "2026-04-28",
@@ -102,8 +106,9 @@
       "final_judgment": "$469,124.10",
       "assessed_value": "$501,950.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "PERSAUD AVINASH",
+      "mailing_address": "101 W Grant St, Orlando, FL 32806-3931",
+      "property_type": "TOWNHOUSE CLASS II",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292302314600140",
@@ -113,7 +118,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:11.069302Z"
+      "scraped_at": "2026-04-26T15:44:20.823606Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -126,6 +131,7 @@
       "opening_bid": "",
       "owner_name": "",
       "mailing_address": "",
+      "property_type": "",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/MULTIPLE PARCELS",
@@ -135,7 +141,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:13.476087Z"
+      "scraped_at": "2026-04-26T15:44:23.644104Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -146,8 +152,9 @@
       "final_judgment": "$2,020,376.52",
       "assessed_value": "$1,971,063.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "UNSALAN JOHN CAN, UNSALAN DUYGU",
+      "mailing_address": "5001 Latrobe Dr, Windermere, FL 34786-8914",
+      "property_type": "SINGLE FAM CLASS IV",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282316389900290",
@@ -157,7 +164,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:13.476385Z"
+      "scraped_at": "2026-04-26T15:44:23.644417Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -168,8 +175,9 @@
       "final_judgment": "$12,238.62",
       "assessed_value": "$282,021.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "MURRAY ASHER DAN C, MURRAY STACEY ANN KENISHA",
+      "mailing_address": "7921 Riffle Ln, Orlando, FL 32818-1253",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282202755701060",
@@ -179,7 +187,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:13.476664Z"
+      "scraped_at": "2026-04-26T15:44:23.644699Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -190,8 +198,9 @@
       "final_judgment": "$272,579.73",
       "assessed_value": "$132,860.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "BACCHUS HAFIZ",
+      "mailing_address": "143 Brigadoon Pt, Orlando, FL 32835-1088",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282226922400560",
@@ -201,7 +210,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:13.476932Z"
+      "scraped_at": "2026-04-26T15:44:23.644972Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -212,8 +221,9 @@
       "final_judgment": "$318,270.43",
       "assessed_value": "$282,379.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "BAJANA IGNACIO C JR, SANTANA YARITSA M",
+      "mailing_address": "Po Box 1082, Orlando, FL 32802-1082",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/302324898000970",
@@ -223,7 +233,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:16.548174Z"
+      "scraped_at": "2026-04-26T15:44:27.063164Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -234,8 +244,9 @@
       "final_judgment": "$9,143.67",
       "assessed_value": "$258,315.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "HUNTE MAKEDA ONEKAH",
+      "mailing_address": "12043 White Wave Pt, Orlando, FL 32828-5568",
+      "property_type": "TOWNHOUSE CLASS II",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312225873501210",
@@ -245,7 +256,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:16.548689Z"
+      "scraped_at": "2026-04-26T15:44:27.063693Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -256,8 +267,9 @@
       "final_judgment": "$184,647.91",
       "assessed_value": "$222,099.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "MARURI LOURDES",
+      "mailing_address": "2533 Brampton Ct, Orlando, FL 32817-2738",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312218022401890",
@@ -267,7 +279,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:19.051742Z"
+      "scraped_at": "2026-04-26T15:44:29.845699Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -278,8 +290,9 @@
       "final_judgment": "$207,893.12",
       "assessed_value": "$88,379.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "GONZALEZ HENRY, GONZALES ANA",
+      "mailing_address": "9925 Red Clover Ave, Orlando, FL 32824-8764",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/302406555901010",
@@ -289,7 +302,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:19.052021Z"
+      "scraped_at": "2026-04-26T15:44:29.845977Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -300,8 +313,9 @@
       "final_judgment": "$318,282.84",
       "assessed_value": "$367,270.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "BURRUS CYNTHIA HANIBLE ESTATE",
+      "mailing_address": "962 Grand Hilltop Dr, Apopka, FL 32703-6355",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282121363201490",
@@ -311,7 +325,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:26.432494Z"
+      "scraped_at": "2026-04-26T15:44:38.377056Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -324,6 +338,7 @@
       "opening_bid": "",
       "owner_name": "",
       "mailing_address": "",
+      "property_type": "",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/",
@@ -333,7 +348,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:26.432713Z"
+      "scraped_at": "2026-04-26T15:44:38.377272Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -344,8 +359,9 @@
       "final_judgment": "$740,905.16",
       "assessed_value": "$340,660.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "RODDY GREGORY L",
+      "mailing_address": "7101 White Trillium Cir, Orlando, FL 32818-1279",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282202243100410",
@@ -355,7 +371,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:28.274144Z"
+      "scraped_at": "2026-04-26T15:44:40.522654Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -366,8 +382,9 @@
       "final_judgment": "$527,527.95",
       "assessed_value": "$331,673.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "ESTRADA JAVIER, ESTRADA SANDRA",
+      "mailing_address": "7866 Bardmoor Hill Cir, Orlando, FL 32835-8158",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282303566201490",
@@ -377,7 +394,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:28.274449Z"
+      "scraped_at": "2026-04-26T15:44:40.522940Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -388,8 +405,9 @@
       "final_judgment": "$215,315.97",
       "assessed_value": "$258,801.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "RODRIGUEZ ESTHER ELISE",
+      "mailing_address": "4025 Shorecrest Dr, Orlando, FL 32804-2224",
+      "property_type": "SINGLE FAMILY",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292211069206150",
@@ -399,7 +417,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:28.274723Z"
+      "scraped_at": "2026-04-26T15:44:40.523212Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -410,8 +428,9 @@
       "final_judgment": "$354,853.35",
       "assessed_value": "$540,558.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "NOTYCE CARLA ELYSE",
+      "mailing_address": "10244 Sandy Marsh Ln, Orlando, FL 32832-5956",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312409512901190",
@@ -421,7 +440,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:28.274987Z"
+      "scraped_at": "2026-04-26T15:44:40.523505Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -432,8 +451,9 @@
       "final_judgment": "$370,746.51",
       "assessed_value": "$217,416.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "REY JASMINE",
+      "mailing_address": "9923 Castleton St, Orlando, FL 32817-1814",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312207380001620",
@@ -443,7 +463,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:31.593170Z"
+      "scraped_at": "2026-04-26T15:44:44.530586Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -454,8 +474,9 @@
       "final_judgment": "$68,680.25",
       "assessed_value": "$566,290.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "LAINETTE MIGUEL ALEXANDER SILVA, SIFONTES MARIANYELA FRANCIS SALAZAR",
+      "mailing_address": "3243 Stonewyck St, Orlando, FL 32824",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/302433495701190",
@@ -465,7 +486,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:31.593735Z"
+      "scraped_at": "2026-04-26T15:44:44.531112Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -476,10 +497,11 @@
       "final_judgment": "$20,789.03",
       "assessed_value": "$207,300.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "BOTHAM ADRIAN",
+      "mailing_address": "387 E Allen St Apt 14, Castle Rock, CO 80108-7662",
+      "property_type": "CONDO-RESIDENTIAL",
       "homestead": false,
-      "absentee_owner": false,
+      "absentee_owner": true,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292307565079632",
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260136173",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
@@ -487,7 +509,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:31.594656Z"
+      "scraped_at": "2026-04-26T15:44:44.532048Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -498,8 +520,9 @@
       "final_judgment": "$128,775.10",
       "assessed_value": "$189,750.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "ROLDAN JOHANNA L",
+      "mailing_address": "2213 Bonneville Dr, Orlando, FL 32826-3705",
+      "property_type": "SINGLE FAM CLASS IV",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312214653910053",
@@ -509,7 +532,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.577730Z"
+      "scraped_at": "2026-04-26T15:44:47.915443Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -520,8 +543,9 @@
       "final_judgment": "$318,677.53",
       "assessed_value": "$393,800.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "TROUTMAN JOETTA AKEYA, TROUTMAN ANTONIO",
+      "mailing_address": "7133 Tallowtree Ln, Orlando, FL 32835-1035",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282226393000110",
@@ -531,7 +555,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.578004Z"
+      "scraped_at": "2026-04-26T15:44:47.915730Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -542,10 +566,11 @@
       "final_judgment": "$377,470.74",
       "assessed_value": "$302,470.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "JTPIII VENTURES LLC, D H INVESTIGATIONS LLC",
+      "mailing_address": "829 Eagle Claw Ct, Lake Mary, FL 32746-4881",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
-      "absentee_owner": false,
+      "absentee_owner": true,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282222889200430",
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260016558",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
@@ -553,7 +578,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.578267Z"
+      "scraped_at": "2026-04-26T15:44:47.916003Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -564,8 +589,9 @@
       "final_judgment": "$33,263.02",
       "assessed_value": "$401,900.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "BRADLEY DEBORAH BENITA",
+      "mailing_address": "1984 Casaba Cove Ave, Ocoee, FL 34761-7700",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282204627400500",
@@ -575,7 +601,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.578551Z"
+      "scraped_at": "2026-04-26T15:44:47.916275Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -586,8 +612,9 @@
       "final_judgment": "$349,142.59",
       "assessed_value": "$294,100.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "J3 EQUITIES LLC",
+      "mailing_address": "6925 Lake Ellenor Dr Ste 625-A, Orlando, FL 32809-4631",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292407935903090",
@@ -597,7 +624,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.578811Z"
+      "scraped_at": "2026-04-26T15:44:47.916565Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -608,8 +635,9 @@
       "final_judgment": "$240,360.41",
       "assessed_value": "$594,160.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "RANGEL SILVA ELISA MARIA",
+      "mailing_address": "2461 Woodbark St, Apopka, FL 32712-6626",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282018609901110",
@@ -619,7 +647,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.579318Z"
+      "scraped_at": "2026-04-26T15:44:47.917087Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -630,8 +658,9 @@
       "final_judgment": "$303,364.43",
       "assessed_value": "$229,776.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "SOMMER CHRISTINE ELIZABETH, HOWARD CORY G",
+      "mailing_address": "430 Ashley Brooke Ct Unit B, Apopka, FL 32712-3356",
+      "property_type": "CONDO-RESIDENTIAL",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282105646149020",
@@ -641,7 +670,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.579601Z"
+      "scraped_at": "2026-04-26T15:44:47.917377Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -652,8 +681,9 @@
       "final_judgment": "$241,942.74",
       "assessed_value": "$275,110.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "DWAN HOPE",
+      "mailing_address": "449 Lake View Dr, Apopka, FL 32703-3335",
+      "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282106718802020",
@@ -663,7 +693,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:34.579866Z"
+      "scraped_at": "2026-04-26T15:44:47.917649Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -674,8 +704,9 @@
       "final_judgment": "$980,836.75",
       "assessed_value": "$522,061.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "SUESS ELKE R",
+      "mailing_address": "6201 Dartmoor Ct, Orlando, FL 32819-4833",
+      "property_type": "SFR - GOLF",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282327052700150",
@@ -685,7 +716,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:44.267438Z"
+      "scraped_at": "2026-04-26T15:44:55.164766Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -696,8 +727,9 @@
       "final_judgment": "$23,168.73",
       "assessed_value": "$65,102.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
+      "owner_name": "LIU CHUNMEL",
+      "mailing_address": "2628 Sandy Ln, Orlando, FL 32818-3146",
+      "property_type": "CONDO-RESIDENTIAL",
       "homestead": false,
       "absentee_owner": false,
       "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292309499822107",
@@ -707,7 +739,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-26T14:34:44.267721Z"
+      "scraped_at": "2026-04-26T15:44:55.165066Z"
     }
   ]
 }
