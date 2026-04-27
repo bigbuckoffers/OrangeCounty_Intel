@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-27T17:15:19.881447Z",
-  "total_records": 29,
+  "generated_at": "2026-04-27T19:24:54.531131Z",
+  "total_records": 28,
   "active": 23,
   "expired": 0,
-  "too_soon": 6,
+  "too_soon": 5,
   "foreclosures": [
     {
       "auction_date": "2026-04-28",
@@ -26,30 +26,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-04-27T17:14:49.599193Z"
-    },
-    {
-      "auction_date": "2026-04-28",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2025-CA-005717-O",
-      "parcel_id": "292416816600610",
-      "address": "2943 WOOLRIDGE DR, ORLANDO, 32837",
-      "final_judgment": "$135,021.21",
-      "assessed_value": "$112,760.00",
-      "opening_bid": "",
-      "owner_name": "SAFADY SANDRA K",
-      "mailing_address": "2943 Woolridge Dr, Orlando, FL 32837-9072",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292416816600610",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260114920",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/28/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 1,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:49.599864Z"
+      "scraped_at": "2026-04-27T19:24:21.805454Z"
     },
     {
       "auction_date": "2026-04-28",
@@ -72,7 +49,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:49.600302Z"
+      "scraped_at": "2026-04-27T19:24:21.806429Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -95,7 +72,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:51.698694Z"
+      "scraped_at": "2026-04-27T19:24:23.656832Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -118,7 +95,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:51.698951Z"
+      "scraped_at": "2026-04-27T19:24:23.657140Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -141,7 +118,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:51.699189Z"
+      "scraped_at": "2026-04-27T19:24:23.657414Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -164,7 +141,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:53.758981Z"
+      "scraped_at": "2026-04-27T19:24:26.087687Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -187,7 +164,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:53.759429Z"
+      "scraped_at": "2026-04-27T19:24:26.088216Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -210,7 +187,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:55.867198Z"
+      "scraped_at": "2026-04-27T19:24:28.185407Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -233,7 +210,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:14:55.867459Z"
+      "scraped_at": "2026-04-27T19:24:28.185691Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -256,7 +233,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:02.037802Z"
+      "scraped_at": "2026-04-27T19:24:34.826764Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -279,7 +256,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:02.037996Z"
+      "scraped_at": "2026-04-27T19:24:34.827070Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -302,7 +279,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:04.329189Z"
+      "scraped_at": "2026-04-27T19:24:36.611730Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -325,30 +302,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:04.329453Z"
-    },
-    {
-      "auction_date": "2026-05-05",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2023-CA-011611-O",
-      "parcel_id": "292211069206150",
-      "address": "4025 SHORECREST DR, ORLANDO, 32804",
-      "final_judgment": "$215,315.97",
-      "assessed_value": "$258,801.00",
-      "opening_bid": "",
-      "owner_name": "RODRIGUEZ ESTHER ELISE",
-      "mailing_address": "4025 Shorecrest Dr, Orlando, FL 32804-2224",
-      "property_type": "SINGLE FAMILY",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292211069206150",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250651256",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 8,
-      "status": "ACTIVE",
-      "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:04.329691Z"
+      "scraped_at": "2026-04-27T19:24:36.612100Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -371,7 +325,30 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:04.329928Z"
+      "scraped_at": "2026-04-27T19:24:36.612372Z"
+    },
+    {
+      "auction_date": "2026-05-05",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-000397-O",
+      "parcel_id": "282314355200220",
+      "address": "5055 CASPIAN CT, ORLANDO, 32819",
+      "final_judgment": "$626,920.03",
+      "assessed_value": "$259,765.00",
+      "opening_bid": "",
+      "owner_name": "LYNN ERNEST F, LYNN MARCIA L",
+      "mailing_address": "5055 Caspian Ct, Orlando, FL 32819-3325",
+      "property_type": "SINGLE FAM CLASS III",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282314355200220",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260012638",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 8,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-27T19:24:36.613901Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -394,7 +371,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:07.117016Z"
+      "scraped_at": "2026-04-27T19:24:40.440766Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -417,7 +394,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:07.117501Z"
+      "scraped_at": "2026-04-27T19:24:40.441326Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -440,7 +417,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:07.118255Z"
+      "scraped_at": "2026-04-27T19:24:40.442336Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -463,7 +440,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.580913Z"
+      "scraped_at": "2026-04-27T19:24:42.929515Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -486,7 +463,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.581162Z"
+      "scraped_at": "2026-04-27T19:24:42.929800Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -509,7 +486,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.581407Z"
+      "scraped_at": "2026-04-27T19:24:42.930103Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -532,7 +509,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.581637Z"
+      "scraped_at": "2026-04-27T19:24:42.930369Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -555,7 +532,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.581872Z"
+      "scraped_at": "2026-04-27T19:24:42.930636Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -578,7 +555,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.582309Z"
+      "scraped_at": "2026-04-27T19:24:42.931169Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -601,7 +578,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.582550Z"
+      "scraped_at": "2026-04-27T19:24:42.931439Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -624,7 +601,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:09.582779Z"
+      "scraped_at": "2026-04-27T19:24:42.931705Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -647,7 +624,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:13.821963Z"
+      "scraped_at": "2026-04-27T19:24:47.524199Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -670,7 +647,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T17:15:13.822211Z"
+      "scraped_at": "2026-04-27T19:24:47.524493Z"
     }
   ]
 }
