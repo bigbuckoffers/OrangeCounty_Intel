@@ -2,501 +2,1101 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OC Motivated Seller Leads</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PropSignal — Orange County FL Lead Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0d0f14;--surface:#151820;--border:#1e2330;--accent:#e84040;--accent2:#f5a623;--text:#e8eaf0;--muted:#5a6070;--card:#181c26}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'IBM Plex Mono',monospace;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:60px}
-  header{background:linear-gradient(135deg,#0d0f14 0%,#131928 100%);border-bottom:1px solid var(--border);padding:32px 48px 28px;display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap}
-  header h1{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;line-height:1;color:#fff;letter-spacing:-1px}
-  header h1 span{color:var(--accent)}
-  header .meta{font-size:11px;color:var(--muted);margin-left:auto;text-align:right;line-height:1.8}
-  .stats{display:flex;gap:16px;padding:28px 48px 0;flex-wrap:wrap}
-  .stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 28px;min-width:120px;position:relative;overflow:hidden}
-  .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-  .stat-card.red::before{background:var(--accent)}
-  .stat-card.gold::before{background:var(--accent2)}
-  .stat-card.green::before{background:#38a169}
-  .stat-card.blue::before{background:#3182ce}
-  .stat-card.purple::before{background:#6b46c1}
-  .stat-card.orange::before{background:#dd6b20}
-  .stat-card .num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;line-height:1;color:#fff}
-  .stat-card .label{font-size:10px;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:1px}
-  .tab-nav{display:flex;gap:4px;padding:24px 48px 0;border-bottom:1px solid var(--border)}
-  .tab-btn{background:transparent;border:none;border-bottom:3px solid transparent;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;padding:10px 20px;cursor:pointer;transition:all .15s;margin-bottom:-1px}
-  .tab-btn:hover{color:var(--text)}
-  .tab-btn.active{color:#fff;border-bottom-color:var(--accent)}
-  .tab-btn .tab-count{background:var(--surface);border-radius:10px;font-size:10px;padding:1px 6px;margin-left:6px;color:var(--muted)}
-  .tab-btn.active .tab-count{background:var(--accent);color:#fff}
-  .tab-content{display:none}
-  .tab-content.active{display:block}
-  .toolbar{padding:20px 48px 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .toolbar input{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:13px;padding:10px 16px;width:260px;outline:none}
-  .toolbar input:focus{border-color:var(--accent)}
-  .filter-group{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
-  .filter-btn{background:var(--card);border:1px solid var(--border);border-radius:5px;color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:7px 13px;cursor:pointer;transition:all .15s}
-  .filter-btn:hover{border-color:var(--text);color:var(--text)}
-  .filter-btn.active{color:#fff;border-color:transparent}
-  .filter-btn.f-all.active{background:#444}
-  .filter-btn.f-high.active{background:#276749}
-  .filter-btn.f-medium.active{background:#744210}
-  .filter-btn.f-low.active{background:#2a4a7f}
-  .filter-btn.f-none.active{background:#6b1f1f}
-  .btn-export{background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:10px 20px;cursor:pointer;margin-left:auto}
-  .btn-export:hover{opacity:.85}
-  .table-wrap{margin:20px 48px 0;border:1px solid var(--border);border-radius:12px;overflow:auto}
-  table{width:100%;border-collapse:collapse;font-size:12px}
-  thead th{background:var(--surface);padding:12px 14px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
-  thead th:hover{color:var(--text)}
-  thead th.sorted{color:var(--accent)}
-  .lead-row{border-bottom:1px solid var(--border);animation:fadeUp .4s ease both;animation-delay:calc(var(--row-i)*15ms)}
-  .stacked-row{border-left:3px solid #6b46c1}
-  .auction-row{border-left:3px solid #e53e3e}
-  .stacked-auction-row{border-left:3px solid #e53e3e}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-  .lead-row:hover td{background:#1a1f2e}
-  td{padding:11px 14px;vertical-align:top}
-  .col-addr{max-width:180px}
-  .col-legal{max-width:160px}
-  .muted{color:var(--muted);font-size:11px}
-  small.muted{display:block;margin-top:3px}
-  .score-cell{text-align:center;min-width:60px}
-  .score-ring{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--c,#38a169);color:var(--c,#38a169);font-family:'Syne',sans-serif;font-weight:800;font-size:14px}
-  .conf-badge{display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700}
-  .conf-HIGH{background:#276749;color:#9ae6b4}
-  .conf-MEDIUM{background:#7b4f12;color:#fbd38d}
-  .conf-LOW{background:#1a365d;color:#90cdf4}
-  .conf-NONE{background:#63171b;color:#feb2b2}
-  .status-badge{display:inline-block;padding:3px 8px;border-radius:3px;font-size:10px;font-weight:700}
-  .status-ACTIVE{background:#276749;color:#9ae6b4}
-  .status-EXPIRED{background:#63171b;color:#feb2b2}
-  .status-TOO_SOON{background:#7b4f12;color:#fbd38d}
-  .days-badge{font-family:'Syne',sans-serif;font-weight:800;font-size:15px}
-  .days-badge.urgent{color:#e53e3e}
-  .days-badge.soon{color:#d69e2e}
-  .days-badge.ok{color:#38a169}
-  .alert-box{margin:20px 48px 0;background:#63171b;border:1px solid #e53e3e;border-radius:10px;padding:16px 24px}
-  .alert-box h3{color:#feb2b2;font-size:13px;font-weight:700;margin-bottom:8px}
-  .alert-item{color:#fed7d7;font-size:12px;padding:4px 0;border-bottom:1px solid rgba(255,80,80,.15)}
-  .missing{color:var(--muted);font-style:italic;font-size:11px}
-  .lookup-link{color:#63b3ed;text-decoration:none;font-size:10px;display:inline-block;margin-top:2px;opacity:.8}
-  .lookup-link:hover{opacity:1;text-decoration:underline}
-  .loading{text-align:center;padding:60px;color:var(--muted)}
-  footer{margin-top:40px;text-align:center;font-size:11px;color:var(--muted)}
-  .mot-tag{display:inline-block;background:#2d3748;color:#a0aec0;padding:1px 5px;border-radius:3px;font-size:9px;margin:1px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F5F6F8;
+  --surface:#FFFFFF;
+  --surface2:#F9FAFB;
+  --border:#E5E7EB;
+  --border2:#D1D5DB;
+  --text:#111827;
+  --text2:#6B7280;
+  --text3:#9CA3AF;
+  --blue:#2563EB;
+  --blue-light:#EFF6FF;
+  --blue-mid:#DBEAFE;
+  --green:#059669;
+  --green-light:#ECFDF5;
+  --red:#DC2626;
+  --red-light:#FEF2F2;
+  --orange:#D97706;
+  --orange-light:#FFFBEB;
+  --purple:#7C3AED;
+  --purple-light:#F5F3FF;
+  --pink:#DB2777;
+  --pink-light:#FDF2F8;
+  --teal:#0891B2;
+  --teal-light:#ECFEFF;
+  --r:8px;
+  --r-lg:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 4px 24px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.06);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.5}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.app{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:200;overflow-y:auto}
+.main{margin-left:220px;display:flex;flex-direction:column;min-height:100vh;flex:1}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
+.content{padding:24px;flex:1}
+.sidebar-logo{padding:20px;border-bottom:1px solid var(--border)}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-icon{width:34px;height:34px;background:var(--blue);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:white}
+.logo-name{font-size:14.5px;font-weight:700;letter-spacing:-.4px}
+.logo-tag{font-size:10px;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-top:1px}
+.nav-sect{padding:16px 12px 4px}
+.nav-lbl{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);padding:0 8px;margin-bottom:6px}
+.nav-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:var(--r);color:var(--text2);cursor:pointer;transition:.15s;font-size:13px;font-weight:400}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:var(--blue-light);color:var(--blue);font-weight:500}
+.nav-item svg{width:15px;height:15px;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:600;padding:1px 6px;border-radius:20px;min-width:20px;text-align:center}
+.nav-badge.blue{background:var(--blue)}
+.sidebar-county{margin:auto 0 0;padding:16px;border-top:1px solid var(--border)}
+.county-badge{background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;padding:6px 10px;border-radius:var(--r);display:flex;align-items:center;gap:6px}
+.county-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.search-wrap{flex:1;max-width:440px;position:relative}
+.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;fill:var(--text3);pointer-events:none}
+.search-input{width:100%;height:36px;border:1px solid var(--border2);border-radius:var(--r);padding:0 12px 0 34px;font-size:13px;font-family:inherit;background:var(--surface2);color:var(--text);outline:none;transition:.15s}
+.search-input:focus{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.search-input::placeholder{color:var(--text3)}
+.topbar-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:0 14px;height:34px;border-radius:var(--r);font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer;transition:.15s;border:1px solid transparent}
+.btn-ghost{border-color:var(--border2);color:var(--text2);background:var(--surface)}
+.btn-ghost:hover{background:var(--bg);color:var(--text)}
+.btn-primary{background:var(--blue);color:white}
+.btn-primary:hover{background:#1d4ed8}
+.btn-danger{background:#FEE2E2;color:var(--red);border-color:#FECACA}
+.btn svg{width:13px;height:13px}
+.topbar-sep{width:1px;height:22px;background:var(--border);margin:0 2px}
+.last-run{font-size:11px;color:var(--text3)}
+.cards-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px;margin-bottom:24px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;position:relative;overflow:hidden;transition:.2s;cursor:pointer}
+.card:hover{box-shadow:var(--shadow-lg);border-color:var(--border2);transform:translateY(-1px)}
+.card-label{font-size:10.5px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.card-value{font-size:22px;font-weight:700;letter-spacing:-.5px;line-height:1}
+.card-sub{font-size:10.5px;color:var(--text3);margin-top:4px}
+.card-trend{font-size:10px;font-weight:500;margin-top:6px;display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:20px}
+.card-trend.up{background:#DCFCE7;color:#16a34a}
+.card-trend.hot{background:#FEE2E2;color:var(--red)}
+.card.accent-blue{border-left:3px solid var(--blue)}
+.card.accent-red{border-left:3px solid var(--red)}
+.card.accent-green{border-left:3px solid var(--green)}
+.card.accent-orange{border-left:3px solid var(--orange)}
+.card.accent-purple{border-left:3px solid var(--purple)}
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.filter-btn{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 11px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border2);color:var(--text2);background:var(--surface);cursor:pointer;transition:.15s}
+.filter-btn:hover{background:var(--bg);color:var(--text)}
+.filter-btn.active{background:var(--blue-light);border-color:var(--blue-mid);color:var(--blue)}
+.select-filter{height:30px;padding:0 10px;border-radius:20px;border:1px solid var(--border2);font-size:12px;font-family:inherit;color:var(--text2);background:var(--surface);cursor:pointer;outline:none}
+.toolbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.results-count{font-size:12px;color:var(--text3)}
+.bulk-bar{display:none;align-items:center;gap:8px;padding:8px 16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--r-lg);margin-bottom:12px}
+.bulk-bar.visible{display:flex}
+.bulk-bar-count{font-size:13px;font-weight:600;color:var(--blue)}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:1300px}
+thead th{padding:10px 14px;text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);background:var(--surface2);border-bottom:1px solid var(--border);white-space:nowrap}
+thead th:first-child{padding-left:16px}
+tbody tr{border-bottom:1px solid var(--border);transition:.15s;cursor:pointer}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#FAFBFF}
+tbody tr.selected{background:var(--blue-light)}
+tbody td{padding:12px 14px;vertical-align:middle}
+tbody td:first-child{padding-left:16px}
+.score-cell{display:flex;flex-direction:column;align-items:center;gap:3px}
+.score-ring{width:44px;height:44px;position:relative}
+.score-ring svg{width:44px;height:44px;transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:3.5}
+.score-ring .bg{stroke:#E5E7EB}
+.score-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;font-weight:700;letter-spacing:-.5px}
+.score-stack{font-size:10px;font-weight:600;color:var(--text3);display:flex;align-items:center;gap:2px}
+.stack-dot{width:5px;height:5px;background:var(--orange);border-radius:50%}
+.pills{display:flex;flex-wrap:wrap;gap:4px;max-width:280px}
+.pill{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.pill-lp{background:#FEE2E2;color:#991B1B}
+.pill-prob{background:#F5F3FF;color:#5B21B6}
+.pill-jdg{background:#FEF3C7;color:#92400E}
+.pill-tax{background:#FEF2F2;color:#B91C1C}
+.pill-fc{background:#FFEDD5;color:#9A3412}
+.pill-vac{background:#F0FDF4;color:#166534}
+.pill-abs{background:#EFF6FF;color:#1E40AF}
+.pill-heq{background:#ECFDF5;color:#065F46}
+.pill-hoa{background:#FDF4FF;color:#7E22CE}
+.pill-div{background:#FFF1F2;color:#9F1239}
+.pill-code{background:#FFFBEB;color:#92400E}
+.pill-inh{background:#F0F9FF;color:#075985}
+.pill-mtg{background:#FFF7ED;color:#9A3412}
+.pill-util{background:#F8FAFC;color:#475569}
+.action-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.action-call{background:#FEE2E2;color:var(--red)}
+.action-skip{background:#EFF6FF;color:var(--blue)}
+.action-sms{background:#ECFDF5;color:var(--green)}
+.action-ghl{background:#F5F3FF;color:var(--purple)}
+.action-mail{background:#FFFBEB;color:var(--orange)}
+.action-research{background:#F1F5F9;color:#475569}
+.action-dnc{background:#F1F5F9;color:#9CA3AF}
+.match-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px}
+.match-high{background:#DCFCE7;color:#166534}
+.match-medium{background:#FEF9C3;color:#854D0E}
+.match-low{background:#FEE2E2;color:#991B1B}
+.match-none{background:#F1F5F9;color:#6B7280}
+.skip-badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:500;padding:2px 8px;border-radius:20px}
+.skip-none{background:#F9FAFB;color:var(--text3);border:1px solid var(--border)}
+.skip-done{background:#DCFCE7;color:#166534}
+.skip-phone{background:#EFF6FF;color:var(--blue)}
+.skip-dnc{background:#FEE2E2;color:var(--red)}
+.links-btn{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;padding:5px 11px;border-radius:var(--r);border:1px solid var(--border2);color:var(--text2);background:var(--surface);cursor:pointer;transition:.15s;white-space:nowrap}
+.links-btn:hover{background:var(--bg);color:var(--text);border-color:var(--blue)}
+.doc-num{font-family:'SF Mono',Monaco,'Courier New',monospace;font-size:11.5px;font-weight:500;color:var(--text);letter-spacing:-.2px}
+.doc-stacked{display:inline-flex;align-items:center;gap:3px;margin-top:2px;font-size:10px;font-weight:600;color:var(--orange);background:var(--orange-light);padding:1px 6px;border-radius:20px}
+.addr-main{font-size:12.5px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.addr-sub{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.money{font-size:13px;font-weight:600}
+.money-owed{color:var(--red)}
+.money-val{color:var(--text)}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:500;opacity:0;pointer-events:none;transition:.2s}
+.drawer-overlay.open{opacity:1;pointer-events:all}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:520px;background:var(--surface);z-index:501;transform:translateX(100%);transition:.25s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;flex-shrink:0}
+.drawer-close{margin-left:auto;width:30px;height:30px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--text2);cursor:pointer;transition:.15s;flex-shrink:0}
+.drawer-close:hover{background:var(--bg)}
+.drawer-body{flex:1;overflow-y:auto;padding:20px 24px}
+.drawer-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0}
+.drawer-section{margin-bottom:24px}
+.drawer-section-title{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.detail-item{background:var(--surface2);border-radius:var(--r);padding:10px 12px}
+.detail-item-label{font-size:10.5px;color:var(--text3);font-weight:500;margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
+.detail-item-val{font-size:13px;font-weight:500;color:var(--text)}
+.score-breakdown{background:var(--surface2);border-radius:var(--r);overflow:hidden}
+.score-row{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--border)}
+.score-row:last-child{border-bottom:none}
+.score-row-label{font-size:12px;color:var(--text);flex:1}
+.score-row-bar{flex:2;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.score-row-fill{height:100%;border-radius:2px;background:var(--green)}
+.score-row-fill.neg{background:var(--red)}
+.score-row-val{font-size:12px;font-weight:700;min-width:36px;text-align:right}
+.score-row-val.pos{color:var(--green)}
+.score-row-val.neg{color:var(--red)}
+.timeline{position:relative;padding-left:20px}
+.timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-dot{position:absolute;left:-17px;top:3px;width:11px;height:11px;border-radius:50%;border:2px solid var(--surface)}
+.tl-dot.hot{background:var(--red);box-shadow:0 0 0 2px #FEE2E2}
+.tl-dot.warm{background:var(--orange);box-shadow:0 0 0 2px #FEF3C7}
+.tl-dot.cool{background:var(--blue);box-shadow:0 0 0 2px #DBEAFE}
+.tl-dot.base{background:var(--text3)}
+.tl-date{font-size:10.5px;color:var(--text3);font-weight:500;margin-bottom:2px}
+.tl-event{font-size:12.5px;font-weight:500;color:var(--text)}
+.tl-sub{font-size:11px;color:var(--text2)}
+.links-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:600;opacity:0;pointer-events:none;transition:.15s;display:flex;align-items:center;justify-content:center}
+.links-modal-overlay.open{opacity:1;pointer-events:all}
+.links-modal{background:var(--surface);border-radius:var(--r-lg);width:380px;box-shadow:var(--shadow-lg);overflow:hidden}
+.links-modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.links-modal-head h3{font-size:14px;font-weight:600}
+.links-modal-body{padding:8px 0}
+.link-item{display:flex;align-items:center;gap:10px;padding:10px 20px;transition:.15s;cursor:pointer;text-decoration:none}
+.link-item:hover{background:var(--bg)}
+.link-icon{width:30px;height:30px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.link-icon svg{width:14px;height:14px}
+.link-item-name{font-size:12.5px;font-weight:500;color:var(--text)}
+.link-item-url{font-size:11px;color:var(--text3)}
+.hot-radar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;margin-bottom:24px;box-shadow:var(--shadow)}
+.radar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.radar-head h2{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.fire-badge{display:inline-flex;align-items:center;gap:4px;background:var(--red-light);color:var(--red);font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.radar-items{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.radar-card{border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;cursor:pointer;transition:.15s;background:var(--surface2)}
+.radar-card:hover{border-color:var(--blue);background:var(--blue-light)}
+.radar-card-score{font-size:20px;font-weight:800;letter-spacing:-1px;color:var(--red)}
+.radar-card-name{font-size:12px;font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.radar-card-addr{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.radar-card-pills{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px}
+.tabs{display:flex;gap:2px;background:var(--surface2);border-radius:var(--r);padding:3px;border:1px solid var(--border);width:fit-content}
+.tab{padding:5px 14px;border-radius:6px;font-size:12.5px;font-weight:500;cursor:pointer;color:var(--text2);transition:.15s}
+.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tab-count{font-size:10px;background:var(--border);color:var(--text2);padding:1px 5px;border-radius:20px;margin-left:4px}
+.tab.active .tab-count{background:var(--blue);color:white}
+.ghl-not{background:#F1F5F9;color:var(--text3);border:1px solid var(--border);display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:500}
+.ghl-pushed{background:#F5F3FF;color:var(--purple);display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:500}
+.ghl-active{background:#ECFDF5;color:var(--green);display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:500}
+.owner-initials{width:36px;height:36px;border-radius:50%;background:var(--blue-light);color:var(--blue);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--blue)}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
+@media(max-width:1400px){.cards-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
-<header>
-  <div><h1>ORANGE COUNTY <span>FL</span><br>MOTIVATED SELLERS</h1></div>
-  <div class="meta" id="meta">Loading...<br>Source: Orange County Comptroller + RealForeclose<br>Scored by distress signal analysis</div>
-</header>
+<div class="app">
 
-<div class="stats">
-  <div class="stat-card red">   <div class="num" id="totalLeads">-</div><div class="label">Total Leads</div></div>
-  <div class="stat-card gold">  <div class="num" id="hotLeads">-</div> <div class="label">Lis Pendens</div></div>
-  <div class="stat-card purple"><div class="num" id="stackedCount">-</div><div class="label">Stacked</div></div>
-  <div class="stat-card green"> <div class="num" id="highCount">-</div> <div class="label">HIGH Match</div></div>
-  <div class="stat-card blue">  <div class="num" id="medCount">-</div>  <div class="label">MEDIUM Match</div></div>
-  <div class="stat-card orange"><div class="num" id="fcCount">-</div>   <div class="label">Active Auctions</div></div>
-  <div class="stat-card red">   <div class="num" id="fcExpired">-</div> <div class="label">Expired Auctions</div></div>
-  <div class="stat-card green"> <div class="num" id="dateRange">-</div> <div class="label">Date Range</div></div>
-</div>
-
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('leads',this)">
-    📋 Leads <span class="tab-count" id="tab-leads-count">-</span>
-  </button>
-  <button class="tab-btn" onclick="switchTab('foreclosures',this)">
-    🔨 Foreclosure Auctions <span class="tab-count" id="tab-fc-count">-</span>
-  </button>
-</div>
-
-<!-- LEADS TAB -->
-<div id="tab-leads" class="tab-content active">
-  <div class="toolbar">
-    <input type="text" id="searchBox" placeholder="Search name, address, legal ..." oninput="applyFilters()">
-    <div class="filter-group">
-      <label>Match:</label>
-      <button class="filter-btn f-all active" onclick="setConf('ALL')">All</button>
-      <button class="filter-btn f-high"       onclick="setConf('HIGH')">HIGH</button>
-      <button class="filter-btn f-medium"     onclick="setConf('MEDIUM')">MEDIUM</button>
-      <button class="filter-btn f-low"        onclick="setConf('LOW')">LOW</button>
-      <button class="filter-btn f-none"       onclick="setConf('NONE')">NONE</button>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-wrap">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      </div>
+      <div>
+        <div class="logo-name">PropSignal</div>
+        <div class="logo-tag">Lead Intelligence</div>
+      </div>
     </div>
-    <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
   </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr>
-        <th onclick="sortTable(0)">Score</th>
-        <th onclick="sortTable(1)">Doc #</th>
-        <th onclick="sortTable(2)">File Date</th>
-        <th onclick="sortTable(3)">Grantor (Lender)</th>
-        <th onclick="sortTable(4)">Grantee (Owner)</th>
-        <th onclick="sortTable(5)">Property Address</th>
-        <th onclick="sortTable(6)">Mailing Address</th>
-        <th onclick="sortTable(7)">Legal Description</th>
-        <th onclick="sortTable(8)">Assessed Value</th>
-        <th onclick="sortTable(9)">Amount Owed</th>
-        <th onclick="sortTable(10)">Match</th>
-        <th>Motivations</th>
-      </tr></thead>
-      <tbody id="tableBody"><tr><td colspan="12" class="loading">Loading leads...</td></tr></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- FORECLOSURES TAB -->
-<div id="tab-foreclosures" class="tab-content">
-  <div id="expiredAlerts" style="display:none"></div>
-  <div class="toolbar">
-    <input type="text" id="fcSearchBox" placeholder="Search address, case #, owner..." oninput="applyFcFilters()">
-    <div class="filter-group">
-      <label>Status:</label>
-      <button class="filter-btn f-all active" onclick="setFcFilter('ALL',this)">All</button>
-      <button class="filter-btn" onclick="setFcFilter('ACTIVE',this)">🟢 Active</button>
-      <button class="filter-btn" onclick="setFcFilter('EXPIRED',this)">🔴 Expired</button>
+  <div class="nav-sect">
+    <div class="nav-lbl">Workspace</div>
+    <div class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      Dashboard
+      <span class="nav-badge">6,904</span>
     </div>
-    <button class="btn-export" onclick="exportFcCSV()">⬇ Export CSV</button>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Hot Leads
+      <span class="nav-badge">161</span>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+      Fresh Filings
+      <span class="nav-badge blue">27</span>
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      Call Queue
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+      Skiptrace
+    </div>
   </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr>
-        <th onclick="sortFcTable(0)">Days Left</th>
-        <th onclick="sortFcTable(1)">Auction Date</th>
-        <th onclick="sortFcTable(2)">Status</th>
-        <th onclick="sortFcTable(3)">Address</th>
-        <th onclick="sortFcTable(4)">Owner</th>
-        <th onclick="sortFcTable(5)">Mailing Address</th>
-        <th onclick="sortFcTable(6)">Final Judgment</th>
-        <th onclick="sortFcTable(7)">Assessed Value</th>
-        <th onclick="sortFcTable(8)">Case #</th>
-        <th onclick="sortFcTable(9)">Parcel ID</th>
-        <th>Links</th>
-      </tr></thead>
-      <tbody id="fcTableBody"><tr><td colspan="11" class="loading">Loading foreclosures...</td></tr></tbody>
-    </table>
+  <div class="nav-sect">
+    <div class="nav-lbl">Workflows</div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+      GHL Export
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      Mailer Lists
+    </div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+      Reports
+    </div>
+  </div>
+  <div class="nav-sect">
+    <div class="nav-lbl">Settings</div>
+    <div class="nav-item">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+      Settings
+    </div>
+  </div>
+  <div class="sidebar-county">
+    <div class="county-badge">
+      <div class="county-dot"></div>
+      Orange County, FL
+    </div>
+    <div style="font-size:10px;color:var(--text3);margin-top:8px">Last sync: 26 Apr 2026 · 15:45 UTC</div>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input class="search-input" type="text" placeholder="Search owner, address, doc #, case #, motivation…" id="searchInput" oninput="filterLeads()">
+    </div>
+    <div class="topbar-sep"></div>
+    <button class="btn btn-ghost" onclick="toggleFilters()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
+      Filters
+    </button>
+    <div class="topbar-sep"></div>
+    <div class="last-run">Generated: Apr 26, 2026 · 15:45 UTC</div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" onclick="alert('Downloading CSV…')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Export CSV
+      </button>
+      <button class="btn btn-primary" onclick="alert('Pushing to GHL…')">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        Push to GHL
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="cards-grid">
+      <div class="card accent-blue" onclick="setFilter('all')">
+        <div class="card-label">Total Leads</div>
+        <div class="card-value">6,904</div>
+        <div class="card-sub">All scraped records</div>
+        <div class="card-trend up">▲ 234 today</div>
+      </div>
+      <div class="card accent-red" onclick="setFilter('hot')">
+        <div class="card-label">Hot Leads</div>
+        <div class="card-value" style="color:var(--red)">161</div>
+        <div class="card-sub">Score 80+</div>
+        <div class="card-trend hot">🔥 Lis Pendens</div>
+      </div>
+      <div class="card accent-orange" onclick="setFilter('stacked2')">
+        <div class="card-label">2+ Signals</div>
+        <div class="card-value">31</div>
+        <div class="card-sub">Stacked motivations</div>
+        <div class="card-trend up">▲ High priority</div>
+      </div>
+      <div class="card accent-red" onclick="setFilter('stacked3')">
+        <div class="card-label">3+ Signals</div>
+        <div class="card-value" style="color:var(--red)">8</div>
+        <div class="card-sub">Maximum distress</div>
+        <div class="card-trend hot">⚡ Call now</div>
+      </div>
+      <div class="card accent-blue">
+        <div class="card-label">New Today</div>
+        <div class="card-value">27</div>
+        <div class="card-sub">Fresh filings</div>
+        <div class="card-trend up">▲ Active auctions</div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-label">Est. Equity</div>
+        <div class="card-value" style="font-size:17px">$18.2M</div>
+        <div class="card-sub">Across hot leads</div>
+        <div class="card-trend up">▲ Avg $113K</div>
+      </div>
+      <div class="card accent-purple">
+        <div class="card-label">Skip Ready</div>
+        <div class="card-value">96</div>
+        <div class="card-sub">High match · no phone</div>
+        <div class="card-trend up">Run batch</div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-label">GHL Ready</div>
+        <div class="card-value">43</div>
+        <div class="card-sub">Skiptraced leads</div>
+        <div class="card-trend up">▲ Export now</div>
+      </div>
+    </div>
+
+    <div class="hot-radar">
+      <div class="radar-head">
+        <h2>
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;color:var(--red)"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.72 7.72L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5V2.05zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/></svg>
+          Hot Lead Radar
+          <span class="fire-badge">🔥 TOP 6 NOW</span>
+        </h2>
+        <button class="btn btn-ghost" onclick="setFilter('hot')">View all →</button>
+      </div>
+      <div class="radar-items" id="radarItems"></div>
+    </div>
+
+    <div id="filterBar" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow)">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);font-weight:600;margin-bottom:5px">Match</div>
+          <div style="display:flex;gap:5px">
+            <button class="filter-btn active" onclick="setMatchFilter(this,'all')">All</button>
+            <button class="filter-btn" onclick="setMatchFilter(this,'HIGH')">High</button>
+            <button class="filter-btn" onclick="setMatchFilter(this,'MEDIUM')">Medium</button>
+            <button class="filter-btn" onclick="setMatchFilter(this,'LOW')">Low</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);font-weight:600;margin-bottom:5px">Motivation</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap">
+            <button class="filter-btn" onclick="setMotivFilter(this,'Lis Pendens')">Lis Pendens</button>
+            <button class="filter-btn" onclick="setMotivFilter(this,'Probate')">Probate</button>
+            <button class="filter-btn" onclick="setMotivFilter(this,'Judgment')">Judgment</button>
+            <button class="filter-btn" onclick="setMotivFilter(this,'Foreclosure')">Foreclosure</button>
+            <button class="filter-btn" onclick="setMotivFilter(this,'Delinquent Taxes')">Delinquent Taxes</button>
+            <button class="filter-btn" onclick="setMotivFilter(this,'HOA Lien')">HOA Lien</button>
+            <button class="filter-btn" onclick="setMotivFilter(this,'Absentee Owner')">Absentee</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);font-weight:600;margin-bottom:5px">Min Score</div>
+          <select class="select-filter" onchange="activeFilters.score=this.value?parseInt(this.value):null;applyFilters()">
+            <option value="">All</option>
+            <option value="80">80+ Hot</option>
+            <option value="60">60+ Warm</option>
+            <option value="40">40+ Cool</option>
+          </select>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);font-weight:600;margin-bottom:5px">Stacked</div>
+          <select class="select-filter" onchange="activeFilters.stack=this.value?parseInt(this.value):null;applyFilters()">
+            <option value="">Any</option>
+            <option value="2">2+ signals</option>
+            <option value="3">3+ signals</option>
+          </select>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);font-weight:600;margin-bottom:5px">Skiptrace</div>
+          <div style="display:flex;gap:5px">
+            <button class="filter-btn" onclick="setSkipFilter(this,'none')">Not done</button>
+            <button class="filter-btn" onclick="setSkipFilter(this,'phone')">Phone found</button>
+            <button class="filter-btn" onclick="setSkipFilter(this,'done')">Done</button>
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="clearFilters()">Clear all</button>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="tabs">
+        <div class="tab active" onclick="setTab(this,'all')">All Leads <span class="tab-count" id="allCount">6,904</span></div>
+        <div class="tab" onclick="setTab(this,'hot')">Hot <span class="tab-count" id="hotCount">161</span></div>
+        <div class="tab" onclick="setTab(this,'auction')">Auctions <span class="tab-count">27</span></div>
+        <div class="tab" onclick="setTab(this,'skipready')">Skip Ready <span class="tab-count">96</span></div>
+      </div>
+      <span class="results-count" id="resultsCount">Showing 10 of 6,904 leads</span>
+      <div class="toolbar-right">
+        <button class="btn btn-ghost" onclick="selectAll()">Select All</button>
+        <button class="btn btn-ghost">Sort</button>
+      </div>
+    </div>
+
+    <div class="bulk-bar" id="bulkBar">
+      <span class="bulk-bar-count" id="bulkCount">0 selected</span>
+      <button class="btn btn-ghost">Skiptrace</button>
+      <button class="btn btn-ghost">Push to GHL</button>
+      <button class="btn btn-ghost">Mark Reviewed</button>
+      <button class="btn btn-ghost">Assign Caller</button>
+      <button class="btn btn-ghost">Download CSV</button>
+      <button class="btn btn-danger">Archive</button>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table id="leadsTable">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="masterCheck" onchange="toggleAllCheckboxes(this)"></th>
+              <th>Score</th>
+              <th>Doc #</th>
+              <th>Filed</th>
+              <th>Grantor / Lender</th>
+              <th>Grantee / Owner</th>
+              <th>Property Address</th>
+              <th>Mailing Address</th>
+              <th>Assessed Value</th>
+              <th>Amt Owed</th>
+              <th>Match</th>
+              <th>Motivations</th>
+              <th>Next Action</th>
+              <th>Skiptrace</th>
+              <th>Links</th>
+            </tr>
+          </thead>
+          <tbody id="leadsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="owner-initials" id="drawerInitials">SK</div>
+    <div style="flex:1">
+      <div style="font-size:15px;font-weight:700" id="drawerName">SAFADY SANDRA K</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:2px" id="drawerAddr">2943 Woolridge Dr, Orlando FL 32837</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px" id="drawerPills"></div>
+    </div>
+    <div class="drawer-close" onclick="closeDrawer()">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </div>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-section">
+      <div id="drawerScoreBanner" style="display:flex;align-items:center;gap:10px;background:var(--red-light);border-radius:var(--r);padding:12px 16px;margin-bottom:16px">
+        <div style="font-size:32px;font-weight:800;letter-spacing:-2px" id="drawerScore">97</div>
+        <div>
+          <div style="font-size:12px;font-weight:600" id="drawerHotLabel">HOT LEAD</div>
+          <div style="font-size:11px;margin-top:2px" id="drawerStackInfo">×3 stacked motivations</div>
+          <div id="drawerAction" style="margin-top:6px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Owner & Property</div>
+      <div class="detail-grid" id="drawerDetails"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Score Breakdown</div>
+      <div class="score-breakdown" id="drawerScoreBreak"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Motivation Timeline</div>
+      <div class="timeline" id="drawerTimeline"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">GHL & Outreach Status</div>
+      <div class="detail-grid">
+        <div class="detail-item"><div class="detail-item-label">GHL Pipeline</div><div class="detail-item-val" id="drawerGHL"></div></div>
+        <div class="detail-item"><div class="detail-item-label">Skiptrace</div><div class="detail-item-val" id="drawerSkip"></div></div>
+        <div class="detail-item"><div class="detail-item-label">Last Contacted</div><div class="detail-item-val" id="drawerContact">—</div></div>
+        <div class="detail-item"><div class="detail-item-label">Assigned To</div><div class="detail-item-val">Unassigned</div></div>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Deal Angle</div>
+      <div style="background:var(--blue-light);border-radius:var(--r);padding:12px 14px;font-size:12.5px;color:#1E3A8A;line-height:1.6" id="drawerAngle"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Notes</div>
+      <textarea style="width:100%;border:1px solid var(--border2);border-radius:var(--r);padding:10px;font-family:inherit;font-size:12.5px;resize:vertical;min-height:80px;color:var(--text);background:var(--surface)" placeholder="Add notes about this lead…"></textarea>
+    </div>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-primary" style="flex:1" onclick="alert('Pushing to GHL…')">Push to GHL</button>
+    <button class="btn btn-ghost" onclick="alert('Opening skiptrace…')">Skiptrace</button>
+    <button class="btn btn-ghost">Call Now</button>
+    <button class="btn btn-ghost">SMS</button>
   </div>
 </div>
 
-<footer>Orange County Comptroller + RealForeclose public records — For investment research only</footer>
+<div class="links-modal-overlay" id="linksModalOverlay" onclick="closeLinksModal()">
+  <div class="links-modal" onclick="event.stopPropagation()">
+    <div class="links-modal-head">
+      <h3>Public Record Links</h3>
+      <div class="drawer-close" onclick="closeLinksModal()">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </div>
+    </div>
+    <div class="links-modal-body" id="linksModalBody"></div>
+  </div>
+</div>
 
 <script>
-var LEADS_URL = 'https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/main/data/output.json';
-var FC_URL    = 'https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/main/data/foreclosures.json';
-var allLeads=[], allFc=[], activeConf='ALL', activeFcFilter='ALL';
+const LEADS = [
+  {
+    id:1,score:100,stack:3,
+    docNum:'2025-CA-005717-O',docType:'Foreclosure Auction',
+    filed:'2026-04-28',grantor:'WELLS FARGO BANK NA',
+    grantee:'SAFADY SANDRA K',
+    propAddr:'2943 Woolridge Dr, Orlando FL 32837',
+    mailAddr:'2943 Woolridge Dr, Orlando FL 32837-9072',
+    assessed:112760,owed:135021,match:'HIGH',
+    motivations:['Lis Pendens','Foreclosure','Delinquent Taxes'],
+    action:'Call Now',skipStatus:'none',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Lis Pendens',val:35,pos:true},{label:'Active Auction',val:30,pos:true},
+      {label:'Delinquent Taxes',val:20,pos:true},{label:'Absentee Owner',val:15,pos:true},
+      {label:'Matched Address',val:5,pos:true},{label:'Low Equity',val:-5,pos:false}
+    ],
+    timeline:[
+      {date:'2024-08-12',event:'Delinquency notice filed',sub:'Orange County Tax Collector',cls:'warm'},
+      {date:'2025-09-01',event:'Lis Pendens recorded',sub:'Circuit Court case 2025-CA-005717-O',cls:'hot'},
+      {date:'2026-03-14',event:'Foreclosure judgment entered',sub:'Final judgment $135,021',cls:'hot'},
+      {date:'2026-04-28',event:'Auction scheduled',sub:'Active — 3 days remaining',cls:'hot'}
+    ],
+    angle:'Owner facing foreclosure auction in 3 days. Property is underwater — owed exceeds assessed value. High motivation to sell quickly. Approach: cash offer, fast close, subject-to. Absentee mailing address suggests vacant situation.',
+    links:[
+      {name:'Court File',url:'https://www.myorangeclerk.com',cat:'Court',icon:'court'},
+      {name:'Foreclosure Case',url:'https://www.realforeclose.com',cat:'Auction',icon:'auction'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'},
+      {name:'Recorded Docs',url:'https://www.myorangeclerk.com/official-records',cat:'Deeds',icon:'deed'}
+    ]
+  },
+  {
+    id:2,score:100,stack:3,
+    docNum:'2025-CA-008843-O',docType:'Foreclosure Auction',
+    filed:'2026-04-28',grantor:'BANK OF AMERICA NA',
+    grantee:'PERSAUD AVINASH',
+    propAddr:'101 W Grant St, Orlando FL 32806',
+    mailAddr:'101 W Grant St, Orlando FL 32806-3931',
+    assessed:501950,owed:469124,match:'HIGH',
+    motivations:['Foreclosure','Lis Pendens','HOA Lien'],
+    action:'Call Now',skipStatus:'none',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Lis Pendens',val:35,pos:true},{label:'Active Auction',val:30,pos:true},
+      {label:'HOA Lien',val:15,pos:true},{label:'High Value Property',val:20,pos:true},
+      {label:'Matched Address',val:5,pos:true},{label:'No mailing variance',val:-5,pos:false}
+    ],
+    timeline:[
+      {date:'2024-11-05',event:'HOA lien recorded',sub:'Unpaid association dues',cls:'warm'},
+      {date:'2025-10-15',event:'Lis Pendens filed',sub:'Bank of America NA',cls:'hot'},
+      {date:'2026-04-28',event:'Auction date set',sub:'Active — today',cls:'hot'}
+    ],
+    angle:'High-value property with active auction today. HOA lien stacked on foreclosure. Owner owes less than assessed — potential equity play if redemption window still open. Contact immediately.',
+    links:[
+      {name:'Court File',url:'https://www.myorangeclerk.com',cat:'Court',icon:'court'},
+      {name:'Foreclosure Case',url:'https://www.realforeclose.com',cat:'Auction',icon:'auction'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'}
+    ]
+  },
+  {
+    id:3,score:100,stack:5,
+    docNum:'2024-CA-002251-O',docType:'Foreclosure Auction',
+    filed:'2026-04-29',grantor:'CITIBANK NA',
+    grantee:'UNSALAN JOHN CAN, UNSALAN DUYGU',
+    propAddr:'5001 Latrobe Dr, Windermere FL 34786',
+    mailAddr:'5001 Latrobe Dr, Windermere FL 34786-8914',
+    assessed:1971063,owed:2020376,match:'HIGH',
+    motivations:['Lis Pendens','Foreclosure','Probate','Judgment','Delinquent Taxes'],
+    action:'Call Now',skipStatus:'phone',ghlStatus:'pushed',
+    scoreBreak:[
+      {label:'Lis Pendens',val:35,pos:true},{label:'Probate',val:25,pos:true},
+      {label:'Judgment',val:20,pos:true},{label:'Delinquent Taxes',val:20,pos:true},
+      {label:'Active Auction',val:15,pos:true},{label:'Multiple owners',val:-15,pos:false}
+    ],
+    timeline:[
+      {date:'2023-06-01',event:'Probate case opened',sub:'Orange County Probate Court',cls:'warm'},
+      {date:'2024-01-18',event:'Judgment recorded',sub:'Civil judgment $58,000',cls:'warm'},
+      {date:'2024-05-22',event:'Delinquent tax notice',sub:'2 years delinquent',cls:'warm'},
+      {date:'2024-09-03',event:'Lis Pendens filed',sub:'Citibank NA',cls:'hot'},
+      {date:'2026-04-29',event:'Auction scheduled',sub:'Tomorrow — URGENT',cls:'hot'}
+    ],
+    angle:'Maximum distress — 5 stacked signals. Luxury property ($2M) going to auction tomorrow. Probate + judgment + taxes + foreclosure. Owner desperate. Cash offer, fast close. Phone already found — call immediately.',
+    links:[
+      {name:'Court File',url:'https://www.myorangeclerk.com',cat:'Court',icon:'court'},
+      {name:'Probate Case',url:'https://www.myorangeclerk.com/probate',cat:'Probate',icon:'prob'},
+      {name:'Civil Judgment',url:'https://www.myorangeclerk.com',cat:'Judgment',icon:'jdg'},
+      {name:'Foreclosure Case',url:'https://www.realforeclose.com',cat:'Auction',icon:'auction'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'}
+    ]
+  },
+  {
+    id:4,score:88,stack:2,
+    docNum:'2025-PR-011204-O',docType:'Probate',
+    filed:'2026-03-15',grantor:'ESTATE OF MARGARET JONES',
+    grantee:'JONES ROBERT T',
+    propAddr:'4712 Curry Ford Rd, Orlando FL 32812',
+    mailAddr:'8801 Pine Ridge Ln, Kissimmee FL 34744',
+    assessed:224500,owed:0,match:'HIGH',
+    motivations:['Probate','Absentee Owner'],
+    action:'SMS Blast',skipStatus:'done',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Probate',val:35,pos:true},{label:'Absentee Owner',val:25,pos:true},
+      {label:'Inherited Property',val:20,pos:true},{label:'Mailing mismatch',val:8,pos:true},
+      {label:'No active liens',val:0,pos:true},{label:'Low urgency',val:0,pos:false}
+    ],
+    timeline:[
+      {date:'2026-01-08',event:'Death certificate recorded',sub:'Margaret Jones — property owner',cls:'base'},
+      {date:'2026-02-14',event:'Probate petition filed',sub:'Case 2025-PR-011204-O',cls:'warm'},
+      {date:'2026-03-15',event:'Personal rep appointed',sub:'Robert T Jones named PR',cls:'cool'}
+    ],
+    angle:'Inherited property in probate. Heir lives in Kissimmee — absentee from the Orlando property. Likely motivated to sell and split proceeds. Approach: empathetic outreach, fair cash offer, probate experience a plus.',
+    links:[
+      {name:'Probate Case',url:'https://www.myorangeclerk.com',cat:'Probate',icon:'prob'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Recorded Deed',url:'https://www.myorangeclerk.com/official-records',cat:'Deeds',icon:'deed'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'}
+    ]
+  },
+  {
+    id:5,score:82,stack:2,
+    docNum:'2026-TX-003381-O',docType:'Tax Deed',
+    filed:'2026-02-20',grantor:'ORANGE COUNTY TAX COLLECTOR',
+    grantee:'HAMILTON DELROY A',
+    propAddr:'1839 Fernwood Blvd, Orlando FL 32803',
+    mailAddr:'PO Box 54213, Orlando FL 32854',
+    assessed:167300,owed:14880,match:'MEDIUM',
+    motivations:['Tax Deed','Delinquent Taxes','Absentee Owner'],
+    action:'Skiptrace',skipStatus:'none',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Tax Deed Filed',val:30,pos:true},{label:'Delinquent Taxes',val:20,pos:true},
+      {label:'Absentee Owner',val:15,pos:true},{label:'PO Box mailing',val:10,pos:true},
+      {label:'Medium match confidence',val:-8,pos:false},{label:'No other liens',val:5,pos:true}
+    ],
+    timeline:[
+      {date:'2024-07-01',event:'Tax delinquency — Year 1',sub:'$6,200 unpaid',cls:'warm'},
+      {date:'2025-07-01',event:'Tax delinquency — Year 2',sub:'$8,680 total balance',cls:'warm'},
+      {date:'2026-02-20',event:'Tax deed application filed',sub:'Orange County Tax Collector',cls:'hot'}
+    ],
+    angle:'Absentee owner with PO Box — harder to reach. 2-year tax delinquency leading to tax deed sale. Owner may not know or may be unable to pay. Skiptrace first to find a direct number.',
+    links:[
+      {name:'Tax Deed Application',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'}
+    ]
+  },
+  {
+    id:6,score:79,stack:2,
+    docNum:'2026-CI-007792-O',docType:'Judgment',
+    filed:'2026-01-30',grantor:'FIRSTMARK CREDIT UNION',
+    grantee:'WASHINGTON DARIUS L',
+    propAddr:'3305 Raleigh St, Orlando FL 32805',
+    mailAddr:'3305 Raleigh St, Orlando FL 32805',
+    assessed:138900,owed:42300,match:'HIGH',
+    motivations:['Judgment','HOA Lien','Mortgage Default'],
+    action:'Call Now',skipStatus:'phone',ghlStatus:'active',
+    scoreBreak:[
+      {label:'Judgment',val:25,pos:true},{label:'HOA Lien',val:20,pos:true},
+      {label:'Mortgage Default',val:20,pos:true},{label:'High Match',val:10,pos:true},
+      {label:'Phone verified',val:5,pos:true},{label:'Owner-occupied',val:-1,pos:false}
+    ],
+    timeline:[
+      {date:'2025-06-10',event:'Mortgage default notice',sub:'FirstMark Credit Union',cls:'warm'},
+      {date:'2025-09-22',event:'HOA lien recorded',sub:'$4,800 unpaid dues',cls:'warm'},
+      {date:'2026-01-30',event:'Civil judgment entered',sub:'$42,300 judgment',cls:'hot'}
+    ],
+    angle:'Triple-stacked: judgment + HOA lien + mortgage default. Phone already verified. Owner-occupied — motivated but may be in denial. Best approach: empathetic call, help them see fast sale as the relief they need. Already in GHL.',
+    links:[
+      {name:'Court File',url:'https://www.myorangeclerk.com',cat:'Court',icon:'court'},
+      {name:'HOA Lien Document',url:'https://www.myorangeclerk.com/official-records',cat:'Deeds',icon:'deed'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'}
+    ]
+  },
+  {
+    id:7,score:71,stack:1,
+    docNum:'2025-DN-014455-O',docType:'Divorce',
+    filed:'2026-03-04',grantor:'CIRCUIT COURT FAMILY DIV',
+    grantee:'OKONKWO CHIOMA E',
+    propAddr:'6712 Westgate Dr, Orlando FL 32835',
+    mailAddr:'445 Sandpiper Cir, Ocoee FL 34761',
+    assessed:289400,owed:0,match:'MEDIUM',
+    motivations:['Divorce','Absentee Owner'],
+    action:'Send Mailer',skipStatus:'none',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Divorce filing',val:30,pos:true},{label:'Absentee',val:20,pos:true},
+      {label:'No liens or judgments',val:0,pos:true},{label:'Medium match',val:-5,pos:false},
+      {label:'High equity estimate',val:15,pos:true},{label:'Clean title',val:11,pos:true}
+    ],
+    timeline:[
+      {date:'2026-01-17',event:'Divorce petition filed',sub:'Circuit Court Family Division',cls:'warm'},
+      {date:'2026-03-04',event:'Deed recorded — name change',sub:'Title updated post-separation',cls:'cool'}
+    ],
+    angle:'Divorce situation — owner moved to Ocoee, property still in Orlando. High equity, no liens. Likely ordered to sell or needing cash split. Best approached with a mailer or respectful call.',
+    links:[
+      {name:'Divorce Case',url:'https://www.myorangeclerk.com',cat:'Court',icon:'court'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Recorded Deed',url:'https://www.myorangeclerk.com/official-records',cat:'Deeds',icon:'deed'}
+    ]
+  },
+  {
+    id:8,score:68,stack:1,
+    docNum:'2026-CV-002219-O',docType:'Code Violation',
+    filed:'2026-02-11',grantor:'ORANGE COUNTY CODE ENF',
+    grantee:'PATEL RAJIV M',
+    propAddr:'2214 Mercy Dr, Orlando FL 32808',
+    mailAddr:'5500 Diplomat Circle Apt 112, Orlando FL 32810',
+    assessed:96700,owed:8200,match:'MEDIUM',
+    motivations:['Code Violation','Absentee Owner','Vacant Property'],
+    action:'Skiptrace',skipStatus:'none',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Code Violation',val:20,pos:true},{label:'Vacant Property',val:20,pos:true},
+      {label:'Absentee',val:15,pos:true},{label:'Fines accruing',val:13,pos:true},
+      {label:'Medium match',val:-8,pos:false},{label:'Low assessed value',val:8,pos:true}
+    ],
+    timeline:[
+      {date:'2025-10-30',event:'Vacant property notice',sub:'Orange County Code Enforcement',cls:'cool'},
+      {date:'2026-01-15',event:'First code violation citation',sub:'$4,100 fine',cls:'warm'},
+      {date:'2026-02-11',event:'Second citation issued',sub:'$4,100 additional — escalating',cls:'hot'}
+    ],
+    angle:'Vacant + absentee + escalating code violations. Fines growing. Owner may be overwhelmed. Skiptrace the apartment address. Approach: help them get out from under the violations fast.',
+    links:[
+      {name:'Code Enforcement Record',url:'https://www.ocfl.net/code',cat:'Code',icon:'court'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'}
+    ]
+  },
+  {
+    id:9,score:61,stack:1,
+    docNum:'2026-MT-009112-O',docType:'Mortgage',
+    filed:'2026-04-01',grantor:'QUICKEN LOANS LLC',
+    grantee:'RIVERA MARCOS A & SOFIA',
+    propAddr:'880 S Goldenrod Rd Apt 14, Orlando FL 32822',
+    mailAddr:'880 S Goldenrod Rd Apt 14, Orlando FL 32822',
+    assessed:178200,owed:192500,match:'HIGH',
+    motivations:['Mortgage Default','High Equity'],
+    action:'Research First',skipStatus:'done',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Mortgage Default',val:30,pos:true},{label:'High match',val:10,pos:true},
+      {label:'Skiptraced',val:5,pos:true},{label:'Underwater slightly',val:-10,pos:false},
+      {label:'No additional liens',val:0,pos:true},{label:'Condo unit',val:-4,pos:false}
+    ],
+    timeline:[
+      {date:'2026-03-01',event:'Default notice sent',sub:'Quicken Loans LLC',cls:'warm'},
+      {date:'2026-04-01',event:'Mortgage default recorded',sub:'Public record filed',cls:'hot'}
+    ],
+    angle:'Early stage default — may still be saveable. Slightly underwater on a condo. Research condo docs and HOA status first. Good for subject-to or short sale negotiation if lender cooperates.',
+    links:[
+      {name:'Mortgage Document',url:'https://www.myorangeclerk.com/official-records',cat:'Deeds',icon:'deed'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'},
+      {name:'Tax Collector',url:'https://www.octaxcol.com',cat:'Tax',icon:'tax'}
+    ]
+  },
+  {
+    id:10,score:55,stack:1,
+    docNum:'2026-UT-000887-O',docType:'Utility Lien',
+    filed:'2026-03-22',grantor:'ORLANDO UTILITIES COMMISSION',
+    grantee:'THOMPSON BARBARA J',
+    propAddr:'1102 W 46th St, Orlando FL 32839',
+    mailAddr:'PO Box 18834, Orlando FL 32860',
+    assessed:111800,owed:3400,match:'LOW',
+    motivations:['Utility Lien','Absentee Owner'],
+    action:'Review Match',skipStatus:'none',ghlStatus:'not',
+    scoreBreak:[
+      {label:'Utility Lien',val:15,pos:true},{label:'Absentee',val:10,pos:true},
+      {label:'PO Box — hard to reach',val:8,pos:true},{label:'Low match confidence',val:-18,pos:false},
+      {label:'Small lien amount',val:-5,pos:false},{label:'No other signals',val:0,pos:false}
+    ],
+    timeline:[
+      {date:'2025-12-01',event:'Utility bill unpaid — 90 days',sub:'OUC notice',cls:'base'},
+      {date:'2026-03-22',event:'Utility lien recorded',sub:'$3,400 OUC lien',cls:'cool'}
+    ],
+    angle:'Low priority — single small utility lien, low match confidence. Review match accuracy before outreach. If confirmed, could be a distress signal on a potentially vacant property.',
+    links:[
+      {name:'Utility Lien Document',url:'https://www.myorangeclerk.com/official-records',cat:'Deeds',icon:'deed'},
+      {name:'Property Appraiser',url:'https://www.ocpafl.org',cat:'Property',icon:'prop'}
+    ]
+  }
+];
 
-function switchTab(tab,btn){
-  document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
-  document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
-  document.getElementById('tab-'+tab).classList.add('active');
-  btn.classList.add('active');
+const pillMap = {
+  'Lis Pendens':{cls:'pill-lp',icon:'⚖'},
+  'Foreclosure':{cls:'pill-fc',icon:'🏚'},
+  'Probate':{cls:'pill-prob',icon:'📋'},
+  'Judgment':{cls:'pill-jdg',icon:'⚠'},
+  'Delinquent Taxes':{cls:'pill-tax',icon:'💸'},
+  'Tax Deed':{cls:'pill-tax',icon:'🏛'},
+  'HOA Lien':{cls:'pill-hoa',icon:'🏘'},
+  'Absentee Owner':{cls:'pill-abs',icon:'📍'},
+  'Vacant Property':{cls:'pill-vac',icon:'🏠'},
+  'High Equity':{cls:'pill-heq',icon:'📈'},
+  'Divorce':{cls:'pill-div',icon:'⚡'},
+  'Code Violation':{cls:'pill-code',icon:'🚨'},
+  'Inherited Property':{cls:'pill-inh',icon:'🔑'},
+  'Mortgage Default':{cls:'pill-mtg',icon:'🏦'},
+  'Utility Lien':{cls:'pill-util',icon:'⚡'}
+};
+const actionMap = {
+  'Call Now':{cls:'action-call',icon:'📞'},
+  'Skiptrace':{cls:'action-skip',icon:'🔍'},
+  'SMS Blast':{cls:'action-sms',icon:'💬'},
+  'Push to GHL':{cls:'action-ghl',icon:'⬆'},
+  'Send Mailer':{cls:'action-mail',icon:'✉'},
+  'Research First':{cls:'action-research',icon:'🔎'},
+  'Review Match':{cls:'action-research',icon:'✓'},
+  'Do Not Contact':{cls:'action-dnc',icon:'🚫'}
+};
+const linkIconSVG = {
+  court:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>`,
+  auction:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7H5a2 2 0 00-2 2v8h2v-4h2v4h2V9a2 2 0 00-2-2zm0 4H5V9h2v2zm7-4h-4v10h2v-4h2a2 2 0 002-2V9a2 2 0 00-2-2zm0 4h-2V9h2v2zM22 9h-2V7h-2v2h-2v2h2v6h2v-6h2V9z"/></svg>`,
+  prop:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>`,
+  tax:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>`,
+  deed:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>`,
+  prob:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>`,
+  jdg:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>`
+};
+const linkColors={court:'#EFF6FF',auction:'#FEF2F2',prop:'#ECFDF5',tax:'#FFFBEB',deed:'#F5F3FF',prob:'#F5F3FF',jdg:'#FFFBEB'};
+const linkText={court:'#2563EB',auction:'#DC2626',prop:'#059669',tax:'#D97706',deed:'#7C3AED',prob:'#7C3AED',jdg:'#D97706'};
+
+let activeFilters={match:'all',motivation:null,score:null,stack:null,skip:null};
+let selectedIds=new Set();
+let currentTab='all';
+
+function makePill(m){const p=pillMap[m]||{cls:'pill-abs',icon:'•'};return`<span class="pill ${p.cls}">${p.icon} ${m}</span>`}
+function makeAction(a){const am=actionMap[a]||{cls:'action-research',icon:'•'};return`<span class="action-badge ${am.cls}">${am.icon} ${a}</span>`}
+function makeMatch(m){const mc={HIGH:'match-high',MEDIUM:'match-medium',LOW:'match-low'};return`<span class="match-badge ${mc[m]||'match-none'}">${m}</span>`}
+function makeSkip(s){const sc={none:'skip-none',done:'skip-done',phone:'skip-phone',dnc:'skip-dnc'};const sl={none:'Not run',done:'Skiptraced',phone:'Phone found',dnc:'DNC'};return`<span class="skip-badge ${sc[s]}">${sl[s]||s}</span>`}
+function fmt(n){return n?'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'—'}
+function fmtDate(d){const dt=new Date(d);return(dt.getMonth()+1).toString().padStart(2,'0')+'/'+dt.getDate().toString().padStart(2,'0')+'/'+dt.getFullYear()}
+
+function makeScoreRing(score,stack){
+  const pct=score/100;
+  const circ=126;
+  const dash=pct*circ;
+  const color=score>=80?'#DC2626':score>=60?'#D97706':'#2563EB';
+  return`<div class="score-cell"><div class="score-ring"><svg viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="20"/><circle class="bg" cx="22" cy="22" r="20" stroke="${color}" stroke-dasharray="${dash} ${circ}" stroke-linecap="round" fill="none" stroke-width="3.5"/></svg><div class="score-val" style="color:${color}">${score}</div></div><div class="score-stack"><div class="stack-dot"></div>×${stack}</div></div>`
 }
 
-function scoreColor(s){
-  if(s>=70) return '#c53030';
-  if(s>=40) return '#e53e3e';
-  if(s>=25) return '#d69e2e';
-  return '#38a169';
-}
-
-function badge(flag){
-  var m={
-    lis_pendens:['LIS PENDENS','#e53e3e'],
-    tax_deed:['TAX DEED','#c53030'],
-    lien:['LIEN','#3182ce'],
-    multiple_liens:['LIEN','#3182ce'],
-    judgment:['JUDGMENT','#d69e2e'],
-    probate:['PROBATE','#805ad5'],
-    divorce:['DIVORCE','#319795'],
-    divorce_bankruptcy:['DIVORCE','#319795'],
-    death_certificate:['DEATH CERT','#1a202c'],
-    notice_of_commencement:['NOC','#718096'],
-    foreclosure_auction:['🔨 AUCTION','#c53030'],
-  };
-  var lb=m[flag]||[flag.toUpperCase().replace(/_/g,' '),'#718096'];
-  return '<span style="background:'+lb[1]+';color:#fff;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:700;margin-right:2px;margin-bottom:2px;display:inline-block">'+lb[0]+'</span>';
-}
-
-function motivationTags(lead){
-  var types = lead.stacked_types || [];
-  if(typeof types === 'string') types = types.split('+').map(function(t){return t.trim();});
-  if(!types.length && lead.document_type) types = [lead.document_type];
-  return types.map(function(t){
-    return '<span class="mot-tag">'+t+'</span>';
-  }).join('');
-}
-
-function stackedBadge(lead){
-  if(!lead.stacked) return '';
-  var cnt = lead.motivation_count || 2;
-  var isAuction = (lead.stacked_types||[]).indexOf('Foreclosure Auction') >= 0 ||
-                  (typeof lead.stacked_types === 'string' && lead.stacked_types.includes('Foreclosure Auction'));
-  var color = isAuction ? '#c53030' : '#6b46c1';
-  return '<span style="background:'+color+';color:#fff;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;display:inline-block;margin-top:2px">🔥 '+cnt+'x STACKED</span>';
-}
-
-function auctionBadge(lead){
-  if(!lead.auction_date) return '';
-  var days = lead.auction_days_left;
-  var color = days <= 7 ? '#c53030' : days <= 14 ? '#d69e2e' : '#276749';
-  return '<span style="background:'+color+';color:#fff;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;display:inline-block;margin-top:2px">⚖️ AUCTION '+lead.auction_date+' ('+days+'d)</span>';
-}
-
-function trunc(s,n){return s&&s.length>n?s.slice(0,n)+'...':s||'';}
-
-function addrCell(addr,fallback){
-  if(addr&&addr.trim()) return '<span>'+trunc(addr,55)+'</span>';
-  if(fallback) return '<span class="missing">—</span><a class="lookup-link" href="'+fallback+'" target="_blank">🔍 lookup</a>';
-  return '<span class="missing">—</span>';
-}
-
-function confBadge(conf,reason){
-  var c=conf||'NONE';
-  var tip=reason?(' title="'+reason.replace(/"/g,"'")+'"'):'';
-  return '<span class="conf-badge conf-'+c+'"'+tip+'>'+c+'</span>';
-}
-
-function rowClass(lead){
-  var cls = 'lead-row';
-  var hasAuction = !!lead.auction_date;
-  var isStacked  = !!lead.stacked;
-  if(hasAuction && isStacked) cls += ' stacked-auction-row';
-  else if(hasAuction) cls += ' auction-row';
-  else if(isStacked)  cls += ' stacked-row';
-  return cls;
-}
-
-function loadLeads(){
-  fetch(LEADS_URL+'?t='+Date.now())
-  .then(function(r){return r.json();})
-  .then(function(data){
-    allLeads = data.leads||[];
-    document.getElementById('totalLeads').textContent  = allLeads.length;
-    document.getElementById('hotLeads').textContent    = allLeads.filter(function(l){return (l.document_type||'').toLowerCase().includes('lis pendens');}).length;
-    document.getElementById('highCount').textContent   = allLeads.filter(function(l){return l.match_confidence==='HIGH';}).length;
-    document.getElementById('medCount').textContent    = allLeads.filter(function(l){return l.match_confidence==='MEDIUM';}).length;
-    document.getElementById('stackedCount').textContent= allLeads.filter(function(l){return l.stacked;}).length;
-    document.getElementById('tab-leads-count').textContent = allLeads.length;
-    document.getElementById('meta').innerHTML='Generated: '+(data.generated_at||'').slice(0,16).replace('T',' ')+' UTC<br>Source: Orange County Comptroller + RealForeclose<br>Scored by distress signal analysis';
-    if(allLeads.length>0){
-      var dates=allLeads.map(function(l){return l.file_date;}).filter(Boolean).sort();
-      document.getElementById('dateRange').textContent=(dates[0]||'').slice(0,5)+' - '+(dates[dates.length-1]||'').slice(0,5);
-    }
-    applyFilters();
-  })
-  .catch(function(e){document.getElementById('tableBody').innerHTML='<tr><td colspan="12" class="loading">Error: '+e.message+'</td></tr>';});
-}
-
-function loadForeclosures(){
-  fetch(FC_URL+'?t='+Date.now())
-  .then(function(r){return r.json();})
-  .then(function(data){
-    allFc = data.foreclosures||[];
-    var active  = allFc.filter(function(f){return f.status==='ACTIVE';}).length;
-    var expired = allFc.filter(function(f){return f.status==='EXPIRED';}).length;
-    document.getElementById('fcCount').textContent   = active;
-    document.getElementById('fcExpired').textContent = expired;
-    document.getElementById('tab-fc-count').textContent = active;
-    buildExpiredAlerts(allFc.filter(function(f){return f.status==='EXPIRED';}));
-    applyFcFilters();
-  })
-  .catch(function(){
-    document.getElementById('fcTableBody').innerHTML='<tr><td colspan="11" class="loading">Foreclosure data not yet available.</td></tr>';
+function renderTable(leads){
+  const tbody=document.getElementById('leadsBody');
+  tbody.innerHTML='';
+  leads.forEach(lead=>{
+    const row=document.createElement('tr');
+    if(selectedIds.has(lead.id))row.classList.add('selected');
+    row.onclick=(e)=>{if(e.target.type==='checkbox'||e.target.classList.contains('links-btn')||e.target.closest('.links-btn'))return;openDrawer(lead)};
+    const eq=lead.assessed-lead.owed;
+    const eqHTML=lead.owed>0?`<div style="font-size:10.5px;margin-top:2px;color:${eq>0?'var(--green)':'var(--red)'}">Equity: ${eq>0?'+':''}$${Math.abs(eq).toLocaleString()}</div>`:'';
+    row.innerHTML=`
+      <td><input type="checkbox" ${selectedIds.has(lead.id)?'checked':''} onchange="toggleSelect(${lead.id},this)"></td>
+      <td>${makeScoreRing(lead.score,lead.stack)}</td>
+      <td><div class="doc-num">${lead.docNum}</div>${lead.stack>1?`<div class="doc-stacked">⚡ ${lead.stack}x stacked</div>`:''}</td>
+      <td style="white-space:nowrap;color:var(--text2);font-size:12px">${fmtDate(lead.filed)}</td>
+      <td style="font-size:12px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${lead.grantor}</td>
+      <td><div style="display:flex;align-items:center;gap:7px"><div class="owner-initials" style="width:28px;height:28px;font-size:10px">${lead.grantee.split(' ').slice(0,2).map(w=>w[0]).join('').slice(0,2)}</div><div style="font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px">${lead.grantee}</div></div></td>
+      <td><div class="addr-main">${lead.propAddr}</div></td>
+      <td><div class="addr-sub">${lead.mailAddr}</div></td>
+      <td><div class="money money-val">${fmt(lead.assessed)}</div>${eqHTML}</td>
+      <td><div class="money ${lead.owed>0?'money-owed':''}">${lead.owed>0?fmt(lead.owed):'<span style="color:var(--text3)">—</span>'}</div></td>
+      <td>${makeMatch(lead.match)}</td>
+      <td><div class="pills">${lead.motivations.map(makePill).join('')}</div></td>
+      <td>${makeAction(lead.action)}</td>
+      <td>${makeSkip(lead.skipStatus)}</td>
+      <td><button class="links-btn" onclick="openLinksModal(event,${lead.id})"><svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>Links (${lead.links.length})</button></td>
+    `;
+    tbody.appendChild(row);
   });
+  document.getElementById('resultsCount').textContent=`Showing ${leads.length} of ${LEADS.length.toLocaleString()} leads`;
 }
 
-function buildExpiredAlerts(expired){
-  var box = document.getElementById('expiredAlerts');
-  if(!expired.length){box.style.display='none';return;}
-  box.style.display='block';
-  box.innerHTML='<div class="alert-box"><h3>⚠️ '+expired.length+' EXPIRED AUCTION'+(expired.length>1?'S':'')+' — Remove from CRM if present</h3>'
-    +expired.map(function(f){
-      return '<div class="alert-item">🔴 <strong>'+(f.address||'Unknown')+'</strong> — Auction was <strong>'+f.auction_date+'</strong>'+(f.final_judgment?' | Judgment: '+f.final_judgment:'')+(f.case_number?' | Case: '+f.case_number:'')+'</div>';
-    }).join('')+'</div>';
+function renderRadar(){
+  const hot=LEADS.filter(l=>l.score>=80).slice(0,6);
+  document.getElementById('radarItems').innerHTML=hot.map(l=>`
+    <div class="radar-card" onclick="openDrawer(LEADS.find(x=>x.id==${l.id}))">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div class="radar-card-score">${l.score}</div>
+        <span style="font-size:10px;font-weight:600;background:var(--orange-light);color:var(--orange);padding:2px 6px;border-radius:20px">×${l.stack}</span>
+      </div>
+      <div class="radar-card-name">${l.grantee}</div>
+      <div class="radar-card-addr">${l.propAddr}</div>
+      <div class="radar-card-pills">${l.motivations.slice(0,2).map(makePill).join('')}</div>
+      <div style="margin-top:8px">${makeAction(l.action)}</div>
+    </div>
+  `).join('');
 }
 
-function setConf(c){
-  activeConf=c;
-  document.querySelectorAll('#tab-leads .filter-btn').forEach(function(b){b.classList.remove('active');});
-  event.target.classList.add('active');
+function openDrawer(lead){
+  document.getElementById('drawerInitials').textContent=lead.grantee.split(' ').slice(0,2).map(w=>w[0]).join('').slice(0,2);
+  document.getElementById('drawerName').textContent=lead.grantee;
+  document.getElementById('drawerAddr').textContent=lead.propAddr;
+  document.getElementById('drawerPills').innerHTML=lead.motivations.map(makePill).join('');
+  document.getElementById('drawerScore').textContent=lead.score;
+  const isHot=lead.score>=80;const isWarm=lead.score>=60;
+  const bannerBg=isHot?'var(--red-light)':isWarm?'var(--orange-light)':'var(--blue-light)';
+  const bannerColor=isHot?'var(--red)':isWarm?'var(--orange)':'var(--blue)';
+  const banner=document.getElementById('drawerScoreBanner');
+  banner.style.background=bannerBg;
+  document.getElementById('drawerScore').style.color=bannerColor;
+  document.getElementById('drawerHotLabel').style.color=bannerColor;
+  document.getElementById('drawerHotLabel').textContent=isHot?'HOT LEAD':isWarm?'WARM LEAD':'COOL LEAD';
+  document.getElementById('drawerStackInfo').textContent=`×${lead.stack} stacked motivation${lead.stack!==1?'s':''}`;
+  document.getElementById('drawerStackInfo').style.color=bannerColor;
+  document.getElementById('drawerAction').innerHTML=makeAction(lead.action);
+  document.getElementById('drawerDetails').innerHTML=`
+    <div class="detail-item"><div class="detail-item-label">Property Address</div><div class="detail-item-val" style="font-size:12px">${lead.propAddr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mailing Address</div><div class="detail-item-val" style="font-size:12px">${lead.mailAddr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Assessed Value</div><div class="detail-item-val">${fmt(lead.assessed)}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Amount Owed</div><div class="detail-item-val" style="color:${lead.owed>0?'var(--red)':'inherit'}">${lead.owed>0?fmt(lead.owed):'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Doc Number</div><div class="detail-item-val" style="font-family:monospace;font-size:11px">${lead.docNum}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Filed Date</div><div class="detail-item-val">${fmtDate(lead.filed)}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Grantor / Lender</div><div class="detail-item-val" style="font-size:11.5px">${lead.grantor}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Match Confidence</div><div class="detail-item-val">${makeMatch(lead.match)}</div></div>
+  `;
+  const mx=Math.max(...lead.scoreBreak.filter(s=>s.pos).map(s=>s.val),1);
+  document.getElementById('drawerScoreBreak').innerHTML=lead.scoreBreak.map(s=>`
+    <div class="score-row">
+      <div class="score-row-label">${s.label}</div>
+      <div class="score-row-bar"><div class="score-row-fill ${s.pos?'':'neg'}" style="width:${Math.abs(s.val)/mx*100}%"></div></div>
+      <div class="score-row-val ${s.pos?'pos':'neg'}">${s.pos?'+':''}${s.val}</div>
+    </div>
+  `).join('');
+  document.getElementById('drawerTimeline').innerHTML=lead.timeline.map(t=>`
+    <div class="tl-item">
+      <div class="tl-dot ${t.cls}"></div>
+      <div class="tl-date">${fmtDate(t.date)}</div>
+      <div class="tl-event">${t.event}</div>
+      <div class="tl-sub">${t.sub}</div>
+    </div>
+  `).join('');
+  const ghlMap={not:'<span class="ghl-not">Not pushed</span>',pushed:'<span class="ghl-pushed">In GHL</span>',active:'<span class="ghl-active">Active campaign</span>'};
+  document.getElementById('drawerGHL').innerHTML=ghlMap[lead.ghlStatus]||'—';
+  document.getElementById('drawerSkip').innerHTML=makeSkip(lead.skipStatus);
+  document.getElementById('drawerAngle').textContent=lead.angle;
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open')}
+
+function openLinksModal(e,id){
+  e.stopPropagation();
+  const lead=LEADS.find(l=>l.id===id);
+  if(!lead)return;
+  document.getElementById('linksModalBody').innerHTML=lead.links.map(link=>`
+    <a href="${link.url}" target="_blank" class="link-item">
+      <div class="link-icon" style="background:${linkColors[link.icon]||'#F9FAFB'};color:${linkText[link.icon]||'#6B7280'}">${linkIconSVG[link.icon]||linkIconSVG.deed}</div>
+      <div style="flex:1"><div class="link-item-name">${link.name}</div><div class="link-item-url">${link.cat} · ${link.url.replace('https://','')}</div></div>
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:12px;height:12px;color:#9CA3AF"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+    </a>
+  `).join('');
+  document.getElementById('linksModalOverlay').classList.add('open');
+}
+function closeLinksModal(){document.getElementById('linksModalOverlay').classList.remove('open')}
+
+function toggleFilters(){const fb=document.getElementById('filterBar');fb.style.display=fb.style.display==='none'?'block':'none'}
+
+function setMatchFilter(btn,val){
+  btn.closest('div').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');activeFilters.match=val;applyFilters();
+}
+function setMotivFilter(btn,val){
+  const already=btn.classList.contains('active');
+  btn.closest('div').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(!already){btn.classList.add('active');activeFilters.motivation=val;}else{activeFilters.motivation=null;}
   applyFilters();
 }
+function setSkipFilter(btn,val){
+  const already=btn.classList.contains('active');
+  btn.closest('div').querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(!already){btn.classList.add('active');activeFilters.skip=val;}else{activeFilters.skip=null;}
+  applyFilters();
+}
+function clearFilters(){activeFilters={match:'all',motivation:null,score:null,stack:null,skip:null};document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.filter-btn[onclick*="all"]').forEach(b=>b.classList.add('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');applyFilters()}
 
 function applyFilters(){
-  var q=document.getElementById('searchBox').value.toLowerCase();
-  var filtered=allLeads.filter(function(l){
-    var confOk=activeConf==='ALL'||(l.match_confidence||'NONE')===activeConf;
-    if(!confOk)return false;
-    if(!q)return true;
-    return((l.document_number||'')+(l.grantor||'')+(l.grantee||'')+(l.legal_description||'')+(l.document_type||'')+(l.property_address||'')+(l.mailing_address||'')+(l.owner_name||'')+(l.match_reason||'')+(l.auction_case_number||'')).toLowerCase().includes(q);
-  });
-  renderLeads(filtered);
+  let leads=[...LEADS];
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  if(q)leads=leads.filter(l=>l.grantee.toLowerCase().includes(q)||l.propAddr.toLowerCase().includes(q)||l.mailAddr.toLowerCase().includes(q)||l.docNum.toLowerCase().includes(q)||l.motivations.some(m=>m.toLowerCase().includes(q)));
+  if(activeFilters.match&&activeFilters.match!=='all')leads=leads.filter(l=>l.match===activeFilters.match);
+  if(activeFilters.motivation)leads=leads.filter(l=>l.motivations.includes(activeFilters.motivation));
+  if(activeFilters.score)leads=leads.filter(l=>l.score>=activeFilters.score);
+  if(activeFilters.stack)leads=leads.filter(l=>l.stack>=activeFilters.stack);
+  if(activeFilters.skip)leads=leads.filter(l=>l.skipStatus===activeFilters.skip);
+  if(currentTab==='hot')leads=leads.filter(l=>l.score>=80);
+  if(currentTab==='auction')leads=leads.filter(l=>l.docType.includes('Forecast')||l.docType.includes('Auction'));
+  if(currentTab==='skipready')leads=leads.filter(l=>l.skipStatus==='none'&&l.match!=='LOW');
+  renderTable(leads);
+}
+function filterLeads(){applyFilters()}
+
+function setTab(el,tab){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');currentTab=tab;applyFilters();
+}
+function setFilter(type){
+  if(type==='hot'){currentTab='hot';document.querySelectorAll('.tab')[1].click();}
+  else if(type==='stacked2'){activeFilters.stack=2;applyFilters();}
+  else if(type==='stacked3'){activeFilters.stack=3;applyFilters();}
+  else{currentTab='all';applyFilters();}
 }
 
-function renderLeads(leads){
-  var tbody=document.getElementById('tableBody');
-  if(!leads.length){tbody.innerHTML='<tr><td colspan="12" class="loading">No records found</td></tr>';return;}
-  tbody.innerHTML=leads.map(function(l,i){
-    var flags=(l.distress_flags||[]);
-    if(typeof flags==='string') flags=flags.split(',').map(function(f){return f.trim();});
-    var searchUrl=l.county_search_url||'';
-    return '<tr class="'+rowClass(l)+'" style="--row-i:'+(i+1)+'">'
-      +'<td class="score-cell"><div class="score-ring" style="--c:'+scoreColor(l.seller_score)+'">'+l.seller_score+'</div>'
-      +(l.stacked?'<div style="font-size:9px;color:#9f7aea;margin-top:2px">'+(l.motivation_count||2)+'x</div>':'')
-      +'</td>'
-      +'<td><strong>'+(l.document_number||'-')+'</strong>'
-      +'<small class="muted">'+(l.document_type||'')+'</small>'
-      +(l.stacked?'<br>'+stackedBadge(l):'')
-      +(l.auction_date?'<br>'+auctionBadge(l):'')
-      +'<br><div style="margin-top:3px">'+motivationTags(l)+'</div>'
-      +(l.comptroller_url?'<br><a class="lookup-link" href="'+l.comptroller_url+'" target="_blank">📄 Court file</a>':'')
-      +(l.auction_url&&l.auction_date?'<br><a class="lookup-link" href="'+l.auction_url+'" target="_blank">🔨 Auction</a>':'')
-      +'</td>'
-      +'<td>'+(l.file_date||l.auction_date||'-')+'</td>'
-      +'<td>'+trunc(l.grantor,45)+'</td>'
-      +'<td>'+trunc(l.grantee||l.owner_name,50)+'</td>'
-      +'<td class="col-addr">'+addrCell(l.property_address,searchUrl)+'</td>'
-      +'<td class="col-addr">'+addrCell(l.mailing_address,null)+'</td>'
-      +'<td class="col-legal">'+(l.legal_description?trunc(l.legal_description,55):'<span class="missing">—</span>')+'</td>'
-      +'<td>'+(l.assessed_value||'<span class="missing">—</span>')+'</td>'
-      +'<td>'+(l.auction_final_judgment||l.amount_owed||'<span class="missing">—</span>')+'</td>'
-      +'<td>'+confBadge(l.match_confidence,l.match_reason)+'</td>'
-      +'<td>'+flags.map(badge).join('')+'</td>'
-      +'</tr>';
-  }).join('');
+function toggleSelect(id,cb){
+  if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);
+  updateBulkBar();
+  document.querySelectorAll('#leadsBody tr').forEach((row,i)=>{if(LEADS[i])row.classList.toggle('selected',selectedIds.has(LEADS[i].id))});
+}
+function toggleAllCheckboxes(master){
+  document.querySelectorAll('#leadsBody input[type=checkbox]').forEach((cb,i)=>{cb.checked=master.checked;if(LEADS[i]){if(master.checked)selectedIds.add(LEADS[i].id);else selectedIds.delete(LEADS[i].id)}});
+  updateBulkBar();
+}
+function selectAll(){document.getElementById('masterCheck').checked=true;toggleAllCheckboxes(document.getElementById('masterCheck'))}
+function updateBulkBar(){
+  const n=selectedIds.size;
+  document.getElementById('bulkCount').textContent=`${n} lead${n!==1?'s':''} selected`;
+  document.getElementById('bulkBar').classList.toggle('visible',n>0);
 }
 
-function setFcFilter(f,btn){
-  activeFcFilter=f;
-  document.querySelectorAll('#tab-foreclosures .filter-btn').forEach(function(b){b.classList.remove('active');});
-  btn.classList.add('active');
-  applyFcFilters();
-}
-
-function applyFcFilters(){
-  var q=document.getElementById('fcSearchBox').value.toLowerCase();
-  var filtered=allFc.filter(function(f){
-    if(activeFcFilter!=='ALL'&&f.status!==activeFcFilter)return false;
-    if(!q)return true;
-    return((f.address||'')+(f.case_number||'')+(f.parcel_id||'')+(f.owner_name||'')+(f.mailing_address||'')).toLowerCase().includes(q);
-  });
-  filtered.sort(function(a,b){
-    var order={ACTIVE:0,TOO_SOON:1,EXPIRED:2,UNKNOWN:3};
-    var ao=order[a.status]||3,bo=order[b.status]||3;
-    if(ao!==bo)return ao-bo;
-    return (a.days_until_auction||0)-(b.days_until_auction||0);
-  });
-  renderFc(filtered);
-}
-
-function renderFc(list){
-  var tbody=document.getElementById('fcTableBody');
-  if(!list.length){tbody.innerHTML='<tr><td colspan="11" class="loading">No foreclosures found</td></tr>';return;}
-  tbody.innerHTML=list.map(function(f,i){
-    var days=f.days_until_auction;
-    var daysClass=days<0?'':days<=5?'urgent':days<=10?'soon':'ok';
-    var daysLabel=days<0?'EXPIRED':days===0?'TODAY':days+' days';
-    var pid=f.parcel_id||'';
-    var isValidPid = pid && pid.match(/^\d{10,}$/);
-    return '<tr class="lead-row" style="--row-i:'+(i+1)+'">'
-      +'<td class="score-cell"><span class="days-badge '+daysClass+'">'+daysLabel+'</span></td>'
-      +'<td>'+f.auction_date+'</td>'
-      +'<td><span class="status-badge status-'+(f.status||'UNKNOWN')+'">'+(f.status||'?')+'</span></td>'
-      +'<td><strong>'+(f.address?trunc(f.address,55):'<span class="missing">No address yet</span>')+'</strong></td>'
-      +'<td>'+(f.owner_name||'<span class="missing">—</span>')+'</td>'
-      +'<td>'+(f.mailing_address?trunc(f.mailing_address,50):'<span class="missing">—</span>')+'</td>'
-      +'<td>'+(f.final_judgment||'<span class="missing">—</span>')+'</td>'
-      +'<td>'+(f.assessed_value||'<span class="missing">—</span>')+'</td>'
-      +'<td>'+(f.case_number||'<span class="missing">—</span>')+'</td>'
-      +'<td>'+(isValidPid?pid:'<span class="missing">'+(pid||'—')+'</span>')+'</td>'
-      +'<td>'
-      +(f.auction_url?'<a class="lookup-link" href="'+f.auction_url+'" target="_blank" rel="noopener">🔨 Auction</a><br>':'')
-      +(f.ocpa_url&&isValidPid?'<a class="lookup-link" href="'+f.ocpa_url+'" target="_blank" rel="noopener">🏠 OCPA</a><br>':'')
-      +(f.comptroller_url?'<a class="lookup-link" href="'+f.comptroller_url+'" target="_blank" rel="noopener">📄 Court file</a>':'')
-      +'</td>'
-      +'</tr>';
-  }).join('');
-}
-
-function exportCSV(){
-  var q=document.getElementById('searchBox').value.toLowerCase();
-  var leads=allLeads.filter(function(l){
-    var confOk=activeConf==='ALL'||(l.match_confidence||'NONE')===activeConf;
-    if(!confOk)return false;
-    if(!q)return true;
-    return((l.document_number||'')+(l.grantor||'')+(l.grantee||'')+(l.property_address||'')+(l.owner_name||'')).toLowerCase().includes(q);
-  });
-  var headers=['Score','Motivation Count','Stacked','Document #','File Date','Document Type','Motivations','Grantor','Grantee/Owner','Property Address','Mailing Address','Legal Description','Assessed Value','Amount Owed/Judgment','Match Confidence','Match Reason','County Search URL','Auction Date','Auction Status','Auction Days Left','Final Judgment','Case #','Auction URL','Court File URL','Parcel ID'];
-  var rows=leads.map(function(l){
-    var flags=(l.distress_flags||[]);
-    if(typeof flags==='string')flags=flags.split(',').map(function(f){return f.trim();});
-    var stypes=(l.stacked_types||[]);
-    if(typeof stypes==='string')stypes=[stypes];
-    return[
-      l.seller_score,l.motivation_count||1,l.stacked?'YES':'NO',
-      l.document_number,l.file_date||l.auction_date,l.document_type,stypes.join(' + '),
-      l.grantor,l.grantee||l.owner_name,l.property_address,l.mailing_address,
-      l.legal_description,l.assessed_value,l.auction_final_judgment||l.amount_owed,
-      l.match_confidence,l.match_reason,l.county_search_url,
-      l.auction_date,l.auction_status,l.auction_days_left,
-      l.auction_final_judgment,l.auction_case_number,l.auction_url,l.comptroller_url,l.parcel_id
-    ].map(function(v){return'"'+(String(v||'').replace(/"/g,'""'))+'"';}).join(',');
-  });
-  downloadCSV([headers.join(',')].concat(rows).join('\n'),'oc_motivated_sellers_'+new Date().toISOString().slice(0,10)+'.csv');
-}
-
-function exportFcCSV(){
-  var filtered=allFc.filter(function(f){return activeFcFilter==='ALL'||f.status===activeFcFilter;});
-  var headers=['Status','Days Left','Auction Date','Address','Owner Name','Mailing Address','Final Judgment','Assessed Value','Case #','Parcel ID','Auction URL','OCPA URL','Court File URL'];
-  var rows=filtered.map(function(f){
-    return[f.status,f.days_until_auction,f.auction_date,f.address,f.owner_name,f.mailing_address,f.final_judgment,f.assessed_value,f.case_number,f.parcel_id,f.auction_url,f.ocpa_url,f.comptroller_url]
-      .map(function(v){return'"'+(String(v||'').replace(/"/g,'""'))+'"';}).join(',');
-  });
-  downloadCSV([headers.join(',')].concat(rows).join('\n'),'oc_foreclosures_'+new Date().toISOString().slice(0,10)+'.csv');
-}
-
-function downloadCSV(csv,filename){
-  var blob=new Blob([csv],{type:'text/csv'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);
-}
-
-var sortDir={};
-function sortTable(col){
-  var tbody=document.getElementById('tableBody');
-  var rows=Array.from(tbody.querySelectorAll('.lead-row'));
-  var asc=!sortDir[col];sortDir={};sortDir[col]=asc;
-  rows.sort(function(a,b){
-    var av=a.cells[col]?a.cells[col].innerText.trim():'';
-    var bv=b.cells[col]?b.cells[col].innerText.trim():'';
-    var an=parseFloat(av),bn=parseFloat(bv);
-    if(!isNaN(an)&&!isNaN(bn))return asc?an-bn:bn-an;
-    return asc?av.localeCompare(bv):bv.localeCompare(av);
-  });
-  rows.forEach(function(r){tbody.appendChild(r);});
-}
-
-var fcSortDir={};
-function sortFcTable(col){
-  var tbody=document.getElementById('fcTableBody');
-  var rows=Array.from(tbody.querySelectorAll('tr'));
-  var asc=!fcSortDir[col];fcSortDir={};fcSortDir[col]=asc;
-  rows.sort(function(a,b){
-    var av=a.cells[col]?a.cells[col].innerText.trim():'';
-    var bv=b.cells[col]?b.cells[col].innerText.trim():'';
-    var an=parseFloat(av),bn=parseFloat(bv);
-    if(!isNaN(an)&&!isNaN(bn))return asc?an-bn:bn-an;
-    return asc?av.localeCompare(bv):bv.localeCompare(av);
-  });
-  rows.forEach(function(r){tbody.appendChild(r);});
-}
-
-loadLeads();
-loadForeclosures();
+renderRadar();
+renderTable(LEADS);
 </script>
 </body>
 </html>
