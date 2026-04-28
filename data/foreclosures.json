@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-27T20:16:20.036453Z",
-  "total_records": 28,
-  "active": 23,
+  "generated_at": "2026-04-28T00:30:02.306967Z",
+  "total_records": 29,
+  "active": 22,
   "expired": 0,
-  "too_soon": 5,
+  "too_soon": 7,
   "foreclosures": [
     {
       "auction_date": "2026-04-28",
@@ -23,10 +23,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260153247",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 1,
+      "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-04-27T20:15:42.772038Z"
+      "scraped_at": "2026-04-28T00:29:25.967866Z"
     },
     {
       "auction_date": "2026-04-28",
@@ -46,10 +46,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260178036",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 1,
+      "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:42.773099Z"
+      "scraped_at": "2026-04-28T00:29:25.968983Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -69,10 +69,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260014463",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 2,
+      "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:44.809648Z"
+      "scraped_at": "2026-04-28T00:29:27.883882Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -92,10 +92,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250062751",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 2,
+      "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:44.809951Z"
+      "scraped_at": "2026-04-28T00:29:27.884165Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -115,10 +115,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260061685",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 2,
+      "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:44.810227Z"
+      "scraped_at": "2026-04-28T00:29:27.884458Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -138,10 +138,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20230071874",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/30/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 3,
-      "status": "ACTIVE",
+      "days_until_auction": 2,
+      "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:47.408311Z"
+      "scraped_at": "2026-04-28T00:29:30.292754Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -161,10 +161,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250449202",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/30/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 3,
-      "status": "ACTIVE",
+      "days_until_auction": 2,
+      "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:47.408820Z"
+      "scraped_at": "2026-04-28T00:29:30.293244Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -184,10 +184,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250444013",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/01/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:49.832449Z"
+      "scraped_at": "2026-04-28T00:29:32.662524Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -207,10 +207,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260192475",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/01/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:49.832750Z"
+      "scraped_at": "2026-04-28T00:29:32.662810Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -230,10 +230,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260161696",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 7,
+      "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:58.149854Z"
+      "scraped_at": "2026-04-28T00:29:39.982289Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -253,10 +253,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260196225",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 7,
+      "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:15:58.150079Z"
+      "scraped_at": "2026-04-28T00:29:39.982543Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -276,10 +276,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250615226",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 8,
+      "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:00.174511Z"
+      "scraped_at": "2026-04-28T00:29:41.921468Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -299,10 +299,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20180188976",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 8,
+      "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:00.174814Z"
+      "scraped_at": "2026-04-28T00:29:41.921754Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -322,10 +322,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260024339",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 8,
+      "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:00.175079Z"
+      "scraped_at": "2026-04-28T00:29:41.922024Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -345,10 +345,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260012638",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 8,
+      "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-27T20:16:00.176658Z"
+      "scraped_at": "2026-04-28T00:29:41.923616Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -368,10 +368,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260123930",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 9,
+      "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:03.778812Z"
+      "scraped_at": "2026-04-28T00:29:45.196683Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -391,10 +391,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260048863",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 9,
+      "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:03.779368Z"
+      "scraped_at": "2026-04-28T00:29:45.197222Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -414,10 +414,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260136173",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 9,
+      "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:03.780275Z"
+      "scraped_at": "2026-04-28T00:29:45.198201Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -437,10 +437,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250713421",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.924899Z"
+      "scraped_at": "2026-04-28T00:29:48.290737Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -460,10 +460,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20240322101",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.925187Z"
+      "scraped_at": "2026-04-28T00:29:48.291022Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -483,10 +483,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260016558",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.925457Z"
+      "scraped_at": "2026-04-28T00:29:48.291411Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -506,10 +506,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250679549",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.925747Z"
+      "scraped_at": "2026-04-28T00:29:48.291681Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -529,10 +529,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250719589",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.926020Z"
+      "scraped_at": "2026-04-28T00:29:48.291942Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -552,10 +552,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260196638",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.926536Z"
+      "scraped_at": "2026-04-28T00:29:48.292464Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -575,10 +575,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260076845",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.926819Z"
+      "scraped_at": "2026-04-28T00:29:48.292723Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -598,10 +598,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260168918",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:06.927087Z"
+      "scraped_at": "2026-04-28T00:29:48.292983Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -621,10 +621,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260191370",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/08/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:12.720900Z"
+      "scraped_at": "2026-04-28T00:29:53.624629Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -644,10 +644,33 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260158360",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/08/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-27T20:16:12.721186Z"
+      "scraped_at": "2026-04-28T00:29:53.624916Z"
+    },
+    {
+      "auction_date": "2026-05-11",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CC-020610-O",
+      "parcel_id": "302313129600850",
+      "address": "4860 HOPESPRING DR, ORLANDO, 32829",
+      "final_judgment": "$7,582.99",
+      "assessed_value": "$286,865.00",
+      "opening_bid": "",
+      "owner_name": "STOUTT DARLENE A",
+      "mailing_address": "1478 Shallcross Ave, Orlando, FL 32828-6840",
+      "property_type": "SINGLE FAM CLASS III",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/302313129600850",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260149782",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/11/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 13,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T00:30:00.785399Z"
     }
   ]
 }
