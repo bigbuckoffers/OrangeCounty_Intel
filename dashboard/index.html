@@ -130,7 +130,7 @@ tbody td:first-child{padding-left:16px}
 .action-mail{background:#FFFBEB;color:var(--orange)}
 .action-research{background:#F1F5F9;color:#475569}
 .match-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px}
-.match-high{background:#DCFCE7;color:#166534}
+.match-high{background:#DCFCE7;color:#166634}
 .match-medium{background:#FEF9C3;color:#854D0E}
 .match-low{background:#FEE2E2;color:#991B1B}
 .match-none{background:#F1F5F9;color:#6B7280}
@@ -525,13 +525,13 @@ let LEADS=[],F={match:'all',doctype:null,scoreBand:null,stack:null},currentTab='
 // 60-74 = Warm. This week.
 // 40-59 = Cool. Follow up.
 // <40   = Low priority.
-// Max theoretical ~105, hard capped at 99.
 // ══════════════════════════════════════════════════════
 function calcScore(lead){
   let pts=0;const notes=[];
   const doc=(lead.docType||'').toLowerCase();
   const match=(lead.match||'').toUpperCase();
-  const stack=parseInt(lead.stack)||1;
+  // stack now comes from lead.stack which is set AFTER motivations are built
+  const stack=lead.stack||1;
   const assessed=parseFloat((lead.assessed||'0').toString().replace(/[$,]/g,''))||0;
   const mail=(lead.mailAddr||'').toLowerCase();
   const prop=(lead.propAddr||'').toLowerCase();
@@ -551,7 +551,7 @@ function calcScore(lead){
     const aDate=new Date(lead.filed);
     const today=new Date();today.setHours(0,0,0,0);
     const daysOut=Math.ceil((aDate-today)/86400000);
-    if(daysOut<=0){pts+=20;notes.push({label:`Auction today/passed — redemption window`,val:20});}
+    if(daysOut<=0){pts+=20;notes.push({label:'Auction today/passed — redemption window',val:20});}
     else if(daysOut<=3){pts+=30;notes.push({label:`Auction in ${daysOut} day(s) — CRITICAL`,val:30});}
     else if(daysOut<=7){pts+=24;notes.push({label:`Auction in ${daysOut} days — urgent`,val:24});}
     else if(daysOut<=14){pts+=18;notes.push({label:`Auction in ${daysOut} days — hot`,val:18});}
@@ -560,9 +560,8 @@ function calcScore(lead){
     else{pts+=2;notes.push({label:`Auction in ${daysOut} days — low urgency`,val:2});}
   }
 
-  // 3. STACKED SIGNALS — max 20
-  if(stack>=8){pts+=20;notes.push({label:`${stack} signals stacked — extreme distress`,val:20});}
-  else if(stack>=5){pts+=16;notes.push({label:`${stack} signals stacked`,val:16});}
+  // 3. STACKED SIGNALS — max 20 (based on actual detected motivations)
+  if(stack>=5){pts+=16;notes.push({label:`${stack} signals stacked`,val:16});}
   else if(stack>=3){pts+=11;notes.push({label:`${stack} signals stacked`,val:11});}
   else if(stack>=2){pts+=6;notes.push({label:`2 signals stacked`,val:6});}
 
@@ -667,10 +666,13 @@ function mapRow(row,idx){
   const docType=row.document_type||'Unknown';
   const distress=row.distress_flags||'';
   const match=(row.match_confidence||'').toUpperCase();
-  const stack=parseInt(row.motivation_count)||1;
+  // NOTE: We intentionally ignore row.motivation_count because the scraper
+  // inflates this number. We calculate the real stack from detected motivations.
   const assessed=parseFloat((row.assessed_value||'').replace(/[$,]/g,''))||0;
+
   const lead={
-    id:idx+1,stack,assessed,match,docType,
+    id:idx+1,
+    assessed,match,docType,
     docNum:row.document_number||'—',
     filed:row.file_date||'',
     grantor:row.grantor||'—',
@@ -684,27 +686,48 @@ function mapRow(row,idx){
     matchReason:row.match_reason||'',
     countyUrl:row.county_search_url||''
   };
-  const{score,notes}=calcScore(lead);
-  lead.score=score;lead.scoreNotes=notes;
+
+  // ── BUILD MOTIVATIONS from actual data (ignore scraper's motivation_count) ──
   const motivations=[];
   if(docType.toLowerCase().includes('foreclosure'))motivations.push('Foreclosure');
-  if(docType.toLowerCase().includes('lis pendens')||distress.includes('lis_pendens'))motivations.push('Lis Pendens');
-  if(docType.toLowerCase().includes('probate')||distress.includes('probate'))motivations.push('Probate');
-  if(docType.toLowerCase().includes('judgment')||distress.includes('judgment'))motivations.push('Judgment');
-  if(docType.toLowerCase().includes('tax deed')||distress.includes('tax_deed'))motivations.push('Tax Deed');
-  if(distress.includes('delinquent'))motivations.push('Delinquent Taxes');
-  if(docType.toLowerCase().includes('lien')||distress.includes('lien'))motivations.push('Lien');
+  if(docType.toLowerCase().includes('lis pendens')||distress.toLowerCase().includes('lis_pendens'))motivations.push('Lis Pendens');
+  if(docType.toLowerCase().includes('probate')||distress.toLowerCase().includes('probate'))motivations.push('Probate');
+  if(docType.toLowerCase().includes('judgment')||distress.toLowerCase().includes('judgment'))motivations.push('Judgment');
+  if(docType.toLowerCase().includes('tax deed')||distress.toLowerCase().includes('tax_deed'))motivations.push('Tax Deed');
+  if(distress.toLowerCase().includes('delinquent'))motivations.push('Delinquent Taxes');
+  if(distress.toLowerCase().includes('hoa'))motivations.push('HOA Lien');
+  if(distress.toLowerCase().includes('code'))motivations.push('Code Violation');
+  if(distress.toLowerCase().includes('vacant'))motivations.push('Vacant Property');
+  if(distress.toLowerCase().includes('absentee'))motivations.push('Absentee Owner');
+  if((docType.toLowerCase().includes('lien')||distress.toLowerCase().includes('lien'))
+    &&!motivations.includes('HOA Lien'))motivations.push('Lien');
   if(motivations.length===0)motivations.push(docType);
+
   lead.motivations=motivations;
+  // Stack = actual number of unique signals detected (not the scraper's number)
+  lead.stack=Math.max(1,motivations.length);
+
+  // Now score using real stack
+  const{score,notes}=calcScore(lead);
+  lead.score=score;
+  lead.scoreNotes=notes;
+
+  // Action based on final score
   const actionObj=calcAction(score,match,lead.mailAddr);
-  lead.action=actionObj.label;lead.actionCls=actionObj.cls;
+  lead.action=actionObj.label;
+  lead.actionCls=actionObj.cls;
+
+  // Links
   const links=[];
   if(lead.countyUrl)links.push({name:'Property Appraiser',url:lead.countyUrl,cat:'PROP'});
   links.push({name:'Orange County Clerk',url:'https://www.myorangeclerk.com/official-records',cat:'CLERK'});
   links.push({name:'Tax Collector',url:'https://www.octaxcol.com',cat:'TAX'});
-  if(docType.toLowerCase().includes('foreclosure')||distress.includes('foreclosure'))links.push({name:'RealForeclose (Auction)',url:'https://www.realforeclose.com',cat:'AUCTION'});
-  if(docType.toLowerCase().includes('probate'))links.push({name:'Probate Court Records',url:'https://www.myorangeclerk.com/probate',cat:'PROBATE'});
+  if(docType.toLowerCase().includes('foreclosure')||distress.toLowerCase().includes('foreclosure'))
+    links.push({name:'RealForeclose (Auction)',url:'https://www.realforeclose.com',cat:'AUCTION'});
+  if(docType.toLowerCase().includes('probate'))
+    links.push({name:'Probate Court Records',url:'https://www.myorangeclerk.com/probate',cat:'PROBATE'});
   lead.links=links;
+
   return lead;
 }
 
@@ -779,7 +802,7 @@ function renderTable(){
       <td><div class="money">${fmt(lead.assessed)}</div></td>
       <td><div class="pill pill-generic" style="font-size:10px">${lead.docType}</div></td>
       <td>${matchBadge(lead.match)}</td>
-      <td><div class="pills">${lead.motivations.slice(0,3).map(pill).join('')}</div></td>
+      <td><div class="pills">${lead.motivations.map(pill).join('')}</div></td>
       <td><span class="action-badge ${lead.actionCls}">${lead.action}</span></td>
       <td><button class="links-btn" onclick="openLinks(event,${lead.id})"><svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>Links (${lead.links.length})</button></td>
     `;
@@ -799,7 +822,7 @@ function renderRadar(){
       </div>
       <div class="radar-card-name">${l.ownerName||l.grantee}</div>
       <div class="radar-card-addr">${l.propAddr}</div>
-      <div class="radar-card-pills">${l.motivations.slice(0,2).map(pill).join('')}</div>
+      <div class="radar-card-pills">${l.motivations.map(pill).join('')}</div>
       <div style="margin-top:6px;font-size:10px;font-weight:600;color:${urg.color}">${urg.text}</div>
     </div>`;
   }).join('');
@@ -838,8 +861,7 @@ function openDrawer(lead){
   document.getElementById('d-pills-head').innerHTML=lead.motivations.map(pill).join(' ');
   const col=scoreColor(lead.score);
   const urg=urgencyLabel(lead.score);
-  const banner=document.getElementById('d-banner');
-  banner.style.background=lead.score>=85?'#FEF2F2':lead.score>=70?'#FFFBEB':'#EFF6FF';
+  document.getElementById('d-banner').style.background=lead.score>=85?'#FEF2F2':lead.score>=70?'#FFFBEB':'#EFF6FF';
   document.getElementById('d-score').textContent=lead.score;
   document.getElementById('d-score').style.color=col;
   document.getElementById('d-hotlbl').textContent=lead.score>=90?'🚨 SUPER BOWL LEAD':lead.score>=85?'🔥 DROP EVERYTHING':lead.score>=75?'⚡ VERY HOT LEAD':lead.score>=65?'📈 HOT LEAD':lead.score>=50?'👀 WARM LEAD':'COOL LEAD';
@@ -864,7 +886,7 @@ function openDrawer(lead){
     <div class="detail-item"><div class="detail-item-label">File Date</div><div class="detail-item-val">${fmtD(lead.filed)}</div></div>
     <div class="detail-item"><div class="detail-item-label">Document Type</div><div class="detail-item-val">${lead.docType}</div></div>
     <div class="detail-item"><div class="detail-item-label">Match Confidence</div><div class="detail-item-val">${matchBadge(lead.match)}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Stacked Signals</div><div class="detail-item-val">×${lead.stack}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Signals Detected</div><div class="detail-item-val">×${lead.stack}</div></div>
     <div class="detail-item"><div class="detail-item-label">Parcel ID</div><div class="detail-item-val" style="font-size:11px">${lead.parcelId||'—'}</div></div>
     <div class="detail-item" style="grid-column:1/-1"><div class="detail-item-label">Match Reason</div><div class="detail-item-val" style="font-size:11px">${lead.matchReason||'—'}</div></div>
   `;
@@ -914,7 +936,7 @@ function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCoun
 // EXPORT
 function exportCSV(){
   const leads=getFiltered();
-  const rows=[['Score','Urgency','Stack','Doc#','Filed','Doc Type','Owner','Property Address','Mailing Address','Assessed Value','Match','Motivations','Action','Parcel ID']];
+  const rows=[['Score','Urgency','Signals','Doc#','Filed','Doc Type','Owner','Property Address','Mailing Address','Assessed Value','Match','Motivations','Action','Parcel ID']];
   leads.forEach(l=>{
     const urg=l.score>=85?'DROP EVERYTHING':l.score>=75?'CALL TODAY':l.score>=65?'HOT':l.score>=50?'WARM':'COOL';
     rows.push([l.score,urg,l.stack,l.docNum,l.filed,l.docType,l.ownerName||l.grantee,l.propAddr,l.mailAddr,l.assessed,l.match,l.motivations.join('; '),l.action,l.parcelId]);
