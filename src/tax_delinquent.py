@@ -13,7 +13,6 @@ Loads the Orange County delinquent tax roll CSV and:
   6. Saves updated output.json and output.csv
 
 Run this after scraper.py and merger.py.
-Add to your GitHub Actions workflow after merger.py.
 """
 import csv, json, logging, os, re
 from collections import defaultdict
@@ -23,19 +22,19 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 log = logging.getLogger(__name__)
 
 # ── PATHS ──────────────────────────────────────────────────────────────────
-TAX_CSV_PATH = "data/delinquent_taxes.csv"   # upload this file to your repo
+TAX_CSV_PATH = "data/delinquent_taxes.csv"
 OUTPUT_PATH  = "data/output.json"
 OUTPUT_CSV   = "data/output.csv"
 
 # ── SCORING ────────────────────────────────────────────────────────────────
-TAX_BASE_SCORE        = 20   # base points just for being on delinquent roll
-TAX_YEARS_2_BONUS     = 8    # delinquent 2 years
-TAX_YEARS_3_BONUS     = 15   # delinquent 3 years
-TAX_YEARS_5_BONUS     = 22   # delinquent 5+ years — very serious
-TAX_YEARS_10_BONUS    = 30   # delinquent 10+ years — desperate
-TAX_STACK_BONUS       = 15   # bonus when stacked onto existing lead
+TAX_BASE_SCORE     = 20
+TAX_YEARS_2_BONUS  = 8
+TAX_YEARS_3_BONUS  = 15
+TAX_YEARS_5_BONUS  = 22
+TAX_YEARS_10_BONUS = 30
+TAX_STACK_BONUS    = 15
 
-# ── FILTERS — skip these, not wholesaleable ────────────────────────────────
+# ── FILTERS ────────────────────────────────────────────────────────────────
 SKIP_OWNERS = [
     'DISNEY', 'WALT DISNEY', 'UNIVERSAL', 'SEAWORLD', 'MARRIOTT', 'HILTON',
     'SHERATON', 'WYNDHAM', 'HYATT', 'STARWOOD', 'RITZ', 'WESTIN',
@@ -51,15 +50,11 @@ SKIP_ADDRESSES = [
     'MAGIC KINGDOM', 'ANIMAL KINGDOM',
 ]
 
-# Minimum balance to care about — skip tiny amounts under $500
-MIN_BALANCE = 500.0
-
-# Maximum balance — commercial properties over $5M assessed, skip
+MIN_BALANCE  = 500.0
 MAX_ASSESSED = 5_000_000
 
 
 def clean_parcel(pid):
-    """Normalize parcel ID for comparison."""
     return re.sub(r'[-\s]', '', (pid or "")).strip()
 
 
@@ -69,17 +64,15 @@ def is_valid_parcel(pid):
 
 
 def clean_address_key(addr):
-    """Extract just the street number + name for fuzzy matching."""
     if not addr:
         return ""
     addr = addr.upper().strip()
-    addr = re.sub(r',.*', '', addr)         # strip city/state/zip
+    addr = re.sub(r',.*', '', addr)
     addr = re.sub(r'\s+', ' ', addr).strip()
     return addr
 
 
 def clean_owner_key(name):
-    """Normalize owner name for matching."""
     if not name:
         return ""
     name = name.upper().strip()
@@ -89,22 +82,21 @@ def clean_owner_key(name):
 
 
 def should_skip(owner_name, property_address, assessed_val):
-    """Return True if this is a commercial/government property to skip."""
     owner_up = (owner_name or "").upper()
     addr_up  = (property_address or "").upper()
 
     for skip in SKIP_OWNERS:
         if skip in owner_up:
-            return True, f"Skip owner: {skip}"
+            return True, "Skip owner: {}".format(skip)
 
     for skip in SKIP_ADDRESSES:
         if skip in addr_up:
-            return True, f"Skip address: {skip}"
+            return True, "Skip address: {}".format(skip)
 
     try:
-        val = float(str(assessed_val).replace('$','').replace(',','').strip())
+        val = float(str(assessed_val).replace('$', '').replace(',', '').strip())
         if val > MAX_ASSESSED:
-            return True, f"Skip high assessed: ${val:,.0f}"
+            return True, "Skip high assessed: {}".format(val)
     except:
         pass
 
@@ -112,20 +104,6 @@ def should_skip(owner_name, property_address, assessed_val):
 
 
 def parse_tax_csv(path):
-    """
-    Load and group delinquent tax records by parcel ID (Account Number).
-    Returns dict: parcel_id -> {
-        years: [2020, 2021, ...],
-        years_count: int,
-        total_balance: float,
-        owner_name: str,
-        property_address: str,
-        billing_address: str,
-        assessed_value: float,
-        account_number: str,
-        cert_status: str,
-    }
-    """
     log.info("Loading delinquent tax CSV: %s", path)
     groups = defaultdict(lambda: {
         "years": [],
@@ -137,8 +115,6 @@ def parse_tax_csv(path):
         "assessed_value": 0.0,
         "account_number": "",
         "cert_status": "",
-        "skipped": False,
-        "skip_reason": "",
     })
 
     skipped = 0
@@ -147,52 +123,46 @@ def parse_tax_csv(path):
     with open(path, encoding="utf-8", errors="replace") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            acct     = (row.get("Account Number") or "").strip()
-            owner    = (row.get("Owner Name") or "").strip()
-            prop_addr= (row.get("Property Address") or "").strip()
-            bill_addr= (row.get("Billing Address") or "").strip()
-            tax_yr   = (row.get("Tax Yr") or row.get("Roll Yr") or "").strip()
-            assessed = (row.get("Assessed Value") or "0").strip()
-            balance  = (row.get("Balance Amount") or "0").strip()
-            cert_st  = (row.get("Cert Status") or "").strip()
+            acct      = (row.get("Account Number") or "").strip()
+            owner     = (row.get("Owner Name") or "").strip()
+            prop_addr = (row.get("Property Address") or "").strip()
+            bill_addr = (row.get("Billing Address") or "").strip()
+            tax_yr    = (row.get("Tax Yr") or row.get("Roll Yr") or "").strip()
+            assessed  = (row.get("Assessed Value") or "0").strip()
+            balance   = (row.get("Balance Amount") or "0").strip()
+            cert_st   = (row.get("Cert Status") or "").strip()
 
             if not acct or acct == "Grand Total":
                 continue
 
-            # Parse balance
             try:
-                bal = float(balance.replace('$','').replace(',',''))
+                bal = float(balance.replace('$', '').replace(',', ''))
             except:
                 bal = 0.0
 
             if bal < MIN_BALANCE:
                 continue
 
-            # Parse assessed value
             try:
-                av = float(assessed.replace('$','').replace(',',''))
+                av = float(assessed.replace('$', '').replace(',', ''))
             except:
                 av = 0.0
 
-            # Check if should skip
             skip, reason = should_skip(owner, prop_addr, av)
             if skip:
                 skipped += 1
                 continue
 
-            # Parse year
             try:
                 yr = int(tax_yr)
             except:
                 yr = 0
 
-            # Group by account number (parcel ID equivalent)
             g = groups[acct]
             g["account_number"] = acct
             if yr and yr not in g["years"]:
                 g["years"].append(yr)
             g["total_balance"] += bal
-            # Use most recent data for names/addresses
             if owner:
                 g["owner_name"] = owner
             if prop_addr:
@@ -206,14 +176,11 @@ def parse_tax_csv(path):
 
             loaded += 1
 
-    # Finalize groups
+    # Finalize
     result = {}
     for acct, g in groups.items():
         g["years"].sort()
         g["years_count"] = len(g["years"])
-        # Deduplicate — same parcel sometimes appears twice per year
-        g["total_balance"] = round(g["total_balance"] / max(
-            len([y for y in g["years"]]), 1), 2) * g["years_count"]
         result[acct] = g
 
     log.info("Tax CSV: %d rows loaded | %d parcels grouped | %d skipped",
@@ -222,9 +189,7 @@ def parse_tax_csv(path):
 
 
 def calc_tax_score(years_count, total_balance):
-    """Calculate score contribution from delinquent tax data."""
     score = TAX_BASE_SCORE
-
     if years_count >= 10:
         score += TAX_YEARS_10_BONUS
     elif years_count >= 5:
@@ -233,20 +198,16 @@ def calc_tax_score(years_count, total_balance):
         score += TAX_YEARS_3_BONUS
     elif years_count >= 2:
         score += TAX_YEARS_2_BONUS
-
-    # Large balance adds urgency
     if total_balance >= 50000:
         score += 10
     elif total_balance >= 20000:
         score += 6
     elif total_balance >= 5000:
         score += 3
-
     return score
 
 
 def tax_record_to_lead(acct, tax):
-    """Convert a delinquent tax record into a new lead dict."""
     years_count   = tax["years_count"]
     total_balance = tax["total_balance"]
     score         = calc_tax_score(years_count, total_balance)
@@ -254,42 +215,40 @@ def tax_record_to_lead(acct, tax):
     bill_addr     = tax["billing_address"]
     owner         = tax["owner_name"]
 
-    # Absentee check — billing differs from property
     absentee = False
     prop_key = clean_address_key(prop_addr)
     bill_key = clean_address_key(bill_addr)
     if prop_key and bill_key and prop_key != bill_key:
         absentee = True
-        score += 8  # absentee + delinquent = motivated
+        score += 8
 
     years_str = ", ".join(str(y) for y in sorted(tax["years"]))
-    flag_note = f"delinquent_taxes_{years_count}yr"
+    flag_note = "delinquent_taxes_{}yr".format(years_count)
 
     return {
-        "document_number":   f"TAX-{acct}",
-        "file_date":         f"{max(tax['years'])}-01-01" if tax["years"] else "",
-        "grantor":           "",
-        "grantee":           owner,
-        "legal_description": "",
-        "document_type":     "Delinquent Taxes",
-        "seller_score":      min(score, 99),
-        "distress_flags":    [flag_note],
-        "stacked":           False,
-        "stacked_docs":      [f"TAX-{acct}"],
-        "stacked_types":     ["Delinquent Taxes"],
-        "motivation_count":  1,
-        "property_address":  prop_addr,
-        "mailing_address":   bill_addr,
-        "owner_name":        owner,
-        "assessed_value":    f"${tax['assessed_value']:,.2f}" if tax["assessed_value"] else "",
-        "parcel_id":         acct,
-        "match_confidence":  "HIGH" if prop_addr else "LOW",
-        "match_score":       80 if prop_addr else 20,
-        "match_reason":      f"Delinquent tax roll — {years_count} year(s) unpaid | balance ${total_balance:,.2f}",
-        "county_search_url": f"https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=parcel&SearchValue={acct}",
-        "needs_enrichment":  not bool(prop_addr),
-        "absentee_owner":    absentee,
-        # Tax-specific fields
+        "document_number":      "TAX-{}".format(acct),
+        "file_date":            "{}-01-01".format(max(tax["years"])) if tax["years"] else "",
+        "grantor":              "",
+        "grantee":              owner,
+        "legal_description":    "",
+        "document_type":        "Delinquent Taxes",
+        "seller_score":         min(score, 99),
+        "distress_flags":       [flag_note],
+        "stacked":              False,
+        "stacked_docs":         ["TAX-{}".format(acct)],
+        "stacked_types":        ["Delinquent Taxes"],
+        "motivation_count":     1,
+        "property_address":     prop_addr,
+        "mailing_address":      bill_addr,
+        "owner_name":           owner,
+        "assessed_value":       "${:,.2f}".format(tax["assessed_value"]) if tax["assessed_value"] else "",
+        "parcel_id":            acct,
+        "match_confidence":     "HIGH" if prop_addr else "LOW",
+        "match_score":          80 if prop_addr else 20,
+        "match_reason":         "Delinquent tax roll — {} year(s) unpaid | balance ${:,.2f}".format(years_count, total_balance),
+        "county_search_url":    "https://www.ocpafl.org/searches/ParcelSearch.aspx?SearchType=parcel&SearchValue={}".format(acct),
+        "needs_enrichment":     not bool(prop_addr),
+        "absentee_owner":       absentee,
         "tax_years_delinquent": years_count,
         "tax_years_list":       years_str,
         "tax_total_balance":    round(total_balance, 2),
@@ -301,48 +260,47 @@ def tax_record_to_lead(acct, tax):
 def main():
     log.info("=== Delinquent Tax Cross-Reference ===")
 
-    # ── LOAD TAX DATA ──────────────────────────────────────────────────────
     if not os.path.exists(TAX_CSV_PATH):
-        log.error("Tax CSV not found: %s", TAX_CSV_PATH)
-        log.error("Upload the delinquent tax roll CSV to data/delinquent_taxes.csv")
+        log.error("Tax CSV not found: %s — upload to data/delinquent_taxes.csv", TAX_CSV_PATH)
         return
 
     tax_records = parse_tax_csv(TAX_CSV_PATH)
     log.info("Loaded %d unique delinquent parcels", len(tax_records))
 
-    # ── LOAD EXISTING LEADS ────────────────────────────────────────────────
     if not os.path.exists(OUTPUT_PATH):
         log.error("No output.json found — run scraper.py and merger.py first")
         return
 
     with open(OUTPUT_PATH, encoding="utf-8") as f:
         data = json.load(f)
-    leads = data.get("leads", [])
+
+    # Work on a plain list copy — never modify while indexing
+    leads = list(data.get("leads", []))
     log.info("Loaded %d existing leads", len(leads))
 
     # ── BUILD INDEXES ──────────────────────────────────────────────────────
-    parcel_idx  = {}    # parcel_id -> lead index
-    addr_idx    = {}    # clean address -> lead index
-    owner_idx   = {}    # clean owner key -> lead index
+    # Indexes map lookup key -> position in `leads` list
+    # New leads go into a separate list and are appended at the end
+    # so indexes into `leads` stay valid throughout the loop
+    parcel_idx = {}
+    addr_idx   = {}
+    owner_idx  = {}
 
     for i, lead in enumerate(leads):
-        # Parcel index
         pid = clean_parcel(lead.get("parcel_id", ""))
         if is_valid_parcel(pid):
             parcel_idx[pid] = i
-
-        # Also index the account number format (dashes)
         raw_pid = (lead.get("parcel_id") or "").strip()
         if raw_pid:
             parcel_idx[raw_pid] = i
 
-        # Address index
         addr = clean_address_key(lead.get("property_address", ""))
         if addr and len(addr) > 5:
             addr_idx[addr] = i
 
-        # Owner name index (first word of last name)
-        owner = clean_owner_key(lead.get("owner_name", "") or lead.get("grantee", ""))
+        owner = clean_owner_key(
+            lead.get("owner_name", "") or lead.get("grantee", "")
+        )
         if owner and len(owner) >= 4:
             owner_idx[owner] = i
 
@@ -350,11 +308,10 @@ def main():
              len(parcel_idx), len(addr_idx), len(owner_idx))
 
     # ── CROSS-REFERENCE ────────────────────────────────────────────────────
+    new_leads = []   # collected separately — appended after loop
     stacked   = 0
     new_added = 0
     skipped   = 0
-
-    new_leads = []
 
     for acct, tax in tax_records.items():
         years_count   = tax["years_count"]
@@ -370,38 +327,39 @@ def main():
         # ── FIND EXISTING LEAD ─────────────────────────────────────────────
         lead_idx = None
 
-        # 1. Try parcel ID — exact match with dashes removed
         cleaned = clean_parcel(acct)
         if cleaned in parcel_idx:
             lead_idx = parcel_idx[cleaned]
         elif acct in parcel_idx:
             lead_idx = parcel_idx[acct]
 
-        # 2. Try property address
         if lead_idx is None:
             addr_key = clean_address_key(prop_addr)
             if addr_key and addr_key in addr_idx:
                 lead_idx = addr_idx[addr_key]
 
-        # 3. Try owner name exact match
         if lead_idx is None:
             owner_key = clean_owner_key(owner_name)
             if owner_key and owner_key in owner_idx:
                 lead_idx = owner_idx[owner_key]
 
+        # Guard — index must be inside the original leads list
+        if lead_idx is not None and lead_idx >= len(leads):
+            lead_idx = None
+
         # ── STACK OR ADD ───────────────────────────────────────────────────
         if lead_idx is not None:
             lead = leads[lead_idx]
 
-            # Check if already has delinquent taxes stacked
             existing_flags = lead.get("distress_flags", [])
             if isinstance(existing_flags, str):
                 existing_flags = [f.strip() for f in existing_flags.split(",") if f.strip()]
 
-            already_has_tax = any("delinquent" in f.lower() or "tax" in f.lower()
-                                  for f in existing_flags)
+            already_has_tax = any(
+                "delinquent" in f.lower() or "tax" in f.lower()
+                for f in existing_flags
+            )
             if already_has_tax:
-                # Just update the tax-specific fields with latest data
                 lead["tax_years_delinquent"] = years_count
                 lead["tax_total_balance"]    = round(total_balance, 2)
                 lead["tax_cert_status"]      = tax["cert_status"]
@@ -409,45 +367,38 @@ def main():
                 skipped += 1
                 continue
 
-            # Stack delinquent taxes onto existing lead
             old_score = lead.get("seller_score", 0)
             new_score = min(old_score + tax_score + TAX_STACK_BONUS, 99)
 
-            # Add flag
-            existing_flags.append(f"delinquent_taxes_{years_count}yr")
+            existing_flags.append("delinquent_taxes_{}yr".format(years_count))
             lead["distress_flags"] = existing_flags
 
-            # Stack types
             stacked_types = lead.get("stacked_types", [])
             if isinstance(stacked_types, str):
                 stacked_types = [stacked_types] if stacked_types else []
             if "Delinquent Taxes" not in stacked_types:
                 stacked_types.append("Delinquent Taxes")
 
-            # Stack docs
             stacked_docs = lead.get("stacked_docs", [])
             if isinstance(stacked_docs, str):
                 stacked_docs = [stacked_docs] if stacked_docs else []
-            tax_doc = f"TAX-{acct}"
+            tax_doc = "TAX-{}".format(acct)
             if tax_doc not in stacked_docs:
                 stacked_docs.append(tax_doc)
 
             mot_count = lead.get("motivation_count", 1) + 1
 
-            lead["seller_score"]     = new_score
-            lead["stacked"]          = True
-            lead["stacked_types"]    = stacked_types
-            lead["stacked_docs"]     = stacked_docs
-            lead["motivation_count"] = mot_count
-            lead["document_type"]    = " + ".join(stacked_types)
-
-            # Add tax-specific fields
+            lead["seller_score"]         = new_score
+            lead["stacked"]              = True
+            lead["stacked_types"]        = stacked_types
+            lead["stacked_docs"]         = stacked_docs
+            lead["motivation_count"]     = mot_count
+            lead["document_type"]        = " + ".join(stacked_types)
             lead["tax_years_delinquent"] = years_count
             lead["tax_years_list"]       = ", ".join(str(y) for y in sorted(tax["years"]))
             lead["tax_total_balance"]    = round(total_balance, 2)
             lead["tax_cert_status"]      = tax["cert_status"]
 
-            # Fill missing data from tax record
             if not lead.get("property_address") and prop_addr:
                 lead["property_address"] = prop_addr
             if not lead.get("owner_name") and owner_name:
@@ -455,45 +406,37 @@ def main():
             if not lead.get("mailing_address") and tax["billing_address"]:
                 lead["mailing_address"] = tax["billing_address"]
             if not lead.get("assessed_value") and tax["assessed_value"]:
-                lead["assessed_value"] = f"${tax['assessed_value']:,.2f}"
+                lead["assessed_value"] = "${:,.2f}".format(tax["assessed_value"])
             if not lead.get("parcel_id"):
                 lead["parcel_id"] = acct
 
             leads[lead_idx] = lead
             stacked += 1
-            log.info("Stacked tax onto lead: %s | %d yr delinquent | score %d→%d",
+            log.info("Stacked tax: %s | %d yr | score %d->%d",
                      prop_addr[:45], years_count, old_score, new_score)
 
         else:
-            # Brand new lead from delinquent tax record only
+            # New lead — goes into separate list, NOT into leads yet
+            # so existing lead_idx values stay valid
             new_lead = tax_record_to_lead(acct, tax)
             new_leads.append(new_lead)
-
-            # Add to indexes immediately so we don't double-add in this run
-            new_idx = len(leads) + len(new_leads) - 1
-            cleaned = clean_parcel(acct)
-            parcel_idx[cleaned] = new_idx
-            parcel_idx[acct]    = new_idx
-            addr_key = clean_address_key(prop_addr)
-            if addr_key:
-                addr_idx[addr_key] = new_idx
-
             new_added += 1
-            log.info("New tax lead: %s | owner=%s | %d yr | bal=$%,.0f | score=%d",
+            bal_str = "${:,.0f}".format(total_balance)
+            log.info("New tax lead: %s | owner=%s | %d yr | bal=%s | score=%d",
                      prop_addr[:40], owner_name[:25],
-                     years_count, total_balance, new_lead["seller_score"])
+                     years_count, bal_str, new_lead["seller_score"])
 
-    # Merge new leads in
+    # Append all new leads at once after loop completes
     leads.extend(new_leads)
 
-    # ── SORT BY SCORE ──────────────────────────────────────────────────────
+    # ── SORT ───────────────────────────────────────────────────────────────
     leads.sort(
         key=lambda l: l.get("seller_score", 0) if isinstance(l, dict) else 0,
         reverse=True
     )
 
-    log.info("Done: %d stacked onto existing | %d new tax-only leads | %d already had tax",
-             stacked, new_added, skipped)
+    log.info("Done: %d stacked | %d new tax leads | %d already had tax | %d total",
+             stacked, new_added, skipped, len(leads))
 
     # ── SAVE JSON ──────────────────────────────────────────────────────────
     data["generated_at"]  = datetime.utcnow().isoformat() + "Z"
