@@ -1,20 +1,25 @@
 name: Scrape OC Motivated Seller Leads
+
 on:
   schedule:
     - cron: "0 12 * * *"
   workflow_dispatch:
+
 permissions:
   contents: write
   pages: write
   id-token: write
+
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
 jobs:
   scrape:
     name: Scrape & Generate Dashboard
     runs-on: ubuntu-latest
     timeout-minutes: 60
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,6 +58,11 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
 
+      - name: Cross-reference delinquent taxes
+        run: python src/tax_delinquent.py
+        env:
+          PYTHONUNBUFFERED: "1"
+
       - name: Validate outputs
         run: |
           python - <<'EOF'
@@ -75,7 +85,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin main
           git checkout main
-          git add -f data/output.json data/output.csv data/foreclosures.json data/foreclosures.csv dashboard/index.html
+          git add -f data/output.json data/output.csv data/foreclosures.json data/foreclosures.csv data/delinquent_taxes.csv dashboard/index.html
           git diff --cached --quiet || git commit -m "chore: auto-update leads $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push origin main
         env:
@@ -99,5 +109,6 @@ jobs:
             data/output.csv
             data/foreclosures.json
             data/foreclosures.csv
+            data/delinquent_taxes.csv
             dashboard/index.html
           retention-days: 30
