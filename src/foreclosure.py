@@ -260,7 +260,7 @@ def fetch_preview_page(session, date):
         time.sleep(0.3)
 
     if listings:
-        log.info("  %s: %d listings", date_str, len(listings))
+        log.info("  %s: %d listings (pre-dedup)", date_str, len(listings))
     return listings
 
 
@@ -508,15 +508,42 @@ def main():
         if listings:
             time.sleep(0.5)
 
-    # Deduplicate by parcel ID
+    # ── DEDUPLICATION ──────────────────────────────────────────────────────
+    # Priority order: case number > parcel ID > address+date
+    # This catches duplicates from scraping areas W and R returning same listing,
+    # and from the scraper running multiple times per day on the same auctions.
     seen    = set()
     deduped = []
     for fc in all_listings:
-        pid = fc.get("parcel_id","")
-        key = pid if pid else f"{fc.get('address','')}-{fc.get('auction_date','')}"
-        if key and key not in seen:
+        case_num  = (fc.get("case_number") or "").strip()
+        parcel_id = (fc.get("parcel_id")   or "").strip()
+        address   = (fc.get("address")     or "").strip().upper()
+        date      = (fc.get("auction_date")or "").strip()
+
+        # Build the best available unique key — case number is most reliable
+        if case_num:
+            key = f"case:{case_num}"
+        elif parcel_id:
+            key = f"parcel:{parcel_id}"
+        elif address and date:
+            key = f"addr:{address}:{date}"
+        else:
+            key = None
+
+        if key is None:
+            deduped.append(fc)  # can't dedup — include it
+            continue
+
+        if key not in seen:
             seen.add(key)
             deduped.append(fc)
+        else:
+            log.debug("Dedup skip: %s | case=%s parcel=%s",
+                      address[:40], case_num, parcel_id)
+
+    log.info("Dedup: %d raw → %d unique listings",
+             len(all_listings), len(deduped))
+    # ──────────────────────────────────────────────────────────────────────
 
     log.info("Total:%d ACTIVE:%d TOO_SOON:%d EXPIRED:%d",
              len(deduped),
