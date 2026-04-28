@@ -1,56 +1,10 @@
 {
-  "generated_at": "2026-04-28T12:36:08.143878Z",
-  "total_records": 29,
-  "active": 22,
+  "generated_at": "2026-04-28T17:59:37.750249Z",
+  "total_records": 46,
+  "active": 34,
   "expired": 0,
-  "too_soon": 7,
+  "too_soon": 12,
   "foreclosures": [
-    {
-      "auction_date": "2026-04-28",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2024-CA-011315-O",
-      "parcel_id": "TIMESHARE",
-      "address": "",
-      "final_judgment": "$3,545.71",
-      "assessed_value": "",
-      "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
-      "property_type": "",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260153247",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/28/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": false,
-      "scraped_at": "2026-04-28T12:35:27.248314Z"
-    },
-    {
-      "auction_date": "2026-04-28",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2025-CA-008843-O",
-      "parcel_id": "292302314600140",
-      "address": "101 W GRANT ST, ORLANDO, 32806",
-      "final_judgment": "$469,124.10",
-      "assessed_value": "$501,950.00",
-      "opening_bid": "",
-      "owner_name": "PERSAUD AVINASH",
-      "mailing_address": "101 W Grant St, Orlando, FL 32806-3931",
-      "property_type": "TOWNHOUSE CLASS II",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292302314600140",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260178036",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/28/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:27.249194Z"
-    },
     {
       "auction_date": "2026-04-29",
       "auction_time": "11:00 AM ET",
@@ -72,7 +26,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:29.334399Z"
+      "scraped_at": "2026-04-28T17:59:02.751306Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -95,7 +49,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:29.334640Z"
+      "scraped_at": "2026-04-28T17:59:02.751631Z"
     },
     {
       "auction_date": "2026-04-29",
@@ -118,7 +72,168 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:29.334872Z"
+      "scraped_at": "2026-04-28T17:59:02.751877Z"
+    },
+    {
+      "auction_date": "2026-04-29",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-003184-O (COUNT II)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$26,726.23",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260168475",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 1,
+      "status": "TOO_SOON",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:02.752076Z"
+    },
+    {
+      "auction_date": "2026-04-29",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-003184-O (COUNT III)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$11,412.63",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260168497",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 1,
+      "status": "TOO_SOON",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:02.752250Z"
+    },
+    {
+      "auction_date": "2026-04-29",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-003184-O (COUNT IV)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$10,430.51",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260168468",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 1,
+      "status": "TOO_SOON",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:02.752424Z"
+    },
+    {
+      "auction_date": "2026-04-29",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-003184-O (COUNT VII)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$5,188.04",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260168504",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 1,
+      "status": "TOO_SOON",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:02.752599Z"
+    },
+    {
+      "auction_date": "2026-04-29",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-003184-O (COUNT VIII)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$7,196.34",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260168455",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 1,
+      "status": "TOO_SOON",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:02.752775Z"
+    },
+    {
+      "auction_date": "2026-04-29",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-003184-O (CT IX)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$12,136.27",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260165207",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 1,
+      "status": "TOO_SOON",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:02.752971Z"
+    },
+    {
+      "auction_date": "2026-04-29",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-003184-O (CT X)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$7,374.64",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260165215",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/29/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 1,
+      "status": "TOO_SOON",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:02.753140Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -141,7 +256,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:31.961534Z"
+      "scraped_at": "2026-04-28T17:59:05.859896Z"
     },
     {
       "auction_date": "2026-04-30",
@@ -164,7 +279,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:31.962058Z"
+      "scraped_at": "2026-04-28T17:59:05.860164Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -187,7 +302,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:34.582699Z"
+      "scraped_at": "2026-04-28T17:59:08.290890Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -210,7 +325,7 @@
       "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:34.582942Z"
+      "scraped_at": "2026-04-28T17:59:08.291153Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -233,7 +348,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:42.411530Z"
+      "scraped_at": "2026-04-28T17:59:15.396439Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -256,7 +371,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:42.411762Z"
+      "scraped_at": "2026-04-28T17:59:15.396630Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -279,7 +394,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:44.467043Z"
+      "scraped_at": "2026-04-28T17:59:17.346700Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -302,7 +417,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:44.467282Z"
+      "scraped_at": "2026-04-28T17:59:17.346963Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -325,7 +440,145 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:44.467511Z"
+      "scraped_at": "2026-04-28T17:59:17.347198Z"
+    },
+    {
+      "auction_date": "2026-05-05",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2024-CA-004652-O (ct II)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$4,055.20",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260139553",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 7,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:17.347374Z"
+    },
+    {
+      "auction_date": "2026-05-05",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2024-CA-008440-O",
+      "parcel_id": "Property Appraiser",
+      "address": "8801 WORLDQUEST BLVD # 4406, ORLAND, 32821",
+      "final_judgment": "$212,838.46",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250568098",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 7,
+      "status": "ACTIVE",
+      "matched_lead": true,
+      "scraped_at": "2026-04-28T17:59:17.347585Z"
+    },
+    {
+      "auction_date": "2026-05-05",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2024-CA-010175-O (ct I)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$5,173.00",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260139559",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 7,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:17.347755Z"
+    },
+    {
+      "auction_date": "2026-05-05",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2024-CA-010175-O (CT II)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$4,915.02",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260138278",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 7,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:17.347935Z"
+    },
+    {
+      "auction_date": "2026-05-05",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2024-CA-010526-O (COUNT II)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$4,798.55",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260140092",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 7,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:17.348110Z"
+    },
+    {
+      "auction_date": "2026-05-05",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2024-CA-011594-O",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$5,093.77",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260140060",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/05/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 7,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:17.348280Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -348,7 +601,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-28T12:35:44.468845Z"
+      "scraped_at": "2026-04-28T17:59:17.348508Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -371,7 +624,30 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:48.657679Z"
+      "scraped_at": "2026-04-28T17:59:20.640626Z"
+    },
+    {
+      "auction_date": "2026-05-06",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2023-CC-009899-O",
+      "parcel_id": "Property Appraiser",
+      "address": "5317 INDIAN CREEK DRIVE # F-02, ORLANDO, 32811",
+      "final_judgment": "$54,932.02",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250562457",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 8,
+      "status": "ACTIVE",
+      "matched_lead": true,
+      "scraped_at": "2026-04-28T17:59:20.640855Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -394,7 +670,76 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:48.658163Z"
+      "scraped_at": "2026-04-28T17:59:20.641102Z"
+    },
+    {
+      "auction_date": "2026-05-06",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-008451-O (COUNT II,III,IV,V,VI,VII,)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$123,031.31",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260196727",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 8,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:20.641279Z"
+    },
+    {
+      "auction_date": "2026-05-06",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-008766-O (ct II,III,IV,V)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$67,582.26",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260189091",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 8,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:20.641452Z"
+    },
+    {
+      "auction_date": "2026-05-06",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-008768-O (COUNT III,V,VI)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$69,253.82",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260196598",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/06/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 8,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:20.641625Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -417,7 +762,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:48.658949Z"
+      "scraped_at": "2026-04-28T17:59:20.641849Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -440,7 +785,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.914298Z"
+      "scraped_at": "2026-04-28T17:59:23.562955Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -463,7 +808,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.914541Z"
+      "scraped_at": "2026-04-28T17:59:23.563207Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -486,7 +831,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.914768Z"
+      "scraped_at": "2026-04-28T17:59:23.563445Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -509,7 +854,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.914990Z"
+      "scraped_at": "2026-04-28T17:59:23.563676Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -532,7 +877,30 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.915240Z"
+      "scraped_at": "2026-04-28T17:59:23.563908Z"
+    },
+    {
+      "auction_date": "2026-05-07",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2024-CC-017891-O",
+      "parcel_id": "Property Appraiser",
+      "address": "5313 INDIAN CREEK DRIVE, ORLANDO, 32811",
+      "final_judgment": "$19,034.42",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250585784",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 9,
+      "status": "ACTIVE",
+      "matched_lead": true,
+      "scraped_at": "2026-04-28T17:59:23.564137Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -555,7 +923,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.915669Z"
+      "scraped_at": "2026-04-28T17:59:23.564367Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -578,7 +946,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.915895Z"
+      "scraped_at": "2026-04-28T17:59:23.564602Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -601,7 +969,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:51.916134Z"
+      "scraped_at": "2026-04-28T17:59:23.564835Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -624,7 +992,7 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:58.927797Z"
+      "scraped_at": "2026-04-28T17:59:28.931368Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -647,7 +1015,30 @@
       "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:35:58.928111Z"
+      "scraped_at": "2026-04-28T17:59:28.931614Z"
+    },
+    {
+      "auction_date": "2026-05-11",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-004691-O (CTS III, V, VII, VIII, IX)",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$73,169.83",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260123768",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/11/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 13,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-04-28T17:59:36.228256Z"
     },
     {
       "auction_date": "2026-05-11",
@@ -670,7 +1061,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-28T12:36:06.547049Z"
+      "scraped_at": "2026-04-28T17:59:36.228509Z"
     }
   ]
 }
