@@ -132,38 +132,100 @@ def main():
     active_fc = [f for f in foreclosures if f.get("status") == "ACTIVE"]
     log.info("Loaded %d active foreclosures", len(active_fc))
 
-    # Build parcel index for existing leads
-    parcel_idx = {}
-    addr_idx   = {}
+    # ── BUILD LOOKUP INDEXES ───────────────────────────────────────────────
+    # Track by parcel ID, address, case number, AND document number
+    # so we never add the same property twice regardless of run frequency
+    parcel_idx   = {}
+    addr_idx     = {}
+    case_num_idx = {}
+
     for i, lead in enumerate(leads):
+        # Parcel ID index
         pid = clean_parcel(lead.get("parcel_id", ""))
         if is_valid_parcel(pid):
             parcel_idx[pid] = i
+
+        # Address index
         addr = (lead.get("property_address") or "").upper().strip()
         key  = addr.split(",")[0].strip()
         if key:
             addr_idx[key] = i
 
+        # Case/document number index — catches foreclosure-only leads
+        # that were added in previous runs
+        doc = (lead.get("document_number") or "").strip()
+        if doc:
+            case_num_idx[doc] = i
+
+        # Also index all stacked doc numbers
+        stacked_docs = lead.get("stacked_docs") or []
+        if isinstance(stacked_docs, str):
+            stacked_docs = [stacked_docs] if stacked_docs else []
+        for d in stacked_docs:
+            if d:
+                case_num_idx[d] = i
+
+        # Index auction case number field too
+        auction_case = (lead.get("auction_case_number") or "").strip()
+        if auction_case:
+            case_num_idx[auction_case] = i
+
+    log.info("Indexes built: %d parcels | %d addresses | %d case numbers",
+             len(parcel_idx), len(addr_idx), len(case_num_idx))
+    # ──────────────────────────────────────────────────────────────────────
+
     new_leads = []
     stacked   = 0
     added     = 0
+    skipped   = 0
 
     for fc in active_fc:
-        pid     = clean_parcel(fc.get("parcel_id", ""))
-        fc_addr = (fc.get("address") or "").upper().strip()
-        fc_key  = fc_addr.split(",")[0].strip()
+        pid      = clean_parcel(fc.get("parcel_id", ""))
+        fc_addr  = (fc.get("address") or "").upper().strip()
+        fc_key   = fc_addr.split(",")[0].strip()
+        case_num = (fc.get("case_number") or "").strip()
 
+        # ── FIND EXISTING LEAD ─────────────────────────────────────────────
+        # Check in priority order:
+        # 1. Case number (most reliable — catches re-runs on same data)
+        # 2. Parcel ID (catches cross-source matches)
+        # 3. Address (fallback)
         lead_idx = None
-        if is_valid_parcel(pid) and pid in parcel_idx:
+
+        if case_num and case_num in case_num_idx:
+            lead_idx = case_num_idx[case_num]
+            log.debug("Matched by case number: %s", case_num)
+        elif is_valid_parcel(pid) and pid in parcel_idx:
             lead_idx = parcel_idx[pid]
+            log.debug("Matched by parcel: %s", pid)
         elif fc_key and fc_key in addr_idx:
             lead_idx = addr_idx[fc_key]
+            log.debug("Matched by address: %s", fc_key)
+        # ──────────────────────────────────────────────────────────────────
 
         auction_score = calc_auction_score(fc)
 
         if lead_idx is not None:
-            # Stack onto existing lead
             lead = leads[lead_idx]
+
+            # Check if this exact foreclosure case is already stacked on this lead
+            existing_stacked = lead.get("stacked_docs") or []
+            if isinstance(existing_stacked, str):
+                existing_stacked = [existing_stacked] if existing_stacked else []
+
+            existing_auction_case = (lead.get("auction_case_number") or "").strip()
+
+            if case_num and (case_num in existing_stacked or case_num == existing_auction_case):
+                # Already stacked — just update the auction date/status in case it changed
+                lead["auction_date"]      = fc.get("auction_date", "")
+                lead["auction_days_left"] = fc.get("days_until_auction", 0)
+                lead["auction_status"]    = fc.get("status", "ACTIVE")
+                leads[lead_idx] = lead
+                skipped += 1
+                log.debug("Already stacked, updated date only: %s", case_num)
+                continue
+
+            # Stack onto existing lead — new foreclosure signal
             old_score = lead.get("seller_score", 0)
             new_score = min(old_score + auction_score, 100)
 
@@ -181,10 +243,10 @@ def main():
             if "Foreclosure Auction" not in stacked_types:
                 stacked_types.append("Foreclosure Auction")
 
+            # Combine stacked docs
             stacked_docs = lead.get("stacked_docs", [])
             if isinstance(stacked_docs, str):
                 stacked_docs = [stacked_docs] if stacked_docs else []
-            case_num = fc.get("case_number", "")
             if case_num and case_num not in stacked_docs:
                 stacked_docs.append(case_num)
 
@@ -195,7 +257,7 @@ def main():
                 "type":       "Foreclosure Auction",
                 "date":       fc.get("auction_date", ""),
                 "score":      auction_score,
-                "doc_number": fc.get("case_number", ""),
+                "doc_number": case_num,
             })
 
             mot_count = lead.get("motivation_count", 1) + 1
@@ -229,27 +291,47 @@ def main():
             if not lead.get("assessed_value") and fc.get("assessed_value"):
                 lead["assessed_value"] = fc["assessed_value"]
 
-            # Add auction fields
+            # Add/update auction fields
             lead["auction_date"]           = fc.get("auction_date", "")
             lead["auction_time"]           = fc.get("auction_time", "")
             lead["auction_status"]         = fc.get("status", "ACTIVE")
             lead["auction_days_left"]      = fc.get("days_until_auction", 0)
             lead["auction_final_judgment"] = fc.get("final_judgment", "")
-            lead["auction_case_number"]    = fc.get("case_number", "")
+            lead["auction_case_number"]    = case_num
             lead["auction_url"]            = fc.get("auction_url", "")
             lead["comptroller_url"]        = fc.get("comptroller_url", "")
             lead["homestead"]              = fc.get("homestead", False)
             lead["absentee_owner"]         = fc.get("absentee_owner", False)
 
             leads[lead_idx] = lead
+
+            # Update indexes so later iterations don't double-add
+            if case_num:
+                case_num_idx[case_num] = lead_idx
+            if is_valid_parcel(pid):
+                parcel_idx[pid] = lead_idx
+            if fc_key:
+                addr_idx[fc_key] = lead_idx
+
             stacked += 1
             log.info("Stacked FC onto lead: %s | score %d→%d",
                      fc.get("address","")[:50], old_score, new_score)
 
         else:
-            # New lead from foreclosure — not in comptroller data
+            # New lead from foreclosure — not in any existing data
             new_lead = foreclosure_to_lead(fc)
             new_leads.append(new_lead)
+
+            # Immediately add to indexes so subsequent iterations
+            # in this same run don't add the same property again
+            new_idx = len(leads) + len(new_leads) - 1
+            if case_num:
+                case_num_idx[case_num] = new_idx
+            if is_valid_parcel(pid):
+                parcel_idx[pid] = new_idx
+            if fc_key:
+                addr_idx[fc_key] = new_idx
+
             added += 1
             log.info("New FC lead: %s | score %d",
                      fc.get("address","")[:50], new_lead["seller_score"])
@@ -257,12 +339,49 @@ def main():
     # Add new foreclosure-only leads
     leads.extend(new_leads)
 
+    # ── FINAL DEDUP PASS ───────────────────────────────────────────────────
+    # Safety net — remove any remaining duplicates by parcel ID or case number
+    # This catches anything that slipped through from previous runs before this fix
+    seen_parcels = set()
+    seen_cases   = set()
+    deduped_leads = []
+
+    for lead in leads:
+        pid  = clean_parcel(lead.get("parcel_id", ""))
+        doc  = (lead.get("document_number") or "").strip()
+        case = (lead.get("auction_case_number") or "").strip()
+
+        parcel_key = pid  if is_valid_parcel(pid) else None
+        case_key   = doc  or case or None
+
+        is_dup = False
+        if parcel_key and parcel_key in seen_parcels:
+            is_dup = True
+        elif case_key and case_key in seen_cases and not parcel_key:
+            is_dup = True
+
+        if is_dup:
+            log.debug("Final dedup removed duplicate: parcel=%s case=%s", pid, case_key)
+            continue
+
+        if parcel_key:
+            seen_parcels.add(parcel_key)
+        if case_key:
+            seen_cases.add(case_key)
+        deduped_leads.append(lead)
+
+    removed = len(leads) - len(deduped_leads)
+    if removed > 0:
+        log.info("Final dedup removed %d duplicate leads", removed)
+    leads = deduped_leads
+    # ──────────────────────────────────────────────────────────────────────
+
     # Sort by score descending
     leads.sort(key=lambda l: l.get("seller_score", 0) if isinstance(l, dict)
                else l.seller_score, reverse=True)
 
-    log.info("Merge complete: %d stacked onto existing | %d new FC leads added",
-             stacked, added)
+    log.info("Merge complete: %d stacked | %d new | %d skipped (already exists) | %d dupes removed | %d total",
+             stacked, added, skipped, removed, len(leads))
 
     # Save
     data["generated_at"]  = datetime.utcnow().isoformat() + "Z"
