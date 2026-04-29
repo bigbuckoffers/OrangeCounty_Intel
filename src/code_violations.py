@@ -1,21 +1,24 @@
 """
 code_violations.py — Orange County FL Open Code Violations
 
-Reads data/code_violations.xlsx (committed to repo manually or via
-a local script that downloads from netapps.ocfl.net and pushes).
+Reads data/code_violations.xlsx (downloaded weekly from
+https://netapps.ocfl.net/CETitleViolationSearch/ and committed to repo).
 
-XLSX columns:
+XLSX columns (header at row 5):
   Incident ID | Parcel ID | Incident Address | Incident Type |
   Incident Status | Violation Recorded Date
 
 For each property (grouped by Parcel ID):
   1. Enriches owner name + mailing address from OCPA Azure API
+     (same API used by foreclosure.py — confirmed working)
   2. Cross-references against output.json leads by Parcel ID or address
   3. If match found: stacks Code Violation signal, boosts score
   4. If no match: creates new lead
   5. Saves data/code_violations.csv, updates output.json + output.csv
+
+Run after tax_delinquent.py in GitHub Actions.
 """
-import csv, json, logging, os, re, time, requests, io
+import csv, json, logging, os, re, time, requests
 from collections import defaultdict
 from datetime import datetime
 
@@ -28,6 +31,7 @@ OUTPUT_PATH    = "data/output.json"
 OUTPUT_CSV     = "data/output.csv"
 VIOLATIONS_CSV = "data/code_violations.csv"
 
+# OCPA Azure API — same endpoint foreclosure.py uses, confirmed working
 OCPA_API_URL = "https://ocpa-mainsite-afd-standard.azurefd.net/api/PRC/GetPRCGeneralInfo"
 OCPA_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -47,6 +51,8 @@ SKIP_OWNERS = [
     'DISNEY', 'UNIVERSAL', 'SEAWORLD', 'MARRIOTT', 'HILTON',
     'CITY OF ORLANDO', 'ORANGE COUNTY', 'STATE OF FLORIDA',
     'SCHOOL BOARD', 'BOARD OF COUNTY', 'REEDY CREEK',
+    'WYNDHAM', 'HYATT', 'SHERATON', 'RITZ', 'WESTIN',
+    'SIMON PROPERTY', 'MALL AT MILLENNIA', 'PREMIUM OUTLETS',
 ]
 
 
@@ -71,8 +77,9 @@ def should_skip(owner):
 # ── OCPA ENRICHMENT ───────────────────────────────────────────────────────
 def enrich_from_ocpa(parcel_id):
     """
-    Uses the same OCPA Azure API that foreclosure.py uses.
-    Returns {owner_name, mailing_address, property_type} or {}
+    Calls OCPA's own Azure CDN API to get owner name and mailing address.
+    Same endpoint the ocpaweb.ocpafl.org website uses internally.
+    No auth required. Returns dict or {} on failure.
     """
     pid = clean_parcel(parcel_id)
     if not pid or not pid.isdigit():
@@ -92,7 +99,7 @@ def enrich_from_ocpa(parcel_id):
         mail_city  = (d.get("mailCity") or "").strip()
         mail_state = (d.get("mailState") or "FL").strip()
         mail_zip   = (d.get("mailZip") or "").strip()
-        mailing    = ""
+        mailing = ""
         if mail_addr:
             mailing = "{}, {}, {} {}".format(
                 mail_addr, mail_city, mail_state, mail_zip).strip()
@@ -109,10 +116,10 @@ def enrich_from_ocpa(parcel_id):
 # ── PARSE XLSX ────────────────────────────────────────────────────────────
 def parse_violations_xlsx(path):
     """
-    Reads the XLSX and returns list of violation dicts.
-    Header row is at index 4 (row 5 in Excel).
-    Columns: Incident ID | Parcel ID | Incident Address |
-             Incident Type | Incident Status | Violation Recorded Date
+    Reads the violations XLSX.
+    Header is at row 5 (index 4). Columns:
+      Incident ID | Parcel ID | Incident Address |
+      Incident Type | Incident Status | Violation Recorded Date
     """
     try:
         import openpyxl
@@ -129,7 +136,7 @@ def parse_violations_xlsx(path):
         return []
 
     if len(rows) < 5:
-        log.error("XLSX too short")
+        log.error("XLSX too short — expected header at row 5")
         return []
 
     # Find header row
@@ -140,13 +147,13 @@ def parse_violations_xlsx(path):
         if 'Incident ID' in vals or 'Parcel ID' in vals:
             headers = vals
             data_start = i + 1
+            log.info("Found header at row %d: %s", i + 1, headers)
             break
 
     if not headers:
         log.error("Could not find header row in XLSX")
         return []
 
-    log.info("XLSX headers: %s", headers)
     violations = []
     for row in rows[data_start:]:
         if not any(v is not None for v in row):
@@ -155,25 +162,26 @@ def parse_violations_xlsx(path):
                for i, v in enumerate(row) if i < len(headers)}
         violations.append(rec)
 
-    log.info("Parsed %d violation records", len(violations))
+    log.info("Parsed %d violation records from %s", len(violations), path)
     return violations
 
 
 # ── GROUP BY PROPERTY ─────────────────────────────────────────────────────
 def group_by_property(violations):
-    """Group violations by Parcel ID."""
+    """Group violations by Parcel ID (or address as fallback)."""
     groups = defaultdict(list)
     for v in violations:
         parcel = clean_parcel(v.get("Parcel ID", ""))
         addr   = clean_address_key(v.get("Incident Address", ""))
-        key    = parcel if parcel else addr
+        key    = parcel if is_valid_parcel(parcel) else addr
         if key:
             groups[key].append(v)
-    log.info("Grouped into %d unique properties", len(groups))
+    log.info("Grouped %d violations into %d unique properties",
+             len(violations), len(groups))
     return groups
 
 
-# ── SAVE RAW CSV ──────────────────────────────────────────────────────────
+# ── SAVE RAW VIOLATIONS CSV ───────────────────────────────────────────────
 def save_violations_csv(violations):
     if not violations:
         return
@@ -194,16 +202,22 @@ def group_to_lead(group_key, viol_list, enriched):
     count  = len(viol_list)
     parcel = first.get("Parcel ID", "")
     addr   = first.get("Incident Address", "")
-    types  = list(set(v.get("Incident Type", "") for v in viol_list if v.get("Incident Type")))
-
+    types  = list(set(
+        v.get("Incident Type", "") for v in viol_list
+        if v.get("Incident Type")
+    ))
     owner   = enriched.get("owner_name", "")
     mailing = enriched.get("mailing_address", "")
 
     score = VIOLATION_BASE_SCORE
-    if count >= 3: score += MULTI_VIOLATION_BONUS * 2
-    elif count >= 2: score += MULTI_VIOLATION_BONUS
+    if count >= 3:
+        score += MULTI_VIOLATION_BONUS * 2
+    elif count >= 2:
+        score += MULTI_VIOLATION_BONUS
 
-    doc_id = "CV-{}".format(re.sub(r'[^A-Z0-9]', '', group_key.upper())[:15])
+    safe_key = re.sub(r'[^A-Z0-9]', '', group_key.upper())[:15]
+    doc_id   = "CV-{}".format(safe_key)
+    types_str = "; ".join(types[:5])
 
     return {
         "document_number":      doc_id,
@@ -226,12 +240,14 @@ def group_to_lead(group_key, viol_list, enriched):
         "match_confidence":     "HIGH" if addr else "LOW",
         "match_score":          75 if addr else 20,
         "match_reason":         "Open code violation — {} active violation(s): {}".format(
-                                    count, "; ".join(types[:3])),
-        "county_search_url":    "https://www.ocpafl.org/searches/ParcelSearch.aspx"
-                                "?SearchType=parcel&SearchValue={}".format(parcel) if parcel else "",
+                                    count, types_str),
+        "county_search_url":    (
+            "https://www.ocpafl.org/searches/ParcelSearch.aspx"
+            "?SearchType=parcel&SearchValue={}".format(parcel)
+        ) if parcel else "",
         "needs_enrichment":     not bool(addr),
         "code_violation_count": count,
-        "code_violation_types": "; ".join(types),
+        "code_violation_types": types_str,
         "scraped_at":           datetime.utcnow().isoformat() + "Z",
     }
 
@@ -241,9 +257,12 @@ def main():
     log.info("=== Code Violations Cross-Reference ===")
 
     if not os.path.exists(XLSX_PATH):
-        log.warning("No %s found — skipping code violations", XLSX_PATH)
-        log.warning("Download from https://netapps.ocfl.net/CETitleViolationSearch/ "
-                    "and commit to data/code_violations.xlsx")
+        log.warning("No %s found — skipping code violations step", XLSX_PATH)
+        log.warning("To add violations data:")
+        log.warning("  1. Go to https://netapps.ocfl.net/CETitleViolationSearch/")
+        log.warning("  2. Click the 'here' link to download the XLSX")
+        log.warning("  3. Rename it code_violations.xlsx")
+        log.warning("  4. Upload to data/ folder in your GitHub repo and commit")
         return
 
     # Parse XLSX
@@ -255,23 +274,23 @@ def main():
     # Group by property
     groups = group_by_property(violations)
 
-    # Enrich with owner/mailing from OCPA API
-    log.info("Enriching %d properties from OCPA API...", len(groups))
+    # Enrich each unique property with owner/mailing from OCPA API
+    log.info("Enriching %d properties from OCPA Azure API...", len(groups))
     enrichment_cache = {}
-    enriched_violations = list(violations)  # for CSV save
+    enriched_violations = list(violations)
 
     for group_key, viol_list in groups.items():
         parcel = clean_parcel(viol_list[0].get("Parcel ID", ""))
-        if parcel and parcel not in enrichment_cache:
+        if parcel and is_valid_parcel(parcel) and parcel not in enrichment_cache:
             enriched = enrich_from_ocpa(parcel)
             enrichment_cache[parcel] = enriched
             if enriched.get("owner_name"):
-                log.debug("Enriched %s: %s", parcel, enriched["owner_name"][:30])
-            time.sleep(0.3)
+                log.debug("OCPA: %s -> %s", parcel, enriched["owner_name"][:30])
+            time.sleep(0.3)  # be polite to OCPA API
 
-    # Add enrichment to raw violations for CSV
+    # Write enrichment back to violation records for raw CSV
     for v in enriched_violations:
-        parcel = clean_parcel(v.get("Parcel ID", ""))
+        parcel   = clean_parcel(v.get("Parcel ID", ""))
         enriched = enrichment_cache.get(parcel, {})
         v["owner_name"]      = enriched.get("owner_name", "")
         v["mailing_address"] = enriched.get("mailing_address", "")
@@ -280,7 +299,7 @@ def main():
 
     # Load existing leads
     if not os.path.exists(OUTPUT_PATH):
-        log.error("No output.json — run scraper.py first")
+        log.error("No output.json found — run scraper.py first")
         return
 
     with open(OUTPUT_PATH, encoding="utf-8") as f:
@@ -288,8 +307,9 @@ def main():
     leads = list(data.get("leads", []))
     log.info("Loaded %d existing leads", len(leads))
 
-    # Build indexes
-    parcel_idx, addr_idx = {}, {}
+    # Build lookup indexes
+    parcel_idx = {}
+    addr_idx   = {}
     for i, lead in enumerate(leads):
         pid = clean_parcel(lead.get("parcel_id", ""))
         if is_valid_parcel(pid):
@@ -300,7 +320,7 @@ def main():
 
     log.info("Index: %d parcels | %d addresses", len(parcel_idx), len(addr_idx))
 
-    # Cross-reference
+    # Cross-reference each violation group
     new_leads = []
     stacked = added = skipped = 0
 
@@ -318,7 +338,7 @@ def main():
             skipped += 1
             continue
 
-        # Find existing lead
+        # Find matching existing lead
         lead_idx = None
         if is_valid_parcel(pid) and pid in parcel_idx:
             lead_idx = parcel_idx[pid]
@@ -326,17 +346,20 @@ def main():
             ak = clean_address_key(addr)
             if ak and ak in addr_idx:
                 lead_idx = addr_idx[ak]
+        # Guard — index must be within original leads list
         if lead_idx is not None and lead_idx >= len(leads):
             lead_idx = None
 
         viol_score = VIOLATION_BASE_SCORE
-        if count >= 3: viol_score += MULTI_VIOLATION_BONUS * 2
-        elif count >= 2: viol_score += MULTI_VIOLATION_BONUS
+        if count >= 3:
+            viol_score += MULTI_VIOLATION_BONUS * 2
+        elif count >= 2:
+            viol_score += MULTI_VIOLATION_BONUS
 
         if lead_idx is not None:
             lead = leads[lead_idx]
 
-            # Check already stacked
+            # Already has code violation stacked?
             flags = lead.get("distress_flags", [])
             if isinstance(flags, str):
                 flags = [f.strip() for f in flags.split(",") if f.strip()]
@@ -346,8 +369,8 @@ def main():
                 skipped += 1
                 continue
 
-            old_score  = lead.get("seller_score", 0)
-            new_score  = min(old_score + viol_score + VIOLATION_STACK_BONUS, 99)
+            old_score = lead.get("seller_score", 0)
+            new_score = min(old_score + viol_score + VIOLATION_STACK_BONUS, 99)
             flags.append("code_violation")
 
             stacked_types = lead.get("stacked_types", [])
@@ -359,7 +382,8 @@ def main():
             stacked_docs = lead.get("stacked_docs", [])
             if isinstance(stacked_docs, str):
                 stacked_docs = [stacked_docs] if stacked_docs else []
-            doc_id = "CV-{}".format(re.sub(r'[^A-Z0-9]', '', group_key.upper())[:15])
+            safe_key = re.sub(r'[^A-Z0-9]', '', group_key.upper())[:15]
+            doc_id   = "CV-{}".format(safe_key)
             if doc_id not in stacked_docs:
                 stacked_docs.append(doc_id)
 
@@ -373,7 +397,7 @@ def main():
                 "document_type":        " + ".join(stacked_types),
                 "code_violation_count": count,
             })
-            # Fill missing owner/mailing from OCPA
+            # Fill missing data from OCPA enrichment
             if not lead.get("owner_name") and owner:
                 lead["owner_name"] = owner
             if not lead.get("mailing_address") and enriched.get("mailing_address"):
@@ -387,24 +411,29 @@ def main():
                      addr[:40], count, old_score, new_score, owner[:20])
 
         else:
+            # New lead — add to separate list, extend after loop
             nl      = group_to_lead(group_key, viol_list, enriched)
             new_idx = len(leads) + len(new_leads)
             new_leads.append(nl)
+
+            # Update indexes for subsequent iterations
             if is_valid_parcel(pid):
                 parcel_idx[pid] = new_idx
             ak = clean_address_key(addr)
             if ak:
                 addr_idx[ak] = new_idx
+
             added += 1
             log.info("NEW: %s | %d violation(s) | owner=%s",
                      addr[:40], count, owner[:20])
 
+    # Merge new leads in after loop
     leads.extend(new_leads)
     leads.sort(
         key=lambda l: l.get("seller_score", 0) if isinstance(l, dict) else 0,
         reverse=True
     )
-    log.info("Done: %d stacked | %d new | %d skipped | %d total",
+    log.info("Done: %d stacked onto existing | %d new leads | %d skipped | %d total",
              stacked, added, skipped, len(leads))
 
     # Save JSON
