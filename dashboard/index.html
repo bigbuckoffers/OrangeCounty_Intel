@@ -307,7 +307,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 
     <div id="mainContent" style="display:none">
 
-      <!-- ROW 1: Priority -->
       <div class="cards-grid">
         <div class="card accent-blue" onclick="clearAllFilters()">
           <div class="card-label">Total Leads</div>
@@ -335,12 +334,11 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         </div>
       </div>
 
-      <!-- ROW 2: Sources -->
       <div class="cards-row2">
         <div class="card accent-orange" onclick="setTabFilter('foreclosure')">
           <div class="card-label">🏠 Foreclosure Auctions</div>
           <div class="card-value" id="c-fc">—</div>
-          <div class="card-sub">From RealForeclose.com</div>
+          <div class="card-sub">4+ days out only</div>
           <div class="card-trend warn">Active auctions</div>
         </div>
         <div class="card accent-blue" onclick="setTabFilter('county')">
@@ -363,7 +361,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         </div>
       </div>
 
-      <!-- SIGNAL KEY -->
       <div class="source-legend">
         <span class="source-legend-label">Signal Key:</span>
         <span class="source-chip sc-fc">🏠 Foreclosure</span>
@@ -379,7 +376,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         <span class="pill pill-stacked" style="font-size:11px;margin-left:8px">⚡ STACKED = multiple sources on same property</span>
       </div>
 
-      <!-- RADAR -->
       <div class="hot-radar">
         <div class="radar-head">
           <h2>
@@ -391,7 +387,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         <div class="radar-items" id="radarItems"></div>
       </div>
 
-      <!-- FILTER BAR -->
       <div class="filter-bar" id="filterBar">
         <div class="filter-row">
           <div>
@@ -440,7 +435,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         </div>
       </div>
 
-      <!-- TABS -->
       <div class="toolbar">
         <div class="tabs">
           <div class="tab active" onclick="setTab(this,'all')">All <span class="tab-count" id="tc-all">—</span></div>
@@ -495,7 +489,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 </div>
 </div>
 
-<!-- DRAWER -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-head">
@@ -545,7 +538,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
   </div>
 </div>
 
-<!-- LINKS MODAL -->
 <div class="links-modal-overlay" id="linksOverlay" onclick="closeLinks()">
   <div class="links-modal" onclick="event.stopPropagation()">
     <div class="links-modal-head">
@@ -558,9 +550,9 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 
 <script>
 const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/refs/heads/main/data/output.csv';
+const AUCTION_MIN_DAYS=3; // foreclosure auctions with <=3 days are excluded
 let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null},currentTab='all',selectedIds=new Set();
 
-// ─── SOURCE CLASSIFICATION ────────────────────────────────────────────────────
 function classifySource(lead){
   const flags  =(lead.distressFlags||'').toLowerCase();
   const docType=(lead.docType||'').toLowerCase();
@@ -569,76 +561,52 @@ function classifySource(lead){
   return'county';
 }
 
-// ─── DISTRESS SIGNAL DETECTION ────────────────────────────────────────────────
-// Reads from actual distress_flags + document_type fields
-// NO longer adds Foreclosure to every lead by default
 function detectDistressSignals(lead){
   const signals=[];
   const flags  =(lead.distressFlags||'').toLowerCase();
   const docType=(lead.docType||'').toLowerCase();
-
-  if(flags.includes('foreclosure_auction')||docType.includes('foreclosure'))
-    signals.push('Foreclosure');
-  if(flags.includes('lis_pendens')||docType.includes('lis pendens'))
-    signals.push('Lis Pendens');
-  if(flags.includes('probate')||docType.includes('probate'))
-    signals.push('Probate');
-  if(flags.includes('judgment')||docType.includes('judgment'))
-    signals.push('Judgment');
-  if(flags.includes('lien')&&!flags.includes('lis_pendens'))
-    signals.push('Lien');
-  if(flags.includes('tax_deed')||docType.includes('tax deed'))
-    signals.push('Tax Deed');
-  if(flags.includes('death_certificate')||docType.includes('death'))
-    signals.push('Death Cert');
-  if(flags.includes('divorce')||docType.includes('domestic'))
-    signals.push('Divorce');
+  if(flags.includes('foreclosure_auction')||docType.includes('foreclosure'))signals.push('Foreclosure');
+  if(flags.includes('lis_pendens')||docType.includes('lis pendens'))signals.push('Lis Pendens');
+  if(flags.includes('probate')||docType.includes('probate'))signals.push('Probate');
+  if(flags.includes('judgment')||docType.includes('judgment'))signals.push('Judgment');
+  if(flags.includes('lien')&&!flags.includes('lis_pendens'))signals.push('Lien');
+  if(flags.includes('tax_deed')||docType.includes('tax deed'))signals.push('Tax Deed');
+  if(flags.includes('death_certificate')||docType.includes('death'))signals.push('Death Cert');
+  if(flags.includes('divorce')||docType.includes('domestic'))signals.push('Divorce');
   if(flags.includes('delinquent')||docType.includes('delinquent')){
     const yrs=lead.taxYearsDelinquent||1;
     signals.push('Delinquent Tax '+yrs+'yr');
   }
-  if(flags.includes('notice_of_commencement')||docType.includes('notice of'))
-    signals.push('NOC');
-
+  if(flags.includes('notice_of_commencement')||docType.includes('notice of'))signals.push('NOC');
   return signals;
 }
 
-// ─── OWNER SIGNAL DETECTION ───────────────────────────────────────────────────
 function detectOwnerSignals(lead){
   const signals=[];
   const owner=(lead.ownerName||lead.grantee||'').toUpperCase();
   const mail =(lead.mailAddr||'').toLowerCase();
   const prop =(lead.propAddr||'').toLowerCase();
   const today=new Date();today.setHours(0,0,0,0);
-
   if(detectOOS(lead.mailAddr))signals.push('Out of State');
   else if(mail.includes('po box')||mail.includes('p.o. box'))signals.push('PO Box');
   else{
     const propStreet=prop.split(',')[0].trim().toLowerCase().substring(0,15);
     if(propStreet.length>4&&!mail.includes(propStreet))signals.push('Absentee Owner');
   }
-
   if(owner.includes('ESTATE')||owner.includes(' HEIRS')||owner.includes('HEIR ')||
-     owner.includes('DECEASED')||owner.includes('SURVIVING'))
-    signals.push('Estate/Heirs');
-
+     owner.includes('DECEASED')||owner.includes('SURVIVING'))signals.push('Estate/Heirs');
   const commas=(lead.ownerName||lead.grantee||'').split(',').length-1;
   if(commas>=1&&!signals.includes('Estate/Heirs'))signals.push('Multiple Owners');
-
   if(owner.includes(' LLC')||owner.includes(' INC')||owner.includes(' CORP')||
      owner.includes(' LTD')||owner.includes(' TRUST')||owner.includes(' VENTURES')||
      owner.includes(' EQUITIES')||owner.includes(' HOLDINGS')||owner.includes(' INVESTMENTS'))
     signals.push('LLC/Corp');
-
   const ym=(lead.docNum||'').match(/^(\d{4})-/);
   if(ym){const yrs=today.getFullYear()-parseInt(ym[1]);if(yrs>=5)signals.push('Old Case '+yrs+'yr');}
-
   if(lead.assessed>=500000)signals.push('High Value $'+Math.round(lead.assessed/1000)+'K');
-
   return signals;
 }
 
-// ─── SCORE CALCULATION ────────────────────────────────────────────────────────
 function calcScore(lead){
   let pts=0;const notes=[];
   const match  =(lead.match||'').toUpperCase();
@@ -647,7 +615,7 @@ function calcScore(lead){
   const owner  =lead.ownerSignals||[];
   const today  =new Date();today.setHours(0,0,0,0);
 
-  // 1. BASE by source type
+  // Base by source type
   if(distress.includes('Foreclosure')){pts+=20;notes.push({label:'Foreclosure Auction',val:20});}
   else if(distress.includes('Lis Pendens')){pts+=18;notes.push({label:'Lis Pendens filing',val:18});}
   else if(distress.includes('Tax Deed')){pts+=22;notes.push({label:'Tax Deed filing',val:22});}
@@ -659,25 +627,22 @@ function calcScore(lead){
   else if(distress.includes('Lien')){pts+=10;notes.push({label:'Lien filing',val:10});}
   else{pts+=8;notes.push({label:'County filing',val:8});}
 
-  // 2. STACKED BONUS — multiple distress types on same property
+  // Stacked bonus
   if(distress.length>=3){pts+=25;notes.push({label:'3+ stacked signals — extremely motivated',val:25});}
   else if(distress.length===2){pts+=15;notes.push({label:'2 stacked signals — motivated',val:15});}
 
-  // 3. AUCTION URGENCY (foreclosures only)
+  // Auction urgency (foreclosures only — already filtered to >3 days)
   if(distress.includes('Foreclosure')&&lead.filed){
     const aDate=new Date(lead.filed);
     const daysOut=Math.ceil((aDate-today)/86400000);
-    if(daysOut<=0){pts+=25;notes.push({label:'Auction passed — redemption window',val:25});}
-    else if(daysOut===1){pts+=35;notes.push({label:'Auction TOMORROW — call NOW',val:35});}
-    else if(daysOut<=3){pts+=32;notes.push({label:'Auction in '+daysOut+' days — CRITICAL',val:32});}
-    else if(daysOut<=7){pts+=26;notes.push({label:'Auction in '+daysOut+' days — very urgent',val:26});}
+    if(daysOut<=7){pts+=26;notes.push({label:'Auction in '+daysOut+' days — very urgent',val:26});}
     else if(daysOut<=14){pts+=18;notes.push({label:'Auction in '+daysOut+' days',val:18});}
     else if(daysOut<=21){pts+=12;notes.push({label:'Auction in '+daysOut+' days',val:12});}
     else if(daysOut<=45){pts+=7;notes.push({label:'Auction in '+daysOut+' days',val:7});}
     else{pts+=2;notes.push({label:'Auction in '+daysOut+' days',val:2});}
   }
 
-  // 4. DELINQUENT TAX YEARS
+  // Delinquent tax years
   const taxSig=distress.find(s=>s.startsWith('Delinquent Tax'));
   if(taxSig){
     const yrs=parseInt(taxSig.match(/(\d+)/)?.[1]||0);
@@ -690,35 +655,30 @@ function calcScore(lead){
     else if(lead.taxTotalBalance>=5000){pts+=3;notes.push({label:'Tax balance $5K+',val:3});}
   }
 
-  // 5. OLD CASE
+  // Old case
   const oldSig=owner.find(s=>s.startsWith('Old Case'));
   if(oldSig){
     const yrs=parseInt(oldSig.match(/(\d+)/)?.[1]||0);
-    if(yrs>=10){pts+=18;notes.push({label:'Case '+yrs+' years old — very desperate',val:18});}
+    if(yrs>=10){pts+=18;notes.push({label:'Case '+yrs+' years old',val:18});}
     else if(yrs>=7){pts+=14;notes.push({label:'Case '+yrs+' years old',val:14});}
     else if(yrs>=5){pts+=10;notes.push({label:'Case '+yrs+' years old',val:10});}
   }
 
-  // 6. OWNER LOCATION
+  // Owner location
   if(owner.includes('Out of State')){pts+=14;notes.push({label:'Out-of-state owner',val:14});}
   else if(owner.includes('PO Box')){pts+=10;notes.push({label:'PO Box mailing',val:10});}
   else if(owner.includes('Absentee Owner')){pts+=7;notes.push({label:'Absentee owner',val:7});}
 
-  // 7. ESTATE
   if(owner.includes('Estate/Heirs')){pts+=12;notes.push({label:'Estate/Heirs in title',val:12});}
-
-  // 8. MULTIPLE OWNERS
   if(owner.includes('Multiple Owners')){pts+=8;notes.push({label:'Multiple owners',val:8});}
-
-  // 9. LLC/CORP
   if(owner.includes('LLC/Corp')){pts+=5;notes.push({label:'LLC/Corp owner',val:5});}
 
-  // 10. MATCH CONFIDENCE
+  // Match confidence
   if(match==='HIGH'){pts+=8;notes.push({label:'High match confidence',val:8});}
   else if(match==='MEDIUM'){pts+=3;notes.push({label:'Medium match confidence',val:3});}
   else if(match==='LOW'){pts-=5;notes.push({label:'Low match — verify first',val:-5});}
 
-  // 11. PROPERTY VALUE
+  // Property value
   if(assessed>=700000){pts+=8;notes.push({label:'High value $'+Math.round(assessed/1000)+'K',val:8});}
   else if(assessed>=400000){pts+=5;notes.push({label:'Value $'+Math.round(assessed/1000)+'K',val:5});}
   else if(assessed>=200000){pts+=3;notes.push({label:'Value $'+Math.round(assessed/1000)+'K',val:3});}
@@ -767,7 +727,6 @@ function scoreColor(s){
   return'#9CA3AF';
 }
 
-// ─── PILL RENDERING ───────────────────────────────────────────────────────────
 const DISTRESS_CLS={'Foreclosure':'pill-fc','Lis Pendens':'pill-lp','Probate':'pill-prob',
   'Judgment':'pill-jdg','Lien':'pill-lien','Tax Deed':'pill-td','Death Cert':'pill-dc',
   'Divorce':'pill-div','NOC':'pill-noc'};
@@ -786,7 +745,6 @@ function ownerPill(s){
   return`<span class="pill ${OWNER_CLS[s]||'pill-generic'}">${s}</span>`;
 }
 
-// ─── CSV PARSING ──────────────────────────────────────────────────────────────
 function parseCSV(text){
   const lines=text.trim().split('\n');
   const headers=parseCSVLine(lines[0]);
@@ -854,7 +812,12 @@ function mapRow(row,idx){
   return lead;
 }
 
-// ─── FILTERING ────────────────────────────────────────────────────────────────
+function daysUntil(dateStr){
+  if(!dateStr)return null;
+  const d=new Date(dateStr);const today=new Date();today.setHours(0,0,0,0);
+  return Math.ceil((d-today)/86400000);
+}
+
 function getFiltered(){
   let leads=[...LEADS];
   const q=document.getElementById('searchInput').value.trim().toLowerCase();
@@ -888,25 +851,16 @@ function getFiltered(){
   return leads;
 }
 
-// ─── RENDERING ────────────────────────────────────────────────────────────────
 const fmt=n=>n?'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'—';
 const fmtD=d=>{if(!d)return'—';const p=d.split(/[-T]/);if(p.length<3)return d;return`${p[1]}/${p[2].slice(0,2)}/${p[0]}`;};
 const initials=n=>n.split(' ').slice(0,2).map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
-
-function daysUntil(dateStr){
-  if(!dateStr)return null;
-  const d=new Date(dateStr);const today=new Date();today.setHours(0,0,0,0);
-  return Math.ceil((d-today)/86400000);
-}
 
 function auctionBadge(lead){
   if(!lead.distressSignals.includes('Foreclosure'))return'';
   const days=daysUntil(lead.filed);
   if(days===null)return'';
-  if(days<=0)return`<div style="font-size:9px;font-weight:700;color:#DC2626;margin-top:2px">🔴 AUCTION PASSED</div>`;
-  if(days===1)return`<div style="font-size:9px;font-weight:700;color:#DC2626;margin-top:2px">🔴 TOMORROW</div>`;
-  if(days<=3)return`<div style="font-size:9px;font-weight:700;color:#DC2626;margin-top:2px">🔴 ${days} DAYS LEFT</div>`;
-  if(days<=7)return`<div style="font-size:9px;font-weight:700;color:#D97706;margin-top:2px">🟠 ${days} days</div>`;
+  // All remaining foreclosures are >3 days so no passed/tomorrow badges needed
+  if(days<=7)return`<div style="font-size:9px;font-weight:700;color:#D97706;margin-top:2px">🟠 ${days} days left</div>`;
   if(days<=14)return`<div style="font-size:9px;color:#D97706;margin-top:2px">${days} days to auction</div>`;
   return`<div style="font-size:9px;color:var(--text3);margin-top:2px">${days}d to auction</div>`;
 }
@@ -940,7 +894,6 @@ function renderTable(){
   document.getElementById('tc-fc').textContent=L.filter(l=>l.source==='foreclosure').length;
   document.getElementById('tc-county').textContent=L.filter(l=>l.source==='county').length;
   document.getElementById('tc-tax').textContent=L.filter(l=>l.source==='tax').length;
-
   const tbody=document.getElementById('tbody');
   tbody.innerHTML='';
   filtered.forEach(lead=>{
@@ -953,7 +906,6 @@ function renderTable(){
     const srcPills=lead.distressSignals.map(distressPill).join('');
     const stackBadge=isStackedLead?`<span class="pill pill-stacked" style="font-size:9px;padding:1px 5px">⚡ STACKED</span>`:'';
     const ownerPills=lead.ownerSignals.filter(s=>!s.startsWith('High Value')).map(ownerPill).join('');
-
     tr.innerHTML=`
       <td><input type="checkbox" ${selectedIds.has(lead.id)?'checked':''} onchange="toggleSel(${lead.id},this)"></td>
       <td>${makeRing(lead.score)}</td>
@@ -979,7 +931,7 @@ function renderRadar(){
   document.getElementById('radarItems').innerHTML=top.map(l=>{
     const urg=urgencyLabel(l.score);
     const days=l.distressSignals.includes('Foreclosure')?daysUntil(l.filed):null;
-    const daysStr=days!==null?(days<=0?'Auction passed':days===1?'🔴 Tomorrow!':days<=3?`🔴 ${days} days left`:`${days} days to auction`):'';
+    const daysStr=days!==null?(days<=7?`🟠 ${days} days left`:`${days} days to auction`):'';
     const isStacked=l.isStacked||l.distressSignals.length>=2;
     return`<div class="radar-card" onclick="openDrawer(LEADS.find(x=>x.id===${l.id}))">
       <div style="display:flex;justify-content:space-between;align-items:flex-start">
@@ -1022,7 +974,6 @@ function updateCards(){
   }
 }
 
-// ─── DRAWER ───────────────────────────────────────────────────────────────────
 function openDrawer(lead){
   const owner=lead.ownerName||lead.grantee;
   document.getElementById('d-av').textContent=initials(owner);
@@ -1054,7 +1005,7 @@ function openDrawer(lead){
     </div>`).join('')+
     `<div class="score-row" style="background:var(--surface2)"><div class="score-row-label" style="font-weight:700">FINAL SCORE</div><div class="score-row-bar"></div><div class="score-row-val" style="color:${col};font-size:14px">${lead.score}</div></div>`;
   const days=lead.distressSignals.includes('Foreclosure')?daysUntil(lead.filed):null;
-  const daysStr=days===null?'Not a foreclosure':days<=0?'Auction passed':`${days} day(s) until auction`;
+  const daysStr=days===null?'Not a foreclosure':`${days} day(s) until auction`;
   document.getElementById('d-details').innerHTML=`
     <div class="detail-item"><div class="detail-item-label">Owner</div><div class="detail-item-val">${owner}</div></div>
     <div class="detail-item"><div class="detail-item-label">Source Type</div><div class="detail-item-val">${lead.distressSignals.join(' + ')||lead.docType}</div></div>
@@ -1076,9 +1027,7 @@ function openDrawer(lead){
       <div class="detail-item"><div class="detail-item-label">Delinquent Years</div><div class="detail-item-val" style="font-size:11px">${lead.taxYearsList||'—'}</div></div>
       <div class="detail-item"><div class="detail-item-label">Cert Status</div><div class="detail-item-val">${lead.taxCertStatus||'—'}</div></div>
     `;
-  } else {
-    document.getElementById('d-tax-section').style.display='none';
-  }
+  }else{document.getElementById('d-tax-section').style.display='none';}
   document.getElementById('d-links').innerHTML=lead.links.map(lk=>`
     <a href="${lk.url}" target="_blank" class="link-item" style="padding:8px 0;border-bottom:1px solid var(--border)">
       <span style="background:var(--blue-light);color:var(--blue);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-right:8px;min-width:44px;display:inline-block;text-align:center">${lk.cat}</span>
@@ -1103,21 +1052,19 @@ function openLinks(e,id){
 }
 function closeLinks(){document.getElementById('linksOverlay').classList.remove('open')}
 
-// ─── CONTROLS ─────────────────────────────────────────────────────────────────
 function toggleFilterBar(){document.getElementById('filterBar').classList.toggle('open')}
 function setScoreBand(btn,val){document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');F.scoreBand=(val==='all'?null:val);doFilter()}
 function setSigFilter(btn,val){const already=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.signal=already?null:val;if(!already)btn.classList.add('active');doFilter()}
 function setSrcFilter(btn,val){const already=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.source=already?null:val;if(!already)btn.classList.add('active');doFilter()}
 function setTab(el,tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;doFilter()}
-function setTabFilter(tab){currentTab=tab;document.querySelectorAll('.tab').forEach(t=>{const txt=t.textContent.toLowerCase();t.classList.toggle('active',txt.includes(tab)||( tab==='all'&&txt.startsWith('all')));});doFilter()}
-function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null};currentTab='all';document.querySelectorAll('.tab')[0].classList.add('active');document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');doFilter()}
+function setTabFilter(tab){currentTab=tab;document.querySelectorAll('.tab').forEach((t,i)=>{const names=['all','critical','hot','warm','stacked','foreclosure','county','tax'];t.classList.toggle('active',names[i]===tab);});doFilter()}
+function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null};currentTab='all';document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');doFilter()}
 function doFilter(){renderTable()}
 function toggleSel(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);updateBulk()}
 function masterCheck(cb){getFiltered().forEach(l=>{if(cb.checked)selectedIds.add(l.id);else selectedIds.delete(l.id)});renderTable();updateBulk()}
 function selAll(){getFiltered().forEach(l=>selectedIds.add(l.id));renderTable();updateBulk()}
 function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCount').textContent=`${n} lead${n!==1?'s':''} selected`;document.getElementById('bulkBar').classList.toggle('visible',n>0)}
 
-// ─── EXPORT ───────────────────────────────────────────────────────────────────
 function exportCSV(){
   const leads=getFiltered();
   const rows=[['Score','Source','Distress Signals','Owner Signals','Doc#','Date','Owner','Property Address','Mailing Address','Assessed Value','Match','Action','Stacked','Tax Yrs Delinquent','Tax Balance','Parcel ID']];
@@ -1126,7 +1073,6 @@ function exportCSV(){
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='orange_county_leads_classified.csv';a.click();
 }
 
-// ─── LOAD ─────────────────────────────────────────────────────────────────────
 async function loadData(){
   try{
     const res=await fetch(DATA_URL+'?t='+Date.now());
@@ -1135,8 +1081,7 @@ async function loadData(){
     const rows=parseCSV(text);
 
     // Deduplicate by document_number — keep highest seller_score version
-    const byDoc={};
-    const noDocs=[];
+    const byDoc={};const noDocs=[];
     rows.forEach(r=>{
       const doc=(r.document_number||'').trim();
       if(!doc||doc==='—'){noDocs.push(r);return;}
@@ -1145,8 +1090,21 @@ async function loadData(){
     });
     const deduped=[...Object.values(byDoc),...noDocs];
 
-    LEADS=deduped.map((r,i)=>mapRow(r,i)).filter(Boolean);
-    LEADS.sort((a,b)=>b.score-a.score);
+    let leads=deduped.map((r,i)=>mapRow(r,i)).filter(Boolean);
+
+    // ── AUCTION FILTER ────────────────────────────────────────────────────────
+    // Remove foreclosure-only leads where auction is 3 days or fewer away —
+    // not enough time to act, no point cluttering the list
+    leads=leads.filter(lead=>{
+      if(lead.source!=='foreclosure')return true; // keep all non-foreclosure leads
+      const days=daysUntil(lead.filed);
+      if(days===null)return true;                 // no date — keep it
+      return days>AUCTION_MIN_DAYS;               // only keep if >3 days out
+    });
+    // ─────────────────────────────────────────────────────────────────────────
+
+    leads.sort((a,b)=>b.score-a.score);
+    LEADS=leads;
 
     document.getElementById('loadingState').style.display='none';
     document.getElementById('mainContent').style.display='block';
