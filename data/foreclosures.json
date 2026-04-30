@@ -1,56 +1,10 @@
 {
-  "generated_at": "2026-04-30T14:35:14.336307Z",
-  "total_records": 55,
+  "generated_at": "2026-04-30T15:31:20.797123Z",
+  "total_records": 53,
   "active": 51,
   "expired": 0,
-  "too_soon": 4,
+  "too_soon": 2,
   "foreclosures": [
-    {
-      "auction_date": "2026-04-30",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2019-CA-013607-O",
-      "parcel_id": "302324898000970",
-      "address": "8228 SOMMERVILLE DR, ORLANDO, 32829",
-      "final_judgment": "$318,270.43",
-      "assessed_value": "$282,379.00",
-      "opening_bid": "",
-      "owner_name": "BAJANA IGNACIO C JR, SANTANA YARITSA M",
-      "mailing_address": "Po Box 1082, Orlando, FL 32802-1082",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/302324898000970",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20230071874",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/30/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:34.873864Z"
-    },
-    {
-      "auction_date": "2026-04-30",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2025-CC-004025-O",
-      "parcel_id": "312225873501210",
-      "address": "12043 WHITE WAVE PT, ORLANDO, 32828",
-      "final_judgment": "$9,143.67",
-      "assessed_value": "$258,315.00",
-      "opening_bid": "",
-      "owner_name": "HUNTE MAKEDA ONEKAH",
-      "mailing_address": "12043 White Wave Pt, Orlando, FL 32828-5568",
-      "property_type": "TOWNHOUSE CLASS II",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312225873501210",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250449202",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=04/30/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:34.874198Z"
-    },
     {
       "auction_date": "2026-05-01",
       "auction_time": "11:00 AM ET",
@@ -72,7 +26,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:38.370866Z"
+      "scraped_at": "2026-04-30T15:30:39.358619Z"
     },
     {
       "auction_date": "2026-05-01",
@@ -95,7 +49,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:38.371191Z"
+      "scraped_at": "2026-04-30T15:30:39.358869Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -118,7 +72,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:46.013616Z"
+      "scraped_at": "2026-04-30T15:30:47.929519Z"
     },
     {
       "auction_date": "2026-05-04",
@@ -141,7 +95,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:46.013839Z"
+      "scraped_at": "2026-04-30T15:30:47.929716Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -164,7 +118,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:47.941188Z"
+      "scraped_at": "2026-04-30T15:30:50.126788Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -187,7 +141,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:47.941489Z"
+      "scraped_at": "2026-04-30T15:30:50.127029Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -210,7 +164,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:47.941772Z"
+      "scraped_at": "2026-04-30T15:30:50.127253Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -233,7 +187,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:47.942022Z"
+      "scraped_at": "2026-04-30T15:30:50.127432Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -256,7 +210,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:47.942283Z"
+      "scraped_at": "2026-04-30T15:30:50.127656Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -279,7 +233,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:47.942490Z"
+      "scraped_at": "2026-04-30T15:30:50.127831Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -302,7 +256,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:47.942694Z"
+      "scraped_at": "2026-04-30T15:30:50.128002Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -325,7 +279,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:47.942900Z"
+      "scraped_at": "2026-04-30T15:30:50.128175Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -348,7 +302,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:47.943129Z"
+      "scraped_at": "2026-04-30T15:30:50.128350Z"
     },
     {
       "auction_date": "2026-05-05",
@@ -371,7 +325,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:47.943397Z"
+      "scraped_at": "2026-04-30T15:30:50.128579Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -394,7 +348,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:51.395329Z"
+      "scraped_at": "2026-04-30T15:30:54.643785Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -417,7 +371,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:51.395597Z"
+      "scraped_at": "2026-04-30T15:30:54.644004Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -440,7 +394,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:51.395872Z"
+      "scraped_at": "2026-04-30T15:30:54.644230Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -463,7 +417,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:51.396109Z"
+      "scraped_at": "2026-04-30T15:30:54.644409Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -486,7 +440,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:51.396332Z"
+      "scraped_at": "2026-04-30T15:30:54.644589Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -509,7 +463,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:34:51.396538Z"
+      "scraped_at": "2026-04-30T15:30:54.644764Z"
     },
     {
       "auction_date": "2026-05-06",
@@ -532,7 +486,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:51.396807Z"
+      "scraped_at": "2026-04-30T15:30:54.644989Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -555,7 +509,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.331142Z"
+      "scraped_at": "2026-04-30T15:30:58.279522Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -578,7 +532,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.331424Z"
+      "scraped_at": "2026-04-30T15:30:58.279771Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -601,7 +555,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.331693Z"
+      "scraped_at": "2026-04-30T15:30:58.279998Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -624,7 +578,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.331978Z"
+      "scraped_at": "2026-04-30T15:30:58.280222Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -647,7 +601,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.332245Z"
+      "scraped_at": "2026-04-30T15:30:58.280445Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -670,7 +624,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.332486Z"
+      "scraped_at": "2026-04-30T15:30:58.280662Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -693,7 +647,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.332749Z"
+      "scraped_at": "2026-04-30T15:30:58.280897Z"
     },
     {
       "auction_date": "2026-05-07",
@@ -716,7 +670,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:54.333039Z"
+      "scraped_at": "2026-04-30T15:30:58.281123Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -739,7 +693,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:59.183180Z"
+      "scraped_at": "2026-04-30T15:31:04.390626Z"
     },
     {
       "auction_date": "2026-05-08",
@@ -762,7 +716,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:34:59.183466Z"
+      "scraped_at": "2026-04-30T15:31:04.390864Z"
     },
     {
       "auction_date": "2026-05-11",
@@ -785,7 +739,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:06.559482Z"
+      "scraped_at": "2026-04-30T15:31:12.798405Z"
     },
     {
       "auction_date": "2026-05-11",
@@ -808,7 +762,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:35:06.559775Z"
+      "scraped_at": "2026-04-30T15:31:12.798654Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -831,7 +785,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:35:08.535050Z"
+      "scraped_at": "2026-04-30T15:31:14.923033Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -854,7 +808,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-04-30T14:35:08.535339Z"
+      "scraped_at": "2026-04-30T15:31:14.923271Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -877,7 +831,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.535611Z"
+      "scraped_at": "2026-04-30T15:31:14.923496Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -900,7 +854,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.535820Z"
+      "scraped_at": "2026-04-30T15:31:14.923678Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -923,7 +877,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.536062Z"
+      "scraped_at": "2026-04-30T15:31:14.923852Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -946,7 +900,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.536272Z"
+      "scraped_at": "2026-04-30T15:31:14.924026Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -969,7 +923,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.536484Z"
+      "scraped_at": "2026-04-30T15:31:14.924198Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -992,7 +946,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.536692Z"
+      "scraped_at": "2026-04-30T15:31:14.924369Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -1015,7 +969,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.536901Z"
+      "scraped_at": "2026-04-30T15:31:14.924543Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -1038,7 +992,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:08.537187Z"
+      "scraped_at": "2026-04-30T15:31:14.924770Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1061,7 +1015,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.006100Z"
+      "scraped_at": "2026-04-30T15:31:18.891820Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1084,7 +1038,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.006333Z"
+      "scraped_at": "2026-04-30T15:31:18.892007Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1107,7 +1061,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.006549Z"
+      "scraped_at": "2026-04-30T15:31:18.892183Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1130,7 +1084,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.006774Z"
+      "scraped_at": "2026-04-30T15:31:18.892360Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1153,7 +1107,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.007010Z"
+      "scraped_at": "2026-04-30T15:31:18.892535Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1176,7 +1130,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.007226Z"
+      "scraped_at": "2026-04-30T15:31:18.892720Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1199,7 +1153,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.007433Z"
+      "scraped_at": "2026-04-30T15:31:18.892897Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1222,7 +1176,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.007638Z"
+      "scraped_at": "2026-04-30T15:31:18.893072Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1245,7 +1199,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.007843Z"
+      "scraped_at": "2026-04-30T15:31:18.893246Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -1268,7 +1222,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-04-30T14:35:12.008077Z"
+      "scraped_at": "2026-04-30T15:31:18.893418Z"
     }
   ]
 }
