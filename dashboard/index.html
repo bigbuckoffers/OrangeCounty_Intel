@@ -46,15 +46,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .county-badge{background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;padding:6px 10px;border-radius:var(--r);display:flex;align-items:center;gap:6px}
 .county-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* CODE VIOLATIONS WEEKLY DOWNLOAD BUTTON */
 .cv-btn-wrap{padding:12px 16px;border-top:1px solid var(--border)}
 .cv-btn{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border-radius:var(--r);background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1px solid #F59E0B;color:#92400E;font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s;text-decoration:none}
 .cv-btn:hover{background:linear-gradient(135deg,#FDE68A,#FCD34D);border-color:#D97706;color:#78350F;transform:translateY(-1px);box-shadow:0 2px 8px rgba(217,119,6,.2)}
 .cv-btn svg{width:14px;height:14px;flex-shrink:0}
-.cv-btn-label{flex:1}
 .cv-btn-sub{font-size:9.5px;font-weight:400;opacity:.75;display:block;margin-top:1px}
-
 .search-wrap{flex:1;max-width:440px;position:relative}
 .search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;fill:var(--text3);pointer-events:none}
 .search-input{width:100%;height:36px;border:1px solid var(--border2);border-radius:var(--r);padding:0 12px 0 34px;font-size:13px;font-family:inherit;background:var(--surface2);color:var(--text);outline:none;transition:.15s}
@@ -90,16 +86,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .source-legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);align-items:center}
 .source-legend-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-right:4px}
 .source-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
-.sc-fc{background:#FFEDD5;color:#9A3412}
-.sc-lp{background:#FEE2E2;color:#991B1B}
-.sc-prob{background:#F5F3FF;color:#5B21B6}
-.sc-jdg{background:#FEF3C7;color:#92400E}
-.sc-lien{background:#E0F2FE;color:#0369A1}
-.sc-td{background:#FEF2F2;color:#B91C1C}
-.sc-dc{background:#F0FDF4;color:#166534}
-.sc-div{background:#FFF1F2;color:#9F1239}
-.sc-tax{background:#FCE7F3;color:#9D174D}
-.sc-cv{background:#FEF9C3;color:#854D0E}
+.sc-fc{background:#FFEDD5;color:#9A3412}.sc-lp{background:#FEE2E2;color:#991B1B}
+.sc-prob{background:#F5F3FF;color:#5B21B6}.sc-jdg{background:#FEF3C7;color:#92400E}
+.sc-lien{background:#E0F2FE;color:#0369A1}.sc-td{background:#FEF2F2;color:#B91C1C}
+.sc-dc{background:#F0FDF4;color:#166534}.sc-div{background:#FFF1F2;color:#9F1239}
+.sc-tax{background:#FCE7F3;color:#9D174D}.sc-cv{background:#FEF9C3;color:#854D0E}
 .sc-noc{background:#F1F5F9;color:#475569}
 .toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
 .filter-btn{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 11px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border2);color:var(--text2);background:var(--surface);cursor:pointer;transition:.15s}
@@ -124,46 +115,35 @@ tbody td{padding:11px 14px;vertical-align:middle}
 tbody td:first-child{padding-left:16px}
 tbody tr.row-critical{background:#FFF5F5;border-left:3px solid var(--red)}
 tbody tr.row-critical:hover{background:#FEE8E8}
-.score-cell{display:flex;flex-direction:column;align-items:center;gap:3px}
+.score-cell{display:flex;flex-direction:column;align-items:center;gap:2px}
 .score-ring{width:44px;height:44px;position:relative}
 .score-ring svg{width:44px;height:44px;transform:rotate(-90deg)}
 .score-ring circle{fill:none;stroke-width:3.5}
 .score-ring .bg{stroke:#E5E7EB}
 .score-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;font-weight:700;letter-spacing:-.5px}
+.score-heat{font-size:8px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-top:1px}
 .pills{display:flex;flex-wrap:wrap;gap:4px;max-width:260px}
 .pill{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
-.pill-fc{background:#FFEDD5;color:#9A3412}
-.pill-lp{background:#FEE2E2;color:#991B1B}
-.pill-prob{background:#F5F3FF;color:#5B21B6}
-.pill-jdg{background:#FEF3C7;color:#92400E}
-.pill-lien{background:#E0F2FE;color:#0369A1}
-.pill-td{background:#FEF2F2;color:#B91C1C}
-.pill-dc{background:#F0FDF4;color:#166534}
-.pill-div{background:#FFF1F2;color:#9F1239}
+.pill-fc{background:#FFEDD5;color:#9A3412}.pill-lp{background:#FEE2E2;color:#991B1B}
+.pill-prob{background:#F5F3FF;color:#5B21B6}.pill-jdg{background:#FEF3C7;color:#92400E}
+.pill-lien{background:#E0F2FE;color:#0369A1}.pill-td{background:#FEF2F2;color:#B91C1C}
+.pill-dc{background:#F0FDF4;color:#166534}.pill-div{background:#FFF1F2;color:#9F1239}
 .pill-tax{background:#FCE7F3;color:#9D174D}
 .pill-cv{background:#FEF9C3;color:#854D0E}
+.pill-cv-housing{background:#FEF08A;color:#713F12;font-weight:700}
 .pill-noc{background:#F1F5F9;color:#475569}
-.pill-oos{background:#F0FDF4;color:#166534}
-.pill-po{background:#FFFBEB;color:#92400E}
-.pill-abs{background:#EFF6FF;color:#1E40AF}
-.pill-estate{background:#FDF4FF;color:#7E22CE}
-.pill-multi{background:#FFF1F2;color:#9F1239}
-.pill-llc{background:#F8FAFC;color:#475569}
-.pill-old{background:#FEE2E2;color:#991B1B}
-.pill-generic{background:#F1F5F9;color:#475569}
+.pill-oos{background:#F0FDF4;color:#166534}.pill-po{background:#FFFBEB;color:#92400E}
+.pill-abs{background:#EFF6FF;color:#1E40AF}.pill-estate{background:#FDF4FF;color:#7E22CE}
+.pill-multi{background:#FFF1F2;color:#9F1239}.pill-llc{background:#F8FAFC;color:#475569}
+.pill-old{background:#FEE2E2;color:#991B1B}.pill-generic{background:#F1F5F9;color:#475569}
 .pill-stacked{background:#111827;color:white;font-weight:700}
 .action-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap}
-.action-callhot{background:#DC2626;color:white}
-.action-call{background:#FEE2E2;color:var(--red)}
-.action-skip{background:#EFF6FF;color:var(--blue)}
-.action-sms{background:#ECFDF5;color:var(--green)}
-.action-mail{background:#FFFBEB;color:var(--orange)}
-.action-research{background:#F1F5F9;color:#475569}
+.action-callhot{background:#DC2626;color:white}.action-call{background:#FEE2E2;color:var(--red)}
+.action-skip{background:#EFF6FF;color:var(--blue)}.action-sms{background:#ECFDF5;color:var(--green)}
+.action-mail{background:#FFFBEB;color:var(--orange)}.action-research{background:#F1F5F9;color:#475569}
 .match-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px}
-.match-high{background:#DCFCE7;color:#166534}
-.match-medium{background:#FEF9C3;color:#854D0E}
-.match-low{background:#FEE2E2;color:#991B1B}
-.match-none{background:#F1F5F9;color:#6B7280}
+.match-high{background:#DCFCE7;color:#166534}.match-medium{background:#FEF9C3;color:#854D0E}
+.match-low{background:#FEE2E2;color:#991B1B}.match-none{background:#F1F5F9;color:#6B7280}
 .doc-num{font-family:'SF Mono',Monaco,'Courier New',monospace;font-size:11px;font-weight:500;color:var(--text)}
 .addr-main{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
 .addr-sub{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
@@ -221,7 +201,6 @@ tbody tr.row-critical:hover{background:#FEE8E8}
 .link-item{display:flex;align-items:center;gap:10px;padding:10px 20px;transition:.15s;text-decoration:none}
 .link-item:hover{background:var(--bg)}
 .link-item-name{font-size:12.5px;font-weight:500;color:var(--text);flex:1}
-.link-item-url{font-size:11px;color:var(--text3)}
 .loading{display:flex;align-items:center;justify-content:center;padding:60px;flex-direction:column;gap:16px;color:var(--text3)}
 .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -233,7 +212,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 </head>
 <body>
 <div class="app">
-
 <aside class="sidebar">
   <div class="sidebar-logo">
     <div class="logo-wrap">
@@ -243,58 +221,25 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
   </div>
   <div class="nav-sect">
     <div class="nav-lbl">Workspace</div>
-    <div class="nav-item active">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
-      Dashboard <span class="nav-badge" id="nb-total">—</span>
-    </div>
-    <div class="nav-item">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-      Hot Leads <span class="nav-badge" id="nb-hot">—</span>
-    </div>
-    <div class="nav-item">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
-      Fresh Filings <span class="nav-badge blue" id="nb-new">—</span>
-    </div>
-    <div class="nav-item">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-      Call Queue
-    </div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>Dashboard <span class="nav-badge" id="nb-total">—</span></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Hot Leads <span class="nav-badge" id="nb-hot">—</span></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>Fresh Filings <span class="nav-badge blue" id="nb-new">—</span></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>Call Queue</div>
   </div>
   <div class="nav-sect">
     <div class="nav-lbl">Data Sources</div>
-    <div class="nav-item" onclick="setTabFilter('foreclosure')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Foreclosure <span class="nav-badge" id="nb-fc" style="background:#D97706">—</span>
-    </div>
-    <div class="nav-item" onclick="setTabFilter('county')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-      County Filings <span class="nav-badge blue" id="nb-county">—</span>
-    </div>
-    <div class="nav-item" onclick="setTabFilter('tax')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
-      Delinquent Tax <span class="nav-badge" id="nb-tax" style="background:#9D174D">—</span>
-    </div>
-    <div class="nav-item" onclick="setTabFilter('violations')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-      Code Violations <span class="nav-badge" id="nb-cv" style="background:#92400E">—</span>
-    </div>
-    <div class="nav-item" onclick="setTabFilter('stacked')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>
-      Stacked Leads <span class="nav-badge" id="nb-stacked" style="background:#111827">—</span>
-    </div>
+    <div class="nav-item" onclick="setTabFilter('foreclosure')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Foreclosure <span class="nav-badge" id="nb-fc" style="background:#D97706">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('county')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>County Filings <span class="nav-badge blue" id="nb-county">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('tax')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>Delinquent Tax <span class="nav-badge" id="nb-tax" style="background:#9D174D">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('violations')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>Code Violations <span class="nav-badge" id="nb-cv" style="background:#92400E">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('stacked')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>Stacked Leads <span class="nav-badge" id="nb-stacked" style="background:#111827">—</span></div>
   </div>
-
-  <!-- WEEKLY VIOLATIONS DOWNLOAD BUTTON -->
   <div class="cv-btn-wrap">
     <a href="https://netapps.ocfl.net/CETitleViolationSearch/" target="_blank" class="cv-btn">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-      <div class="cv-btn-label">
-        Download Violations
-        <span class="cv-btn-sub">Click "here" → get XLSX → upload to repo</span>
-      </div>
+      <div><div>Download Violations</div><span class="cv-btn-sub">Click "here" → XLSX → upload to repo</span></div>
     </a>
   </div>
-
   <div class="sidebar-county">
     <div class="county-badge"><div class="county-dot"></div>Orange County, FL</div>
     <div style="font-size:10px;color:var(--text3);margin-top:8px" id="sync-time">Loading...</div>
@@ -309,126 +254,93 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
     </div>
     <div class="topbar-sep"></div>
     <button class="btn btn-ghost" onclick="toggleFilterBar()">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
-      Filters
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>Filters
     </button>
     <div class="topbar-sep"></div>
     <div class="last-run" id="last-run">Loading data...</div>
     <div class="topbar-actions">
       <button class="btn btn-ghost" onclick="exportCSV()">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        Export CSV
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Export CSV
       </button>
       <button class="btn btn-primary" onclick="alert('GHL integration coming soon!')">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
-        Push to GHL
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>Push to GHL
       </button>
     </div>
   </div>
 
   <div class="content">
-    <div class="loading" id="loadingState">
-      <div class="spinner"></div>
-      <div>Loading your leads from Orange County...</div>
-    </div>
-
+    <div class="loading" id="loadingState"><div class="spinner"></div><div>Loading leads from Orange County...</div></div>
     <div id="mainContent" style="display:none">
 
-      <!-- ROW 1: Priority -->
       <div class="cards-grid">
         <div class="card accent-blue" onclick="clearAllFilters()">
-          <div class="card-label">Total Leads</div>
-          <div class="card-value" id="c-total">—</div>
-          <div class="card-sub">All records across all sources</div>
-          <div class="card-trend up" id="c-hot-trend">—</div>
+          <div class="card-label">Total Leads</div><div class="card-value" id="c-total">—</div>
+          <div class="card-sub">All records across all sources</div><div class="card-trend up" id="c-hot-trend">—</div>
         </div>
         <div class="card accent-red" onclick="setTabFilter('critical')">
-          <div class="card-label">🚨 Critical 85+</div>
-          <div class="card-value" id="c-critical" style="color:var(--red)">—</div>
-          <div class="card-sub">Drop everything</div>
-          <div class="card-trend hot">PI territory</div>
+          <div class="card-label">🚨 Critical 80+</div><div class="card-value" id="c-critical" style="color:var(--red)">—</div>
+          <div class="card-sub">Drop everything — call now</div><div class="card-trend hot">Highest motivation</div>
         </div>
         <div class="card accent-orange" onclick="setTabFilter('hot')">
-          <div class="card-label">🔥 Hot 70–84</div>
-          <div class="card-value" id="c-hot">—</div>
-          <div class="card-sub">Call today</div>
-          <div class="card-trend hot">High priority</div>
+          <div class="card-label">🔥 Hot 60–79</div><div class="card-value" id="c-hot">—</div>
+          <div class="card-sub">Call today</div><div class="card-trend hot">High priority</div>
         </div>
         <div class="card accent-purple" onclick="setTabFilter('stacked')">
-          <div class="card-label">⚡ Stacked Signals</div>
-          <div class="card-value" id="c-stacked">—</div>
-          <div class="card-sub">Multiple distress types</div>
-          <div class="card-trend purple">Most motivated</div>
+          <div class="card-label">⚡ Stacked Signals</div><div class="card-value" id="c-stacked">—</div>
+          <div class="card-sub">Multiple distress types</div><div class="card-trend purple">Most motivated</div>
         </div>
       </div>
 
-      <!-- ROW 2: Sources -->
       <div class="cards-row2">
         <div class="card accent-orange" onclick="setTabFilter('foreclosure')">
-          <div class="card-label">🏠 Foreclosure Auctions</div>
-          <div class="card-value" id="c-fc">—</div>
-          <div class="card-sub">4+ days out only</div>
-          <div class="card-trend warn">Active auctions</div>
+          <div class="card-label">🏠 Foreclosure Auctions</div><div class="card-value" id="c-fc">—</div>
+          <div class="card-sub">4+ days out only</div><div class="card-trend warn">Active auctions</div>
         </div>
         <div class="card accent-blue" onclick="setTabFilter('county')">
-          <div class="card-label">📋 County Filings</div>
-          <div class="card-value" id="c-county">—</div>
-          <div class="card-sub">LP · Probate · Judgment · Lien…</div>
-          <div class="card-trend info">Comptroller records</div>
+          <div class="card-label">📋 County Filings</div><div class="card-value" id="c-county">—</div>
+          <div class="card-sub">LP · Probate · Judgment · Lien…</div><div class="card-trend info">Comptroller records</div>
         </div>
         <div class="card accent-purple" onclick="setTabFilter('tax')">
-          <div class="card-label">💸 Delinquent Tax</div>
-          <div class="card-value" id="c-tax">—</div>
-          <div class="card-sub">Unpaid property taxes</div>
-          <div class="card-trend purple">Tax roll data</div>
+          <div class="card-label">💸 Delinquent Tax</div><div class="card-value" id="c-tax">—</div>
+          <div class="card-sub">Unpaid property taxes</div><div class="card-trend purple">Tax roll data</div>
         </div>
         <div class="card accent-green" onclick="setTabFilter('violations')">
-          <div class="card-label">⚠️ Code Violations</div>
-          <div class="card-value" id="c-cv">—</div>
-          <div class="card-sub">Open enforcement cases</div>
-          <div class="card-trend warn">Updated weekly</div>
+          <div class="card-label">⚠️ Code Violations</div><div class="card-value" id="c-cv">—</div>
+          <div class="card-sub">Open enforcement cases</div><div class="card-trend warn">Updated weekly</div>
         </div>
       </div>
 
-      <!-- SIGNAL KEY -->
       <div class="source-legend">
         <span class="source-legend-label">Signal Key:</span>
-        <span class="source-chip sc-fc">🏠 Foreclosure</span>
         <span class="source-chip sc-lp">⚖️ Lis Pendens</span>
-        <span class="source-chip sc-prob">🕊️ Probate</span>
+        <span class="source-chip sc-fc">🏠 Foreclosure</span>
+        <span class="source-chip sc-td">📜 Tax Deed</span>
         <span class="source-chip sc-jdg">⚡ Judgment</span>
         <span class="source-chip sc-lien">🔗 Lien</span>
-        <span class="source-chip sc-td">📜 Tax Deed</span>
-        <span class="source-chip sc-dc">💀 Death Cert</span>
-        <span class="source-chip sc-div">💔 Divorce</span>
         <span class="source-chip sc-tax">💸 Delinquent Tax</span>
+        <span class="source-chip sc-prob">🕊️ Probate</span>
         <span class="source-chip sc-cv">⚠️ Code Violation</span>
-        <span class="source-chip sc-noc">🔨 NOC</span>
-        <span class="pill pill-stacked" style="font-size:11px;margin-left:8px">⚡ STACKED = multiple sources on same property</span>
+        <span class="source-chip sc-dc">💀 Death Cert</span>
+        <span class="pill pill-stacked" style="font-size:11px;margin-left:8px">⚡ STACKED = multiple signals, same property</span>
       </div>
 
-      <!-- RADAR -->
       <div class="hot-radar">
         <div class="radar-head">
-          <h2>
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;color:var(--red)"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.72 7.72L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5V2.05z"/></svg>
-            Priority Call List <span class="fire-badge">🚨 ACT NOW</span>
-          </h2>
+          <h2><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;color:var(--red)"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.72 7.72L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5V2.05z"/></svg>Priority Call List <span class="fire-badge">🚨 ACT NOW</span></h2>
           <button class="btn btn-ghost" onclick="setTabFilter('critical')">View all critical →</button>
         </div>
         <div class="radar-items" id="radarItems"></div>
       </div>
 
-      <!-- FILTER BAR -->
       <div class="filter-bar" id="filterBar">
         <div class="filter-row">
           <div>
             <div class="filter-group-lbl">Priority</div>
             <div style="display:flex;gap:5px">
               <button class="filter-btn active" onclick="setScoreBand(this,'all')">All</button>
-              <button class="filter-btn" onclick="setScoreBand(this,'critical')">🚨 Critical 85+</button>
-              <button class="filter-btn" onclick="setScoreBand(this,'hot')">🔥 Hot 70+</button>
-              <button class="filter-btn" onclick="setScoreBand(this,'warm')">Warm 50+</button>
+              <button class="filter-btn" onclick="setScoreBand(this,'critical')">🚨 Critical 80+</button>
+              <button class="filter-btn" onclick="setScoreBand(this,'hot')">🔥 Hot 60+</button>
+              <button class="filter-btn" onclick="setScoreBand(this,'warm')">Warm 45+</button>
             </div>
           </div>
           <div>
@@ -459,17 +371,14 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <div>
             <div class="filter-group-lbl">Min Score</div>
             <select class="select-filter" onchange="F.score=this.value?+this.value:null;doFilter()">
-              <option value="">All</option>
-              <option value="85">85+ Critical</option>
-              <option value="70">70+ Hot</option>
-              <option value="50">50+ Warm</option>
+              <option value="">All</option><option value="80">80+ Critical</option>
+              <option value="60">60+ Hot</option><option value="45">45+ Warm</option>
             </select>
           </div>
           <button class="btn btn-ghost" style="margin-top:14px" onclick="clearAllFilters()">Clear all</button>
         </div>
       </div>
 
-      <!-- TABS -->
       <div class="toolbar">
         <div class="tabs">
           <div class="tab active" onclick="setTab(this,'all')">All <span class="tab-count" id="tc-all">—</span></div>
@@ -483,9 +392,7 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <div class="tab" onclick="setTab(this,'violations')">⚠️ Violations <span class="tab-count" id="tc-cv">—</span></div>
         </div>
         <span class="results-count" id="resultsCount">—</span>
-        <div class="toolbar-right">
-          <button class="btn btn-ghost" onclick="selAll()">Select All</button>
-        </div>
+        <div class="toolbar-right"><button class="btn btn-ghost" onclick="selAll()">Select All</button></div>
       </div>
 
       <div class="bulk-bar" id="bulkBar">
@@ -495,31 +402,18 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         <button class="btn btn-ghost" onclick="exportCSV()">Download CSV</button>
       </div>
 
-      <div class="table-wrap">
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th><input type="checkbox" id="masterCb" onchange="masterCheck(this)"></th>
-                <th>Score</th>
-                <th>Source Signals</th>
-                <th>Urgency</th>
-                <th>Doc #</th>
-                <th>Date</th>
-                <th>Owner</th>
-                <th>Property Address</th>
-                <th>Mailing Address</th>
-                <th>Assessed Value</th>
-                <th>Match</th>
-                <th>Owner Signals</th>
-                <th>Next Action</th>
-                <th>Links</th>
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
-        </div>
-      </div>
+      <div class="table-wrap"><div class="table-scroll">
+        <table>
+          <thead><tr>
+            <th><input type="checkbox" id="masterCb" onchange="masterCheck(this)"></th>
+            <th>Score</th><th>Signals</th><th>Urgency</th><th>Auction Date</th>
+            <th>Doc #</th><th>Filed</th><th>Owner</th><th>Property Address</th>
+            <th>Mailing Address</th><th>Assessed Value</th><th>Match</th>
+            <th>Owner Signals</th><th>Next Action</th><th>Links</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div></div>
     </div>
   </div>
 </div>
@@ -548,6 +442,7 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
     </div>
     <div class="drawer-section">
       <div class="drawer-section-title">Score Breakdown — Why This Lead</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:8px">Base score: 30 points. Additions below.</div>
       <div class="score-breakdown" id="d-sbreak"></div>
     </div>
     <div class="drawer-section">
@@ -582,8 +477,7 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 <!-- LINKS MODAL -->
 <div class="links-modal-overlay" id="linksOverlay" onclick="closeLinks()">
   <div class="links-modal" onclick="event.stopPropagation()">
-    <div class="links-modal-head">
-      <h3>Public Record Links</h3>
+    <div class="links-modal-head"><h3>Public Record Links</h3>
       <div class="drawer-close" onclick="closeLinks()"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
     </div>
     <div class="links-modal-body" id="linksBody"></div>
@@ -595,142 +489,230 @@ const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Int
 const AUCTION_MIN_DAYS=3;
 let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null},currentTab='all',selectedIds=new Set();
 
+// ── SOURCE CLASSIFICATION ─────────────────────────────────────────────────
+// Based on actual distress_flags values in your CSV:
+// foreclosure_auction | lis_pendens | judgment | probate | lien | multiple_liens
+// delinquent_taxes_1yr..6yr | code_violation | death_certificate
 function classifySource(lead){
-  const flags  =(lead.distressFlags||'').toLowerCase();
-  const docType=(lead.docType||'').toLowerCase();
-  if(flags.includes('delinquent')||docType.includes('delinquent'))return'tax';
-  if(flags.includes('code_violation')||docType.includes('code violation'))return'violations';
-  if(flags.includes('foreclosure')||docType.includes('foreclosure'))return'foreclosure';
+  const f=(lead.distressFlags||'').toLowerCase();
+  const d=(lead.docType||'').toLowerCase();
+  if(f.includes('foreclosure_auction'))return'foreclosure';
+  if(f.includes('delinquent_taxes')||d.includes('delinquent'))return'tax';
+  if(f.includes('code_violation')&&!f.includes('foreclosure')&&!f.includes('delinquent')
+     &&!f.includes('lis_pendens')&&!f.includes('judgment')&&!f.includes('probate')
+     &&!f.includes('lien'))return'violations';
   return'county';
 }
 
+// ── DISTRESS SIGNAL DETECTION ─────────────────────────────────────────────
+// Reads actual distress_flags from CSV — confirmed field values:
+// foreclosure_auction, lis_pendens, judgment, probate, lien, multiple_liens,
+// delinquent_taxes_Nyr, code_violation, death_certificate
 function detectDistressSignals(lead){
   const signals=[];
-  const flags  =(lead.distressFlags||'').toLowerCase();
-  const docType=(lead.docType||'').toLowerCase();
-  if(flags.includes('foreclosure_auction')||docType.includes('foreclosure'))signals.push('Foreclosure');
-  if(flags.includes('lis_pendens')||docType.includes('lis pendens'))signals.push('Lis Pendens');
-  if(flags.includes('probate')||docType.includes('probate'))signals.push('Probate');
-  if(flags.includes('judgment')||docType.includes('judgment'))signals.push('Judgment');
-  if(flags.includes('lien')&&!flags.includes('lis_pendens'))signals.push('Lien');
-  if(flags.includes('tax_deed')||docType.includes('tax deed'))signals.push('Tax Deed');
-  if(flags.includes('death_certificate')||docType.includes('death'))signals.push('Death Cert');
-  if(flags.includes('divorce')||docType.includes('domestic'))signals.push('Divorce');
-  if(flags.includes('delinquent')||docType.includes('delinquent')){
-    const yrs=lead.taxYearsDelinquent||1;
+  const f=(lead.distressFlags||'').toLowerCase();
+  const d=(lead.docType||'').toLowerCase();
+
+  if(f.includes('foreclosure_auction'))signals.push('Foreclosure Auction');
+  if(f.includes('lis_pendens')||d.includes('lis pendens'))signals.push('Lis Pendens');
+
+  // Tax deed from docType
+  if(d.includes('tax deed')||d.includes('taxdeed'))signals.push('Tax Deed');
+
+  if(f.includes('judgment')||d.includes('judgment'))signals.push('Judgment');
+
+  // Delinquent taxes — extract year count from flag like delinquent_taxes_3yr
+  if(f.includes('delinquent_taxes')){
+    const m=f.match(/delinquent_taxes_(\d+)yr/);
+    const yrs=m?parseInt(m[1]):1;
     signals.push('Delinquent Tax '+yrs+'yr');
   }
-  if(flags.includes('code_violation')||docType.includes('code violation')){
+
+  // Lien — multiple_liens or lien flag
+  if((f.includes('multiple_liens')||f.includes('lien'))&&
+     !f.includes('lis_pendens'))signals.push('Lien');
+
+  if(f.includes('probate')||d.includes('probate'))signals.push('Probate / Estate');
+  if(f.includes('death_certificate')||d.includes('death'))signals.push('Death Cert');
+
+  // Code violation — with type breakdown from codeViolationTypes field
+  if(f.includes('code_violation')){
+    const types=(lead.codeViolationTypes||'').toLowerCase();
     const cnt=lead.codeViolationCount||1;
-    signals.push('Code Violation'+(cnt>1?' x'+cnt:''));
+    if(types.includes('housing'))signals.push('Code Violation: Housing');
+    else if(types.includes('zoning')||types.includes('fire rescue'))signals.push('Code Violation: Zoning/Fire');
+    else if(types.includes('lot cleaning')||types.includes('junk cars'))signals.push('Code Violation: Lot/Junk');
+    else signals.push('Code Violation'+(cnt>1?' x'+cnt:''));
   }
-  if(flags.includes('notice_of_commencement')||docType.includes('notice of'))signals.push('NOC');
+
   return signals;
 }
 
+// ── OWNER SIGNAL DETECTION ────────────────────────────────────────────────
 function detectOwnerSignals(lead){
   const signals=[];
   const owner=(lead.ownerName||lead.grantee||'').toUpperCase();
-  const mail =(lead.mailAddr||'').toLowerCase();
-  const prop =(lead.propAddr||'').toLowerCase();
+  const mail=(lead.mailAddr||'').toLowerCase();
+  const prop=(lead.propAddr||'').toLowerCase();
   const today=new Date();today.setHours(0,0,0,0);
+
   if(detectOOS(lead.mailAddr))signals.push('Out of State');
   else if(mail.includes('po box')||mail.includes('p.o. box'))signals.push('PO Box');
   else{
-    const propStreet=prop.split(',')[0].trim().toLowerCase().substring(0,15);
-    if(propStreet.length>4&&!mail.includes(propStreet))signals.push('Absentee Owner');
+    const ps=prop.split(',')[0].trim().toLowerCase().substring(0,15);
+    if(ps.length>4&&mail.length>4&&!mail.includes(ps))signals.push('Absentee Owner');
   }
   if(owner.includes('ESTATE')||owner.includes(' HEIRS')||owner.includes('HEIR ')||
-     owner.includes('DECEASED')||owner.includes('SURVIVING'))signals.push('Estate/Heirs');
+     owner.includes('DECEASED')||owner.includes('SURVIVING'))signals.push('Estate / Heirs');
   const commas=(lead.ownerName||lead.grantee||'').split(',').length-1;
-  if(commas>=1&&!signals.includes('Estate/Heirs'))signals.push('Multiple Owners');
+  if(commas>=1&&!signals.includes('Estate / Heirs'))signals.push('Multiple Owners');
   if(owner.includes(' LLC')||owner.includes(' INC')||owner.includes(' CORP')||
      owner.includes(' LTD')||owner.includes(' TRUST')||owner.includes(' VENTURES')||
-     owner.includes(' EQUITIES')||owner.includes(' HOLDINGS')||owner.includes(' INVESTMENTS'))
-    signals.push('LLC/Corp');
+     owner.includes(' HOLDINGS')||owner.includes(' INVESTMENTS'))signals.push('LLC / Corp');
+  // Old case — parse year from doc number like 2019-123456
   const ym=(lead.docNum||'').match(/^(\d{4})-/);
-  if(ym){const yrs=today.getFullYear()-parseInt(ym[1]);if(yrs>=5)signals.push('Old Case '+yrs+'yr');}
-  if(lead.assessed>=500000)signals.push('High Value $'+Math.round(lead.assessed/1000)+'K');
+  if(ym){
+    const yrs=today.getFullYear()-parseInt(ym[1]);
+    if(yrs>=7)signals.push('Old Case '+yrs+'yr');
+    else if(yrs>=5)signals.push('Old Case '+yrs+'yr');
+  }
   return signals;
 }
 
+// ── HYBRID SCORING ENGINE ─────────────────────────────────────────────────
+// Base 30 (your original spec)
+// Document type heat (your chart: Very High / High / Medium / Low)
+// LP + FC combo bonus (your original spec)
+// Amount > $100K / $50K (your original spec)
+// +10 per motivation flag (your original spec — owner signals)
+// Code violation type + status scoring
+// Auction urgency (real-world necessity)
+// Calibrated so: single lien ≈ 40-50, probate OOS ≈ 55-65, LP+FC ≈ 75-85, stacked 3-signal ≈ 85+
 function calcScore(lead){
-  let pts=0;const notes=[];
-  const match  =(lead.match||'').toUpperCase();
+  let pts=30;
+  const notes=[];
+  const f=(lead.distressFlags||'').toLowerCase();
+  const match=(lead.match||'').toUpperCase();
   const assessed=lead.assessed||0;
   const distress=lead.distressSignals||[];
-  const owner  =lead.ownerSignals||[];
-  const today  =new Date();today.setHours(0,0,0,0);
+  const owner=lead.ownerSignals||[];
+  const today=new Date();today.setHours(0,0,0,0);
 
-  if(distress.includes('Foreclosure')){pts+=20;notes.push({label:'Foreclosure Auction',val:20});}
-  else if(distress.includes('Lis Pendens')){pts+=18;notes.push({label:'Lis Pendens filing',val:18});}
-  else if(distress.includes('Tax Deed')){pts+=22;notes.push({label:'Tax Deed filing',val:22});}
-  else if(distress.includes('Probate')){pts+=16;notes.push({label:'Probate filing',val:16});}
-  else if(distress.includes('Judgment')){pts+=14;notes.push({label:'Judgment filing',val:14});}
-  else if(distress.some(s=>s.startsWith('Delinquent Tax'))){pts+=15;notes.push({label:'Delinquent Tax record',val:15});}
-  else if(distress.some(s=>s.startsWith('Code Violation'))){pts+=18;notes.push({label:'Open Code Violation',val:18});}
-  else if(distress.includes('Death Cert')){pts+=14;notes.push({label:'Death Certificate',val:14});}
-  else if(distress.includes('Divorce')){pts+=12;notes.push({label:'Domestic Relations',val:12});}
-  else if(distress.includes('Lien')){pts+=10;notes.push({label:'Lien filing',val:10});}
-  else{pts+=8;notes.push({label:'County filing',val:8});}
+  // ── DOCUMENT TYPE HEAT ────────────────────────────────────────────────
+  // VERY HIGH
+  const hasLP=distress.includes('Lis Pendens');
+  const hasFC=distress.includes('Foreclosure Auction');
+  const hasTD=distress.includes('Tax Deed');
+  if(hasLP){pts+=25;notes.push({label:'Lis Pendens — lawsuit on property',val:25});}
+  if(hasFC){pts+=25;notes.push({label:'Foreclosure Auction scheduled',val:25});}
+  if(hasTD){pts+=25;notes.push({label:'Tax Deed — county taking property',val:25});}
 
-  if(distress.length>=3){pts+=25;notes.push({label:'3+ stacked signals — extremely motivated',val:25});}
-  else if(distress.length===2){pts+=15;notes.push({label:'2 stacked signals — motivated',val:15});}
+  // HIGH
+  const hasJudgment=distress.includes('Judgment');
+  const hasTaxDel=distress.some(s=>s.startsWith('Delinquent Tax'));
+  if(hasJudgment){pts+=15;notes.push({label:'Judgment — court ordered payment',val:15});}
+  if(hasTaxDel){pts+=15;notes.push({label:'Delinquent property taxes',val:15});}
 
-  if(distress.includes('Foreclosure')&&lead.filed){
+  // MEDIUM
+  const hasLien=distress.includes('Lien');
+  const hasProbate=distress.includes('Probate / Estate');
+  const hasDeath=distress.includes('Death Cert');
+  if(hasLien){pts+=10;notes.push({label:'Lien (mechanic / HOA / general)',val:10});}
+  if(hasProbate){pts+=10;notes.push({label:'Probate / Estate — heirs may need to sell',val:10});}
+  if(hasDeath){pts+=10;notes.push({label:'Death Certificate filed',val:10});}
+
+  // CODE VIOLATION — type matters (based on your actual data: Housing/Zoning/Lot/Junk)
+  const hasCVHousing=distress.some(s=>s.includes('Housing'));
+  const hasCVZoning=distress.some(s=>s.includes('Zoning')||s.includes('Fire'));
+  const hasCVLot=distress.some(s=>s.includes('Lot')||s.includes('Junk'));
+  const hasCVGeneric=distress.some(s=>s.startsWith('Code Violation'));
+  if(hasCVHousing){
+    pts+=18;notes.push({label:'Code Violation: Housing — highest urgency',val:18});
+    // Status bonus — stored in distressFlags or codeViolationTypes
+    const cv=(lead.codeViolationTypes||'').toLowerCase();
+    if(f.includes('lien')||cv.includes('lien')){pts+=15;notes.push({label:'CV Status: Lien already placed',val:15});}
+    else if(cv.includes('non-compliance')||cv.includes('repeat')){pts+=12;notes.push({label:'CV Status: Non-compliance / Repeat',val:12});}
+    else if(cv.includes('agenda')||cv.includes('heard')){pts+=8;notes.push({label:'CV Status: Board hearing',val:8});}
+    else if(cv.includes('enforcement')||cv.includes('pending')){pts+=5;notes.push({label:'CV Status: Active enforcement',val:5});}
+  } else if(hasCVZoning){pts+=12;notes.push({label:'Code Violation: Zoning / Fire Rescue',val:12});}
+  else if(hasCVLot){pts+=8;notes.push({label:'Code Violation: Lot Cleaning / Junk Cars',val:8});}
+  else if(hasCVGeneric){pts+=8;notes.push({label:'Code Violation: Open enforcement case',val:8});}
+
+  // Multiple violations on same property — extra signal of neglect
+  if(hasCVGeneric&&lead.codeViolationCount>=3){pts+=5;notes.push({label:lead.codeViolationCount+' violations — serious neglect',val:5});}
+  else if(hasCVGeneric&&lead.codeViolationCount>=2){pts+=3;notes.push({label:lead.codeViolationCount+' violations on same property',val:3});}
+
+  // ── LP + FORECLOSURE COMBO BONUS (your original spec) ─────────────────
+  if(hasLP&&hasFC){pts+=20;notes.push({label:'LP + Foreclosure combo — imminent loss',val:20});}
+
+  // ── STACKING (2+ distinct signal types) ──────────────────────────────
+  // Count only meaningful signal types, not NOC
+  const sigTypes=new Set();
+  if(hasLP||hasFC||hasTD)sigTypes.add('foreclosure');
+  if(hasJudgment)sigTypes.add('judgment');
+  if(hasTaxDel)sigTypes.add('tax');
+  if(hasLien)sigTypes.add('lien');
+  if(hasProbate||hasDeath)sigTypes.add('probate');
+  if(hasCVGeneric)sigTypes.add('cv');
+  if(sigTypes.size>=3){pts+=15;notes.push({label:'3+ stacked signals — extremely motivated',val:15});}
+  else if(sigTypes.size===2){pts+=8;notes.push({label:'2 stacked signal types',val:8});}
+
+  // ── AUCTION URGENCY ───────────────────────────────────────────────────
+  // Only for foreclosures — already filtered to >3 days
+  if(hasFC&&lead.filed){
     const aDate=new Date(lead.filed);
     const daysOut=Math.ceil((aDate-today)/86400000);
-    if(daysOut<=7){pts+=26;notes.push({label:'Auction in '+daysOut+' days — very urgent',val:26});}
-    else if(daysOut<=14){pts+=18;notes.push({label:'Auction in '+daysOut+' days',val:18});}
-    else if(daysOut<=21){pts+=12;notes.push({label:'Auction in '+daysOut+' days',val:12});}
-    else if(daysOut<=45){pts+=7;notes.push({label:'Auction in '+daysOut+' days',val:7});}
-    else{pts+=2;notes.push({label:'Auction in '+daysOut+' days',val:2});}
+    if(daysOut>3&&daysOut<=7){pts+=20;notes.push({label:'Auction in '+daysOut+' days — very urgent',val:20});}
+    else if(daysOut<=14){pts+=12;notes.push({label:'Auction in '+daysOut+' days',val:12});}
+    else if(daysOut<=30){pts+=6;notes.push({label:'Auction in '+daysOut+' days',val:6});}
+    else if(daysOut>30){pts+=2;notes.push({label:'Auction in '+daysOut+' days',val:2});}
   }
 
+  // ── DELINQUENT TAX YEARS (additional to base +15) ────────────────────
   const taxSig=distress.find(s=>s.startsWith('Delinquent Tax'));
   if(taxSig){
-    const yrs=parseInt(taxSig.match(/(\d+)/)?.[1]||0);
-    if(yrs>=10){pts+=30;notes.push({label:'Delinquent '+yrs+'yr — desperate',val:30});}
-    else if(yrs>=5){pts+=22;notes.push({label:'Delinquent '+yrs+'yr',val:22});}
-    else if(yrs>=3){pts+=15;notes.push({label:'Delinquent '+yrs+'yr',val:15});}
-    else if(yrs>=2){pts+=8;notes.push({label:'Delinquent 2yr',val:8});}
-    if(lead.taxTotalBalance>=50000){pts+=10;notes.push({label:'Tax balance $50K+',val:10});}
-    else if(lead.taxTotalBalance>=20000){pts+=6;notes.push({label:'Tax balance $20K+',val:6});}
-    else if(lead.taxTotalBalance>=5000){pts+=3;notes.push({label:'Tax balance $5K+',val:3});}
+    const yrs=parseInt(taxSig.match(/(\d+)/)?.[1]||1);
+    if(yrs>=5){pts+=5;notes.push({label:'Delinquent '+yrs+' years — very behind',val:5});}
+    else if(yrs>=3){pts+=3;notes.push({label:'Delinquent '+yrs+' years',val:3});}
+    if(lead.taxTotalBalance>=50000){pts+=5;notes.push({label:'Tax balance $50K+',val:5});}
+    else if(lead.taxTotalBalance>=20000){pts+=3;notes.push({label:'Tax balance $20K+',val:3});}
   }
 
-  const cvSig=distress.find(s=>s.startsWith('Code Violation'));
-  if(cvSig){
-    const cnt=lead.codeViolationCount||1;
-    if(cnt>=3){pts+=16;notes.push({label:cnt+' active violations — serious neglect',val:16});}
-    else if(cnt>=2){pts+=8;notes.push({label:cnt+' active violations',val:8});}
+  // ── AMOUNT (your original spec) ───────────────────────────────────────
+  // Skip if assessed looks like a commercial outlier (>$5M)
+  if(assessed<5000000){
+    if(assessed>=100000){pts+=15;notes.push({label:'Assessed value >$100K',val:15});}
+    else if(assessed>=50000){pts+=10;notes.push({label:'Assessed value >$50K',val:10});}
   }
 
+  // ── OWNER SIGNALS (your original spec: +10 per flag) ─────────────────
+  // Using graduated values that reflect real motivation difference
+  if(owner.includes('Out of State')){pts+=12;notes.push({label:'Out-of-state owner — can\'t manage in person',val:12});}
+  else if(owner.includes('PO Box')){pts+=8;notes.push({label:'PO Box mailing — likely absentee',val:8});}
+  else if(owner.includes('Absentee Owner')){pts+=6;notes.push({label:'Absentee owner',val:6});}
+  if(owner.includes('Estate / Heirs')){pts+=10;notes.push({label:'Estate/Heirs — motivated to liquidate',val:10});}
+  if(owner.includes('Multiple Owners')){pts+=7;notes.push({label:'Multiple owners — split decision, more pressure',val:7});}
+  if(owner.includes('LLC / Corp')){pts+=5;notes.push({label:'LLC/Corp — financial decision, not emotional',val:5});}
+
+  // Old case
   const oldSig=owner.find(s=>s.startsWith('Old Case'));
   if(oldSig){
     const yrs=parseInt(oldSig.match(/(\d+)/)?.[1]||0);
-    if(yrs>=10){pts+=18;notes.push({label:'Case '+yrs+' years old',val:18});}
-    else if(yrs>=7){pts+=14;notes.push({label:'Case '+yrs+' years old',val:14});}
-    else if(yrs>=5){pts+=10;notes.push({label:'Case '+yrs+' years old',val:10});}
+    if(yrs>=7){pts+=10;notes.push({label:'Case '+yrs+' years old — deeply distressed',val:10});}
+    else if(yrs>=5){pts+=7;notes.push({label:'Case '+yrs+' years old — lingering problem',val:7});}
   }
 
-  if(owner.includes('Out of State')){pts+=14;notes.push({label:'Out-of-state owner',val:14});}
-  else if(owner.includes('PO Box')){pts+=10;notes.push({label:'PO Box mailing',val:10});}
-  else if(owner.includes('Absentee Owner')){pts+=7;notes.push({label:'Absentee owner',val:7});}
-  if(owner.includes('Estate/Heirs')){pts+=12;notes.push({label:'Estate/Heirs in title',val:12});}
-  if(owner.includes('Multiple Owners')){pts+=8;notes.push({label:'Multiple owners',val:8});}
-  if(owner.includes('LLC/Corp')){pts+=5;notes.push({label:'LLC/Corp owner',val:5});}
+  // ── FRESHNESS (your original spec) ───────────────────────────────────
+  if(lead.filed){
+    const filed=new Date(lead.filed);
+    const daysSince=Math.ceil((today-filed)/86400000);
+    if(daysSince>=0&&daysSince<=7){pts+=5;notes.push({label:'Filed this week — fresh lead',val:5});}
+  }
+  if(lead.propAddr&&lead.propAddr!=='—'&&lead.propAddr.length>5){
+    pts+=5;notes.push({label:'Has confirmed property address',val:5});
+  }
 
-  if(match==='HIGH'){pts+=8;notes.push({label:'High match confidence',val:8});}
-  else if(match==='MEDIUM'){pts+=3;notes.push({label:'Medium match confidence',val:3});}
-  else if(match==='LOW'){pts-=5;notes.push({label:'Low match — verify first',val:-5});}
-
-  if(assessed>=700000){pts+=8;notes.push({label:'High value $'+Math.round(assessed/1000)+'K',val:8});}
-  else if(assessed>=400000){pts+=5;notes.push({label:'Value $'+Math.round(assessed/1000)+'K',val:5});}
-  else if(assessed>=200000){pts+=3;notes.push({label:'Value $'+Math.round(assessed/1000)+'K',val:3});}
-  else if(assessed>=100000){pts+=1;notes.push({label:'Value $'+Math.round(assessed/1000)+'K',val:1});}
-
-  return{score:Math.max(5,Math.min(99,Math.round(pts))),notes};
+  return{score:Math.max(30,Math.min(99,Math.round(pts))),notes};
 }
 
 function detectOOS(addr){
@@ -745,50 +727,62 @@ function detectOOS(addr){
 
 function calcAction(score,match,distress,ownerSigs){
   const hasOOS=ownerSigs.includes('Out of State');
-  if(score>=90)return{label:'🚨 Call Now — Max Effort',cls:'action-callhot'};
-  if(score>=85)return{label:'🔥 Call Now',cls:'action-callhot'};
-  if(score>=75&&match==='HIGH')return{label:'📞 Call Now',cls:'action-call'};
-  if(score>=75)return{label:'🔍 Skiptrace First',cls:'action-skip'};
-  if(score>=65&&match==='HIGH')return{label:'📞 Call Now',cls:'action-call'};
-  if(score>=65)return{label:'🔍 Skiptrace',cls:'action-skip'};
-  if(hasOOS)return{label:'🔍 Skiptrace',cls:'action-skip'};
+  const hasFC=distress.includes('Foreclosure Auction');
+  if(score>=85)return{label:'🚨 Call Now — Max Effort',cls:'action-callhot'};
+  if(score>=80)return{label:'🔥 Call Now',cls:'action-callhot'};
+  if(score>=70&&match==='HIGH')return{label:'📞 Call Now',cls:'action-call'};
+  if(score>=70)return{label:'🔍 Skiptrace First',cls:'action-skip'};
+  if(score>=60&&match==='HIGH')return{label:'📞 Call Now',cls:'action-call'};
+  if(score>=60||hasOOS||hasFC)return{label:'🔍 Skiptrace',cls:'action-skip'};
   if(score>=50&&match==='HIGH')return{label:'💬 SMS Blast',cls:'action-sms'};
   if(score>=45)return{label:'✉ Send Mailer',cls:'action-mail'};
   return{label:'🔎 Research First',cls:'action-research'};
 }
 
+function heatLabel(score){
+  if(score>=80)return{text:'VERY HIGH',color:'#DC2626'};
+  if(score>=60)return{text:'HIGH',color:'#D97706'};
+  if(score>=45)return{text:'MEDIUM',color:'#2563EB'};
+  return{text:'LOW',color:'#9CA3AF'};
+}
+
 function urgencyLabel(score){
   if(score>=90)return{text:'🚨 SUPER BOWL — spend whatever it takes',color:'#DC2626'};
-  if(score>=85)return{text:'🔥 DROP EVERYTHING — call within the hour',color:'#DC2626'};
-  if(score>=75)return{text:'⚡ Very hot — call today',color:'#D97706'};
-  if(score>=65)return{text:'📈 Hot — priority this week',color:'#D97706'};
-  if(score>=50)return{text:'👀 Warm — follow up soon',color:'#2563EB'};
+  if(score>=80)return{text:'🔥 DROP EVERYTHING — call within the hour',color:'#DC2626'};
+  if(score>=70)return{text:'⚡ Very hot — call today',color:'#D97706'};
+  if(score>=60)return{text:'📈 Hot — priority this week',color:'#D97706'};
+  if(score>=45)return{text:'👀 Warm — follow up soon',color:'#2563EB'};
   return{text:'Research before outreach',color:'#6B7280'};
 }
 
 function scoreColor(s){
-  if(s>=85)return'#DC2626';
-  if(s>=70)return'#D97706';
-  if(s>=50)return'#2563EB';
-  return'#9CA3AF';
+  if(s>=80)return'#DC2626';if(s>=60)return'#D97706';
+  if(s>=45)return'#2563EB';return'#9CA3AF';
 }
 
-const DISTRESS_CLS={'Foreclosure':'pill-fc','Lis Pendens':'pill-lp','Probate':'pill-prob','Judgment':'pill-jdg','Lien':'pill-lien','Tax Deed':'pill-td','Death Cert':'pill-dc','Divorce':'pill-div','NOC':'pill-noc'};
-const OWNER_CLS={'Out of State':'pill-oos','PO Box':'pill-po','Absentee Owner':'pill-abs','Estate/Heirs':'pill-estate','Multiple Owners':'pill-multi','LLC/Corp':'pill-llc'};
-
+// ── PILL RENDERING ────────────────────────────────────────────────────────
 function distressPill(s){
-  if(s.startsWith('Delinquent Tax'))return`<span class="pill pill-tax">${s}</span>`;
-  if(s.startsWith('Code Violation'))return`<span class="pill pill-cv">${s}</span>`;
-  if(s.startsWith('Old Case'))return`<span class="pill pill-old">${s}</span>`;
-  if(s.startsWith('High Value'))return`<span class="pill pill-generic">${s}</span>`;
-  return`<span class="pill ${DISTRESS_CLS[s]||'pill-generic'}">${s}</span>`;
+  if(s==='Lis Pendens')return`<span class="pill pill-lp">⚖️ ${s}</span>`;
+  if(s==='Foreclosure Auction')return`<span class="pill pill-fc">🏠 ${s}</span>`;
+  if(s==='Tax Deed')return`<span class="pill pill-td">📜 ${s}</span>`;
+  if(s==='Judgment')return`<span class="pill pill-jdg">⚡ ${s}</span>`;
+  if(s.startsWith('Delinquent Tax'))return`<span class="pill pill-tax">💸 ${s}</span>`;
+  if(s==='Lien')return`<span class="pill pill-lien">🔗 ${s}</span>`;
+  if(s==='Probate / Estate')return`<span class="pill pill-prob">🕊️ ${s}</span>`;
+  if(s==='Death Cert')return`<span class="pill pill-dc">💀 ${s}</span>`;
+  if(s.includes('Housing'))return`<span class="pill pill-cv-housing">🔴 ${s}</span>`;
+  if(s.startsWith('Code Violation'))return`<span class="pill pill-cv">⚠️ ${s}</span>`;
+  return`<span class="pill pill-generic">${s}</span>`;
 }
+
+const OWNER_CLS={'Out of State':'pill-oos','PO Box':'pill-po','Absentee Owner':'pill-abs',
+  'Estate / Heirs':'pill-estate','Multiple Owners':'pill-multi','LLC / Corp':'pill-llc'};
 function ownerPill(s){
   if(s.startsWith('Old Case'))return`<span class="pill pill-old">${s}</span>`;
-  if(s.startsWith('High Value'))return`<span class="pill pill-generic">${s}</span>`;
   return`<span class="pill ${OWNER_CLS[s]||'pill-generic'}">${s}</span>`;
 }
 
+// ── CSV PARSING ───────────────────────────────────────────────────────────
 function parseCSV(text){
   const lines=text.trim().split('\n');
   const headers=parseCSVLine(lines[0]);
@@ -814,7 +808,7 @@ function parseCSVLine(line){
 }
 
 function mapRow(row,idx){
-  const match   =(row.match_confidence||'').toUpperCase();
+  const match=(row.match_confidence||'').toUpperCase();
   const assessed=parseFloat((row.assessed_value||'').replace(/[$,]/g,''))||0;
   const lead={
     id:idx+1,assessed,match,
@@ -840,26 +834,28 @@ function mapRow(row,idx){
     codeViolationCount: parseInt(row.code_violation_count||'0')||0,
     codeViolationTypes: row.code_violation_types||'',
   };
-  lead.source         =classifySource(lead);
-  lead.distressSignals=detectDistressSignals(lead);
-  lead.ownerSignals   =detectOwnerSignals(lead);
-  lead.allSignals     =[...lead.distressSignals,...lead.ownerSignals];
-  const{score,notes}  =calcScore(lead);
+  lead.source          =classifySource(lead);
+  lead.distressSignals =detectDistressSignals(lead);
+  lead.ownerSignals    =detectOwnerSignals(lead);
+  lead.allSignals      =[...lead.distressSignals,...lead.ownerSignals];
+  const{score,notes}   =calcScore(lead);
   lead.score=score;lead.scoreNotes=notes;
-  const actionObj     =calcAction(score,match,lead.distressSignals,lead.ownerSignals);
+  const actionObj=calcAction(score,match,lead.distressSignals,lead.ownerSignals);
   lead.action=actionObj.label;lead.actionCls=actionObj.cls;
+  // Build public record links
   const links=[];
   if(lead.countyUrl)links.push({name:'Property Appraiser',url:lead.countyUrl,cat:'PROP'});
   links.push({name:'Orange County Clerk',url:'https://www.myorangeclerk.com/official-records',cat:'CLERK'});
   links.push({name:'Tax Collector',url:'https://www.octaxcol.com',cat:'TAX'});
-  if(lead.distressSignals.includes('Foreclosure'))
+  if(lead.distressSignals.includes('Foreclosure Auction'))
     links.push({name:'RealForeclose (Auction)',url:'https://www.realforeclose.com',cat:'AUCTION'});
   if(lead.distressSignals.some(s=>s.startsWith('Code Violation')))
-    links.push({name:'Code Enforcement Search',url:'https://netapps.ocfl.net/CETitleViolationSearch/',cat:'CODE'});
+    links.push({name:'Code Enforcement',url:'https://netapps.ocfl.net/CETitleViolationSearch/',cat:'CODE'});
   lead.links=links;
   return lead;
 }
 
+// ── FILTERING ─────────────────────────────────────────────────────────────
 function daysUntil(dateStr){
   if(!dateStr)return null;
   const d=new Date(dateStr);const today=new Date();today.setHours(0,0,0,0);
@@ -870,61 +866,63 @@ function getFiltered(){
   let leads=[...LEADS];
   const q=document.getElementById('searchInput').value.trim().toLowerCase();
   if(q)leads=leads.filter(l=>
-    l.ownerName.toLowerCase().includes(q)||l.grantee.toLowerCase().includes(q)||
-    l.propAddr.toLowerCase().includes(q)||l.mailAddr.toLowerCase().includes(q)||
-    l.docNum.toLowerCase().includes(q)||l.docType.toLowerCase().includes(q)||
+    (l.ownerName||'').toLowerCase().includes(q)||(l.grantee||'').toLowerCase().includes(q)||
+    (l.propAddr||'').toLowerCase().includes(q)||(l.mailAddr||'').toLowerCase().includes(q)||
+    (l.docNum||'').toLowerCase().includes(q)||(l.docType||'').toLowerCase().includes(q)||
     l.allSignals.some(s=>s.toLowerCase().includes(q))
   );
-  if(F.signal) leads=leads.filter(l=>l.allSignals.some(s=>s.toLowerCase().includes(F.signal.toLowerCase())));
-  if(F.score)  leads=leads.filter(l=>l.score>=F.score);
-  if(F.scoreBand==='critical')leads=leads.filter(l=>l.score>=85);
-  else if(F.scoreBand==='hot')leads=leads.filter(l=>l.score>=70&&l.score<85);
-  else if(F.scoreBand==='warm')leads=leads.filter(l=>l.score>=50&&l.score<70);
-  if(F.source==='foreclosure')leads=leads.filter(l=>l.source==='foreclosure');
-  else if(F.source==='county') leads=leads.filter(l=>l.source==='county');
-  else if(F.source==='tax')    leads=leads.filter(l=>l.source==='tax');
+  if(F.signal)leads=leads.filter(l=>l.allSignals.some(s=>s.toLowerCase().includes(F.signal.toLowerCase())));
+  if(F.score) leads=leads.filter(l=>l.score>=F.score);
+  if(F.scoreBand==='critical')leads=leads.filter(l=>l.score>=80);
+  else if(F.scoreBand==='hot') leads=leads.filter(l=>l.score>=60&&l.score<80);
+  else if(F.scoreBand==='warm')leads=leads.filter(l=>l.score>=45&&l.score<60);
+  if(F.source==='foreclosure')  leads=leads.filter(l=>l.source==='foreclosure');
+  else if(F.source==='county')  leads=leads.filter(l=>l.source==='county');
+  else if(F.source==='tax')     leads=leads.filter(l=>l.source==='tax');
   else if(F.source==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
-  else if(F.source==='stacked')leads=leads.filter(l=>l.isStacked||l.distressSignals.length>=2);
-  else if(F.source==='lp')     leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
-  else if(F.source==='probate')leads=leads.filter(l=>l.distressSignals.includes('Probate'));
+  else if(F.source==='stacked') leads=leads.filter(l=>l.isStacked||l.distressSignals.length>=2);
+  else if(F.source==='lp')      leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
+  else if(F.source==='probate') leads=leads.filter(l=>l.distressSignals.includes('Probate / Estate'));
   else if(F.source==='judgment')leads=leads.filter(l=>l.distressSignals.includes('Judgment'));
-  else if(F.source==='lien')   leads=leads.filter(l=>l.distressSignals.includes('Lien'));
-  if(currentTab==='critical')    leads=leads.filter(l=>l.score>=85);
-  else if(currentTab==='hot')    leads=leads.filter(l=>l.score>=70&&l.score<85);
-  else if(currentTab==='warm')   leads=leads.filter(l=>l.score>=50&&l.score<70);
+  else if(F.source==='lien')    leads=leads.filter(l=>l.distressSignals.includes('Lien'));
+  if(currentTab==='critical')   leads=leads.filter(l=>l.score>=80);
+  else if(currentTab==='hot')   leads=leads.filter(l=>l.score>=60&&l.score<80);
+  else if(currentTab==='warm')  leads=leads.filter(l=>l.score>=45&&l.score<60);
   else if(currentTab==='stacked')leads=leads.filter(l=>l.isStacked||l.distressSignals.length>=2);
   else if(currentTab==='foreclosure')leads=leads.filter(l=>l.source==='foreclosure');
-  else if(currentTab==='county') leads=leads.filter(l=>l.source==='county');
-  else if(currentTab==='tax')    leads=leads.filter(l=>l.source==='tax');
+  else if(currentTab==='county')leads=leads.filter(l=>l.source==='county');
+  else if(currentTab==='tax')   leads=leads.filter(l=>l.source==='tax');
   else if(currentTab==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
   leads.sort((a,b)=>b.score-a.score);
   return leads;
 }
 
-const fmt=n=>n?'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):'—';
+// ── RENDERING ─────────────────────────────────────────────────────────────
+const fmt=n=>n?'$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}):'—';
 const fmtD=d=>{if(!d)return'—';const p=d.split(/[-T]/);if(p.length<3)return d;return`${p[1]}/${p[2].slice(0,2)}/${p[0]}`;};
-const initials=n=>n.split(' ').slice(0,2).map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
+const initials=n=>(n||'?').split(' ').slice(0,2).map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
 
-function auctionBadge(lead){
-  if(!lead.distressSignals.includes('Foreclosure'))return'';
+function auctionDateCell(lead){
+  if(!lead.distressSignals.includes('Foreclosure Auction'))return'<span style="color:var(--text3);font-size:11px">—</span>';
   const days=daysUntil(lead.filed);
-  if(days===null)return'';
-  if(days<=7)return`<div style="font-size:9px;font-weight:700;color:#D97706;margin-top:2px">🟠 ${days} days left</div>`;
-  if(days<=14)return`<div style="font-size:9px;color:#D97706;margin-top:2px">${days} days to auction</div>`;
-  return`<div style="font-size:9px;color:var(--text3);margin-top:2px">${days}d to auction</div>`;
+  if(days===null)return'—';
+  const dateStr=fmtD(lead.filed);
+  const col=days<=5?'#DC2626':days<=8?'#D97706':'#059669';
+  return`<div style="font-size:11.5px;font-weight:700;color:${col}">${dateStr}</div><div style="font-size:9px;color:${col}">${days}d away</div>`;
 }
 
 function makeRing(score){
   const circ=126,dash=(score/100)*circ,color=scoreColor(score);
-  return`<div class="score-cell"><div class="score-ring"><svg viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="20"/><circle cx="22" cy="22" r="20" fill="none" stroke="${color}" stroke-width="3.5" stroke-dasharray="${dash} ${circ}" stroke-linecap="round"/></svg><div class="score-val" style="color:${color}">${score}</div></div></div>`;
+  const heat=heatLabel(score);
+  return`<div class="score-cell"><div class="score-ring"><svg viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="20"/><circle cx="22" cy="22" r="20" fill="none" stroke="${color}" stroke-width="3.5" stroke-dasharray="${dash} ${circ}" stroke-linecap="round"/></svg><div class="score-val" style="color:${color}">${score}</div></div><div class="score-heat" style="color:${heat.color}">${heat.text}</div></div>`;
 }
 
 function urgencyBadge(score){
   if(score>=90)return`<span style="background:#DC2626;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">🚨 SUPER BOWL</span>`;
-  if(score>=85)return`<span style="background:#DC2626;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">🔥 DROP EVERYTHING</span>`;
-  if(score>=75)return`<span style="background:#FEE2E2;color:#DC2626;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">⚡ CALL TODAY</span>`;
-  if(score>=65)return`<span style="background:#FFFBEB;color:#D97706;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">📈 HOT</span>`;
-  if(score>=50)return`<span style="background:#EFF6FF;color:#2563EB;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">👀 WARM</span>`;
+  if(score>=80)return`<span style="background:#DC2626;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">🔥 DROP EVERYTHING</span>`;
+  if(score>=70)return`<span style="background:#FEE2E2;color:#DC2626;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">⚡ CALL TODAY</span>`;
+  if(score>=60)return`<span style="background:#FFFBEB;color:#D97706;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">📈 HOT</span>`;
+  if(score>=45)return`<span style="background:#EFF6FF;color:#2563EB;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap">👀 WARM</span>`;
   return`<span style="background:#F1F5F9;color:#9CA3AF;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap">COOL</span>`;
 }
 
@@ -934,12 +932,12 @@ const matchBadge=m=>`<span class="match-badge ${matchCls[m]||'match-none'}">${m|
 function renderTable(){
   const filtered=getFiltered();
   const L=LEADS;
-  const cvCount=L.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation'))).length;
-  document.getElementById('resultsCount').textContent=`Showing ${filtered.length.toLocaleString()} of ${L.length.toLocaleString()} leads · sorted by score`;
+  const cvCount=L.filter(l=>l.distressSignals.some(s=>s.startsWith('Code Violation'))).length;
+  document.getElementById('resultsCount').textContent=`Showing ${filtered.length.toLocaleString()} of ${L.length.toLocaleString()} leads`;
   document.getElementById('tc-all').textContent=L.length.toLocaleString();
-  document.getElementById('tc-critical').textContent=L.filter(l=>l.score>=85).length;
-  document.getElementById('tc-hot').textContent=L.filter(l=>l.score>=70&&l.score<85).length;
-  document.getElementById('tc-warm').textContent=L.filter(l=>l.score>=50&&l.score<70).length;
+  document.getElementById('tc-critical').textContent=L.filter(l=>l.score>=80).length;
+  document.getElementById('tc-hot').textContent=L.filter(l=>l.score>=60&&l.score<80).length;
+  document.getElementById('tc-warm').textContent=L.filter(l=>l.score>=45&&l.score<60).length;
   document.getElementById('tc-stacked').textContent=L.filter(l=>l.isStacked||l.distressSignals.length>=2).length;
   document.getElementById('tc-fc').textContent=L.filter(l=>l.source==='foreclosure').length;
   document.getElementById('tc-county').textContent=L.filter(l=>l.source==='county').length;
@@ -950,21 +948,22 @@ function renderTable(){
   filtered.forEach(lead=>{
     const tr=document.createElement('tr');
     if(selectedIds.has(lead.id))tr.classList.add('selected');
-    if(lead.score>=85)tr.classList.add('row-critical');
+    if(lead.score>=80)tr.classList.add('row-critical');
     tr.onclick=e=>{if(e.target.type==='checkbox'||e.target.closest('.links-btn'))return;openDrawer(lead);};
     const owner=lead.ownerName||lead.grantee;
     const isStackedLead=lead.isStacked||lead.distressSignals.length>=2;
     const srcPills=lead.distressSignals.map(distressPill).join('');
-    const stackBadge=isStackedLead?`<span class="pill pill-stacked" style="font-size:9px;padding:1px 5px">⚡ STACKED</span>`:'';
-    const ownerPills=lead.ownerSignals.filter(s=>!s.startsWith('High Value')).map(ownerPill).join('');
+    const stackBadge=isStackedLead?`<span class="pill pill-stacked" style="font-size:9px;padding:1px 5px;margin-top:3px">⚡ STACKED</span>`:'';
+    const ownerPills=lead.ownerSignals.map(ownerPill).join('');
     tr.innerHTML=`
       <td><input type="checkbox" ${selectedIds.has(lead.id)?'checked':''} onchange="toggleSel(${lead.id},this)"></td>
       <td>${makeRing(lead.score)}</td>
-      <td><div style="display:flex;flex-direction:column;gap:3px;max-width:160px">${srcPills}${stackBadge}</div></td>
-      <td>${urgencyBadge(lead.score)}${auctionBadge(lead)}</td>
-      <td><div class="doc-num" style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${lead.docNum}</div></td>
+      <td><div style="display:flex;flex-direction:column;gap:3px;max-width:170px">${srcPills}${stackBadge}</div></td>
+      <td>${urgencyBadge(lead.score)}</td>
+      <td>${auctionDateCell(lead)}</td>
+      <td><div class="doc-num" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${lead.docNum}</div></td>
       <td style="white-space:nowrap;font-size:11px;color:var(--text2)">${fmtD(lead.filed)}</td>
-      <td><div style="display:flex;align-items:center;gap:7px"><div class="owner-initials">${initials(owner)}</div><div class="addr-main" style="max-width:130px">${owner}</div></div></td>
+      <td><div style="display:flex;align-items:center;gap:7px"><div class="owner-initials">${initials(owner)}</div><div class="addr-main" style="max-width:120px">${owner}</div></div></td>
       <td><div class="addr-main">${lead.propAddr}</div></td>
       <td><div class="addr-sub">${lead.mailAddr}</div></td>
       <td><div class="money">${fmt(lead.assessed)}</div></td>
@@ -981,8 +980,8 @@ function renderRadar(){
   const top=[...LEADS].sort((a,b)=>b.score-a.score).slice(0,6);
   document.getElementById('radarItems').innerHTML=top.map(l=>{
     const urg=urgencyLabel(l.score);
-    const days=l.distressSignals.includes('Foreclosure')?daysUntil(l.filed):null;
-    const daysStr=days!==null?(days<=7?`🟠 ${days} days left`:`${days} days to auction`):'';
+    const days=l.distressSignals.includes('Foreclosure Auction')?daysUntil(l.filed):null;
+    const daysStr=days!==null&&days>0?`🟠 Auction in ${days} days`:'';
     const isStacked=l.isStacked||l.distressSignals.length>=2;
     return`<div class="radar-card" onclick="openDrawer(LEADS.find(x=>x.id===${l.id}))">
       <div style="display:flex;justify-content:space-between;align-items:flex-start">
@@ -1000,33 +999,34 @@ function renderRadar(){
 
 function updateCards(){
   const L=LEADS;
-  const cvCount=L.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation'))).length;
+  const cvCount=L.filter(l=>l.distressSignals.some(s=>s.startsWith('Code Violation'))).length;
   document.getElementById('c-total').textContent=L.length.toLocaleString();
-  document.getElementById('c-critical').textContent=L.filter(l=>l.score>=85).length.toLocaleString();
-  document.getElementById('c-hot').textContent=L.filter(l=>l.score>=70&&l.score<85).length.toLocaleString();
+  document.getElementById('c-critical').textContent=L.filter(l=>l.score>=80).length.toLocaleString();
+  document.getElementById('c-hot').textContent=L.filter(l=>l.score>=60&&l.score<80).length.toLocaleString();
   document.getElementById('c-stacked').textContent=L.filter(l=>l.isStacked||l.distressSignals.length>=2).length.toLocaleString();
   document.getElementById('c-fc').textContent=L.filter(l=>l.source==='foreclosure').length.toLocaleString();
   document.getElementById('c-county').textContent=L.filter(l=>l.source==='county').length.toLocaleString();
   document.getElementById('c-tax').textContent=L.filter(l=>l.source==='tax').length.toLocaleString();
   document.getElementById('c-cv').textContent=cvCount.toLocaleString();
   document.getElementById('nb-total').textContent=L.length.toLocaleString();
-  document.getElementById('nb-hot').textContent=L.filter(l=>l.score>=85).length;
+  document.getElementById('nb-hot').textContent=L.filter(l=>l.score>=80).length;
   document.getElementById('nb-new').textContent=L.filter(l=>l.source==='county').length;
   document.getElementById('nb-fc').textContent=L.filter(l=>l.source==='foreclosure').length;
   document.getElementById('nb-county').textContent=L.filter(l=>l.source==='county').length;
   document.getElementById('nb-tax').textContent=L.filter(l=>l.source==='tax').length;
   document.getElementById('nb-cv').textContent=cvCount;
   document.getElementById('nb-stacked').textContent=L.filter(l=>l.isStacked||l.distressSignals.length>=2).length;
-  document.getElementById('c-hot-trend').textContent=`▲ ${L.filter(l=>l.score>=85).length} need attention now`;
+  document.getElementById('c-hot-trend').textContent=`▲ ${L.filter(l=>l.score>=80).length} need immediate attention`;
   const latest=L.map(l=>l.scrapedAt).filter(Boolean).sort().pop();
   if(latest){
     const d=new Date(latest);
     const s=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
     document.getElementById('sync-time').textContent='Last sync: '+s;
-    document.getElementById('last-run').textContent='Data: '+s;
+    document.getElementById('last-run').textContent='Data as of '+s;
   }
 }
 
+// ── DRAWER ────────────────────────────────────────────────────────────────
 function openDrawer(lead){
   const owner=lead.ownerName||lead.grantee;
   document.getElementById('d-av').textContent=initials(owner);
@@ -1038,13 +1038,13 @@ function openDrawer(lead){
     (isStacked?`<span class="pill pill-stacked">⚡ STACKED</span>`:'');
   const col=scoreColor(lead.score);
   const urg=urgencyLabel(lead.score);
-  document.getElementById('d-banner').style.background=lead.score>=85?'#FEF2F2':lead.score>=70?'#FFFBEB':'#EFF6FF';
+  document.getElementById('d-banner').style.background=lead.score>=80?'#FEF2F2':lead.score>=60?'#FFFBEB':'#EFF6FF';
   document.getElementById('d-score').textContent=lead.score;
   document.getElementById('d-score').style.color=col;
   document.getElementById('d-hotlbl').textContent=
-    lead.score>=90?'🚨 SUPER BOWL LEAD':lead.score>=85?'🔥 DROP EVERYTHING':
-    lead.score>=75?'⚡ VERY HOT':lead.score>=65?'📈 HOT LEAD':
-    lead.score>=50?'👀 WARM LEAD':'COOL LEAD';
+    lead.score>=90?'🚨 SUPER BOWL LEAD':lead.score>=80?'🔥 DROP EVERYTHING':
+    lead.score>=70?'⚡ VERY HOT':lead.score>=60?'📈 HOT LEAD':
+    lead.score>=45?'👀 WARM LEAD':'COOL LEAD';
   document.getElementById('d-hotlbl').style.color=col;
   document.getElementById('d-urgency-txt').textContent=urg.text;
   document.getElementById('d-urgency-txt').style.color=urg.color;
@@ -1057,8 +1057,8 @@ function openDrawer(lead){
       <div class="score-row-val" style="color:${n.val<0?'var(--red)':'var(--green)'}">${n.val>0?'+':''}${n.val}</div>
     </div>`).join('')+
     `<div class="score-row" style="background:var(--surface2)"><div class="score-row-label" style="font-weight:700">FINAL SCORE</div><div class="score-row-bar"></div><div class="score-row-val" style="color:${col};font-size:14px">${lead.score}</div></div>`;
-  const days=lead.distressSignals.includes('Foreclosure')?daysUntil(lead.filed):null;
-  const daysStr=days===null?'Not a foreclosure':`${days} day(s) until auction`;
+  const days=lead.distressSignals.includes('Foreclosure Auction')?daysUntil(lead.filed):null;
+  const daysStr=days===null?'Not a foreclosure auction':days>0?`${days} day(s) until auction`:'Auction date passed';
   document.getElementById('d-details').innerHTML=`
     <div class="detail-item"><div class="detail-item-label">Owner</div><div class="detail-item-val">${owner}</div></div>
     <div class="detail-item"><div class="detail-item-label">Source Type</div><div class="detail-item-val">${lead.distressSignals.join(' + ')||lead.docType}</div></div>
@@ -1072,11 +1072,11 @@ function openDrawer(lead){
     <div class="detail-item"><div class="detail-item-label">Parcel ID</div><div class="detail-item-val" style="font-size:11px">${lead.parcelId||'—'}</div></div>
     <div class="detail-item" style="grid-column:1/-1"><div class="detail-item-label">Match Reason</div><div class="detail-item-val" style="font-size:11px">${lead.matchReason||'—'}</div></div>
   `;
-  if(lead.taxYearsDelinquent>0){
+  if(lead.taxYearsDelinquent>0||lead.taxTotalBalance>0){
     document.getElementById('d-tax-section').style.display='block';
     document.getElementById('d-tax-details').innerHTML=`
-      <div class="detail-item"><div class="detail-item-label">Years Delinquent</div><div class="detail-item-val" style="color:#9D174D;font-weight:700">${lead.taxYearsDelinquent} year(s)</div></div>
-      <div class="detail-item"><div class="detail-item-label">Total Balance</div><div class="detail-item-val" style="color:#9D174D;font-weight:700">$${lead.taxTotalBalance.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div></div>
+      <div class="detail-item"><div class="detail-item-label">Years Delinquent</div><div class="detail-item-val" style="color:#9D174D;font-weight:700">${lead.taxYearsDelinquent||'1+'} year(s)</div></div>
+      <div class="detail-item"><div class="detail-item-label">Total Balance</div><div class="detail-item-val" style="color:#9D174D;font-weight:700">${lead.taxTotalBalance?'$'+lead.taxTotalBalance.toLocaleString():'See county records'}</div></div>
       <div class="detail-item"><div class="detail-item-label">Delinquent Years</div><div class="detail-item-val" style="font-size:11px">${lead.taxYearsList||'—'}</div></div>
       <div class="detail-item"><div class="detail-item-label">Cert Status</div><div class="detail-item-val">${lead.taxCertStatus||'—'}</div></div>
     `;
@@ -1106,7 +1106,7 @@ function openLinks(e,id){
   document.getElementById('linksBody').innerHTML=lead.links.map(lk=>`
     <a href="${lk.url}" target="_blank" class="link-item">
       <span style="background:var(--blue-light);color:var(--blue);font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;min-width:52px;text-align:center">${lk.cat}</span>
-      <div style="flex:1"><div class="link-item-name">${lk.name}</div><div class="link-item-url">${lk.url.replace('https://','')}</div></div>
+      <div style="flex:1"><div class="link-item-name">${lk.name}</div><div style="font-size:11px;color:var(--text3)">${lk.url.replace('https://','')}</div></div>
       <span style="color:var(--text3)">↗</span>
     </a>`).join('');
   document.getElementById('linksOverlay').classList.add('open');
@@ -1128,10 +1128,22 @@ function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCoun
 
 function exportCSV(){
   const leads=getFiltered();
-  const rows=[['Score','Source','Distress Signals','Owner Signals','Doc#','Date','Owner','Property Address','Mailing Address','Assessed Value','Match','Action','Stacked','Tax Yrs Delinquent','Tax Balance','Code Violations','Parcel ID']];
-  leads.forEach(l=>{rows.push([l.score,l.source,l.distressSignals.join('; '),l.ownerSignals.join('; '),l.docNum,l.filed,l.ownerName||l.grantee,l.propAddr,l.mailAddr,l.assessed,l.match,l.action,l.isStacked?'YES':'NO',l.taxYearsDelinquent||'',l.taxTotalBalance||'',l.codeViolationCount||'',l.parcelId]);});
+  const rows=[['Score','Heat','Source','Distress Signals','Owner Signals','Doc#','File Date','Auction Date','Owner Name','Property Address','Mailing Address','Assessed Value','Match','Next Action','Stacked','Tax Yrs Delinquent','Tax Balance','Code Violations','Violation Types','Parcel ID']];
+  leads.forEach(l=>{
+    const heat=heatLabel(l.score).text;
+    const days=l.distressSignals.includes('Foreclosure Auction')?daysUntil(l.filed):null;
+    const auctionDate=days!==null?fmtD(l.filed):'';
+    rows.push([l.score,heat,l.source,l.distressSignals.join('; '),l.ownerSignals.join('; '),
+      l.docNum,l.filed,auctionDate,l.ownerName||l.grantee,l.propAddr,l.mailAddr,
+      l.assessed,l.match,l.action,l.isStacked?'YES':'NO',
+      l.taxYearsDelinquent||'',l.taxTotalBalance||'',
+      l.codeViolationCount||'',l.codeViolationTypes||'',l.parcelId]);
+  });
   const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='orange_county_leads_classified.csv';a.click();
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='orange_county_leads_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
 }
 
 async function loadData(){
@@ -1140,6 +1152,8 @@ async function loadData(){
     if(!res.ok)throw new Error('HTTP '+res.status);
     const text=await res.text();
     const rows=parseCSV(text);
+
+    // Dedup by document_number — keep highest seller_score version
     const byDoc={};const noDocs=[];
     rows.forEach(r=>{
       const doc=(r.document_number||'').trim();
@@ -1148,13 +1162,17 @@ async function loadData(){
       if(!byDoc[doc]||score>parseFloat(byDoc[doc].seller_score||0))byDoc[doc]=r;
     });
     const deduped=[...Object.values(byDoc),...noDocs];
+
     let leads=deduped.map((r,i)=>mapRow(r,i)).filter(Boolean);
+
+    // Filter foreclosures with <=3 days to auction — no time to act
     leads=leads.filter(lead=>{
       if(lead.source!=='foreclosure')return true;
       const days=daysUntil(lead.filed);
       if(days===null)return true;
       return days>AUCTION_MIN_DAYS;
     });
+
     leads.sort((a,b)=>b.score-a.score);
     LEADS=leads;
     document.getElementById('loadingState').style.display='none';
