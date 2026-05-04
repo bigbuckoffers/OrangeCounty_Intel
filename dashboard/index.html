@@ -90,14 +90,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .date-select{height:32px;padding:0 12px;border-radius:var(--r);border:1.5px solid var(--blue);font-size:12.5px;font-family:inherit;color:var(--blue);background:var(--blue-light);cursor:pointer;outline:none;font-weight:600}
 .date-intel-chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;flex:1}
 .date-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
-.dc-fc{background:#FFEDD5;color:#9A3412}
-.dc-lp{background:#FEE2E2;color:#991B1B}
-.dc-jdg{background:#FEF3C7;color:#92400E}
-.dc-lien{background:#E0F2FE;color:#0369A1}
-.dc-tax{background:#FCE7F3;color:#9D174D}
-.dc-prob{background:#F5F3FF;color:#5B21B6}
-.dc-dc{background:#F0FDF4;color:#166534}
-.dc-cv{background:#FEF9C3;color:#854D0E}
+.dc-fc{background:#FFEDD5;color:#9A3412}.dc-lp{background:#FEE2E2;color:#991B1B}
+.dc-jdg{background:#FEF3C7;color:#92400E}.dc-lien{background:#E0F2FE;color:#0369A1}
+.dc-tax{background:#FCE7F3;color:#9D174D}.dc-prob{background:#F5F3FF;color:#5B21B6}
+.dc-dc{background:#F0FDF4;color:#166534}.dc-cv{background:#FEF9C3;color:#854D0E}
 .date-intel-clear{font-size:11.5px;font-weight:500;color:var(--text3);cursor:pointer;padding:4px 8px;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);white-space:nowrap}
 .date-intel-clear:hover{background:var(--bg);color:var(--text)}
 .date-intel-active{background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border-color:var(--blue)}
@@ -161,8 +157,7 @@ tbody tr.row-critical:hover{background:#FEE8E8}
 .pill-prob{background:#F5F3FF;color:#5B21B6}.pill-jdg{background:#FEF3C7;color:#92400E}
 .pill-lien{background:#E0F2FE;color:#0369A1}.pill-td{background:#FEF2F2;color:#B91C1C}
 .pill-dc{background:#F0FDF4;color:#166534}.pill-tax{background:#FCE7F3;color:#9D174D}
-.pill-cv{background:#FEF9C3;color:#854D0E}
-.pill-cv-housing{background:#FEF08A;color:#713F12;font-weight:700}
+.pill-cv{background:#FEF9C3;color:#854D0E}.pill-cv-housing{background:#FEF08A;color:#713F12;font-weight:700}
 .pill-oos{background:#F0FDF4;color:#166534}.pill-po{background:#FFFBEB;color:#92400E}
 .pill-abs{background:#EFF6FF;color:#1E40AF}.pill-estate{background:#FDF4FF;color:#7E22CE}
 .pill-multi{background:#FFF1F2;color:#9F1239}.pill-llc{background:#F8FAFC;color:#475569}
@@ -819,6 +814,14 @@ function mapRow(row,idx){
     taxYearsList:row.tax_years_list||'',taxCertStatus:row.tax_cert_status||'',
     codeViolationCount:parseInt(row.code_violation_count||'0')||0,
     codeViolationTypes:row.code_violation_types||'',
+    propStreet:row.prop_street||'',
+    propCity:  row.prop_city||'',
+    propState: row.prop_state||'FL',
+    propZip:   row.prop_zip||'',
+    mailStreet:row.mail_street||'',
+    mailCity:  row.mail_city||'',
+    mailState: row.mail_state||'FL',
+    mailZip:   row.mail_zip||'',
   };
   lead.source=classifySource(lead);
   lead.distressSignals=detectDistressSignals(lead);
@@ -1070,11 +1073,20 @@ function openDrawer(lead){
     `<div class="score-row" style="background:var(--surface2)"><div class="score-row-label" style="font-weight:700">FINAL SCORE (base 30)</div><div class="score-row-bar"></div><div class="score-row-val" style="color:${col};font-size:13px">${lead.score}</div></div>`;
   const days=lead.distressSignals.includes('Foreclosure Auction')?daysUntil(lead.filed):null;
   const daysStr=days===null?'Not a foreclosure auction':days>0?`${days} day(s) until auction`:'Auction date passed';
+  // Build skiptrace-ready address display for drawer
+  const pCity=lead.propCity||'';const pZip=lead.propZip||'';
+  const pFull=lead.propStreet||(lead.propAddr!=='—'?lead.propAddr:'');
+  const propDisplay=pFull+(pCity?', '+pCity:'')+(', FL')+(pZip?' '+pZip:'');
+  const mFull=lead.mailStreet||lead.mailAddr;
+  const mCity=lead.mailCity||'';const mState=lead.mailState||'FL';const mZip=lead.mailZip||'';
+  const mailDisplay=mFull+(mCity?', '+mCity:'')+(', '+mState)+(mZip?' '+mZip:'');
   document.getElementById('d-details').innerHTML=`
     <div class="detail-item"><div class="detail-item-label">Owner</div><div class="detail-item-val">${owner}</div></div>
     <div class="detail-item"><div class="detail-item-label">Source Type</div><div class="detail-item-val">${lead.distressSignals.join(' + ')||lead.docType}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Property Address</div><div class="detail-item-val" style="font-size:11.5px">${lead.propAddr}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Mailing Address</div><div class="detail-item-val" style="font-size:11.5px">${lead.mailAddr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Property Street</div><div class="detail-item-val" style="font-size:11.5px">${lead.propStreet||lead.propAddr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Prop City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${pCity||'—'} / FL / ${pZip||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mailing Street</div><div class="detail-item-val" style="font-size:11.5px">${lead.mailStreet||lead.mailAddr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mail City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${mCity||'—'} / ${mState} / ${mZip||'—'}</div></div>
     <div class="detail-item"><div class="detail-item-label">Assessed Value</div><div class="detail-item-val">${fmt(lead.assessed)}</div></div>
     <div class="detail-item"><div class="detail-item-label">Doc Number</div><div class="detail-item-val" style="font-family:monospace;font-size:10.5px">${lead.docNum}</div></div>
     <div class="detail-item"><div class="detail-item-label">File Date</div><div class="detail-item-val">${fmtD(lead.filed)}</div></div>
@@ -1136,18 +1148,67 @@ function masterCheck(cb){getFiltered().forEach(l=>{if(cb.checked)selectedIds.add
 function selAll(){getFiltered().forEach(l=>selectedIds.add(l.id));renderTable();updateBulk()}
 function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCount').textContent=`${n} lead${n!==1?'s':''} selected`;document.getElementById('bulkBar').classList.toggle('visible',n>0)}
 
+function parseAddr(full){
+  if(!full||full==='—')return{street:'',city:'',state:'FL',zip:''};
+  full=full.trim();
+  const zm=full.match(/\b(\d{5})(-\d{4})?\s*$/);
+  const zip=zm?zm[1]:'';
+  if(zip)full=full.slice(0,zm.index).trim().replace(/,\s*$/,'').trim();
+  const su=full.toUpperCase();
+  const sm=su.match(/,?\s*([A-Z]{2})\s*$/);
+  const state=sm?sm[1]:'';
+  if(state)full=full.slice(0,full.length-(sm[0].length)).trim().replace(/,\s*$/,'').trim();
+  const ci=full.lastIndexOf(',');
+  let street=full,city='';
+  if(ci>0){street=full.slice(0,ci).trim();city=full.slice(ci+1).trim();}
+  return{street,city,state:state||'FL',zip};
+}
+
 function exportCSV(){
   const leads=getFiltered();
-  const rows=[['Score','Heat','Source','Distress Signals','Owner Signals','Why This Lead','Doc#','File Date','Scraped Date','Auction Date','Owner Name','Property Address','Mailing Address','Assessed Value','Match','Action','Stacked','Tax Yrs','Tax Balance','Code Violations','Violation Types','Parcel ID']];
+  const rows=[[
+    'Property Street','Property City','Property State','Property Zip',
+    'Mailing Street','Mailing City','Mailing State','Mailing Zip',
+    'Owner Name',
+    'Score','Heat','Source','Distress Signals','Owner Signals','Why This Lead',
+    'Doc#','File Date','Scraped Date','Auction Date',
+    'Assessed Value','Match','Action','Stacked',
+    'Tax Yrs Delinquent','Tax Balance',
+    'Code Violations','Violation Types',
+    'Parcel ID',
+    'Property Address Full','Mailing Address Full',
+  ]];
   leads.forEach(l=>{
     const heat=heatLabel(l.score).text;
     const days=l.distressSignals.includes('Foreclosure Auction')?daysUntil(l.filed):null;
     const aDate=days!==null?fmtD(l.filed):'';
-    rows.push([l.score,heat,l.source,l.distressSignals.join('; '),l.ownerSignals.join('; '),l.insight,l.docNum,l.filed,l.scrapedDate,aDate,l.ownerName||l.grantee,l.propAddr,l.mailAddr,l.assessed,l.match,l.action,l.isReallyStacked?'YES':'NO',l.taxYearsDelinquent||'',l.taxTotalBalance||'',l.codeViolationCount||'',l.codeViolationTypes||'',l.parcelId]);
+    const pp=parseAddr(l.propAddr);
+    const pStreet=l.propStreet||pp.street||l.propAddr||'';
+    const pCity=l.propCity||pp.city||'';
+    const pState=l.propState||pp.state||'FL';
+    const pZip=l.propZip||pp.zip||'';
+    const mp=parseAddr(l.mailAddr);
+    const mStreet=l.mailStreet||mp.street||'';
+    const mCity=l.mailCity||mp.city||'';
+    const mState=l.mailState||mp.state||'FL';
+    const mZip=l.mailZip||mp.zip||'';
+    rows.push([
+      pStreet,pCity,pState,pZip,
+      mStreet,mCity,mState,mZip,
+      l.ownerName||l.grantee,
+      l.score,heat,l.source,
+      l.distressSignals.join('; '),l.ownerSignals.join('; '),l.insight,
+      l.docNum,l.filed,l.scrapedDate,aDate,
+      l.assessed,l.match,l.action,l.isReallyStacked?'YES':'NO',
+      l.taxYearsDelinquent||'',l.taxTotalBalance||'',
+      l.codeViolationCount||'',l.codeViolationTypes||'',
+      l.parcelId,
+      l.propAddr,l.mailAddr,
+    ]);
   });
   const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='propsignal_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  a.download='propsignal_skiptrace_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
 }
 
 async function loadData(){
@@ -1166,7 +1227,6 @@ async function loadData(){
     document.getElementById('loadingState').style.display='none';
     document.getElementById('mainContent').style.display='block';
     updateCards();buildDatePicker();renderFocus();
-    // defer renderTable until after DOM paints mainContent — fixes blank table on load
     requestAnimationFrame(()=>requestAnimationFrame(()=>renderTable()));
   }catch(err){
     document.getElementById('loadingState').innerHTML=`
