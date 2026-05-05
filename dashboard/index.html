@@ -538,6 +538,37 @@ const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Int
 const AUCTION_MIN_DAYS=3;
 let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null},currentTab='all',selectedIds=new Set();
 
+// ── ADDRESS PARSER ─────────────────────────────────────────────────────────
+// Parses any address string into {street, city, state, zip}
+// Works on formats like:
+//   "2943 WOOLRIDGE DR, ORLANDO, 32837"
+//   "2943 Woolridge Dr, Orlando, FL 32837-9072"
+//   "387 E Allen St, Castle Rock, CO 80108"
+const VALID_STATES=new Set(['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC']);
+function parseAddr(addr){
+  if(!addr||addr==='—')return{street:'',city:'',state:'FL',zip:''};
+  addr=addr.trim();
+  // Remove zip+4
+  addr=addr.replace(/(\d{5})-\d{4}/g,'$1');
+  // Extract zip (must be preceded by non-digit to avoid grabbing street numbers)
+  const zm=addr.match(/(?<=\D)\s(\d{5})\b(?!.*\d{5})/);
+  const zip=zm?zm[1]:'';
+  if(zip)addr=addr.slice(0,addr.lastIndexOf(zm[0])).trim().replace(/,\s*$/,'').trim();
+  // Extract state (only real 2-letter state codes, not road suffixes like RD/DR/ST)
+  const su=addr.toUpperCase();
+  const sm=su.match(/[,\s]+([A-Z]{2})\s*$/);
+  let state='';
+  if(sm&&VALID_STATES.has(sm[1])){
+    state=sm[1];
+    addr=addr.slice(0,addr.length-sm[0].length).trim().replace(/,\s*$/,'').trim();
+  }
+  // Split street and city at last comma
+  const ci=addr.lastIndexOf(',');
+  let street=addr,city='';
+  if(ci>0){street=addr.slice(0,ci).trim();city=addr.slice(ci+1).trim();}
+  return{street:street.toUpperCase(),city:city.toUpperCase(),state:state||'FL',zip};
+}
+
 function classifySource(lead){
   const f=(lead.distressFlags||'').toLowerCase();
   const d=(lead.docType||'').toLowerCase();
@@ -805,6 +836,12 @@ function parseCSVLine(line){
 function mapRow(row,idx){
   const match=(row.match_confidence||'').toUpperCase();
   const assessed=parseFloat((row.assessed_value||'').replace(/[$,]/g,''))||0;
+
+  // Parse addresses client-side from full address strings
+  // This works whether or not the split columns exist in the CSV
+  const pParsed=parseAddr(row.property_address||'');
+  const mParsed=parseAddr(row.mailing_address||'');
+
   const lead={
     id:idx+1,assessed,match,
     docType:row.document_type||'Unknown',docNum:row.document_number||'—',filed:row.file_date||'',
@@ -820,14 +857,15 @@ function mapRow(row,idx){
     taxYearsList:row.tax_years_list||'',taxCertStatus:row.tax_cert_status||'',
     codeViolationCount:parseInt(row.code_violation_count||'0')||0,
     codeViolationTypes:row.code_violation_types||'',
-    propStreet:row.prop_street||'',
-    propCity:  row.prop_city||'',
-    propState: row.prop_state||'FL',
-    propZip:   row.prop_zip||'',
-    mailStreet:row.mail_street||'',
-    mailCity:  row.mail_city||'',
-    mailState: row.mail_state||'FL',
-    mailZip:   row.mail_zip||'',
+    // Split address fields — use CSV columns if present, otherwise parse from full address
+    propStreet:row.prop_street||pParsed.street,
+    propCity:  row.prop_city||pParsed.city,
+    propState: row.prop_state||pParsed.state||'FL',
+    propZip:   row.prop_zip||pParsed.zip,
+    mailStreet:row.mail_street||mParsed.street,
+    mailCity:  row.mail_city||mParsed.city,
+    mailState: row.mail_state||mParsed.state||'FL',
+    mailZip:   row.mail_zip||mParsed.zip,
   };
   lead.source=classifySource(lead);
   lead.distressSignals=detectDistressSignals(lead);
@@ -1085,17 +1123,13 @@ function openDrawer(lead){
     `<div class="score-row" style="background:var(--surface2)"><div class="score-row-label" style="font-weight:700">FINAL SCORE (base 30)</div><div class="score-row-bar"></div><div class="score-row-val" style="color:${col};font-size:13px">${lead.score}</div></div>`;
   const days=lead.distressSignals.includes('Foreclosure Auction')?daysUntil(lead.filed):null;
   const daysStr=days===null?'Not a foreclosure auction':days>0?`${days} day(s) until auction`:'Auction date passed';
-  const pStreet=lead.propStreet||(lead.propAddr!=='—'?lead.propAddr:'');
-  const pCity=lead.propCity||'';const pZip=lead.propZip||'';
-  const mStreet=lead.mailStreet||lead.mailAddr;
-  const mCity=lead.mailCity||'';const mState=lead.mailState||'FL';const mZip=lead.mailZip||'';
   document.getElementById('d-details').innerHTML=`
     <div class="detail-item"><div class="detail-item-label">Owner</div><div class="detail-item-val">${owner}</div></div>
     <div class="detail-item"><div class="detail-item-label">Source Type</div><div class="detail-item-val">${lead.distressSignals.join(' + ')||lead.docType}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Property Street</div><div class="detail-item-val" style="font-size:11.5px">${pStreet||'—'}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Prop City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${pCity||'—'} / FL / ${pZip||'—'}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Mailing Street</div><div class="detail-item-val" style="font-size:11.5px">${mStreet||'—'}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Mail City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${mCity||'—'} / ${mState} / ${mZip||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Property Street</div><div class="detail-item-val" style="font-size:11.5px">${lead.propStreet||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Prop City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${lead.propCity||'—'} / ${lead.propState||'FL'} / ${lead.propZip||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mailing Street</div><div class="detail-item-val" style="font-size:11.5px">${lead.mailStreet||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mail City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${lead.mailCity||'—'} / ${lead.mailState||'FL'} / ${lead.mailZip||'—'}</div></div>
     <div class="detail-item"><div class="detail-item-label">Assessed Value</div><div class="detail-item-val">${fmt(lead.assessed)}</div></div>
     <div class="detail-item"><div class="detail-item-label">Doc Number</div><div class="detail-item-val" style="font-family:monospace;font-size:10.5px">${lead.docNum}</div></div>
     <div class="detail-item"><div class="detail-item-label">File Date</div><div class="detail-item-val">${fmtD(lead.filed)}</div></div>
@@ -1157,22 +1191,6 @@ function masterCheck(cb){getFiltered().forEach(l=>{if(cb.checked)selectedIds.add
 function selAll(){getFiltered().forEach(l=>selectedIds.add(l.id));renderTable();updateBulk()}
 function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCount').textContent=`${n} lead${n!==1?'s':''} selected`;document.getElementById('bulkBar').classList.toggle('visible',n>0)}
 
-function parseAddr(full){
-  if(!full||full==='—')return{street:'',city:'',state:'FL',zip:''};
-  full=full.trim();
-  const zm=full.match(/\b(\d{5})(-\d{4})?\s*$/);
-  const zip=zm?zm[1]:'';
-  if(zip)full=full.slice(0,zm.index).trim().replace(/,\s*$/,'').trim();
-  const su=full.toUpperCase();
-  const sm=su.match(/,?\s*([A-Z]{2})\s*$/);
-  const state=sm?sm[1]:'';
-  if(state)full=full.slice(0,full.length-(sm[0].length)).trim().replace(/,\s*$/,'').trim();
-  const ci=full.lastIndexOf(',');
-  let street=full,city='';
-  if(ci>0){street=full.slice(0,ci).trim();city=full.slice(ci+1).trim();}
-  return{street,city,state:state||'FL',zip};
-}
-
 function exportCSV(){
   const leads=getFiltered();
   const rows=[[
@@ -1191,19 +1209,9 @@ function exportCSV(){
     const heat=heatLabel(l.score).text;
     const days=l.distressSignals.includes('Foreclosure Auction')?daysUntil(l.filed):null;
     const aDate=days!==null?fmtD(l.filed):'';
-    const pp=parseAddr(l.propAddr);
-    const pStreet=l.propStreet||pp.street||l.propAddr||'';
-    const pCity=l.propCity||pp.city||'';
-    const pState=l.propState||pp.state||'FL';
-    const pZip=l.propZip||pp.zip||'';
-    const mp=parseAddr(l.mailAddr);
-    const mStreet=l.mailStreet||mp.street||'';
-    const mCity=l.mailCity||mp.city||'';
-    const mState=l.mailState||mp.state||'FL';
-    const mZip=l.mailZip||mp.zip||'';
     rows.push([
-      pStreet,pCity,pState,pZip,
-      mStreet,mCity,mState,mZip,
+      l.propStreet,l.propCity,l.propState,l.propZip,
+      l.mailStreet,l.mailCity,l.mailState,l.mailZip,
       l.ownerName||l.grantee,
       l.score,heat,l.source,
       l.distressSignals.join('; '),l.ownerSignals.join('; '),l.insight,
