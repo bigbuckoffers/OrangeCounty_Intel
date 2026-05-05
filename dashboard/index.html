@@ -131,7 +131,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .bulk-bar-count{font-size:13px;font-weight:600;color:var(--blue)}
 .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
 .table-scroll{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:1700px}
+table{width:100%;border-collapse:collapse;min-width:2400px}
 thead th{padding:9px 12px;text-align:left;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);background:var(--surface2);border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:5}
 thead th:first-child{padding-left:16px}
 tbody tr{border-bottom:1px solid var(--border);transition:.1s;cursor:pointer}
@@ -444,7 +444,13 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
             <th>Filed</th>
             <th>Owner</th>
             <th>Property Address</th>
+            <th>Property City</th>
+            <th>Property State</th>
+            <th>Property Zip</th>
             <th>Mailing Address</th>
+            <th>Mailing City</th>
+            <th>Mailing State</th>
+            <th>Mailing Zip</th>
             <th>Assessed Value</th>
             <th>Match</th>
             <th>Action</th>
@@ -998,8 +1004,14 @@ function renderTable(){
       <td><div class="doc-num" style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${lead.docNum}</div></td>
       <td style="white-space:nowrap;font-size:10.5px;color:var(--text2)">${fmtD(lead.filed)}</td>
       <td><div style="display:flex;align-items:center;gap:6px"><div class="owner-initials">${initials(owner)}</div><div class="addr-main">${owner}</div></div></td>
-      <td><div class="addr-main">${lead.propAddr}</div></td>
-      <td><div class="addr-sub">${lead.mailAddr}</div></td>
+      <td><div class="addr-main">${lead.propStreet||lead.propAddr}</div></td>
+      <td><div class="addr-main">${lead.propCity||''}</div></td>
+      <td><div class="addr-main">${lead.propState||'FL'}</div></td>
+      <td><div class="addr-main">${lead.propZip||''}</div></td>
+      <td><div class="addr-sub">${lead.mailStreet||lead.mailAddr}</div></td>
+      <td><div class="addr-sub">${lead.mailCity||''}</div></td>
+      <td><div class="addr-sub">${lead.mailState||'FL'}</div></td>
+      <td><div class="addr-sub">${lead.mailZip||''}</div></td>
       <td><div class="money">${fmt(lead.assessed)}</div></td>
       <td>${matchBadge(lead.match)}</td>
       <td><span class="action-badge ${lead.actionCls}">${lead.action}</span></td>
@@ -1073,19 +1085,16 @@ function openDrawer(lead){
     `<div class="score-row" style="background:var(--surface2)"><div class="score-row-label" style="font-weight:700">FINAL SCORE (base 30)</div><div class="score-row-bar"></div><div class="score-row-val" style="color:${col};font-size:13px">${lead.score}</div></div>`;
   const days=lead.distressSignals.includes('Foreclosure Auction')?daysUntil(lead.filed):null;
   const daysStr=days===null?'Not a foreclosure auction':days>0?`${days} day(s) until auction`:'Auction date passed';
-  // Build skiptrace-ready address display for drawer
+  const pStreet=lead.propStreet||(lead.propAddr!=='—'?lead.propAddr:'');
   const pCity=lead.propCity||'';const pZip=lead.propZip||'';
-  const pFull=lead.propStreet||(lead.propAddr!=='—'?lead.propAddr:'');
-  const propDisplay=pFull+(pCity?', '+pCity:'')+(', FL')+(pZip?' '+pZip:'');
-  const mFull=lead.mailStreet||lead.mailAddr;
+  const mStreet=lead.mailStreet||lead.mailAddr;
   const mCity=lead.mailCity||'';const mState=lead.mailState||'FL';const mZip=lead.mailZip||'';
-  const mailDisplay=mFull+(mCity?', '+mCity:'')+(', '+mState)+(mZip?' '+mZip:'');
   document.getElementById('d-details').innerHTML=`
     <div class="detail-item"><div class="detail-item-label">Owner</div><div class="detail-item-val">${owner}</div></div>
     <div class="detail-item"><div class="detail-item-label">Source Type</div><div class="detail-item-val">${lead.distressSignals.join(' + ')||lead.docType}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Property Street</div><div class="detail-item-val" style="font-size:11.5px">${lead.propStreet||lead.propAddr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Property Street</div><div class="detail-item-val" style="font-size:11.5px">${pStreet||'—'}</div></div>
     <div class="detail-item"><div class="detail-item-label">Prop City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${pCity||'—'} / FL / ${pZip||'—'}</div></div>
-    <div class="detail-item"><div class="detail-item-label">Mailing Street</div><div class="detail-item-val" style="font-size:11.5px">${lead.mailStreet||lead.mailAddr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mailing Street</div><div class="detail-item-val" style="font-size:11.5px">${mStreet||'—'}</div></div>
     <div class="detail-item"><div class="detail-item-label">Mail City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${mCity||'—'} / ${mState} / ${mZip||'—'}</div></div>
     <div class="detail-item"><div class="detail-item-label">Assessed Value</div><div class="detail-item-val">${fmt(lead.assessed)}</div></div>
     <div class="detail-item"><div class="detail-item-label">Doc Number</div><div class="detail-item-val" style="font-family:monospace;font-size:10.5px">${lead.docNum}</div></div>
