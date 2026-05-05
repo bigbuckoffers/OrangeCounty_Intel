@@ -259,26 +259,9 @@ def main():
 
     groups = group_by_property(violations)
 
-    log.info("Enriching %d properties from OCPA Azure API...", len(groups))
+    # OCPA enrichment is done lazily (only for new leads, not all 3950 properties)
     enrichment_cache = {}
-    enriched_violations = list(violations)
-
-    for group_key, viol_list in groups.items():
-        parcel = clean_parcel(viol_list[0].get("Parcel ID", ""))
-        if parcel and is_valid_parcel(parcel) and parcel not in enrichment_cache:
-            enriched = enrich_from_ocpa(parcel)
-            enrichment_cache[parcel] = enriched
-            if enriched.get("owner_name"):
-                log.debug("OCPA: %s -> %s", parcel, enriched["owner_name"][:30])
-            time.sleep(0.3)
-
-    for v in enriched_violations:
-        parcel   = clean_parcel(v.get("Parcel ID", ""))
-        enriched = enrichment_cache.get(parcel, {})
-        v["owner_name"]      = enriched.get("owner_name", "")
-        v["mailing_address"] = enriched.get("mailing_address", "")
-
-    save_violations_csv(enriched_violations)
+    save_violations_csv(list(violations))
 
     if not os.path.exists(OUTPUT_PATH):
         log.error("No output.json found — run scraper.py first")
@@ -313,10 +296,6 @@ def main():
 
         enriched = enrichment_cache.get(pid, {})
         owner    = enriched.get("owner_name", "")
-
-        if should_skip(owner):
-            skipped += 1
-            continue
 
         lead_idx = None
         if is_valid_parcel(pid) and pid in parcel_idx:
@@ -387,6 +366,14 @@ def main():
                      addr[:40], count, old_score, new_score, owner[:20])
 
         else:
+            # Lazy OCPA enrichment — only called for unmatched new leads
+            if pid and is_valid_parcel(pid) and pid not in enrichment_cache:
+                enrichment_cache[pid] = enrich_from_ocpa(pid)
+                time.sleep(0.25)
+            enriched = enrichment_cache.get(pid, {})
+            if should_skip(enriched.get("owner_name", "")):
+                skipped += 1
+                continue
             nl      = group_to_lead(group_key, viol_list, enriched)
             new_idx = len(leads) + len(new_leads)
             new_leads.append(nl)
