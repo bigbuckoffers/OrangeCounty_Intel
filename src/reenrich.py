@@ -4,14 +4,11 @@ reenrich.py — Re-enrich existing leads with OCPA data
 Reads output.json, finds leads missing owner/mailing/property address details,
 calls OCPA Azure API to fill them in.
 
-Now also stores:
-  - prop_city, prop_state, prop_zip  (from OCPA siteCity/siteZip fields)
-  - mail_street, mail_city, mail_state, mail_zip  (parsed from mailing_address)
-  - prop_street  (cleaned street-only from property_address)
-
-These split fields feed into the skiptrace-ready CSV export.
+Stores split address fields for skiptrace-ready CSV export:
+  prop_street, prop_city, prop_state, prop_zip
+  mail_street, mail_city, mail_state, mail_zip
 """
-import json, logging, os, re, time, requests
+import json, logging, os, re, time, requests, csv
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -29,55 +26,128 @@ OCPA_HEADERS = {
     "Origin":     "https://ocpaweb.ocpafl.org",
 }
 
-# ── ADDRESS PARSING ───────────────────────────────────────────────────────
+STATE_MAP = {
+    'ALABAMA': 'AL', 'ALASKA': 'AK', 'ARIZONA': 'AZ', 'ARKANSAS': 'AR',
+    'CALIFORNIA': 'CA', 'COLORADO': 'CO', 'CONNECTICUT': 'CT', 'DELAWARE': 'DE',
+    'FLORIDA': 'FL', 'GEORGIA': 'GA', 'HAWAII': 'HI', 'IDAHO': 'ID',
+    'ILLINOIS': 'IL', 'INDIANA': 'IN', 'IOWA': 'IA', 'KANSAS': 'KS',
+    'KENTUCKY': 'KY', 'LOUISIANA': 'LA', 'MAINE': 'ME', 'MARYLAND': 'MD',
+    'MASSACHUSETTS': 'MA', 'MICHIGAN': 'MI', 'MINNESOTA': 'MN', 'MISSISSIPPI': 'MS',
+    'MISSOURI': 'MO', 'MONTANA': 'MT', 'NEBRASKA': 'NE', 'NEVADA': 'NV',
+    'NEW HAMPSHIRE': 'NH', 'NEW JERSEY': 'NJ', 'NEW MEXICO': 'NM', 'NEW YORK': 'NY',
+    'NORTH CAROLINA': 'NC', 'NORTH DAKOTA': 'ND', 'OHIO': 'OH', 'OKLAHOMA': 'OK',
+    'OREGON': 'OR', 'PENNSYLVANIA': 'PA', 'RHODE ISLAND': 'RI', 'SOUTH CAROLINA': 'SC',
+    'SOUTH DAKOTA': 'SD', 'TENNESSEE': 'TN', 'TEXAS': 'TX', 'UTAH': 'UT',
+    'VERMONT': 'VT', 'VIRGINIA': 'VA', 'WASHINGTON': 'WA', 'WEST VIRGINIA': 'WV',
+    'WISCONSIN': 'WI', 'WYOMING': 'WY', 'DISTRICT OF COLUMBIA': 'DC'
+}
+SORTED_STATES = sorted(STATE_MAP.items(), key=lambda x: len(x[0]), reverse=True)
+VALID_STATES  = set(STATE_MAP.values())
 
-def parse_full_address(addr):
+# OC cities for no-comma address parsing
+OC_CITIES = [
+    'WINTER GARDEN', 'WINTER PARK', 'ALTAMONTE SPRINGS', 'BELLE ISLE',
+    'WINDERMERE', 'ORLANDO', 'APOPKA', 'OCOEE', 'MAITLAND', 'EDGEWOOD',
+    'UNINCORPORATED', 'ORANGE COUNTY', 'OAKLAND', 'CHRISTMAS', 'GOTHA',
+    'EATONVILLE', 'GOLDENROD', 'PINE HILLS', 'CONWAY', 'AZALEA PARK',
+    'MOUNT DORA', 'MOUNT PLYMOUTH',
+]
+OC_CITIES_SORTED = sorted(OC_CITIES, key=len, reverse=True)
+
+
+# ── ADDRESS NORMALISATION ─────────────────────────────────────────────────
+
+def _replace_state_names(addr):
+    """Replace full state names with abbreviations, but only after the last comma
+    (to avoid abbreviating street names like 'S PENNSYLVANIA AVE')."""
+    last_comma = addr.rfind(',')
+    if last_comma == -1:
+        # No comma — only replace if state appears immediately before a zip
+        for full, abbr in SORTED_STATES:
+            m = re.search(r'\b(' + re.escape(full) + r')(?=\s+\d{5}\b)', addr)
+            if m:
+                addr = addr[:m.start()] + abbr + addr[m.end():]
+        return addr
+    prefix = addr[:last_comma + 1]
+    suffix = addr[last_comma + 1:]
+    for full, abbr in SORTED_STATES:
+        suffix = re.sub(r'\b' + re.escape(full) + r'\b', abbr, suffix)
+    return prefix + suffix
+
+
+def parse_address(addr, default_state='FL'):
     """
-    Parse a full address string into (street, city, state, zip).
-    Handles formats like:
-      "123 MAIN ST, ORLANDO, FL 32801"
-      "123 MAIN ST, ORLANDO FL 32801"
-      "123 MAIN ST ORLANDO FL 32801"
-    Returns dict with street/city/state/zip — empty string if not found.
+    Parse any address string into (street, city, state, zip).
+    Handles:
+      - Full state names  → abbreviations  (FLORIDA → FL)
+      - zip+4 stripping   (32819-4833 → 32819)
+      - No-comma formats  (544 N SEMORAN BLVD Orlando 32807)
+      - Road suffixes     (RD, DR, ST …) NOT mistaken for state codes
+      - Street numbers    (12628 MAIN ST) NOT mistaken for zip codes
+    Returns dict with keys: street, city, state, zip
     """
-    if not addr or addr.strip() in ('—', ''):
+    if not addr or str(addr).strip() in ('', '—'):
         return {'street': '', 'city': '', 'state': '', 'zip': ''}
 
-    addr = addr.strip()
+    addr = str(addr).strip().upper()
 
-    # Extract zip first (5-digit at end)
-    zip_match = re.search(r'\b(\d{5})(-\d{4})?\s*$', addr)
-    zipcode = zip_match.group(1) if zip_match else ''
-    if zipcode:
+    # Step 1 — replace full state names
+    addr = _replace_state_names(addr)
+
+    # Step 2 — remove zip+4
+    addr = re.sub(r'(\d{5})-\d{4}', r'\1', addr)
+
+    # Step 3 — extract zip (must be preceded by a non-digit so street numbers are safe)
+    zip_match = re.search(r'(?<=\D)\s(\d{5})\b(?!.*\d{5})', addr)
+    zip_code  = zip_match.group(1) if zip_match else ''
+    if zip_code:
         addr = addr[:zip_match.start()].strip().rstrip(',').strip()
 
-    # Extract state (2-letter before zip or at end)
-    state_match = re.search(r'\b([A-Z]{2})\s*$', addr.upper())
-    state = state_match.group(1) if state_match else ''
-    if state:
-        addr = addr[:state_match.start()].strip().rstrip(',').strip()
+    # Step 4 — extract state (only real 2-letter state codes, not RD/DR/ST/CT/LN)
+    state = ''
+    state_match = re.search(r'[,\s]+([A-Z]{2})\s*$', addr)
+    if state_match and state_match.group(1) in VALID_STATES:
+        state = state_match.group(1)
+        addr  = addr[:state_match.start()].strip().rstrip(',').strip()
 
-    # Split street and city by last comma
-    if ',' in addr:
-        parts = [p.strip() for p in addr.rsplit(',', 1)]
-        street = parts[0]
-        city   = parts[1] if len(parts) > 1 else ''
+    # Step 5 — split street and city
+    parts = [p.strip() for p in addr.split(',')]
+    if len(parts) >= 2:
+        street = ', '.join(parts[:-1]).strip()
+        city   = parts[-1].strip()
     else:
-        parts = re.split(r'\s{2,}', addr)
-        if len(parts) >= 2:
-            street = parts[0]
-            city   = parts[-1]
-        else:
-            street = addr
-            city   = ''
+        # No comma — try to find a known OC city at end of string
+        city   = ''
+        street = addr.strip()
+        for known_city in OC_CITIES_SORTED:
+            m = re.search(r'\s+' + re.escape(known_city) + r'\s*$', addr)
+            if m:
+                city   = known_city
+                street = addr[:m.start()].strip()
+                break
+
+    # Step 6 — default state to FL only when we have other location info
+    if not state and (city or zip_code):
+        state = default_state
 
     return {
-        'street': street.strip(),
-        'city':   city.strip(),
-        'state':  state.strip() or 'FL',
-        'zip':    zipcode.strip()
+        'street': street,
+        'city':   city,
+        'state':  state,
+        'zip':    zip_code,
     }
 
+
+def build_full_address(street, city, state, zip_code):
+    """Reconstruct a clean 'street, city, state, zip' string."""
+    parts = [p for p in [street, city, state] if p]
+    result = ', '.join(parts)
+    if zip_code:
+        result = f"{result} {zip_code}" if result else zip_code
+    return result.strip()
+
+
+# ── PARCEL HELPERS ────────────────────────────────────────────────────────
 
 def clean_parcel(pid):
     return re.sub(r'[-\s]', '', (pid or '')).strip()
@@ -87,8 +157,12 @@ def clean_parcel(pid):
 
 def enrich_from_ocpa(parcel_id):
     """
-    Call OCPA Azure API. Returns dict with all available fields including
-    site address components if present.
+    Call OCPA Azure API. Returns a dict with ALL address fields including
+    the full property (site) address — not just city/zip.
+
+    FIX: Previous version fetched siteAddress but never stored it.
+    Now returns prop_street, prop_city, prop_state, prop_zip AND
+    rebuilds property_address from those components.
     """
     pid = clean_parcel(parcel_id)
     if not pid or not pid.isdigit():
@@ -98,40 +172,67 @@ def enrich_from_ocpa(parcel_id):
             OCPA_API_URL,
             params={"pid": pid},
             headers=OCPA_HEADERS,
-            timeout=15
+            timeout=15,
         )
         if resp.status_code != 200:
             return {}
         d = resp.json()
 
-        # Mailing address
-        mail_addr  = (d.get("mailAddress")  or '').strip()
-        mail_city  = (d.get("mailCity")     or '').strip()
-        mail_state = (d.get("mailState")    or 'FL').strip()
-        mail_zip   = (d.get("mailZip")      or '').strip()
+        # ── Mailing address ───────────────────────────────────────────────
+        mail_street = (d.get("mailAddress") or '').strip()
+        mail_city   = (d.get("mailCity")    or '').strip()
+        mail_state  = (d.get("mailState")   or 'FL').strip()
+        mail_zip    = str(d.get("mailZip")  or '').strip()[:5]
 
-        mailing_full = ''
-        if mail_addr:
-            mailing_full = f"{mail_addr}, {mail_city}, {mail_state} {mail_zip}".strip()
+        mailing_full = build_full_address(mail_street, mail_city, mail_state, mail_zip)
 
-        # Site / property address — OCPA returns these if available
-        site_addr  = (d.get("siteAddress")  or d.get("propertyAddress") or '').strip()
-        site_city  = (d.get("siteCity")     or d.get("propCity")        or '').strip()
-        site_state = (d.get("siteState")    or d.get("propState")       or 'FL').strip()
-        site_zip   = (d.get("siteZip")      or d.get("propZip")         or '').strip()
+        # ── Property (site) address ───────────────────────────────────────
+        # FIX: siteAddress was being fetched but never returned — now it is.
+        prop_street = (d.get("siteAddress")    or
+                       d.get("propertyAddress") or '').strip()
+        prop_city   = (d.get("siteCity")       or
+                       d.get("propCity")        or '').strip()
+        prop_state  = (d.get("siteState")      or
+                       d.get("propState")       or 'FL').strip()
+        prop_zip    = str(d.get("siteZip")     or
+                          d.get("propZip")      or '').strip()[:5]
+
+        property_full = build_full_address(prop_street, prop_city, prop_state, prop_zip)
+
+        # ── Owner ─────────────────────────────────────────────────────────
+        owner = (d.get("ownerName") or '').strip()
+
+        # ── Assessed value ────────────────────────────────────────────────
+        av = ''
+        for key in ("justValue", "assessedValue", "totalValue", "av_nsd"):
+            val = d.get(key)
+            if val:
+                try:
+                    av = f"${int(float(str(val).replace(',', ''))):,}"
+                    break
+                except (ValueError, TypeError):
+                    pass
 
         return {
-            "owner_name":      (d.get("ownerName") or '').strip(),
-            "mailing_address": mailing_full,
-            "mail_street":     mail_addr,
-            "mail_city":       mail_city,
-            "mail_state":      mail_state,
-            "mail_zip":        mail_zip,
-            "prop_city":       site_city,
-            "prop_state":      site_state if site_state else 'FL',
-            "prop_zip":        site_zip,
-            "property_type":   (d.get("dorDescription") or '').strip(),
+            "owner_name":       owner,
+            # Full address strings
+            "property_address": property_full,
+            "mailing_address":  mailing_full,
+            # Split property fields
+            "prop_street":      prop_street,
+            "prop_city":        prop_city,
+            "prop_state":       prop_state if prop_state else 'FL',
+            "prop_zip":         prop_zip,
+            # Split mailing fields
+            "mail_street":      mail_street,
+            "mail_city":        mail_city,
+            "mail_state":       mail_state if mail_state else 'FL',
+            "mail_zip":         mail_zip,
+            # Extra
+            "assessed_value":   av,
+            "property_type":    (d.get("dorDescription") or '').strip(),
         }
+
     except Exception as e:
         log.debug("OCPA enrich failed %s: %s", parcel_id, e)
         return {}
@@ -151,55 +252,89 @@ def main():
     leads = data.get("leads", [])
     log.info("Loaded %d leads", len(leads))
 
-    enriched_count = 0
-    addr_parsed    = 0
+    ocpa_enriched = 0
+    addr_parsed   = 0
 
     for i, lead in enumerate(leads):
         if not isinstance(lead, dict):
             continue
 
         pid = clean_parcel(lead.get("parcel_id", ""))
-        needs_owner   = not lead.get("owner_name")
-        needs_mailing = not lead.get("mailing_address")
-        needs_propzip = not lead.get("prop_zip")
 
-        # ── OCPA enrichment for missing data ──────────────────────────────
-        if pid and pid.isdigit() and (needs_owner or needs_mailing or needs_propzip):
+        # Determine what's missing
+        needs_owner      = not lead.get("owner_name")
+        needs_mailing    = not lead.get("mailing_address")
+        needs_prop_addr  = not lead.get("property_address") or lead.get("property_address") == "—"
+        needs_prop_zip   = not lead.get("prop_zip")
+        needs_prop_city  = not lead.get("prop_city")
+
+        # ── OCPA enrichment ───────────────────────────────────────────────
+        # FIX: also trigger when property_address is missing or incomplete,
+        # not just when prop_zip is missing.
+        if pid and pid.isdigit() and (
+            needs_owner or needs_mailing or needs_prop_addr or
+            needs_prop_zip or needs_prop_city
+        ):
             enriched = enrich_from_ocpa(pid)
             if enriched:
+                # Owner
                 if needs_owner and enriched.get("owner_name"):
                     lead["owner_name"] = enriched["owner_name"]
+
+                # Full address strings — only fill if currently missing/blank
+                if needs_prop_addr and enriched.get("property_address"):
+                    lead["property_address"] = enriched["property_address"]
                 if needs_mailing and enriched.get("mailing_address"):
                     lead["mailing_address"] = enriched["mailing_address"]
-                for field in ["mail_street","mail_city","mail_state","mail_zip",
-                               "prop_city","prop_state","prop_zip"]:
+
+                # All split fields — fill any that are missing
+                for field in [
+                    "prop_street", "prop_city", "prop_state", "prop_zip",
+                    "mail_street", "mail_city", "mail_state", "mail_zip",
+                    "assessed_value", "property_type",
+                ]:
                     if enriched.get(field) and not lead.get(field):
                         lead[field] = enriched[field]
-                enriched_count += 1
+
+                ocpa_enriched += 1
             time.sleep(0.2)
 
-        # ── Parse mailing address into split fields if not already done ───
+        # ── Parse mailing address into split fields if not already set ────
         mail_full = lead.get("mailing_address", "")
         if mail_full and not lead.get("mail_street"):
-            parsed = parse_full_address(mail_full)
+            parsed = parse_address(mail_full, default_state='')
             if parsed["street"]:
                 lead["mail_street"] = parsed["street"]
                 lead["mail_city"]   = parsed["city"]
-                lead["mail_state"]  = parsed["state"] or "FL"
+                lead["mail_state"]  = parsed["state"]
                 lead["mail_zip"]    = parsed["zip"]
                 addr_parsed += 1
 
-        # ── Parse property address — street only, always FL ───────────────
+        # ── Parse property address into split fields if not already set ───
         prop_full = lead.get("property_address", "")
         if prop_full and prop_full != "—":
-            street_only = re.sub(r',.*$', '', prop_full).strip()
-            lead["prop_street"] = street_only
-            if not lead.get("prop_state"):
-                lead["prop_state"] = "FL"
+            # Only parse if we're still missing split fields
+            if not lead.get("prop_street") or not lead.get("prop_city") or not lead.get("prop_zip"):
+                parsed = parse_address(prop_full, default_state='FL')
+                if parsed["street"] and not lead.get("prop_street"):
+                    lead["prop_street"] = parsed["street"]
+                if parsed["city"] and not lead.get("prop_city"):
+                    lead["prop_city"]   = parsed["city"]
+                if parsed["state"] and not lead.get("prop_state"):
+                    lead["prop_state"]  = parsed["state"]
+                if parsed["zip"] and not lead.get("prop_zip"):
+                    lead["prop_zip"]    = parsed["zip"]
+
+        # ── Ensure prop_state always defaults to FL for OC properties ─────
+        if not lead.get("prop_state") and (lead.get("prop_street") or lead.get("prop_zip")):
+            lead["prop_state"] = "FL"
 
         leads[i] = lead
 
-    log.info("OCPA enriched: %d | Mailing addresses parsed: %d", enriched_count, addr_parsed)
+        if (i + 1) % 1000 == 0:
+            log.info("Processed %d / %d leads...", i + 1, len(leads))
+
+    log.info("OCPA enriched: %d | Addresses parsed from string: %d", ocpa_enriched, addr_parsed)
 
     data["generated_at"]  = datetime.utcnow().isoformat() + "Z"
     data["total_records"] = len(leads)
@@ -209,8 +344,7 @@ def main():
         json.dump(data, f, indent=2)
     log.info("Saved -> %s", OUTPUT_PATH)
 
-    # Write CSV with all split address fields
-    import csv
+    # ── Write CSV ─────────────────────────────────────────────────────────
     csv_fields = [
         "seller_score", "motivation_count", "document_number", "file_date",
         "document_type", "stacked", "stacked_types",
@@ -237,6 +371,7 @@ def main():
                 row["stacked_types"] = " + ".join(row["stacked_types"])
             writer.writerow(row)
     log.info("CSV saved -> %s", OUTPUT_CSV)
+    log.info("Done.")
 
 
 if __name__ == "__main__":
