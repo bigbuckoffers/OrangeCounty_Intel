@@ -252,6 +252,10 @@ def main():
     leads = data.get("leads", [])
     log.info("Loaded %d leads", len(leads))
 
+    # Cap OCPA calls per run so the workflow never times out.
+    # Each daily run processes the next batch of incomplete leads.
+    # After ~7 runs all 14k leads will be fully enriched.
+    MAX_OCPA_PER_RUN = 1500
     ocpa_enriched = 0
     addr_parsed   = 0
 
@@ -267,14 +271,12 @@ def main():
         needs_prop_addr  = not lead.get("property_address") or lead.get("property_address") == "—"
         needs_prop_zip   = not lead.get("prop_zip")
         needs_prop_city  = not lead.get("prop_city")
+        needs_any        = needs_owner or needs_mailing or needs_prop_addr or needs_prop_zip or needs_prop_city
 
         # ── OCPA enrichment ───────────────────────────────────────────────
-        # FIX: also trigger when property_address is missing or incomplete,
-        # not just when prop_zip is missing.
-        if pid and pid.isdigit() and (
-            needs_owner or needs_mailing or needs_prop_addr or
-            needs_prop_zip or needs_prop_city
-        ):
+        # Only call OCPA if something is actually missing AND we haven't
+        # hit the per-run cap yet. Leads already enriched are skipped.
+        if pid and pid.isdigit() and needs_any and ocpa_enriched < MAX_OCPA_PER_RUN:
             enriched = enrich_from_ocpa(pid)
             if enriched:
                 # Owner
