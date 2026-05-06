@@ -85,8 +85,7 @@ jobs:
             data/foreclosures.json \
             data/foreclosures.csv \
             data/delinquent_taxes.csv \
-            data/code_violations.csv \
-            dashboard/index.html
+            data/code_violations.csv
           git diff --cached --quiet || git commit -m "chore: auto-update leads $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push origin main
         env:
