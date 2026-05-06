@@ -820,14 +820,14 @@ function mapRow(row,idx){
     taxYearsList:row.tax_years_list||'',taxCertStatus:row.tax_cert_status||'',
     codeViolationCount:parseInt(row.code_violation_count||'0')||0,
     codeViolationTypes:row.code_violation_types||'',
-    propStreet:row.prop_street||'',
-    propCity:  row.prop_city||'',
-    propState: row.prop_state||'FL',
-    propZip:   row.prop_zip||'',
-    mailStreet:row.mail_street||'',
-    mailCity:  row.mail_city||'',
-    mailState: row.mail_state||'FL',
-    mailZip:   row.mail_zip||'',
+propStreet:row.prop_street||parseAddr(row.property_address||'').street,
+    propCity:  row.prop_city||parseAddr(row.property_address||'').city,
+    propState: row.prop_state||parseAddr(row.property_address||'').state||'FL',
+    propZip:   row.prop_zip||parseAddr(row.property_address||'').zip,
+    mailStreet:row.mail_street||parseAddr(row.mailing_address||'').street,
+    mailCity:  row.mail_city||parseAddr(row.mailing_address||'').city,
+    mailState: row.mail_state||parseAddr(row.mailing_address||'').state||'FL',
+    mailZip:   row.mail_zip||parseAddr(row.mailing_address||'').zip,
   };
   lead.source=classifySource(lead);
   lead.distressSignals=detectDistressSignals(lead);
