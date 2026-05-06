@@ -255,7 +255,7 @@ def main():
     # Cap OCPA calls per run so the workflow never times out.
     # Each daily run processes the next batch of incomplete leads.
     # After ~7 runs all 14k leads will be fully enriched.
-    MAX_OCPA_PER_RUN = 1500
+    MAX_OCPA_PER_RUN = 5000
     ocpa_enriched = 0
     addr_parsed   = 0
 
