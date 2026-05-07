@@ -1,125 +1,10 @@
 {
-  "generated_at": "2026-05-07T00:28:49.221706Z",
-  "total_records": 52,
+  "generated_at": "2026-05-07T18:35:59.006261Z",
+  "total_records": 47,
   "active": 46,
   "expired": 0,
-  "too_soon": 6,
+  "too_soon": 1,
   "foreclosures": [
-    {
-      "auction_date": "2026-05-07",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2022-CA-005715-O",
-      "parcel_id": "312214653910053",
-      "address": "2213 BONNEVILLE DR, ORLANDO, 32826",
-      "final_judgment": "$128,775.10",
-      "assessed_value": "$189,750.00",
-      "opening_bid": "",
-      "owner_name": "ROLDAN JOHANNA L",
-      "mailing_address": "2213 Bonneville Dr, Orlando, FL 32826-3705",
-      "property_type": "SINGLE FAM CLASS IV",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312214653910053",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250713421",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:17.489450Z"
-    },
-    {
-      "auction_date": "2026-05-07",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2024-CA-001014-O",
-      "parcel_id": "282222889200430",
-      "address": "1504 ST LAWRENCE ST, ORLANDO, 32818",
-      "final_judgment": "$377,470.74",
-      "assessed_value": "$302,470.00",
-      "opening_bid": "",
-      "owner_name": "JTPIII VENTURES LLC, D H INVESTIGATIONS LLC",
-      "mailing_address": "829 Eagle Claw Ct, Lake Mary, FL 32746-4881",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": true,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282222889200430",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260016558",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:17.489717Z"
-    },
-    {
-      "auction_date": "2026-05-07",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2024-CA-010848-O",
-      "parcel_id": "292407935903090",
-      "address": "10633 WATERTOWN CT, ORLANDO, 32821",
-      "final_judgment": "$349,142.59",
-      "assessed_value": "$294,100.00",
-      "opening_bid": "",
-      "owner_name": "J3 EQUITIES LLC",
-      "mailing_address": "6925 Lake Ellenor Dr Ste 625-A, Orlando, FL 32809-4631",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/292407935903090",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250719589",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:17.489955Z"
-    },
-    {
-      "auction_date": "2026-05-07",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2024-CC-017891-O",
-      "parcel_id": "Property Appraiser",
-      "address": "5313 INDIAN CREEK DRIVE, ORLANDO, 32811",
-      "final_judgment": "$19,034.42",
-      "assessed_value": "",
-      "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
-      "property_type": "",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250585784",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:17.490170Z"
-    },
-    {
-      "auction_date": "2026-05-07",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2025-CA-009407-O",
-      "parcel_id": "282106718802020",
-      "address": "449 LAKE VIEW DR, APOPKA, 32703",
-      "final_judgment": "$241,942.74",
-      "assessed_value": "$275,110.00",
-      "opening_bid": "",
-      "owner_name": "DWAN HOPE",
-      "mailing_address": "449 Lake View Dr, Apopka, FL 32703-3335",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282106718802020",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260168918",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/07/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 0,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:17.490414Z"
-    },
     {
       "auction_date": "2026-05-08",
       "auction_time": "11:00 AM ET",
@@ -141,7 +26,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:20.880639Z"
+      "scraped_at": "2026-05-07T18:35:24.483288Z"
     },
     {
       "auction_date": "2026-05-11",
@@ -164,7 +49,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:26.099707Z"
+      "scraped_at": "2026-05-07T18:35:30.927373Z"
     },
     {
       "auction_date": "2026-05-11",
@@ -187,30 +72,7 @@
       "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:26.099955Z"
-    },
-    {
-      "auction_date": "2026-05-12",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2024-CA-008033-O",
-      "parcel_id": "312220280200130",
-      "address": "1211 FLOWERS POINTE LN, ORLANDO, 32825",
-      "final_judgment": "$238,395.47",
-      "assessed_value": "$212,316.00",
-      "opening_bid": "",
-      "owner_name": "RUIZ MARIA CRISTINA, OCAMPO JONATHAN A",
-      "mailing_address": "1211 Flowers Pointe Ln, Orlando, FL 32825-5520",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/312220280200130",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250705923",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/12/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 5,
-      "status": "ACTIVE",
-      "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:27.870917Z"
+      "scraped_at": "2026-05-07T18:35:30.927585Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -233,7 +95,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.871113Z"
+      "scraped_at": "2026-05-07T18:35:33.094263Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -256,7 +118,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.871295Z"
+      "scraped_at": "2026-05-07T18:35:33.094419Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -279,7 +141,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.871481Z"
+      "scraped_at": "2026-05-07T18:35:33.094573Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -302,7 +164,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.871654Z"
+      "scraped_at": "2026-05-07T18:35:33.094715Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -325,7 +187,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.871826Z"
+      "scraped_at": "2026-05-07T18:35:33.094851Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -348,7 +210,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.872000Z"
+      "scraped_at": "2026-05-07T18:35:33.094983Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -371,7 +233,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.872235Z"
+      "scraped_at": "2026-05-07T18:35:33.095168Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -394,7 +256,7 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.872424Z"
+      "scraped_at": "2026-05-07T18:35:33.095302Z"
     },
     {
       "auction_date": "2026-05-12",
@@ -417,7 +279,30 @@
       "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:27.872600Z"
+      "scraped_at": "2026-05-07T18:35:33.095437Z"
+    },
+    {
+      "auction_date": "2026-05-12",
+      "auction_time": "11:00 AM ET",
+      "case_number": "2025-CA-006088-O",
+      "parcel_id": "TIMESHARE",
+      "address": "",
+      "final_judgment": "$2,933.82",
+      "assessed_value": "",
+      "opening_bid": "",
+      "owner_name": "",
+      "mailing_address": "",
+      "property_type": "",
+      "homestead": false,
+      "absentee_owner": false,
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/TIMESHARE",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260184847",
+      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/12/2026",
+      "source": "myorangeclerk.realforeclose.com",
+      "days_until_auction": 5,
+      "status": "ACTIVE",
+      "matched_lead": false,
+      "scraped_at": "2026-05-07T18:35:33.095581Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -440,7 +325,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.083372Z"
+      "scraped_at": "2026-05-07T18:35:35.226572Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -463,7 +348,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.083588Z"
+      "scraped_at": "2026-05-07T18:35:35.226729Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -486,7 +371,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.083771Z"
+      "scraped_at": "2026-05-07T18:35:35.226870Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -509,7 +394,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.083948Z"
+      "scraped_at": "2026-05-07T18:35:35.227008Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -532,7 +417,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.084120Z"
+      "scraped_at": "2026-05-07T18:35:35.227142Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -555,7 +440,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.084294Z"
+      "scraped_at": "2026-05-07T18:35:35.227275Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -578,7 +463,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.084486Z"
+      "scraped_at": "2026-05-07T18:35:35.227411Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -601,7 +486,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.084667Z"
+      "scraped_at": "2026-05-07T18:35:35.227556Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -624,7 +509,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.084847Z"
+      "scraped_at": "2026-05-07T18:35:35.227691Z"
     },
     {
       "auction_date": "2026-05-13",
@@ -647,7 +532,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:30.085017Z"
+      "scraped_at": "2026-05-07T18:35:35.227827Z"
     },
     {
       "auction_date": "2026-05-14",
@@ -670,7 +555,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:31.845703Z"
+      "scraped_at": "2026-05-07T18:35:37.358304Z"
     },
     {
       "auction_date": "2026-05-14",
@@ -693,7 +578,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:31.845957Z"
+      "scraped_at": "2026-05-07T18:35:37.358498Z"
     },
     {
       "auction_date": "2026-05-14",
@@ -716,7 +601,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:31.846137Z"
+      "scraped_at": "2026-05-07T18:35:37.358652Z"
     },
     {
       "auction_date": "2026-05-18",
@@ -739,7 +624,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:40.800907Z"
+      "scraped_at": "2026-05-07T18:35:48.311757Z"
     },
     {
       "auction_date": "2026-05-18",
@@ -762,7 +647,7 @@
       "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:40.801103Z"
+      "scraped_at": "2026-05-07T18:35:48.311910Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -785,7 +670,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:42.585023Z"
+      "scraped_at": "2026-05-07T18:35:50.452416Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -808,7 +693,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:42.585274Z"
+      "scraped_at": "2026-05-07T18:35:50.452624Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -831,7 +716,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:42.585516Z"
+      "scraped_at": "2026-05-07T18:35:50.452806Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -854,7 +739,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:42.585742Z"
+      "scraped_at": "2026-05-07T18:35:50.452984Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -877,7 +762,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:42.585915Z"
+      "scraped_at": "2026-05-07T18:35:50.453121Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -900,7 +785,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:42.586088Z"
+      "scraped_at": "2026-05-07T18:35:50.453256Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -923,7 +808,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:42.586261Z"
+      "scraped_at": "2026-05-07T18:35:50.453388Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -946,7 +831,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:42.586441Z"
+      "scraped_at": "2026-05-07T18:35:50.453529Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -969,7 +854,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:42.586618Z"
+      "scraped_at": "2026-05-07T18:35:50.453660Z"
     },
     {
       "auction_date": "2026-05-19",
@@ -992,7 +877,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:42.586845Z"
+      "scraped_at": "2026-05-07T18:35:50.453835Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1014,8 +899,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.848863Z"
+      "matched_lead": true,
+      "scraped_at": "2026-05-07T18:35:54.483897Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1037,8 +922,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.849111Z"
+      "matched_lead": true,
+      "scraped_at": "2026-05-07T18:35:54.484092Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1060,8 +945,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.849349Z"
+      "matched_lead": true,
+      "scraped_at": "2026-05-07T18:35:54.484277Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1083,8 +968,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.849596Z"
+      "matched_lead": true,
+      "scraped_at": "2026-05-07T18:35:54.484454Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1107,7 +992,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.849774Z"
+      "scraped_at": "2026-05-07T18:35:54.484602Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1130,7 +1015,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.849948Z"
+      "scraped_at": "2026-05-07T18:35:54.484735Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1153,7 +1038,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.850122Z"
+      "scraped_at": "2026-05-07T18:35:54.484867Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1176,7 +1061,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-07T00:28:45.850302Z"
+      "scraped_at": "2026-05-07T18:35:54.485000Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -1199,7 +1084,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-07T00:28:45.850542Z"
+      "scraped_at": "2026-05-07T18:35:54.485174Z"
     }
   ]
 }
