@@ -422,7 +422,14 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <div class="tab" onclick="setTab(this,'lp')">⚖️ Lis Pendens <span class="tab-count" id="tc-lp">—</span></div>
         </div>
         <span class="results-count" id="resultsCount"></span>
-        <div class="toolbar-right"><button class="btn btn-ghost" onclick="selAll()">Select All</button></div>
+        <div class="toolbar-right" style="display:flex;align-items:center;gap:8px">
+          <button class="btn btn-ghost" id="hideExportedBtn" onclick="toggleHideExported()" style="font-size:11.5px">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            Hide Exported
+          </button>
+          <span id="exportedCount" style="font-size:11px;color:var(--text3)"></span>
+          <button class="btn btn-ghost" onclick="selAll()">Select All</button>
+        </div>
       </div>
 
       <!-- LP Date Filter Bar -->
@@ -553,7 +560,7 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 <script>
 const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/refs/heads/main/data/output.csv';
 const AUCTION_MIN_DAYS=3;
-let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null},currentTab='all',selectedIds=new Set();
+let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,hideExported:false},currentTab='all',selectedIds=new Set(),exportedIds=new Set();
 
 function classifySource(lead){
   const f=(lead.distressFlags||'').toLowerCase();
@@ -956,6 +963,7 @@ function getFiltered(){
   else if(currentTab==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
   else if(currentTab==='lp')leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
   if(currentTab==='lp'&&F.lpDate)leads=leads.filter(l=>l.filed===F.lpDate);
+  if(F.hideExported)leads=leads.filter(l=>!exportedIds.has(l.docNum));
   leads.sort((a,b)=>b.score-a.score);
   return leads;
 }
@@ -1012,6 +1020,7 @@ function renderTable(){
     const tr=document.createElement('tr');
     if(selectedIds.has(lead.id))tr.classList.add('selected');
     if(lead.score>=75)tr.classList.add('row-critical');
+    if(exportedIds.has(lead.docNum))tr.style.opacity='0.55';
     tr.onclick=e=>{if(e.target.type==='checkbox'||e.target.closest('.links-btn'))return;openDrawer(lead);};
     const owner=lead.ownerName||lead.grantee;
     const distPills=lead.distressSignals.map(distressPill).join('');
@@ -1020,10 +1029,12 @@ function renderTable(){
     const today=new Date().toISOString().slice(0,10);
     const isNewLP=lead.distressSignals.includes('Lis Pendens')&&lead.filed===today;
     const newLPBadge=isNewLP?`<div style="background:#DC2626;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block">🔴 NEW TODAY</div>`:'';
+    const isExported=exportedIds.has(lead.docNum);
+    const exportedBadge=isExported?`<div style="background:#D1FAE5;color:#065F46;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block">✓ EXPORTED</div>`:'';
     tr.innerHTML=`
       <td><input type="checkbox" ${selectedIds.has(lead.id)?'checked':''} onchange="toggleSel(${lead.id},this)"></td>
       <td>${makeRing(lead.score)}</td>
-      <td><div class="sig-wrap"><div class="sig-distress">${distPills}${stackBadge}</div>${ownPills?`<div class="sig-owner">${ownPills}</div>`:''}</div>${newLPBadge}</td>
+      <td><div class="sig-wrap"><div class="sig-distress">${distPills}${stackBadge}</div>${ownPills?`<div class="sig-owner">${ownPills}</div>`:''}</div>${newLPBadge}${exportedBadge}</td>
       <td>${urgencyBadge(lead.score)}</td>
       <td>${auctionCell(lead)}</td>
       <td><div class="insight-cell">${lead.insight}</div></td>
@@ -1110,6 +1121,7 @@ function exportLP(){
   a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
   a.download='lis_pendens_'+date+'.csv';
   a.click();
+  markAsExported(leads);
   alert('Exported '+leads.length+' Lis Pendens leads for '+date);
 }
 
@@ -1297,6 +1309,45 @@ function parseAddr(addr){
   return{street,city,state:state||'FL',zip};
 }
 
+// ── EXPORTED LEADS PERSISTENCE ───────────────────────────────────────────────
+async function loadExportedIds(){
+  try{
+    const r=await window.storage.get('exported_leads');
+    if(r&&r.value){
+      const ids=JSON.parse(r.value);
+      ids.forEach(id=>exportedIds.add(id));
+      updateExportedCount();
+    }
+  }catch(e){/* first run, no data yet */}
+}
+
+async function saveExportedIds(){
+  try{
+    await window.storage.set('exported_leads',JSON.stringify([...exportedIds]));
+  }catch(e){console.warn('Could not save exported leads',e);}
+}
+
+function updateExportedCount(){
+  const el=document.getElementById('exportedCount');
+  if(el)el.textContent=exportedIds.size>0?exportedIds.size+' exported':'';
+  const btn=document.getElementById('hideExportedBtn');
+  if(btn)btn.style.background=F.hideExported?'var(--blue)':'';
+  if(btn)btn.style.color=F.hideExported?'white':'';
+}
+
+function toggleHideExported(){
+  F.hideExported=!F.hideExported;
+  updateExportedCount();
+  doFilter();
+}
+
+async function markAsExported(leads){
+  leads.forEach(l=>{if(l.docNum&&l.docNum!=='—')exportedIds.add(l.docNum);});
+  await saveExportedIds();
+  updateExportedCount();
+  renderTable();
+}
+
 function exportCSV(){
   const leads=getFiltered();
   const rows=[[
@@ -1342,6 +1393,8 @@ function exportCSV(){
   const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
   a.download='propsignal_skiptrace_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  // Mark all exported leads
+  markAsExported(leads);
 }
 
 async function loadData(){
@@ -1361,6 +1414,7 @@ async function loadData(){
     document.getElementById('mainContent').style.display='block';
     updateCards();buildDatePicker();renderFocus();
     buildLPDatePicker();
+  await loadExportedIds();
   requestAnimationFrame(()=>requestAnimationFrame(()=>renderTable()));
   }catch(err){
     document.getElementById('loadingState').innerHTML=`
@@ -1372,4 +1426,3 @@ async function loadData(){
 loadData();
 </script>
 </body>
-</html>
