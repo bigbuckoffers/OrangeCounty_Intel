@@ -123,6 +123,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .results-count{font-size:11.5px;color:var(--text3)}
 .tabs{display:flex;gap:2px;background:var(--surface2);border-radius:var(--r);padding:3px;border:1px solid var(--border);flex-wrap:wrap}
 .tab{padding:5px 11px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;color:var(--text2);transition:.15s}
+.tab:hover{background:var(--surface);color:var(--text)}
 .tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .tab-count{font-size:10px;background:var(--border);color:var(--text2);padding:1px 5px;border-radius:20px;margin-left:4px}
 .tab.active .tab-count{background:var(--blue);color:white}
@@ -219,6 +220,9 @@ tbody tr.row-critical:hover{background:#FEE8E8}
 .loading{display:flex;align-items:center;justify-content:center;padding:60px;flex-direction:column;gap:16px;color:var(--text3)}
 .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* LP alert banner pulse */
+@keyframes lpPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}70%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}
+.lp-bar-alert{animation:lpPulse 2s infinite}
 input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--blue)}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -260,7 +264,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
     </div>
   </div>
 </aside>
-
 <div class="main">
   <div class="topbar">
     <div class="search-wrap">
@@ -282,11 +285,9 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
       </button>
     </div>
   </div>
-
   <div class="content">
     <div class="loading" id="loadingState"><div class="spinner"></div><div>Loading leads from Orange County...</div></div>
     <div id="mainContent" style="display:none">
-
       <div class="cards-grid">
         <div class="card accent-blue" onclick="clearAllFilters()">
           <div class="card-label">Total Leads</div><div class="card-value" id="c-total">—</div>
@@ -305,7 +306,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <div class="card-sub">2+ distress types, same property</div><div class="card-trend purple">Most motivated</div>
         </div>
       </div>
-
       <div class="cards-row2">
         <div class="card accent-orange" onclick="setTabFilter('foreclosure')">
           <div class="card-label">🏠 Foreclosure Auctions</div><div class="card-value" id="c-fc">—</div>
@@ -324,7 +324,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <div class="card-sub">Open enforcement cases</div><div class="card-trend warn">Updated weekly</div>
         </div>
       </div>
-
       <div class="date-intel-bar" id="dateIntelBar">
         <div class="date-intel-head">
           <div class="date-intel-title">📅 New Data By Scrape Date</div>
@@ -335,7 +334,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <button class="date-intel-clear" id="dateClearBtn" onclick="clearDateFilter()" style="display:none">✕ Clear</button>
         </div>
       </div>
-
       <div class="focus-section">
         <div class="focus-head">
           <div class="focus-title">
@@ -346,7 +344,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         </div>
         <div class="focus-items" id="focusItems"></div>
       </div>
-
       <div class="source-legend">
         <span class="source-legend-label">Signals:</span>
         <span class="source-chip sc-lp">⚖️ Lis Pendens</span>
@@ -360,7 +357,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         <span class="source-chip sc-dc">💀 Death Cert</span>
         <span class="pill pill-stacked" style="font-size:10px;margin-left:6px">⚡ STACKED</span>
       </div>
-
       <div class="filter-bar" id="filterBar">
         <div class="filter-row">
           <div>
@@ -407,7 +403,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <button class="btn btn-ghost" style="margin-top:14px" onclick="clearAllFilters()">Clear all</button>
         </div>
       </div>
-
       <div class="toolbar">
         <div class="tabs">
           <div class="tab active" onclick="setTab(this,'all')">All <span class="tab-count" id="tc-all">—</span></div>
@@ -432,9 +427,12 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         </div>
       </div>
 
-      <!-- LP Date Filter Bar -->
-      <div id="lpFilterBar" style="display:none;background:#FEE2E2;border:1px solid #FECACA;border-radius:var(--r-lg);padding:12px 18px;margin-bottom:12px;align-items:center;gap:12px;flex-wrap:wrap">
-        <span style="font-size:12px;font-weight:700;color:#991B1B">⚖️ Lis Pendens Filter</span>
+      <!-- LP Date Filter Bar — shows on LP tab, and always when new leads today -->
+      <div id="lpFilterBar" style="display:none;background:#FEF2F2;border:1.5px solid #FECACA;border-radius:var(--r-lg);padding:12px 18px;margin-bottom:12px;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:8px;height:8px;background:#DC2626;border-radius:50%;animation:lpPulse 2s infinite;flex-shrink:0"></div>
+          <span style="font-size:12px;font-weight:700;color:#991B1B">⚖️ Lis Pendens</span>
+        </div>
         <div style="display:flex;align-items:center;gap:8px">
           <label style="font-size:11.5px;color:#7F1D1D;font-weight:500">Filed date:</label>
           <select id="lpDateSelect" onchange="setLPDate(this.value)" style="height:30px;padding:0 10px;border-radius:var(--r);border:1.5px solid #FCA5A5;font-size:12px;font-family:inherit;color:#991B1B;background:#FFF5F5;cursor:pointer;outline:none;font-weight:600">
@@ -442,10 +440,11 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           </select>
         </div>
         <div id="lpNewTodayCount" style="font-size:11.5px;font-weight:700;color:#DC2626"></div>
-        <button class="btn btn-ghost" style="margin-left:auto;font-size:11.5px;height:30px;background:#DC2626;color:white;border-color:#DC2626" onclick="exportLP()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        <button class="btn" style="margin-left:auto;font-size:11.5px;height:30px;background:#DC2626;color:white;border-color:#DC2626" onclick="exportLP()">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           Export Today's LP
         </button>
+        <button onclick="document.getElementById('lpFilterBar').dataset.dismissed='1';document.getElementById('lpFilterBar').style.display='none'" style="font-size:16px;color:#9CA3AF;background:none;border:none;cursor:pointer;padding:0 4px;line-height:1" title="Dismiss">×</button>
       </div>
 
       <div class="bulk-bar" id="bulkBar">
@@ -454,7 +453,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         <button class="btn btn-ghost">Push to GHL</button>
         <button class="btn btn-ghost" onclick="exportCSV()">Export CSV</button>
       </div>
-
       <div class="table-wrap"><div class="table-scroll">
         <table>
           <thead><tr>
@@ -487,7 +485,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
   </div>
 </div>
 </div>
-
 <!-- DRAWER -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
@@ -546,7 +543,6 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
     <button class="btn btn-ghost">SMS</button>
   </div>
 </div>
-
 <!-- LINKS MODAL -->
 <div class="links-modal-overlay" id="linksOverlay" onclick="closeLinks()">
   <div class="links-modal" onclick="event.stopPropagation()">
@@ -556,12 +552,10 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
     <div class="links-modal-body" id="linksBody"></div>
   </div>
 </div>
-
 <script>
 const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/refs/heads/main/data/output.csv';
 const AUCTION_MIN_DAYS=3;
 let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,hideExported:false},currentTab='all',selectedIds=new Set(),exportedIds=new Set();
-
 function classifySource(lead){
   const f=(lead.distressFlags||'').toLowerCase();
   const d=(lead.docType||'').toLowerCase();
@@ -570,7 +564,6 @@ function classifySource(lead){
   if(f.includes('code_violation')&&!f.includes('foreclosure')&&!f.includes('delinquent')&&!f.includes('lis_pendens')&&!f.includes('judgment')&&!f.includes('probate')&&!f.includes('lien'))return'violations';
   return'county';
 }
-
 function detectDistressSignals(lead){
   const sigs=[];
   const f=(lead.distressFlags||'').toLowerCase();
@@ -593,7 +586,6 @@ function detectDistressSignals(lead){
   }
   return sigs;
 }
-
 function detectOwnerSignals(lead){
   const sigs=[];
   const owner=(lead.ownerName||lead.grantee||'').toUpperCase();
@@ -611,7 +603,6 @@ function detectOwnerSignals(lead){
   if(ym){const yrs=today.getFullYear()-parseInt(ym[1]);if(yrs>=7)sigs.push('Old Case '+yrs+'yr');else if(yrs>=5)sigs.push('Old Case '+yrs+'yr');}
   return sigs;
 }
-
 function detectOOS(addr){
   if(!addr)return false;
   const a=addr.toUpperCase();
@@ -621,7 +612,6 @@ function detectOOS(addr){
   if(zm){const z=parseInt(zm[1]);if(z<32000||z>34999)return true;}
   return false;
 }
-
 function isReallyStacked(lead){
   const sigs=lead.distressSignals||[];
   const cats=new Set();
@@ -633,7 +623,6 @@ function isReallyStacked(lead){
   if(sigs.some(s=>s.startsWith('Code Violation')))cats.add('cv');
   return cats.size>=2;
 }
-
 function calcScore(lead){
   let pts=30;const notes=[];
   const f=(lead.distressFlags||'').toLowerCase();
@@ -714,7 +703,6 @@ function calcScore(lead){
   if(lead.propAddr&&lead.propAddr!=='—'&&lead.propAddr.length>5){pts+=5;notes.push({label:'Has confirmed property address',val:5});}
   return{score:Math.max(30,Math.min(99,Math.round(pts))),notes};
 }
-
 function generateInsight(lead){
   const d=lead.distressSignals||[];
   const o=lead.ownerSignals||[];
@@ -766,7 +754,6 @@ function generateInsight(lead){
   return parts.length>1?parts[0].charAt(0).toUpperCase()+parts[0].slice(1)+', '+parts.slice(1).join(', ')+'.'
     :parts[0].charAt(0).toUpperCase()+parts[0].slice(1)+'.';
 }
-
 function heatLabel(score){
   if(score>=75)return{text:'VERY HIGH',color:'#DC2626'};
   if(score>=55)return{text:'HIGH',color:'#D97706'};
@@ -795,7 +782,6 @@ function calcAction(score,match,distress,ownerSigs){
   if(score>=40)return{label:'✉ Send Mailer',cls:'action-mail'};
   return{label:'🔎 Research First',cls:'action-research'};
 }
-
 function distressPill(s){
   if(s==='Lis Pendens')return`<span class="pill pill-lp">⚖️ ${s}</span>`;
   if(s==='Foreclosure Auction')return`<span class="pill pill-fc">🏠 ${s}</span>`;
@@ -814,7 +800,6 @@ function ownerPill(s){
   if(s.startsWith('Old Case'))return`<span class="pill pill-old">${s}</span>`;
   return`<span class="pill ${OWNER_CLS[s]||'pill-generic'}">${s}</span>`;
 }
-
 function parseCSV(text){
   const lines=text.trim().split('\n');const headers=parseCSVLine(lines[0]);const results=[];
   for(let i=1;i<lines.length;i++){if(!lines[i].trim())continue;const vals=parseCSVLine(lines[i]);const row={};headers.forEach((h,idx)=>{row[h.trim()]=(vals[idx]||'').trim();});results.push(row);}
@@ -825,7 +810,6 @@ function parseCSVLine(line){
   for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}else if(c===','&&!inQ){result.push(cur);cur='';}else cur+=c;}
   result.push(cur);return result;
 }
-
 function mapRow(row,idx){
   const match=(row.match_confidence||'').toUpperCase();
   const assessed=parseFloat((row.assessed_value||'').replace(/[$,]/g,''))||0;
@@ -872,7 +856,6 @@ function mapRow(row,idx){
   lead.links=links;
   return lead;
 }
-
 function buildDatePicker(){
   const byDate={};
   LEADS.forEach(l=>{
@@ -895,7 +878,6 @@ function buildDatePicker(){
   });
   window._byDate=byDate;
 }
-
 function formatDateLabel(d){
   if(!d)return'';
   const dt=new Date(d+'T12:00:00');
@@ -906,7 +888,6 @@ function formatDateLabel(d){
   if(diff===-1)return'Yesterday ('+str+')';
   return str;
 }
-
 function onDatePick(date){
   F.date=date||null;
   const clearBtn=document.getElementById('dateClearBtn');
@@ -922,7 +903,6 @@ function onDatePick(date){
   }else{chips.innerHTML='';}
   doFilter();
 }
-
 function clearDateFilter(){
   F.date=null;
   document.getElementById('datePicker').value='';
@@ -931,9 +911,7 @@ function clearDateFilter(){
   document.getElementById('dateChips').innerHTML='';
   doFilter();
 }
-
 function daysUntil(dateStr){if(!dateStr)return null;const d=new Date(dateStr);const t=new Date();t.setHours(0,0,0,0);return Math.ceil((d-t)/86400000);}
-
 function getFiltered(){
   let leads=[...LEADS];
   const q=document.getElementById('searchInput').value.trim().toLowerCase();
@@ -967,23 +945,19 @@ function getFiltered(){
   leads.sort((a,b)=>b.score-a.score);
   return leads;
 }
-
 const fmt=n=>n?'$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}):'—';
 const fmtD=d=>{if(!d)return'—';const p=d.split(/[-T]/);if(p.length<3)return d;return`${p[1]}/${p[2].slice(0,2)}/${p[0]}`;};
 const initials=n=>(n||'?').split(' ').slice(0,2).map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
-
 function auctionCell(lead){
   if(!lead.distressSignals.includes('Foreclosure Auction'))return'<span style="color:var(--text3);font-size:10.5px">—</span>';
   const days=daysUntil(lead.filed);if(days===null)return'—';
   const col=days<=5?'#DC2626':days<=8?'#D97706':'#059669';
   return`<div style="font-size:11px;font-weight:700;color:${col}">${fmtD(lead.filed)}</div><div style="font-size:9px;color:${col};margin-top:1px">${days}d away</div>`;
 }
-
 function makeRing(score){
   const circ=126,dash=(score/100)*circ,color=scoreColor(score),heat=heatLabel(score);
   return`<div class="score-cell"><div class="score-ring"><svg viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="20"/><circle cx="22" cy="22" r="20" fill="none" stroke="${color}" stroke-width="3.5" stroke-dasharray="${dash} ${circ}" stroke-linecap="round"/></svg><div class="score-val" style="color:${color}">${score}</div></div><div class="score-heat" style="color:${heat.color}">${heat.text}</div></div>`;
 }
-
 function urgencyBadge(score){
   if(score>=90)return`<span class="urgency-badge" style="background:#DC2626;color:white">🚨 MAX PRIORITY</span>`;
   if(score>=75)return`<span class="urgency-badge" style="background:#DC2626;color:white">🔥 DROP EVERYTHING</span>`;
@@ -992,10 +966,8 @@ function urgencyBadge(score){
   if(score>=40)return`<span class="urgency-badge" style="background:#EFF6FF;color:#2563EB">👀 WARM</span>`;
   return`<span class="urgency-badge" style="background:#F1F5F9;color:#9CA3AF">COOL</span>`;
 }
-
 const matchCls={HIGH:'match-high',MEDIUM:'match-medium',LOW:'match-low'};
 const matchBadge=m=>`<span class="match-badge ${matchCls[m]||'match-none'}">${m||'—'}</span>`;
-
 function renderTable(){
   const filtered=getFiltered();
   const L=LEADS;
@@ -1011,9 +983,18 @@ function renderTable(){
   document.getElementById('tc-tax').textContent=L.filter(l=>l.source==='tax').length;
   document.getElementById('tc-cv').textContent=cvCount;
   document.getElementById('tc-lp').textContent=L.filter(l=>l.distressSignals.includes('Lis Pendens')).length;
-  // Show/hide LP filter bar
+
+  // LP filter bar visibility:
+  // - Always show on LP tab
+  // - Show on any tab when there are new LP leads today (and user hasn't dismissed)
   const lpBar=document.getElementById('lpFilterBar');
-  if(lpBar)lpBar.style.display=currentTab==='lp'?'flex':'none';
+  if(lpBar){
+    const today=new Date().toISOString().slice(0,10);
+    const hasTodayLP=LEADS.some(l=>l.distressSignals.includes('Lis Pendens')&&l.filed===today);
+    const dismissed=lpBar.dataset.dismissed==='1';
+    lpBar.style.display=(currentTab==='lp'||(hasTodayLP&&!dismissed))?'flex':'none';
+  }
+
   const tbody=document.getElementById('tbody');
   tbody.innerHTML='';
   filtered.forEach(lead=>{
@@ -1057,7 +1038,6 @@ function renderTable(){
     tbody.appendChild(tr);
   });
 }
-
 function buildLPDatePicker(){
   const lpLeads=LEADS.filter(l=>l.distressSignals.includes('Lis Pendens'));
   const dates=[...new Set(lpLeads.map(l=>l.filed).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
@@ -1084,12 +1064,10 @@ function buildLPDatePicker(){
     }
   }
 }
-
 function setLPDate(date){
   F.lpDate=date||null;
   doFilter();
 }
-
 function exportLP(){
   const date=F.lpDate||new Date().toISOString().slice(0,10);
   const leads=LEADS.filter(l=>{
@@ -1124,7 +1102,6 @@ function exportLP(){
   markAsExported(leads);
   alert('Exported '+leads.length+' Lis Pendens leads for '+date);
 }
-
 function renderFocus(){
   const top=[...LEADS].sort((a,b)=>b.score-a.score).slice(0,10);
   document.getElementById('focusItems').innerHTML=top.map(l=>{
@@ -1139,7 +1116,6 @@ function renderFocus(){
     </div>`;
   }).join('');
 }
-
 function updateCards(){
   const L=LEADS;
   const cvCount=L.filter(l=>l.distressSignals.some(s=>s.startsWith('Code Violation'))).length;
@@ -1162,7 +1138,6 @@ function updateCards(){
   const latest=L.map(l=>l.scrapedAt).filter(Boolean).sort().pop();
   if(latest){const d=new Date(latest);const s=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('sync-time').textContent='Last sync: '+s;document.getElementById('last-run').textContent='Data as of '+s;}
 }
-
 function openDrawer(lead){
   const owner=lead.ownerName||lead.grantee;
   document.getElementById('d-av').textContent=initials(owner);
@@ -1234,7 +1209,6 @@ function openDrawer(lead){
   document.getElementById('drawer').classList.add('open');
 }
 function closeDrawer(){document.getElementById('drawerOverlay').classList.remove('open');document.getElementById('drawer').classList.remove('open')}
-
 function openLinks(e,id){
   e.stopPropagation();
   const lead=LEADS.find(l=>l.id===id);if(!lead)return;
@@ -1247,55 +1221,45 @@ function openLinks(e,id){
   document.getElementById('linksOverlay').classList.add('open');
 }
 function closeLinks(){document.getElementById('linksOverlay').classList.remove('open')}
-
 function toggleFilterBar(){document.getElementById('filterBar').classList.toggle('open')}
 function setScoreBand(btn,val){document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');F.scoreBand=val==='all'?null:val;doFilter()}
 function setSigFilter(btn,val){const a=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.signal=a?null:val;if(!a)btn.classList.add('active');doFilter()}
 function setSrcFilter(btn,val){const a=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.source=a?null:val;if(!a)btn.classList.add('active');doFilter()}
 function setTab(el,tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;doFilter()}
 function setTabFilter(tab){currentTab=tab;document.querySelectorAll('.tab').forEach((t,i)=>{const names=['all','critical','hot','warm','stacked','foreclosure','county','tax','violations','lp'];t.classList.toggle('active',names[i]===tab);});doFilter()}
-function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null,date:null};currentTab='all';clearDateFilter();document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');doFilter()}
+function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,hideExported:false};currentTab='all';clearDateFilter();document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');doFilter()}
 function doFilter(){renderTable()}
 function toggleSel(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);updateBulk()}
 function masterCheck(cb){getFiltered().forEach(l=>{if(cb.checked)selectedIds.add(l.id);else selectedIds.delete(l.id)});renderTable();updateBulk()}
 function selAll(){getFiltered().forEach(l=>selectedIds.add(l.id));renderTable();updateBulk()}
 function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCount').textContent=`${n} lead${n!==1?'s':''} selected`;document.getElementById('bulkBar').classList.toggle('visible',n>0)}
-
-// ADDRESS PARSER — splits any address into street/city/state/zip
-// No regex lookbehind (Safari-safe). Handles full state names, zip+4, missing state.
+// ADDRESS PARSER
 const VALID_STATES=new Set(['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC']);
 const STATE_NAMES={'ALABAMA':'AL','ALASKA':'AK','ARIZONA':'AZ','ARKANSAS':'AR','CALIFORNIA':'CA','COLORADO':'CO','CONNECTICUT':'CT','DELAWARE':'DE','FLORIDA':'FL','GEORGIA':'GA','HAWAII':'HI','IDAHO':'ID','ILLINOIS':'IL','INDIANA':'IN','IOWA':'IA','KANSAS':'KS','KENTUCKY':'KY','LOUISIANA':'LA','MAINE':'ME','MARYLAND':'MD','MASSACHUSETTS':'MA','MICHIGAN':'MI','MINNESOTA':'MN','MISSISSIPPI':'MS','MISSOURI':'MO','MONTANA':'MT','NEBRASKA':'NE','NEVADA':'NV','NEW HAMPSHIRE':'NH','NEW JERSEY':'NJ','NEW MEXICO':'NM','NEW YORK':'NY','NORTH CAROLINA':'NC','NORTH DAKOTA':'ND','OHIO':'OH','OKLAHOMA':'OK','OREGON':'OR','PENNSYLVANIA':'PA','RHODE ISLAND':'RI','SOUTH CAROLINA':'SC','SOUTH DAKOTA':'SD','TENNESSEE':'TN','TEXAS':'TX','UTAH':'UT','VERMONT':'VT','VIRGINIA':'VA','WASHINGTON':'WA','WEST VIRGINIA':'WV','WISCONSIN':'WI','WYOMING':'WY','DISTRICT OF COLUMBIA':'DC'};
-// Known cities sorted longest first — used to detect city in comma-less addresses
 const KNOWN_CITIES=['ALTAMONTE SPRINGS','BUENAVENTURA LAKES','DOCTOR PHILLIPS','HUNTERS CREEK','WINTER GARDEN','WINTER PARK','MOUNT DORA','BELLE ISLE','CASSELBERRY','EATONVILLE','EDGEWOOD','GOLDENROD','CELEBRATION','WINDERMERE','KISSIMMEE','LONGWOOD','MAITLAND','MINNEOLA','GROVELAND','CLERMONT','LAKE MARY','OAK RIDGE','PINE HILLS','PINE CASTLE','REUNION','ST CLOUD','TAVARES','LEESBURG','APOPKA','ORLANDO','SANFORD','OCOEE','DAVENPORT','HAINES CITY','NORTH MUSKEGON','HUNTSVILLE','JACKSONVILLE','TALLAHASSEE','GAINESVILLE','PENSACOLA','FORT LAUDERDALE','MIAMI','TAMPA','HIALEAH','CAPE CORAL','FORT MYERS','PORT ST LUCIE','HOLLYWOOD','MIRAMAR','CORAL SPRINGS','CLEARWATER','BRANDON','SPRING HILL','LAKELAND','POMPANO BEACH','WEST PALM BEACH','DAVIE','BOCA RATON','DELTONA','PALM BAY','LARGO','DEERFIELD BEACH','MELBOURNE','SUNRISE','PLANTATION','BOYNTON BEACH','LAUDERHILL','WESTON','FORT PIERCE','PALM COAST','HOMESTEAD','MIAMI GARDENS','TUSCALOOSA','BIRMINGHAM','MONTGOMERY','MOBILE','ANCHORAGE','PHOENIX','TUCSON','MESA','CHANDLER','GLENDALE','SCOTTSDALE','GILBERT','TEMPE','PEORIA','SURPRISE','LITTLE ROCK','LOS ANGELES','SAN DIEGO','SAN JOSE','SAN FRANCISCO','FRESNO','SACRAMENTO','LONG BEACH','OAKLAND','BAKERSFIELD','ANAHEIM','DENVER','COLORADO SPRINGS','AURORA','FORT COLLINS','BRIDGEPORT','NEW HAVEN','WILMINGTON','WASHINGTON','ATLANTA','SAVANNAH','HONOLULU','BOISE','CHICAGO','ROCKFORD','JOLIET','NAPERVILLE','INDIANAPOLIS','FORT WAYNE','EVANSVILLE','SOUTH BEND','DES MOINES','WICHITA','LOUISVILLE','LEXINGTON','NEW ORLEANS','PORTLAND','BALTIMORE','BOSTON','WORCESTER','SPRINGFIELD','DETROIT','GRAND RAPIDS','WARREN','STERLING HEIGHTS','MINNEAPOLIS','ST PAUL','JACKSON','KANSAS CITY','ST LOUIS','BILLINGS','OMAHA','LINCOLN','LAS VEGAS','HENDERSON','RENO','MANCHESTER','NEWARK','JERSEY CITY','PATERSON','ALBUQUERQUE','BUFFALO','ROCHESTER','YONKERS','CHARLOTTE','RALEIGH','GREENSBORO','DURHAM','FARGO','COLUMBUS','CLEVELAND','CINCINNATI','TOLEDO','AKRON','OKLAHOMA CITY','TULSA','EUGENE','PHILADELPHIA','PITTSBURGH','ALLENTOWN','PROVIDENCE','COLUMBIA','SIOUX FALLS','MEMPHIS','NASHVILLE','KNOXVILLE','CHATTANOOGA','HOUSTON','SAN ANTONIO','DALLAS','AUSTIN','FORT WORTH','EL PASO','ARLINGTON','CORPUS CHRISTI','PLANO','LAREDO','LUBBOCK','SALT LAKE CITY','WEST VALLEY CITY','PROVO','VIRGINIA BEACH','NORFOLK','CHESAPEAKE','RICHMOND','SEATTLE','SPOKANE','TACOMA','BELLEVUE','CHARLESTON','MILWAUKEE','MADISON','GREEN BAY','CHEYENNE'];
 function parseAddr(addr){
   if(!addr||addr==='—')return{street:'',city:'',state:'FL',zip:''};
   addr=addr.trim().toUpperCase();
-  // Replace full state names after last comma only
   const lc=addr.lastIndexOf(',');
   if(lc>=0){
     let sfx=addr.slice(lc+1);
     for(const [full,abbr] of Object.entries(STATE_NAMES)){sfx=sfx.replace(new RegExp('\\b'+full+'\\b','g'),abbr);}
     addr=addr.slice(0,lc+1)+sfx;
   }
-  // Remove zip+4
   addr=addr.replace(/(\d{5})-\d{4}/g,'$1');
-  // Extract zip
   const toks=addr.split(/[\s,]+/);
   let zip='';
   for(let i=toks.length-1;i>0;i--){if(/^\d{5}$/.test(toks[i])){zip=toks[i];break;}}
   if(zip){const zp=addr.lastIndexOf(zip);addr=addr.slice(0,zp).trim().replace(/[,\s]+$/,'').trim();}
-  // Extract state abbreviation
   const sm=addr.match(/[,\s]+([A-Z]{2})\s*$/);
   let state='';
   if(sm&&VALID_STATES.has(sm[1])){state=sm[1];addr=addr.slice(0,addr.length-sm[0].length).trim().replace(/,\s*$/,'').trim();}
-  // Split street and city — try comma first, then known city detection
   const ci=addr.lastIndexOf(',');
   let street=addr,city='';
   if(ci>0){
     street=addr.slice(0,ci).trim();
     city=addr.slice(ci+1).trim();
   } else {
-    // No comma — scan for known city at end of string
     for(const knownCity of KNOWN_CITIES){
       const pat=new RegExp('\\s+'+knownCity.replace(/ /g,'\\s+')+'(\\s+[A-Z]{2})?$');
       if(pat.test(addr)){
@@ -1308,8 +1272,7 @@ function parseAddr(addr){
   }
   return{street,city,state:state||'FL',zip};
 }
-
-// ── EXPORTED LEADS PERSISTENCE ───────────────────────────────────────────────
+// ── EXPORTED LEADS PERSISTENCE ────────────────────────────────────────────────
 async function loadExportedIds(){
   try{
     const r=await window.storage.get('exported_leads');
@@ -1318,36 +1281,30 @@ async function loadExportedIds(){
       ids.forEach(id=>exportedIds.add(id));
       updateExportedCount();
     }
-  }catch(e){/* first run, no data yet */}
+  }catch(e){/* first run */}
 }
-
 async function saveExportedIds(){
   try{
     await window.storage.set('exported_leads',JSON.stringify([...exportedIds]));
   }catch(e){console.warn('Could not save exported leads',e);}
 }
-
 function updateExportedCount(){
   const el=document.getElementById('exportedCount');
   if(el)el.textContent=exportedIds.size>0?exportedIds.size+' exported':'';
   const btn=document.getElementById('hideExportedBtn');
-  if(btn)btn.style.background=F.hideExported?'var(--blue)':'';
-  if(btn)btn.style.color=F.hideExported?'white':'';
+  if(btn){btn.style.background=F.hideExported?'var(--blue)':'';btn.style.color=F.hideExported?'white':'';}
 }
-
 function toggleHideExported(){
   F.hideExported=!F.hideExported;
   updateExportedCount();
   doFilter();
 }
-
 async function markAsExported(leads){
   leads.forEach(l=>{if(l.docNum&&l.docNum!=='—')exportedIds.add(l.docNum);});
   await saveExportedIds();
   updateExportedCount();
   renderTable();
 }
-
 function exportCSV(){
   const leads=getFiltered();
   const rows=[[
@@ -1395,10 +1352,8 @@ function exportCSV(){
   const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
   a.download='propsignal_skiptrace_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
-  // Mark all exported leads
   markAsExported(leads);
 }
-
 async function loadData(){
   try{
     const res=await fetch(DATA_URL+'?t='+Date.now());
@@ -1416,8 +1371,8 @@ async function loadData(){
     document.getElementById('mainContent').style.display='block';
     updateCards();buildDatePicker();renderFocus();
     buildLPDatePicker();
-  await loadExportedIds();
-  requestAnimationFrame(()=>requestAnimationFrame(()=>renderTable()));
+    await loadExportedIds();
+    requestAnimationFrame(()=>requestAnimationFrame(()=>renderTable()));
   }catch(err){
     document.getElementById('loadingState').innerHTML=`
       <div style="color:var(--red);font-weight:600;font-size:14px">Failed to load data</div>
