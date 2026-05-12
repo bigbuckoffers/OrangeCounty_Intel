@@ -820,14 +820,14 @@ function mapRow(row,idx){
     taxYearsList:row.tax_years_list||'',taxCertStatus:row.tax_cert_status||'',
     codeViolationCount:parseInt(row.code_violation_count||'0')||0,
     codeViolationTypes:row.code_violation_types||'',
-propStreet:row.prop_street||parseAddr(row.property_address||'').street,
-    propCity:  row.prop_city||parseAddr(row.property_address||'').city,
-    propState: row.prop_state||parseAddr(row.property_address||'').state||'FL',
-    propZip:   row.prop_zip||parseAddr(row.property_address||'').zip,
-    mailStreet:row.mail_street||parseAddr(row.mailing_address||'').street,
-    mailCity:  row.mail_city||parseAddr(row.mailing_address||'').city,
-    mailState: row.mail_state||parseAddr(row.mailing_address||'').state||'FL',
-    mailZip:   row.mail_zip||parseAddr(row.mailing_address||'').zip,
+    propStreet:row.prop_street||'',
+    propCity:  row.prop_city||'',
+    propState: row.prop_state||'FL',
+    propZip:   row.prop_zip||'',
+    mailStreet:row.mail_street||'',
+    mailCity:  row.mail_city||'',
+    mailState: row.mail_state||'FL',
+    mailZip:   row.mail_zip||'',
   };
   lead.source=classifySource(lead);
   lead.distressSignals=detectDistressSignals(lead);
@@ -1161,10 +1161,12 @@ function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCoun
 // No regex lookbehind (Safari-safe). Handles full state names, zip+4, missing state.
 const VALID_STATES=new Set(['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC']);
 const STATE_NAMES={'ALABAMA':'AL','ALASKA':'AK','ARIZONA':'AZ','ARKANSAS':'AR','CALIFORNIA':'CA','COLORADO':'CO','CONNECTICUT':'CT','DELAWARE':'DE','FLORIDA':'FL','GEORGIA':'GA','HAWAII':'HI','IDAHO':'ID','ILLINOIS':'IL','INDIANA':'IN','IOWA':'IA','KANSAS':'KS','KENTUCKY':'KY','LOUISIANA':'LA','MAINE':'ME','MARYLAND':'MD','MASSACHUSETTS':'MA','MICHIGAN':'MI','MINNESOTA':'MN','MISSISSIPPI':'MS','MISSOURI':'MO','MONTANA':'MT','NEBRASKA':'NE','NEVADA':'NV','NEW HAMPSHIRE':'NH','NEW JERSEY':'NJ','NEW MEXICO':'NM','NEW YORK':'NY','NORTH CAROLINA':'NC','NORTH DAKOTA':'ND','OHIO':'OH','OKLAHOMA':'OK','OREGON':'OR','PENNSYLVANIA':'PA','RHODE ISLAND':'RI','SOUTH CAROLINA':'SC','SOUTH DAKOTA':'SD','TENNESSEE':'TN','TEXAS':'TX','UTAH':'UT','VERMONT':'VT','VIRGINIA':'VA','WASHINGTON':'WA','WEST VIRGINIA':'WV','WISCONSIN':'WI','WYOMING':'WY','DISTRICT OF COLUMBIA':'DC'};
+// Known cities sorted longest first — used to detect city in comma-less addresses
+const KNOWN_CITIES=['ALTAMONTE SPRINGS','BUENAVENTURA LAKES','DOCTOR PHILLIPS','HUNTERS CREEK','WINTER GARDEN','WINTER PARK','MOUNT DORA','BELLE ISLE','CASSELBERRY','EATONVILLE','EDGEWOOD','GOLDENROD','CELEBRATION','WINDERMERE','KISSIMMEE','LONGWOOD','MAITLAND','MINNEOLA','GROVELAND','CLERMONT','LAKE MARY','OAK RIDGE','PINE HILLS','PINE CASTLE','REUNION','ST CLOUD','TAVARES','LEESBURG','APOPKA','ORLANDO','SANFORD','OCOEE','DAVENPORT','HAINES CITY','NORTH MUSKEGON','HUNTSVILLE','JACKSONVILLE','TALLAHASSEE','GAINESVILLE','PENSACOLA','FORT LAUDERDALE','MIAMI','TAMPA','HIALEAH','CAPE CORAL','FORT MYERS','PORT ST LUCIE','HOLLYWOOD','MIRAMAR','CORAL SPRINGS','CLEARWATER','BRANDON','SPRING HILL','LAKELAND','POMPANO BEACH','WEST PALM BEACH','DAVIE','BOCA RATON','DELTONA','PALM BAY','LARGO','DEERFIELD BEACH','MELBOURNE','SUNRISE','PLANTATION','BOYNTON BEACH','LAUDERHILL','WESTON','FORT PIERCE','PALM COAST','HOMESTEAD','MIAMI GARDENS','TUSCALOOSA','BIRMINGHAM','MONTGOMERY','MOBILE','ANCHORAGE','PHOENIX','TUCSON','MESA','CHANDLER','GLENDALE','SCOTTSDALE','GILBERT','TEMPE','PEORIA','SURPRISE','LITTLE ROCK','LOS ANGELES','SAN DIEGO','SAN JOSE','SAN FRANCISCO','FRESNO','SACRAMENTO','LONG BEACH','OAKLAND','BAKERSFIELD','ANAHEIM','DENVER','COLORADO SPRINGS','AURORA','FORT COLLINS','BRIDGEPORT','NEW HAVEN','WILMINGTON','WASHINGTON','ATLANTA','SAVANNAH','HONOLULU','BOISE','CHICAGO','ROCKFORD','JOLIET','NAPERVILLE','INDIANAPOLIS','FORT WAYNE','EVANSVILLE','SOUTH BEND','DES MOINES','WICHITA','LOUISVILLE','LEXINGTON','NEW ORLEANS','PORTLAND','BALTIMORE','BOSTON','WORCESTER','SPRINGFIELD','DETROIT','GRAND RAPIDS','WARREN','STERLING HEIGHTS','MINNEAPOLIS','ST PAUL','JACKSON','KANSAS CITY','ST LOUIS','BILLINGS','OMAHA','LINCOLN','LAS VEGAS','HENDERSON','RENO','MANCHESTER','NEWARK','JERSEY CITY','PATERSON','ALBUQUERQUE','BUFFALO','ROCHESTER','YONKERS','CHARLOTTE','RALEIGH','GREENSBORO','DURHAM','FARGO','COLUMBUS','CLEVELAND','CINCINNATI','TOLEDO','AKRON','OKLAHOMA CITY','TULSA','EUGENE','PHILADELPHIA','PITTSBURGH','ALLENTOWN','PROVIDENCE','COLUMBIA','SIOUX FALLS','MEMPHIS','NASHVILLE','KNOXVILLE','CHATTANOOGA','HOUSTON','SAN ANTONIO','DALLAS','AUSTIN','FORT WORTH','EL PASO','ARLINGTON','CORPUS CHRISTI','PLANO','LAREDO','LUBBOCK','SALT LAKE CITY','WEST VALLEY CITY','PROVO','VIRGINIA BEACH','NORFOLK','CHESAPEAKE','RICHMOND','SEATTLE','SPOKANE','TACOMA','BELLEVUE','CHARLESTON','MILWAUKEE','MADISON','GREEN BAY','CHEYENNE'];
 function parseAddr(addr){
   if(!addr||addr==='—')return{street:'',city:'',state:'FL',zip:''};
   addr=addr.trim().toUpperCase();
-  // Replace full state names after last comma only (protects street names like PENNSYLVANIA AVE)
+  // Replace full state names after last comma only
   const lc=addr.lastIndexOf(',');
   if(lc>=0){
     let sfx=addr.slice(lc+1);
@@ -1173,19 +1175,33 @@ function parseAddr(addr){
   }
   // Remove zip+4
   addr=addr.replace(/(\d{5})-\d{4}/g,'$1');
-  // Extract zip: last 5-digit token that isn't the first token (street number)
+  // Extract zip
   const toks=addr.split(/[\s,]+/);
   let zip='';
   for(let i=toks.length-1;i>0;i--){if(/^\d{5}$/.test(toks[i])){zip=toks[i];break;}}
   if(zip){const zp=addr.lastIndexOf(zip);addr=addr.slice(0,zp).trim().replace(/[,\s]+$/,'').trim();}
-  // Extract state abbreviation (only valid codes, not road suffixes RD/DR/ST/CT)
+  // Extract state abbreviation
   const sm=addr.match(/[,\s]+([A-Z]{2})\s*$/);
   let state='';
   if(sm&&VALID_STATES.has(sm[1])){state=sm[1];addr=addr.slice(0,addr.length-sm[0].length).trim().replace(/,\s*$/,'').trim();}
-  // Split street and city at last comma
+  // Split street and city — try comma first, then known city detection
   const ci=addr.lastIndexOf(',');
   let street=addr,city='';
-  if(ci>0){street=addr.slice(0,ci).trim();city=addr.slice(ci+1).trim();}
+  if(ci>0){
+    street=addr.slice(0,ci).trim();
+    city=addr.slice(ci+1).trim();
+  } else {
+    // No comma — scan for known city at end of string
+    for(const knownCity of KNOWN_CITIES){
+      const pat=new RegExp('\\s+'+knownCity.replace(/ /g,'\\s+')+'(\\s+[A-Z]{2})?$');
+      if(pat.test(addr)){
+        city=knownCity;
+        street=addr.slice(0,addr.lastIndexOf(knownCity)).trim();
+        break;
+      }
+    }
+    if(!city)street=addr;
+  }
   return{street,city,state:state||'FL',zip};
 }
 
@@ -1263,4 +1279,3 @@ async function loadData(){
 loadData();
 </script>
 </body>
-</html>
