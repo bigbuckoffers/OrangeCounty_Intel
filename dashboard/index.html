@@ -418,10 +418,11 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
         </div>
         <span class="results-count" id="resultsCount"></span>
         <div class="toolbar-right" style="display:flex;align-items:center;gap:8px">
-          <button class="btn btn-ghost" id="hideExportedBtn" onclick="toggleHideExported()" style="font-size:11.5px">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Hide Exported
-          </button>
+          <div style="display:flex;gap:4px;align-items:center">
+            <button class="filter-btn active" id="exportFilterAll" onclick="setExportFilter('all')" style="font-size:11px;height:28px">All</button>
+            <button class="filter-btn" id="exportFilterNew" onclick="setExportFilter('new')" style="font-size:11px;height:28px">🆕 Not Exported</button>
+            <button class="filter-btn" id="exportFilterDone" onclick="setExportFilter('exported')" style="font-size:11px;height:28px">✓ Exported</button>
+          </div>
           <span id="exportedCount" style="font-size:11px;color:var(--text3)"></span>
           <button class="btn btn-ghost" onclick="selAll()">Select All</button>
         </div>
@@ -555,7 +556,7 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 <script>
 const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/refs/heads/main/data/output.csv';
 const AUCTION_MIN_DAYS=3;
-let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,hideExported:false},currentTab='all',selectedIds=new Set(),exportedIds=new Set();
+let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,exportFilter:'all'},currentTab='all',selectedIds=new Set(),exportedIds=new Set();
 function classifySource(lead){
   const f=(lead.distressFlags||'').toLowerCase();
   const d=(lead.docType||'').toLowerCase();
@@ -1149,7 +1150,8 @@ function getFiltered(){
   else if(currentTab==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
   else if(currentTab==='lp')leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
   if(currentTab==='lp'&&F.lpDate)leads=leads.filter(l=>(l.filed||'').slice(0,10)===F.lpDate);
-  if(F.hideExported)leads=leads.filter(l=>!exportedIds.has(l.docNum));
+  if(F.exportFilter==='new')leads=leads.filter(l=>!exportedIds.has(l.docNum));
+  else if(F.exportFilter==='exported')leads=leads.filter(l=>exportedIds.has(l.docNum));
   leads.sort((a,b)=>b.score-a.score);
   return leads;
 }
@@ -1415,7 +1417,7 @@ function setSigFilter(btn,val){const a=btn.classList.contains('active');document
 function setSrcFilter(btn,val){const a=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.source=a?null:val;if(!a)btn.classList.add('active');doFilter()}
 function setTab(el,tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;doFilter()}
 function setTabFilter(tab){currentTab=tab;document.querySelectorAll('.tab').forEach((t,i)=>{const names=['all','critical','hot','warm','stacked','foreclosure','county','tax','violations','lp'];t.classList.toggle('active',names[i]===tab);});doFilter()}
-function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,hideExported:false};currentTab='all';clearDateFilter();document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');doFilter()}
+function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,exportFilter:'all'};currentTab='all';clearDateFilter();document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');setExportFilter('all');doFilter()}
 function doFilter(){renderTable()}
 function toggleSel(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);updateBulk()}
 function masterCheck(cb){getFiltered().forEach(l=>{if(cb.checked)selectedIds.add(l.id);else selectedIds.delete(l.id)});renderTable();updateBulk()}
@@ -1479,12 +1481,13 @@ async function saveExportedIds(){
 function updateExportedCount(){
   const el=document.getElementById('exportedCount');
   if(el)el.textContent=exportedIds.size>0?exportedIds.size+' exported':'';
-  const btn=document.getElementById('hideExportedBtn');
-  if(btn){btn.style.background=F.hideExported?'var(--blue)':'';btn.style.color=F.hideExported?'white':'';}
 }
-function toggleHideExported(){
-  F.hideExported=!F.hideExported;
-  updateExportedCount();
+function setExportFilter(val){
+  F.exportFilter=val;
+  ['all','new','exported'].forEach(v=>{
+    const btn=document.getElementById('exportFilter'+v.charAt(0).toUpperCase()+v.slice(1));
+    if(btn)btn.classList.toggle('active',v===val);
+  });
   doFilter();
 }
 async function markAsExported(leads){
