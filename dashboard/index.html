@@ -940,7 +940,7 @@ function getFiltered(){
   else if(currentTab==='tax')leads=leads.filter(l=>l.source==='tax');
   else if(currentTab==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
   else if(currentTab==='lp')leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
-  if(currentTab==='lp'&&F.lpDate)leads=leads.filter(l=>l.filed===F.lpDate);
+  if(currentTab==='lp'&&F.lpDate)leads=leads.filter(l=>(l.filed||'').slice(0,10)===F.lpDate);
   if(F.hideExported)leads=leads.filter(l=>!exportedIds.has(l.docNum));
   leads.sort((a,b)=>b.score-a.score);
   return leads;
@@ -990,7 +990,7 @@ function renderTable(){
   const lpBar=document.getElementById('lpFilterBar');
   if(lpBar){
     const today=new Date().toISOString().slice(0,10);
-    const hasTodayLP=LEADS.some(l=>l.distressSignals.includes('Lis Pendens')&&l.filed===today);
+    const hasTodayLP=LEADS.some(l=>l.distressSignals.includes('Lis Pendens')&&(l.filed||'').slice(0,10)===today);
     const dismissed=lpBar.dataset.dismissed==='1';
     lpBar.style.display=(currentTab==='lp'||(hasTodayLP&&!dismissed))?'flex':'none';
   }
@@ -1008,7 +1008,7 @@ function renderTable(){
     const ownPills=lead.ownerSignals.map(ownerPill).join('');
     const stackBadge=lead.isReallyStacked?`<span class="pill pill-stacked" style="margin-top:2px">⚡ STACKED</span>`:'';
     const today=new Date().toISOString().slice(0,10);
-    const isNewLP=lead.distressSignals.includes('Lis Pendens')&&lead.filed===today;
+    const isNewLP=lead.distressSignals.includes('Lis Pendens')&&(lead.filed||'').slice(0,10)===today;
     const newLPBadge=isNewLP?`<div style="background:#DC2626;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block">🔴 NEW TODAY</div>`:'';
     const isExported=exportedIds.has(lead.docNum);
     const exportedBadge=isExported?`<div style="background:#D1FAE5;color:#065F46;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block">✓ EXPORTED</div>`:'';
@@ -1040,7 +1040,7 @@ function renderTable(){
 }
 function buildLPDatePicker(){
   const lpLeads=LEADS.filter(l=>l.distressSignals.includes('Lis Pendens'));
-  const dates=[...new Set(lpLeads.map(l=>l.filed).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
+  const dates=[...new Set(lpLeads.map(l=>(l.filed||'').slice(0,10)).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
   const sel=document.getElementById('lpDateSelect');
   if(!sel)return;
   sel.innerHTML='<option value="">— All dates —</option>';
@@ -1048,11 +1048,11 @@ function buildLPDatePicker(){
   dates.forEach(d=>{
     const opt=document.createElement('option');
     const label=d===today?'Today ('+d+')':d;
-    opt.value=d;opt.textContent=label+' — '+lpLeads.filter(l=>l.filed===d).length+' leads';
+    opt.value=d;opt.textContent=label+' — '+lpLeads.filter(l=>(l.filed||'').slice(0,10)===d).length+' leads';
     sel.appendChild(opt);
   });
   // Auto-select today if there are today's leads
-  const todayLeads=lpLeads.filter(l=>l.filed===today);
+  const todayLeads=lpLeads.filter(l=>(l.filed||'').slice(0,10)===today);
   const countEl=document.getElementById('lpNewTodayCount');
   if(countEl){
     if(todayLeads.length>0){
@@ -1072,7 +1072,7 @@ function exportLP(){
   const date=F.lpDate||new Date().toISOString().slice(0,10);
   const leads=LEADS.filter(l=>{
     if(!l.distressSignals.includes('Lis Pendens'))return false;
-    if(F.lpDate&&l.filed!==F.lpDate)return false;
+    if(F.lpDate&&(l.filed||'').slice(0,10)!==F.lpDate)return false;
     return true;
   });
   if(!leads.length){alert('No Lis Pendens leads for selected date.');return;}
@@ -1383,4 +1383,3 @@ async function loadData(){
 loadData();
 </script>
 </body>
-</html>
