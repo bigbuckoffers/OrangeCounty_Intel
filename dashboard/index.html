@@ -699,7 +699,7 @@ function calcScore(lead){
   if(owner.includes('LLC / Corp')){pts+=4;notes.push({label:'LLC/Corp — financial not emotional',val:4});}
   const oldSig=owner.find(s=>s.startsWith('Old Case'));
   if(oldSig){const yrs=parseInt(oldSig.match(/(\d+)/)?.[1]||0);if(yrs>=7){pts+=10;notes.push({label:'Case '+yrs+'yr old — deeply distressed',val:10});}else if(yrs>=5){pts+=6;notes.push({label:'Case '+yrs+'yr old',val:6});}}
-  if(lead.filed){const filed=new Date(lead.filed);const daysSince=Math.ceil((today-filed)/86400000);if(daysSince>=0&&daysSince<=7){pts+=5;notes.push({label:'Filed this week — fresh opportunity',val:5});}}
+  if(lead.filed){const filed=new Date((lead.filed||'').slice(0,10)+'T12:00:00');const daysSince=Math.round((today-filed)/86400000);if(daysSince===0){pts+=20;notes.push({label:'Filed today — contact immediately',val:20});}else if(daysSince<=3){pts+=15;notes.push({label:'Filed '+daysSince+'d ago — very fresh',val:15});}else if(daysSince<=7){pts+=10;notes.push({label:'Filed '+daysSince+'d ago — this week',val:10});}else if(daysSince<=14){pts+=5;notes.push({label:'Filed '+daysSince+'d ago — 2 weeks',val:5});}else if(daysSince<=30){pts+=2;notes.push({label:'Filed '+daysSince+'d ago — this month',val:2});}}
   if(lead.propAddr&&lead.propAddr!=='—'&&lead.propAddr.length>5){pts+=5;notes.push({label:'Has confirmed property address',val:5});}
   return{score:Math.max(30,Math.min(99,Math.round(pts))),notes};
 }
@@ -782,6 +782,18 @@ function calcAction(score,match,distress,ownerSigs){
   if(score>=40)return{label:'✉ Send Mailer',cls:'action-mail'};
   return{label:'🔎 Research First',cls:'action-research'};
 }
+function isPoBox(addr){
+  if(!addr)return false;
+  return /p[\.\s]*o[\.\s]*\s*box/i.test(addr);
+}
+function getPipelineStage(lead){
+  if(isPoBox(lead.mailAddr))return'PO Box — Mail Only';
+  if(lead.distressSignals.includes('Foreclosure Auction'))return'Foreclosure Auction';
+  if(lead.distressSignals.includes('Lis Pendens'))return'Lis Pendens';
+  if(lead.isReallyStacked)return'Stacked';
+  if(lead.score>=75)return'Critical';
+  return'Standard';
+}
 function distressPill(s){
   if(s==='Lis Pendens')return`<span class="pill pill-lp">⚖️ ${s}</span>`;
   if(s==='Foreclosure Auction')return`<span class="pill pill-fc">🏠 ${s}</span>`;
@@ -847,6 +859,8 @@ function mapRow(row,idx){
   lead.insight=generateInsight(lead);
   const actionObj=calcAction(score,match,lead.distressSignals,lead.ownerSignals);
   lead.action=actionObj.label;lead.actionCls=actionObj.cls;
+  lead.pipelineStage=getPipelineStage(lead);
+  lead.skipTrace=isPoBox(lead.mailAddr)||!lead.mailAddr||lead.mailAddr==='—'?'NO':'YES';
   const links=[];
   if(lead.countyUrl)links.push({name:'Property Appraiser',url:lead.countyUrl,cat:'PROP'});
   links.push({name:'Orange County Clerk',url:'https://www.myorangeclerk.com/official-records',cat:'CLERK'});
@@ -1081,6 +1095,7 @@ function exportLP(){
     'Mailing Street','Mailing City','Mailing State','Mailing Zip',
     'Owner Name','Score','Distress Signals','Why This Lead',
     'Doc#','File Date','Assessed Value','Match','Action','Stacked','Parcel ID',
+    'Pipeline Stage','Skip Trace',
     'Property Address Full','Mailing Address Full',
   ]];
   leads.forEach(l=>{
@@ -1091,6 +1106,7 @@ function exportLP(){
       l.distressSignals.join('; '),l.insight,
       l.docNum,l.filed,l.assessed,l.match,l.action,
       l.isReallyStacked?'YES':'NO',l.parcelId,
+      l.pipelineStage,l.skipTrace,
       l.propAddr,l.mailAddr,
     ]);
   });
@@ -1317,6 +1333,7 @@ function exportCSV(){
     'Tax Yrs Delinquent','Tax Balance',
     'Code Violations','Violation Types',
     'Parcel ID',
+    'Pipeline Stage','Skip Trace',
     'Property Address Full','Mailing Address Full',
   ]];
   leads.forEach(l=>{
@@ -1346,6 +1363,7 @@ function exportCSV(){
       l.taxYearsDelinquent||'',l.taxTotalBalance||'',
       l.codeViolationCount||'',l.codeViolationTypes||'',
       l.parcelId,
+      l.pipelineStage,l.skipTrace,
       l.propAddr,l.mailAddr,
     ]);
   });
@@ -1382,4 +1400,5 @@ async function loadData(){
 }
 loadData();
 </script>
+</body>
 </body>
