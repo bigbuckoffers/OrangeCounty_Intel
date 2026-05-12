@@ -419,9 +419,26 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
           <div class="tab" onclick="setTab(this,'county')">📋 County <span class="tab-count" id="tc-county">—</span></div>
           <div class="tab" onclick="setTab(this,'tax')">💸 Tax <span class="tab-count" id="tc-tax">—</span></div>
           <div class="tab" onclick="setTab(this,'violations')">⚠️ Violations <span class="tab-count" id="tc-cv">—</span></div>
+          <div class="tab" onclick="setTab(this,'lp')">⚖️ Lis Pendens <span class="tab-count" id="tc-lp">—</span></div>
         </div>
         <span class="results-count" id="resultsCount"></span>
         <div class="toolbar-right"><button class="btn btn-ghost" onclick="selAll()">Select All</button></div>
+      </div>
+
+      <!-- LP Date Filter Bar -->
+      <div id="lpFilterBar" style="display:none;background:#FEE2E2;border:1px solid #FECACA;border-radius:var(--r-lg);padding:12px 18px;margin-bottom:12px;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-size:12px;font-weight:700;color:#991B1B">⚖️ Lis Pendens Filter</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <label style="font-size:11.5px;color:#7F1D1D;font-weight:500">Filed date:</label>
+          <select id="lpDateSelect" onchange="setLPDate(this.value)" style="height:30px;padding:0 10px;border-radius:var(--r);border:1.5px solid #FCA5A5;font-size:12px;font-family:inherit;color:#991B1B;background:#FFF5F5;cursor:pointer;outline:none;font-weight:600">
+            <option value="">— All dates —</option>
+          </select>
+        </div>
+        <div id="lpNewTodayCount" style="font-size:11.5px;font-weight:700;color:#DC2626"></div>
+        <button class="btn btn-ghost" style="margin-left:auto;font-size:11.5px;height:30px;background:#DC2626;color:white;border-color:#DC2626" onclick="exportLP()">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Export Today's LP
+        </button>
       </div>
 
       <div class="bulk-bar" id="bulkBar">
@@ -536,7 +553,7 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--bl
 <script>
 const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/refs/heads/main/data/output.csv';
 const AUCTION_MIN_DAYS=3;
-let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null},currentTab='all',selectedIds=new Set();
+let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null},currentTab='all',selectedIds=new Set();
 
 function classifySource(lead){
   const f=(lead.distressFlags||'').toLowerCase();
@@ -937,6 +954,8 @@ function getFiltered(){
   else if(currentTab==='county')leads=leads.filter(l=>l.source==='county');
   else if(currentTab==='tax')leads=leads.filter(l=>l.source==='tax');
   else if(currentTab==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
+  else if(currentTab==='lp')leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
+  if(currentTab==='lp'&&F.lpDate)leads=leads.filter(l=>l.filed===F.lpDate);
   leads.sort((a,b)=>b.score-a.score);
   return leads;
 }
@@ -983,6 +1002,10 @@ function renderTable(){
   document.getElementById('tc-county').textContent=L.filter(l=>l.source==='county').length;
   document.getElementById('tc-tax').textContent=L.filter(l=>l.source==='tax').length;
   document.getElementById('tc-cv').textContent=cvCount;
+  document.getElementById('tc-lp').textContent=L.filter(l=>l.distressSignals.includes('Lis Pendens')).length;
+  // Show/hide LP filter bar
+  const lpBar=document.getElementById('lpFilterBar');
+  if(lpBar)lpBar.style.display=currentTab==='lp'?'flex':'none';
   const tbody=document.getElementById('tbody');
   tbody.innerHTML='';
   filtered.forEach(lead=>{
@@ -994,10 +1017,13 @@ function renderTable(){
     const distPills=lead.distressSignals.map(distressPill).join('');
     const ownPills=lead.ownerSignals.map(ownerPill).join('');
     const stackBadge=lead.isReallyStacked?`<span class="pill pill-stacked" style="margin-top:2px">⚡ STACKED</span>`:'';
+    const today=new Date().toISOString().slice(0,10);
+    const isNewLP=lead.distressSignals.includes('Lis Pendens')&&lead.filed===today;
+    const newLPBadge=isNewLP?`<div style="background:#DC2626;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block">🔴 NEW TODAY</div>`:'';
     tr.innerHTML=`
       <td><input type="checkbox" ${selectedIds.has(lead.id)?'checked':''} onchange="toggleSel(${lead.id},this)"></td>
       <td>${makeRing(lead.score)}</td>
-      <td><div class="sig-wrap"><div class="sig-distress">${distPills}${stackBadge}</div>${ownPills?`<div class="sig-owner">${ownPills}</div>`:''}</div></td>
+      <td><div class="sig-wrap"><div class="sig-distress">${distPills}${stackBadge}</div>${ownPills?`<div class="sig-owner">${ownPills}</div>`:''}</div>${newLPBadge}</td>
       <td>${urgencyBadge(lead.score)}</td>
       <td>${auctionCell(lead)}</td>
       <td><div class="insight-cell">${lead.insight}</div></td>
@@ -1019,6 +1045,72 @@ function renderTable(){
     `;
     tbody.appendChild(tr);
   });
+}
+
+function buildLPDatePicker(){
+  const lpLeads=LEADS.filter(l=>l.distressSignals.includes('Lis Pendens'));
+  const dates=[...new Set(lpLeads.map(l=>l.filed).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
+  const sel=document.getElementById('lpDateSelect');
+  if(!sel)return;
+  sel.innerHTML='<option value="">— All dates —</option>';
+  const today=new Date().toISOString().slice(0,10);
+  dates.forEach(d=>{
+    const opt=document.createElement('option');
+    const label=d===today?'Today ('+d+')':d;
+    opt.value=d;opt.textContent=label+' — '+lpLeads.filter(l=>l.filed===d).length+' leads';
+    sel.appendChild(opt);
+  });
+  // Auto-select today if there are today's leads
+  const todayLeads=lpLeads.filter(l=>l.filed===today);
+  const countEl=document.getElementById('lpNewTodayCount');
+  if(countEl){
+    if(todayLeads.length>0){
+      countEl.textContent='🔴 '+todayLeads.length+' NEW today — export now!';
+      sel.value=today;
+      F.lpDate=today;
+    }else{
+      countEl.textContent='No new LP filings today';
+    }
+  }
+}
+
+function setLPDate(date){
+  F.lpDate=date||null;
+  doFilter();
+}
+
+function exportLP(){
+  const date=F.lpDate||new Date().toISOString().slice(0,10);
+  const leads=LEADS.filter(l=>{
+    if(!l.distressSignals.includes('Lis Pendens'))return false;
+    if(F.lpDate&&l.filed!==F.lpDate)return false;
+    return true;
+  });
+  if(!leads.length){alert('No Lis Pendens leads for selected date.');return;}
+  const rows=[[
+    'Property Street','Property City','Property State','Property Zip',
+    'Mailing Street','Mailing City','Mailing State','Mailing Zip',
+    'Owner Name','Score','Distress Signals','Why This Lead',
+    'Doc#','File Date','Assessed Value','Match','Action','Stacked','Parcel ID',
+    'Property Address Full','Mailing Address Full',
+  ]];
+  leads.forEach(l=>{
+    rows.push([
+      l.propStreet,l.propCity,l.propState,l.propZip,
+      l.mailStreet,l.mailCity,l.mailState,l.mailZip,
+      l.ownerName||l.grantee,l.score,
+      l.distressSignals.join('; '),l.insight,
+      l.docNum,l.filed,l.assessed,l.match,l.action,
+      l.isReallyStacked?'YES':'NO',l.parcelId,
+      l.propAddr,l.mailAddr,
+    ]);
+  });
+  const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='lis_pendens_'+date+'.csv';
+  a.click();
+  alert('Exported '+leads.length+' Lis Pendens leads for '+date);
 }
 
 function renderFocus(){
@@ -1149,7 +1241,7 @@ function setScoreBand(btn,val){document.querySelectorAll('#filterBar .filter-btn
 function setSigFilter(btn,val){const a=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.signal=a?null:val;if(!a)btn.classList.add('active');doFilter()}
 function setSrcFilter(btn,val){const a=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.source=a?null:val;if(!a)btn.classList.add('active');doFilter()}
 function setTab(el,tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;doFilter()}
-function setTabFilter(tab){currentTab=tab;document.querySelectorAll('.tab').forEach((t,i)=>{const names=['all','critical','hot','warm','stacked','foreclosure','county','tax','violations'];t.classList.toggle('active',names[i]===tab);});doFilter()}
+function setTabFilter(tab){currentTab=tab;document.querySelectorAll('.tab').forEach((t,i)=>{const names=['all','critical','hot','warm','stacked','foreclosure','county','tax','violations','lp'];t.classList.toggle('active',names[i]===tab);});doFilter()}
 function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null,date:null};currentTab='all';clearDateFilter();document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');doFilter()}
 function doFilter(){renderTable()}
 function toggleSel(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);updateBulk()}
@@ -1268,7 +1360,8 @@ async function loadData(){
     document.getElementById('loadingState').style.display='none';
     document.getElementById('mainContent').style.display='block';
     updateCards();buildDatePicker();renderFocus();
-    requestAnimationFrame(()=>requestAnimationFrame(()=>renderTable()));
+    buildLPDatePicker();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>renderTable()));
   }catch(err){
     document.getElementById('loadingState').innerHTML=`
       <div style="color:var(--red);font-weight:600;font-size:14px">Failed to load data</div>
