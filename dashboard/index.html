@@ -856,6 +856,45 @@ function stageRank(stage){
 function bestPipelineStage(group){
   return group.map(l=>l.pipelineStage).filter(Boolean).sort((a,b)=>stageRank(b)-stageRank(a))[0]||'Standard';
 }
+
+function getGHLTags(input){
+  const group = Array.isArray(input) ? input : [input];
+  const tags = ['propsignal','county_orange_fl'];
+
+  const skipTrace = group.some(l => (l.skipTrace || '').toUpperCase() === 'YES') ? 'YES' : 'NO';
+  tags.push(skipTrace === 'YES' ? 'skiptrace_yes' : 'skiptrace_no');
+
+  const stacked = group.some(l => l.isReallyStacked || (l.stacked || '').toUpperCase() === 'YES');
+  tags.push(stacked ? 'stacked_yes' : 'stacked_no');
+
+  const sources = new Set(group.map(l => (l.source || '').toLowerCase()).filter(Boolean));
+  if(sources.has('foreclosure')) tags.push('source_foreclosure');
+  if(sources.has('county')) tags.push('source_county');
+  if(sources.has('tax')) tags.push('source_tax');
+  if(sources.has('violations')) tags.push('source_violations');
+
+  const signals = group
+    .flatMap(l => l.distressSignals || [])
+    .join(' ')
+    .toLowerCase();
+
+  if(signals.includes('lis pendens')) tags.push('signal_lis_pendens');
+  if(signals.includes('foreclosure auction')) tags.push('signal_foreclosure_auction');
+  if(signals.includes('delinquent tax')) tags.push('signal_delinquent_tax');
+  if(signals.includes('code violation')) tags.push('signal_code_violation');
+  if(signals.includes('judgment')) tags.push('signal_judgment');
+  if(signals.includes('lien')) tags.push('signal_lien');
+  if(signals.includes('probate')) tags.push('signal_probate');
+  if(signals.includes('tax deed')) tags.push('signal_tax_deed');
+  if(signals.includes('death cert')) tags.push('signal_death_cert');
+
+  const maxScore = Math.max(...group.map(l => Number(l.score || 0)));
+  if(maxScore >= 75) tags.push('priority_critical');
+  else if(maxScore >= 55) tags.push('priority_hot');
+  else if(maxScore >= 40) tags.push('priority_warm');
+
+  return [...new Set(tags)].join(', ');
+}
 function buildOneAddressRows(leads){
   const groups=new Map();
   leads.forEach(l=>{
@@ -917,7 +956,7 @@ function buildOneAddressRows(leads){
       uniqueJoin(group.map(x=>x.codeViolationCount||'')),
       uniqueJoin(group.map(x=>x.codeViolationTypes||'')),
       uniqueJoin(group.map(x=>x.parcelId)),
-      bestPipelineStage(group),skipTrace,
+      bestPipelineStage(group),skipTrace,getGHLTags(group),
       l.propAddr,l.mailAddr,
       group.length
     ]);
@@ -945,7 +984,7 @@ function skiptraceExportHeader(){
     'Assessed Value','Match','Action','Stacked',
     'Tax Yrs Delinquent','Tax Balance',
     'Code Violations','Violation Types',
-    'Parcel ID','Pipeline Stage','Skip Trace',
+    'Parcel ID','Pipeline Stage','Skip Trace','GHL Tags',
     'Property Address Full','Mailing Address Full','Merged Record Count'
   ];
 }
