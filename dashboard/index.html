@@ -1463,9 +1463,9 @@ function parseAddr(addr){
 // ── EXPORTED LEADS PERSISTENCE ────────────────────────────────────────────────
 async function loadExportedIds(){
   try{
-    const r=await window.storage.get('exported_leads');
-    if(r&&r.value){
-      const ids=JSON.parse(r.value);
+    const raw=localStorage.getItem('propsignal_exported_leads');
+    if(raw){
+      const ids=JSON.parse(raw);
       ids.forEach(id=>exportedIds.add(id));
       updateExportedCount();
     }
@@ -1473,7 +1473,7 @@ async function loadExportedIds(){
 }
 async function saveExportedIds(){
   try{
-    await window.storage.set('exported_leads',JSON.stringify([...exportedIds]));
+    localStorage.setItem('propsignal_exported_leads',JSON.stringify([...exportedIds]));
   }catch(e){console.warn('Could not save exported leads',e);}
 }
 function updateExportedCount(){
