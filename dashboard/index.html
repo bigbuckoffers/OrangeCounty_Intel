@@ -1355,7 +1355,7 @@ function exportCSV(){
     'Mailing Street','Mailing City','Mailing State','Mailing Zip',
     'Owner Name',
     'Score','Heat','Source','Distress Signals','Owner Signals','Why This Lead',
-    'Doc#','File Date','Scraped Date','Auction Date',
+    'Doc#','File Date','Scraped Date','Auction Date','GHL Stop Outreach Date','Days Until Auction',
     'Assessed Value','Match','Action','Stacked',
     'Tax Yrs Delinquent','Tax Balance',
     'Code Violations','Violation Types',
@@ -1383,6 +1383,8 @@ function exportCSV(){
       l.score,heat,l.source,
       l.distressSignals.join('; '),l.ownerSignals.join('; '),l.insight,
       l.docNum,l.filed,l.scrapedDate,aDate,
+      days!==null&&days>0?aDate:'',
+      days!==null?days+'d away':'',
       l.assessed,l.match,l.action,l.isReallyStacked?'YES':'NO',
       l.taxYearsDelinquent||'',l.taxTotalBalance||'',
       l.codeViolationCount||'',l.codeViolationTypes||'',
@@ -1426,3 +1428,4 @@ async function loadData(){
 loadData();
 </script>
 </body>
+</html>
