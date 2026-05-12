@@ -794,6 +794,161 @@ function getPipelineStage(lead){
   if(lead.score>=75)return'Critical';
   return'Standard';
 }
+
+// ── SKIPTRACE EXPORT OWNER + ADDRESS NORMALIZATION ──────────────────────────
+function normText(v){return String(v||'').replace(/\s+/g,' ').trim();}
+function normKey(v){return normText(v).toUpperCase().replace(/[^A-Z0-9]/g,'');}
+function isEntityOwnerName(name){
+  const n=' '+normText(name).toUpperCase()+' ';
+  return /\b(LLC|L\.L\.C|INC|INCORPORATED|CORP|CORPORATION|CO|COMPANY|LTD|LIMITED|LP|LLP|TRUST|TRUSTEE|TR|HOLDINGS|INVESTMENTS|VENTURES|GROUP|PARTNERS|CAPITAL|FUND|BANK|ASSOCIATION|CHURCH|MINISTRIES|PROPERTIES|REALTY|ESTATE OF|HEIRS OF)\b/.test(n);
+}
+function splitOwnerParts(ownerName){
+  return normText(ownerName)
+    .split(',')
+    .map(x=>normText(x))
+    .filter(Boolean);
+}
+function parseOwnerPart(part,inheritedLast){
+  const full=normText(part);
+  if(!full)return{first:'',last:'',entity:false,full:''};
+  if(isEntityOwnerName(full))return{first:full,last:'',entity:true,full};
+
+  const toks=full.split(' ').filter(Boolean);
+  if(toks.length===1){
+    return{first:toks[0],last:inheritedLast||'',entity:false,full};
+  }
+
+  // Orange County owner names usually export as LAST FIRST MIDDLE.
+  // If a second owner is shortened like "MARIA L", reuse the first owner's last name.
+  if(inheritedLast && toks.length===2 && toks[1].length===1){
+    return{first:toks[0],last:inheritedLast,entity:false,full};
+  }
+
+  return{first:toks[1],last:toks[0],entity:false,full};
+}
+function parseOwnersForSkiptrace(ownerName){
+  const parts=splitOwnerParts(ownerName);
+  const owners=[];
+  let inheritedLast='';
+  parts.forEach(part=>{
+    const o=parseOwnerPart(part,inheritedLast);
+    if(o.first||o.last){
+      owners.push(o);
+      if(!o.entity && o.last)inheritedLast=o.last;
+    }
+  });
+  return owners;
+}
+function getAddressKey(l){
+  const pp=parseAddr(l.propAddr);
+  const street=normKey(l.propStreet||pp.street||l.propAddr);
+  const city=normKey(l.propCity||pp.city||'');
+  const state=normKey(l.propState||pp.state||'FL');
+  const zip=normKey(l.propZip||pp.zip||'');
+  return [street,city,state,zip].join('|');
+}
+function uniqueJoin(values,sep='; '){
+  return [...new Set(values.flatMap(v=>Array.isArray(v)?v:[v]).map(v=>normText(v)).filter(v=>v&&v!=='—'))].join(sep);
+}
+function stageRank(stage){
+  return {'Foreclosure Auction':6,'Lis Pendens':5,'Stacked':4,'Critical':3,'Standard':2,'PO Box — Mail Only':1}[stage]||0;
+}
+function bestPipelineStage(group){
+  return group.map(l=>l.pipelineStage).filter(Boolean).sort((a,b)=>stageRank(b)-stageRank(a))[0]||'Standard';
+}
+function buildOneAddressRows(leads){
+  const groups=new Map();
+  leads.forEach(l=>{
+    const key=getAddressKey(l);
+    if(!groups.has(key))groups.set(key,[]);
+    groups.get(key).push(l);
+  });
+
+  const rows=[];
+  [...groups.values()].forEach(group=>{
+    group.sort((a,b)=>(b.score||0)-(a.score||0));
+    const l=group[0];
+    const pp=parseAddr(l.propAddr);
+    const mp=parseAddr(l.mailAddr);
+    const pStreet=l.propStreet||pp.street||l.propAddr||'';
+    const pCity=l.propCity||pp.city||'';
+    const pState=l.propState||pp.state||'FL';
+    const pZip=l.propZip||pp.zip||'';
+    const mStreet=l.mailStreet||mp.street||'';
+    const mCity=l.mailCity||mp.city||'';
+    const mState=l.mailState||mp.state||'FL';
+    const mZip=l.mailZip||mp.zip||'';
+
+    const ownerName=uniqueJoin(group.map(x=>x.ownerName||x.grantee),', ');
+    const owners=parseOwnersForSkiptrace(ownerName);
+    const ownerCols=[];
+    for(let i=0;i<4;i++){
+      ownerCols.push(owners[i]?.first||'', owners[i]?.last||'');
+    }
+
+    const maxScore=Math.max(...group.map(x=>x.score||0));
+    const heat=heatLabel(maxScore).text;
+    const hasAuction=group.some(x=>x.distressSignals.includes('Foreclosure Auction'));
+    const auctionLead=group.find(x=>x.distressSignals.includes('Foreclosure Auction'));
+    const days=hasAuction&&auctionLead?daysUntil(auctionLead.filed):null;
+    const aDate=days!==null?fmtD(auctionLead.filed):'';
+    const skipTrace=group.some(x=>x.skipTrace==='YES')?'YES':'NO';
+
+    rows.push([
+      pStreet,pCity,pState,pZip,
+      mStreet,mCity,mState,mZip,
+      ownerName,
+      ...ownerCols,
+      maxScore,heat,
+      uniqueJoin(group.map(x=>x.source)),
+      uniqueJoin(group.map(x=>x.distressSignals)),
+      uniqueJoin(group.map(x=>x.ownerSignals)),
+      uniqueJoin(group.map(x=>x.insight),' | '),
+      uniqueJoin(group.map(x=>x.docNum)),
+      uniqueJoin(group.map(x=>x.filed)),
+      uniqueJoin(group.map(x=>x.scrapedDate)),
+      aDate,
+      days!==null&&days>0?aDate:'',
+      days!==null?days+'d away':'',
+      l.assessed,l.match,l.action,
+      group.some(x=>x.isReallyStacked)?'YES':'NO',
+      uniqueJoin(group.map(x=>x.taxYearsDelinquent||'')),
+      uniqueJoin(group.map(x=>x.taxTotalBalance||'')),
+      uniqueJoin(group.map(x=>x.codeViolationCount||'')),
+      uniqueJoin(group.map(x=>x.codeViolationTypes||'')),
+      uniqueJoin(group.map(x=>x.parcelId)),
+      bestPipelineStage(group),skipTrace,
+      l.propAddr,l.mailAddr,
+      group.length
+    ]);
+  });
+  return rows;
+}
+function downloadRowsAsCSV(rows,filename){
+  const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download=filename;
+  a.click();
+}
+function skiptraceExportHeader(){
+  return [
+    'Property Street','Property City','Property State','Property Zip',
+    'Mailing Street','Mailing City','Mailing State','Mailing Zip',
+    'Owner Name',
+    'Owner 1 First Name','Owner 1 Last Name',
+    'Owner 2 First Name','Owner 2 Last Name',
+    'Owner 3 First Name','Owner 3 Last Name',
+    'Owner 4 First Name','Owner 4 Last Name',
+    'Score','Heat','Source','Distress Signals','Owner Signals','Why This Lead',
+    'Doc#','File Date','Scraped Date','Auction Date','GHL Stop Outreach Date','Days Until Auction',
+    'Assessed Value','Match','Action','Stacked',
+    'Tax Yrs Delinquent','Tax Balance',
+    'Code Violations','Violation Types',
+    'Parcel ID','Pipeline Stage','Skip Trace',
+    'Property Address Full','Mailing Address Full','Merged Record Count'
+  ];
+}
 function distressPill(s){
   if(s==='Lis Pendens')return`<span class="pill pill-lp">⚖️ ${s}</span>`;
   if(s==='Foreclosure Auction')return`<span class="pill pill-fc">🏠 ${s}</span>`;
@@ -1090,34 +1245,12 @@ function exportLP(){
     return true;
   });
   if(!leads.length){alert('No Lis Pendens leads for selected date.');return;}
-  const rows=[[
-    'Property Street','Property City','Property State','Property Zip',
-    'Mailing Street','Mailing City','Mailing State','Mailing Zip',
-    'Owner Name','Score','Distress Signals','Why This Lead',
-    'Doc#','File Date','Assessed Value','Match','Action','Stacked','Parcel ID',
-    'Pipeline Stage','Skip Trace',
-    'Property Address Full','Mailing Address Full',
-  ]];
-  leads.forEach(l=>{
-    rows.push([
-      l.propStreet,l.propCity,l.propState,l.propZip,
-      l.mailStreet,l.mailCity,l.mailState,l.mailZip,
-      l.ownerName||l.grantee,l.score,
-      l.distressSignals.join('; '),l.insight,
-      l.docNum,l.filed,l.assessed,l.match,l.action,
-      l.isReallyStacked?'YES':'NO',l.parcelId,
-      l.pipelineStage,l.skipTrace,
-      l.propAddr,l.mailAddr,
-    ]);
-  });
-  const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='lis_pendens_'+date+'.csv';
-  a.click();
+  const rows=[skiptraceExportHeader(), ...buildOneAddressRows(leads)];
+  downloadRowsAsCSV(rows,'lis_pendens_one_address_'+date+'.csv');
   markAsExported(leads);
-  alert('Exported '+leads.length+' Lis Pendens leads for '+date);
+  alert('Exported '+(rows.length-1)+' one-address Lis Pendens rows for '+date);
 }
+
 function renderFocus(){
   const top=[...LEADS].sort((a,b)=>b.score-a.score).slice(0,10);
   document.getElementById('focusItems').innerHTML=top.map(l=>{
@@ -1323,55 +1456,11 @@ async function markAsExported(leads){
 }
 function exportCSV(){
   const leads=getFiltered();
-  const rows=[[
-    'Property Street','Property City','Property State','Property Zip',
-    'Mailing Street','Mailing City','Mailing State','Mailing Zip',
-    'Owner Name',
-    'Score','Heat','Source','Distress Signals','Owner Signals','Why This Lead',
-    'Doc#','File Date','Scraped Date','Auction Date','GHL Stop Outreach Date','Days Until Auction',
-    'Assessed Value','Match','Action','Stacked',
-    'Tax Yrs Delinquent','Tax Balance',
-    'Code Violations','Violation Types',
-    'Parcel ID',
-    'Pipeline Stage','Skip Trace',
-    'Property Address Full','Mailing Address Full',
-  ]];
-  leads.forEach(l=>{
-    const heat=heatLabel(l.score).text;
-    const days=l.distressSignals.includes('Foreclosure Auction')?daysUntil(l.filed):null;
-    const aDate=days!==null?fmtD(l.filed):'';
-    const pp=parseAddr(l.propAddr);
-    const pStreet=l.propStreet||pp.street||l.propAddr||'';
-    const pCity=l.propCity||pp.city||'';
-    const pState=l.propState||pp.state||'FL';
-    const pZip=l.propZip||pp.zip||'';
-    const mp=parseAddr(l.mailAddr);
-    const mStreet=l.mailStreet||mp.street||'';
-    const mCity=l.mailCity||mp.city||'';
-    const mState=l.mailState||mp.state||'FL';
-    const mZip=l.mailZip||mp.zip||'';
-    rows.push([
-      pStreet,pCity,pState,pZip,
-      mStreet,mCity,mState,mZip,
-      l.ownerName||l.grantee,
-      l.score,heat,l.source,
-      l.distressSignals.join('; '),l.ownerSignals.join('; '),l.insight,
-      l.docNum,l.filed,l.scrapedDate,aDate,
-      days!==null&&days>0?aDate:'',
-      days!==null?days+'d away':'',
-      l.assessed,l.match,l.action,l.isReallyStacked?'YES':'NO',
-      l.taxYearsDelinquent||'',l.taxTotalBalance||'',
-      l.codeViolationCount||'',l.codeViolationTypes||'',
-      l.parcelId,
-      l.pipelineStage,l.skipTrace,
-      l.propAddr,l.mailAddr,
-    ]);
-  });
-  const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='propsignal_skiptrace_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  const rows=[skiptraceExportHeader(), ...buildOneAddressRows(leads)];
+  downloadRowsAsCSV(rows,'propsignal_skiptrace_one_address_'+new Date().toISOString().slice(0,10)+'.csv');
   markAsExported(leads);
 }
+
 async function loadData(){
   try{
     const res=await fetch(DATA_URL+'?t='+Date.now());
@@ -1401,4 +1490,4 @@ async function loadData(){
 loadData();
 </script>
 </body>
-</body>
+</html>
