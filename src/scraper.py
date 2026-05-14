@@ -1741,7 +1741,6 @@ def main():
     log.info("Final total: %d unique properties", len(merged))
     save_json(merged)
     save_csv(merged)
-    save_no_match_diagnostics(merged)
     log.info("Done.")
 
 
