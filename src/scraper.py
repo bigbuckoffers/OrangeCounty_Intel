@@ -1192,7 +1192,7 @@ def save_excluded_condos(excluded, path="data/excluded_condos.json"):
         "leads":          excluded,
     }
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2)
+        json.dump(payload, f)
     log.info("Saved %d excluded condos -> %s", len(excluded), path)
 
 
@@ -1569,7 +1569,7 @@ def save_json(leads):
         "leads":         [asdict(l) if isinstance(l, Lead) else l for l in leads],
     }
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2)
+        json.dump(payload, f)
     log.info("Saved %d records to %s", len(leads), OUTPUT_PATH)
 
 
