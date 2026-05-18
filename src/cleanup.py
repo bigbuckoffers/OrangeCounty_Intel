@@ -128,7 +128,12 @@ def clear_unsafe_address(lead):
     parcel     = re.sub(r'[-\s]', '', lead.get('parcel_id') or '').strip()
     reason     = (lead.get('match_reason') or '').lower()
 
-    if confidence in ('LOW', 'NONE', '') and not parcel and 'no_anchor' in reason:
+    unsafe = (
+        'no_anchor'  in reason or
+        'ambiguous'  in reason or
+        ('surname'   in reason and 'strict' not in reason and 'direct' not in reason)
+    )
+    if confidence in ('LOW', 'NONE', '') and not parcel and unsafe:
         lead['property_address'] = ''
         lead['prop_street']      = ''
         lead['prop_city']        = ''
@@ -137,7 +142,7 @@ def clear_unsafe_address(lead):
         lead['needs_enrichment'] = True
         lead['match_confidence'] = 'NEEDS_REVIEW'
         lead['match_reason']     = (lead.get('match_reason') or '') + \
-                                   ' | cleared unsafe low-confidence no-anchor address'
+                                   ' | cleared unsafe low-confidence address'
         return True
     return False
 
@@ -452,6 +457,34 @@ def _primary_party(party_str):
     return parts[0] if parts else ""
 
 
+
+def _load_nal_all_rows():
+    """Load ALL NAL rows by parcel ID — no filtering by address/city."""
+    if not os.path.exists(NAL_LOCAL_PATH):
+        return None
+    import csv as _csv
+    rows = []
+    try:
+        with open(NAL_LOCAL_PATH, encoding="utf-8", errors="replace") as f:
+            reader = _csv.DictReader(f)
+            for row in reader:
+                pid = (row.get("PARCEL_ID") or "").strip()
+                if not pid:
+                    continue
+                rows.append({
+                    "PARCEL_ID": pid,
+                    "PHY_ADDR1": (row.get("PHY_ADDR1") or "").strip(),
+                    "PHY_CITY":  (row.get("PHY_CITY")  or "").strip(),
+                    "PHY_STATE": (row.get("PHY_STATE")  or "FL").strip() or "FL",
+                    "PHY_ZIPCD": str(row.get("PHY_ZIPCD") or "").strip()[:5],
+                    "OWN_NAME":  (row.get("OWN_NAME")   or "").strip(),
+                })
+    except Exception as e:
+        log.error("Failed to load NAL all rows: %s", e)
+        return None
+    log.info("NAL all rows loaded: %d", len(rows))
+    return rows
+
 def fill_missing_city_zip(leads):
     """
     For records with a valid parcel ID but missing prop_city or prop_zip,
@@ -481,15 +514,15 @@ def fill_missing_city_zip(leads):
         return leads
 
     log.info("Loading NAL to fill city/zip for %d leads...", len(needs_fix))
-    rows = _load_nal_row_index()
+    rows = _load_nal_all_rows()
     if not rows:
         return leads
 
-    # Build parcel -> row lookup
+    # Build parcel -> row lookup from ALL NAL rows
     parcel_lookup = {}
     for row in rows:
         pid = re.sub(r"[-\s]", "", row.get("PARCEL_ID", ""))
-        if pid:
+        if pid and pid not in parcel_lookup:
             parcel_lookup[pid] = row
 
     fixed = 0
@@ -573,7 +606,8 @@ def revalidate_with_nal(leads):
         # Always trust strict/direct over old fuzzy HIGH
         old_confidence = (lead.get("match_confidence") or "").upper()
         old_reason     = (lead.get("match_reason") or "").lower()
-        old_is_fuzzy   = ("surname" in old_reason or
+        old_is_fuzzy   = ("surname"   in old_reason or
+                          "ambiguous" in old_reason or
                           ("high" == old_confidence and
                            "strict" not in old_reason and
                            "direct" not in old_reason))
