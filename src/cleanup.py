@@ -180,7 +180,7 @@ def _load_nal_row_index():
                 zipcd    = str(row.get("PHY_ZIPCD") or "").strip()[:5]
                 own_name = (row.get("OWN_NAME")   or "").strip()
                 av       = (row.get("AV_NSD") or row.get("TV_NSD") or "").strip()
-                if not addr1 or not city:
+                if not addr1:
                     continue
                 rows.append({
                     "PARCEL_ID": pid,
@@ -473,6 +473,7 @@ def fill_missing_city_zip(leads):
     needs_fix = [l for l in leads if isinstance(l, dict) and
                  is_valid_parcel(clean_parcel(l.get('parcel_id', ''))) and
                  (not l.get('prop_city') or
+                  not l.get('prop_zip') or
                   l.get('prop_city','').upper() not in _VALID_OC_CITIES)]
 
     if not needs_fix:
@@ -1056,8 +1057,23 @@ def main():
     active = fill_missing_city_zip(active)
     gc.collect()
 
+    # ── STEP 3c: Clean owner_name on ALL leads ────────────────────────────
+    log.info("Step 3c: Cleaning owner_name on all leads...")
+    owner_fixed = 0
+    for lead in active:
+        if not isinstance(lead, dict):
+            continue
+        grantee = (lead.get('grantee') or '').strip()
+        grantor = (lead.get('grantor') or '').strip()
+        # Grantee is always the property owner
+        clean_owner = _primary_party(grantee) or _primary_party(grantor)
+        if clean_owner and lead.get('owner_name') != clean_owner:
+            lead['owner_name'] = clean_owner
+            owner_fixed += 1
+    log.info("Cleaned owner_name on %d leads", owner_fixed)
+
     # ── STEP 4: Unstack bad merges ───────────────────────────────────────
-    log.info("Step 4: Unstacking bad merges...")
+    log.info("Step 4: Unstack bad merges...")
     active = unstack_bad_merges(active)
     gc.collect()
 
