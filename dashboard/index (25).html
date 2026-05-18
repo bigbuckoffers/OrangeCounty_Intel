@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PropSignal — Orange County FL Lead Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F5F6F8;--surface:#FFFFFF;--surface2:#F9FAFB;
+  --border:#E5E7EB;--border2:#D1D5DB;
+  --text:#111827;--text2:#6B7280;--text3:#9CA3AF;
+  --blue:#2563EB;--blue-light:#EFF6FF;--blue-mid:#DBEAFE;
+  --green:#059669;--green-light:#ECFDF5;
+  --red:#DC2626;--red-light:#FEF2F2;
+  --orange:#D97706;--orange-light:#FFFBEB;
+  --purple:#7C3AED;--purple-light:#F5F3FF;
+  --r:8px;--r-lg:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 4px 24px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.06);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.5}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.app{display:flex;min-height:100vh}
+.sidebar{width:224px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:200;overflow-y:auto}
+.main{margin-left:224px;display:flex;flex-direction:column;min-height:100vh;flex:1}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
+.content{padding:24px;flex:1}
+.sidebar-logo{padding:18px 20px;border-bottom:1px solid var(--border)}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-icon{width:34px;height:34px;background:var(--blue);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:white}
+.logo-name{font-size:14.5px;font-weight:700;letter-spacing:-.4px}
+.logo-tag{font-size:10px;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-top:1px}
+.nav-sect{padding:14px 12px 4px}
+.nav-lbl{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);padding:0 8px;margin-bottom:5px}
+.nav-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:var(--r);color:var(--text2);cursor:pointer;transition:.15s;font-size:12.5px}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:var(--blue-light);color:var(--blue);font-weight:500}
+.nav-item svg{width:14px;height:14px;flex-shrink:0}
+.nav-badge{margin-left:auto;color:white;font-size:10px;font-weight:600;padding:1px 6px;border-radius:20px;min-width:20px;text-align:center;background:var(--red)}
+.nav-badge.blue{background:var(--blue)}
+.sidebar-bottom{margin:auto 0 0;border-top:1px solid var(--border)}
+.cv-btn-wrap{padding:12px 14px;border-bottom:1px solid var(--border)}
+.cv-btn{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border-radius:var(--r);background:linear-gradient(135deg,#FEF3C7,#FDE68A);border:1px solid #F59E0B;color:#92400E;font-size:11px;font-weight:600;cursor:pointer;transition:.15s;text-decoration:none}
+.cv-btn:hover{background:linear-gradient(135deg,#FDE68A,#FCD34D);border-color:#D97706;transform:translateY(-1px);box-shadow:0 2px 8px rgba(217,119,6,.2)}
+.cv-btn svg{width:13px;height:13px;flex-shrink:0}
+.cv-btn-sub{font-size:9px;font-weight:400;opacity:.7;display:block;margin-top:1px}
+.sidebar-county{padding:14px}
+.county-badge{background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;padding:6px 10px;border-radius:var(--r);display:flex;align-items:center;gap:6px}
+.county-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.search-wrap{flex:1;max-width:400px;position:relative}
+.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;fill:var(--text3);pointer-events:none}
+.search-input{width:100%;height:36px;border:1px solid var(--border2);border-radius:var(--r);padding:0 12px 0 32px;font-size:13px;font-family:inherit;background:var(--surface2);color:var(--text);outline:none;transition:.15s}
+.search-input:focus{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.search-input::placeholder{color:var(--text3)}
+.topbar-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:0 14px;height:34px;border-radius:var(--r);font-size:12.5px;font-weight:500;font-family:inherit;cursor:pointer;transition:.15s;border:1px solid transparent}
+.btn-ghost{border-color:var(--border2);color:var(--text2);background:var(--surface)}
+.btn-ghost:hover{background:var(--bg);color:var(--text)}
+.btn-primary{background:var(--blue);color:white}
+.btn-primary:hover{background:#1d4ed8}
+.btn svg{width:13px;height:13px}
+.topbar-sep{width:1px;height:22px;background:var(--border);margin:0 2px}
+.last-run{font-size:11px;color:var(--text3)}
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.cards-row2{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 16px;cursor:pointer;transition:.2s}
+.card:hover{box-shadow:var(--shadow-lg);border-color:var(--border2);transform:translateY(-1px)}
+.card-label{font-size:10.5px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.card-value{font-size:22px;font-weight:700;letter-spacing:-.5px;line-height:1}
+.card-sub{font-size:10.5px;color:var(--text3);margin-top:4px}
+.card-trend{font-size:10px;font-weight:500;margin-top:6px;display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:20px}
+.card-trend.up{background:#DCFCE7;color:#16a34a}
+.card-trend.hot{background:#FEE2E2;color:var(--red)}
+.card-trend.warn{background:#FFFBEB;color:var(--orange)}
+.card-trend.info{background:#EFF6FF;color:var(--blue)}
+.card-trend.purple{background:#F5F3FF;color:var(--purple)}
+.card.accent-blue{border-left:3px solid var(--blue)}
+.card.accent-red{border-left:3px solid var(--red)}
+.card.accent-green{border-left:3px solid var(--green)}
+.card.accent-orange{border-left:3px solid var(--orange)}
+.card.accent-purple{border-left:3px solid var(--purple)}
+.date-intel-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:20px;box-shadow:var(--shadow)}
+.date-intel-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.date-intel-title{font-size:13px;font-weight:700;white-space:nowrap}
+.date-select{height:32px;padding:0 12px;border-radius:var(--r);border:1.5px solid var(--blue);font-size:12.5px;font-family:inherit;color:var(--blue);background:var(--blue-light);cursor:pointer;outline:none;font-weight:600}
+.date-intel-chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;flex:1}
+.date-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+.dc-fc{background:#FFEDD5;color:#9A3412}.dc-lp{background:#FEE2E2;color:#991B1B}
+.dc-jdg{background:#FEF3C7;color:#92400E}.dc-lien{background:#E0F2FE;color:#0369A1}
+.dc-tax{background:#FCE7F3;color:#9D174D}.dc-prob{background:#F5F3FF;color:#5B21B6}
+.dc-dc{background:#F0FDF4;color:#166534}.dc-cv{background:#FEF9C3;color:#854D0E}
+.date-intel-clear{font-size:11.5px;font-weight:500;color:var(--text3);cursor:pointer;padding:4px 8px;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);white-space:nowrap}
+.date-intel-clear:hover{background:var(--bg);color:var(--text)}
+.date-intel-active{background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border-color:var(--blue)}
+.focus-section{background:linear-gradient(135deg,#0F172A,#1E293B);border-radius:var(--r-lg);padding:18px 20px;margin-bottom:20px;color:white}
+.focus-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.focus-title{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.focus-items{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.focus-item{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:10px 12px;cursor:pointer;transition:.15s}
+.focus-item:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22)}
+.focus-score{font-size:20px;font-weight:800;letter-spacing:-1px}
+.focus-name{font-size:11px;font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.9}
+.focus-why{font-size:9.5px;opacity:.6;margin-top:3px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.source-legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);align-items:center}
+.source-legend-label{font-size:10.5px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-right:4px}
+.source-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:600}
+.sc-fc{background:#FFEDD5;color:#9A3412}.sc-lp{background:#FEE2E2;color:#991B1B}
+.sc-prob{background:#F5F3FF;color:#5B21B6}.sc-jdg{background:#FEF3C7;color:#92400E}
+.sc-lien{background:#E0F2FE;color:#0369A1}.sc-td{background:#FEF2F2;color:#B91C1C}
+.sc-dc{background:#F0FDF4;color:#166534}.sc-tax{background:#FCE7F3;color:#9D174D}
+.sc-cv{background:#FEF9C3;color:#854D0E}
+.toolbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filter-btn{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 11px;border-radius:20px;font-size:11.5px;font-weight:500;border:1px solid var(--border2);color:var(--text2);background:var(--surface);cursor:pointer;transition:.15s}
+.filter-btn:hover{background:var(--bg);color:var(--text)}
+.filter-btn.active{background:var(--blue-light);border-color:var(--blue-mid);color:var(--blue)}
+.select-filter{height:30px;padding:0 10px;border-radius:20px;border:1px solid var(--border2);font-size:11.5px;font-family:inherit;color:var(--text2);background:var(--surface);cursor:pointer;outline:none}
+.toolbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.results-count{font-size:11.5px;color:var(--text3)}
+.tabs{display:flex;gap:2px;background:var(--surface2);border-radius:var(--r);padding:3px;border:1px solid var(--border);flex-wrap:wrap}
+.tab{padding:5px 11px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;color:var(--text2);transition:.15s}
+.tab:hover{background:var(--surface);color:var(--text)}
+.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tab-count{font-size:10px;background:var(--border);color:var(--text2);padding:1px 5px;border-radius:20px;margin-left:4px}
+.tab.active .tab-count{background:var(--blue);color:white}
+.bulk-bar{display:none;align-items:center;gap:8px;padding:8px 16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--r-lg);margin-bottom:12px}
+.bulk-bar.visible{display:flex}
+.bulk-bar-count{font-size:13px;font-weight:600;color:var(--blue)}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:1600px}
+thead th{padding:9px 12px;text-align:left;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);background:var(--surface2);border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:5}
+thead th.sortable{cursor:pointer;user-select:none}
+thead th.sortable:hover{color:var(--text);background:var(--border)}
+thead th.sort-asc::after{content:' ▲';color:var(--blue)}
+thead th.sort-desc::after{content:' ▼';color:var(--blue)}
+thead th.sort-asc,thead th.sort-desc{color:var(--blue)}
+thead th:first-child{padding-left:16px}
+tbody tr{border-bottom:1px solid var(--border);transition:.1s;cursor:pointer}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#FAFBFF}
+tbody tr.selected{background:var(--blue-light)}
+tbody td{padding:9px 12px;vertical-align:middle}
+tbody td:first-child{padding-left:16px}
+tbody tr.row-critical{background:#FFF5F5;border-left:3px solid var(--red)}
+tbody tr.row-critical:hover{background:#FEE8E8}
+.score-cell{display:flex;flex-direction:column;align-items:center;gap:2px}
+.score-ring{width:42px;height:42px;position:relative}
+.score-ring svg{width:42px;height:42px;transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:3.5}
+.score-ring .bg{stroke:#E5E7EB}
+.score-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:11.5px;font-weight:700;letter-spacing:-.5px}
+.score-heat{font-size:7.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;margin-top:1px}
+.sig-wrap{display:flex;flex-direction:column;gap:4px;max-width:190px}
+.sig-distress{display:flex;flex-wrap:wrap;gap:3px}
+.sig-owner{display:flex;flex-wrap:wrap;gap:3px;padding-top:3px;border-top:1px dashed var(--border);margin-top:1px}
+.pill{display:inline-flex;align-items:center;gap:2px;font-size:9.5px;font-weight:500;padding:2px 6px;border-radius:20px;white-space:nowrap}
+.pill-fc{background:#FFEDD5;color:#9A3412}.pill-lp{background:#FEE2E2;color:#991B1B}
+.pill-prob{background:#F5F3FF;color:#5B21B6}.pill-jdg{background:#FEF3C7;color:#92400E}
+.pill-lien{background:#E0F2FE;color:#0369A1}.pill-td{background:#FEF2F2;color:#B91C1C}
+.pill-dc{background:#F0FDF4;color:#166534}.pill-tax{background:#FCE7F3;color:#9D174D}
+.pill-cv{background:#FEF9C3;color:#854D0E}.pill-cv-housing{background:#FEF08A;color:#713F12;font-weight:700}
+.pill-oos{background:#F0FDF4;color:#166534}.pill-po{background:#FFFBEB;color:#92400E}
+.pill-abs{background:#EFF6FF;color:#1E40AF}.pill-estate{background:#FDF4FF;color:#7E22CE}
+.pill-multi{background:#FFF1F2;color:#9F1239}.pill-llc{background:#F8FAFC;color:#475569}
+.pill-old{background:#FEE2E2;color:#991B1B}.pill-generic{background:#F1F5F9;color:#475569}
+.pill-stacked{background:#111827;color:white;font-weight:700}
+.insight-cell{font-size:10.5px;color:var(--text2);line-height:1.4;max-width:240px;font-style:italic}
+.action-badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.action-callhot{background:#DC2626;color:white}.action-call{background:#FEE2E2;color:var(--red)}
+.action-skip{background:#EFF6FF;color:var(--blue)}.action-sms{background:#ECFDF5;color:var(--green)}
+.action-mail{background:#FFFBEB;color:var(--orange)}.action-research{background:#F1F5F9;color:#475569}
+.urgency-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap;display:inline-block}
+.match-badge{display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:20px}
+.match-high{background:#DCFCE7;color:#166534}.match-medium{background:#FEF9C3;color:#854D0E}
+.match-low{background:#FEE2E2;color:#991B1B}.match-none{background:#F1F5F9;color:#6B7280}
+.doc-num{font-family:'SF Mono',Monaco,'Courier New',monospace;font-size:10.5px;font-weight:500;color:var(--text)}
+.addr-main{font-size:11.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px}
+.addr-sub{font-size:10.5px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px}
+.money{font-size:12.5px;font-weight:600}
+.owner-initials{border-radius:50%;background:var(--blue-light);color:var(--blue);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px}
+.links-btn{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:var(--r);border:1px solid var(--border2);color:var(--text2);background:var(--surface);cursor:pointer;transition:.15s;white-space:nowrap}
+.links-btn:hover{background:var(--bg);color:var(--text);border-color:var(--blue)}
+.filter-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:14px;display:none}
+.filter-bar.open{display:block}
+.filter-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.filter-group-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);font-weight:600;margin-bottom:5px}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:500;opacity:0;pointer-events:none;transition:.2s}
+.drawer-overlay.open{opacity:1;pointer-events:all}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:560px;background:var(--surface);z-index:501;transform:translateX(100%);transition:.25s cubic-bezier(.4,0,.2,1);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;flex-shrink:0}
+.drawer-close{margin-left:auto;width:30px;height:30px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--text2);cursor:pointer;transition:.15s;flex-shrink:0}
+.drawer-close:hover{background:var(--bg)}
+.drawer-body{flex:1;overflow-y:auto;padding:20px 24px}
+.drawer-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0}
+.drawer-section{margin-bottom:22px}
+.drawer-section-title{font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.detail-item{background:var(--surface2);border-radius:var(--r);padding:10px 12px}
+.detail-item-label{font-size:10px;color:var(--text3);font-weight:500;margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
+.detail-item-val{font-size:13px;font-weight:500;color:var(--text)}
+.insight-box{background:linear-gradient(135deg,#EFF6FF,#F0FDF4);border:1px solid #BFDBFE;border-radius:var(--r);padding:14px 16px;margin-bottom:20px}
+.insight-label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.insight-text{font-size:13px;color:var(--text);line-height:1.6}
+.score-breakdown{background:var(--surface2);border-radius:var(--r);overflow:hidden}
+.score-row{display:flex;align-items:center;gap:10px;padding:7px 12px;border-bottom:1px solid var(--border)}
+.score-row:last-child{border-bottom:none}
+.score-row-label{font-size:11px;color:var(--text);flex:1}
+.score-row-bar{flex:2;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.score-row-fill{height:100%;border-radius:2px}
+.score-row-val{font-size:11.5px;font-weight:700;min-width:32px;text-align:right}
+.links-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:600;opacity:0;pointer-events:none;transition:.15s;display:flex;align-items:center;justify-content:center}
+.links-modal-overlay.open{opacity:1;pointer-events:all}
+.links-modal{background:var(--surface);border-radius:var(--r-lg);width:380px;box-shadow:var(--shadow-lg);overflow:hidden}
+.links-modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.links-modal-head h3{font-size:14px;font-weight:600}
+.links-modal-body{padding:8px 0}
+.link-item{display:flex;align-items:center;gap:10px;padding:10px 20px;transition:.15s;text-decoration:none}
+.link-item:hover{background:var(--bg)}
+.loading{display:flex;align-items:center;justify-content:center;padding:60px;flex-direction:column;gap:16px;color:var(--text3)}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* LP alert banner pulse */
+@keyframes lpPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}70%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}
+.lp-bar-alert{animation:lpPulse 2s infinite}
+input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--blue)}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-wrap">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+      <div><div class="logo-name">PropSignal</div><div class="logo-tag">Lead Intelligence</div></div>
+    </div>
+  </div>
+  <div class="nav-sect">
+    <div class="nav-lbl">Workspace</div>
+    <div class="nav-item active" onclick="clearAllFilters()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>All Leads <span class="nav-badge" id="nb-total">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('critical')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>Critical 75+ <span class="nav-badge" id="nb-hot">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('stacked')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>Stacked <span class="nav-badge" id="nb-stacked" style="background:#111827">—</span></div>
+  </div>
+  <div class="nav-sect">
+    <div class="nav-lbl">Data Sources</div>
+    <div class="nav-item" onclick="setTabFilter('foreclosure')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Foreclosure <span class="nav-badge" id="nb-fc" style="background:#D97706">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('county')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>County Filings <span class="nav-badge blue" id="nb-county">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('tax')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>Delinquent Tax <span class="nav-badge" id="nb-tax" style="background:#9D174D">—</span></div>
+    <div class="nav-item" onclick="setTabFilter('violations')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>Code Violations <span class="nav-badge" id="nb-cv" style="background:#92400E">—</span></div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="cv-btn-wrap">
+      <a href="https://netapps.ocfl.net/CETitleViolationSearch/" target="_blank" class="cv-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        <div><div>Download Violations</div><span class="cv-btn-sub">Click "here" → XLSX → upload to repo</span></div>
+      </a>
+    </div>
+    <div class="sidebar-county">
+      <div class="county-badge"><div class="county-dot"></div>Orange County, FL</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:8px" id="sync-time">Loading...</div>
+    </div>
+  </div>
+</aside>
+<div class="main">
+  <div class="topbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input class="search-input" type="text" placeholder="Search owner, address, doc #, signal…" id="searchInput" oninput="doFilter()">
+    </div>
+    <div class="topbar-sep"></div>
+    <button class="btn btn-ghost" onclick="toggleFilterBar()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>Filters
+    </button>
+    <div class="topbar-sep"></div>
+    <div class="last-run" id="last-run">Loading...</div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" onclick="exportCSV()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Export CSV
+      </button>
+      <button class="btn btn-primary" onclick="alert('GHL integration coming soon!')">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>Push to GHL
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="loading" id="loadingState"><div class="spinner"></div><div>Loading leads from Orange County...</div></div>
+    <div id="mainContent" style="display:none">
+      <div class="cards-grid">
+        <div class="card accent-blue" onclick="clearAllFilters()">
+          <div class="card-label">Total Leads</div><div class="card-value" id="c-total">—</div>
+          <div class="card-sub">All records, all sources</div><div class="card-trend up" id="c-hot-trend">—</div>
+        </div>
+        <div class="card accent-red" onclick="setTabFilter('critical')">
+          <div class="card-label">🚨 Critical 75+</div><div class="card-value" id="c-critical" style="color:var(--red)">—</div>
+          <div class="card-sub">Drop everything — call now</div><div class="card-trend hot">Highest motivation</div>
+        </div>
+        <div class="card accent-orange" onclick="setTabFilter('hot')">
+          <div class="card-label">🔥 Hot 55–74</div><div class="card-value" id="c-hot">—</div>
+          <div class="card-sub">Priority this week</div><div class="card-trend hot">Skiptrace → call</div>
+        </div>
+        <div class="card accent-purple" onclick="setTabFilter('stacked')">
+          <div class="card-label">⚡ Stacked Signals</div><div class="card-value" id="c-stacked">—</div>
+          <div class="card-sub">2+ distress types, same property</div><div class="card-trend purple">Most motivated</div>
+        </div>
+      </div>
+      <div class="cards-row2">
+        <div class="card accent-orange" onclick="setTabFilter('foreclosure')">
+          <div class="card-label">🏠 Foreclosure Auctions</div><div class="card-value" id="c-fc">—</div>
+          <div class="card-sub">4+ days out only</div><div class="card-trend warn">Scheduled auctions</div>
+        </div>
+        <div class="card accent-blue" onclick="setTabFilter('county')">
+          <div class="card-label">📋 County Filings</div><div class="card-value" id="c-county">—</div>
+          <div class="card-sub">LP · Probate · Judgment · Lien</div><div class="card-trend info">Comptroller records</div>
+        </div>
+        <div class="card accent-purple" onclick="setTabFilter('tax')">
+          <div class="card-label">💸 Delinquent Tax</div><div class="card-value" id="c-tax">—</div>
+          <div class="card-sub">Unpaid property taxes</div><div class="card-trend purple">Tax roll data</div>
+        </div>
+        <div class="card accent-green" onclick="setTabFilter('violations')">
+          <div class="card-label">⚠️ Code Violations</div><div class="card-value" id="c-cv">—</div>
+          <div class="card-sub">Open enforcement cases</div><div class="card-trend warn">Updated weekly</div>
+        </div>
+      </div>
+      <div class="date-intel-bar" id="dateIntelBar">
+        <div class="date-intel-head">
+          <div class="date-intel-title">📅 New Data By Scrape Date</div>
+          <select class="date-select" id="datePicker" onchange="onDatePick(this.value)">
+            <option value="">— Show all dates —</option>
+          </select>
+          <div class="date-intel-chips" id="dateChips"></div>
+          <button class="date-intel-clear" id="dateClearBtn" onclick="clearDateFilter()" style="display:none">✕ Clear</button>
+        </div>
+      </div>
+      <div class="focus-section">
+        <div class="focus-head">
+          <div class="focus-title">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;opacity:.8"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+            Today's Focus — Export &amp; Call These First
+          </div>
+          <button class="btn btn-ghost" style="font-size:11.5px;height:28px;color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.2)" onclick="setTabFilter('critical')">View all critical →</button>
+        </div>
+        <div class="focus-items" id="focusItems"></div>
+      </div>
+      <div class="source-legend">
+        <span class="source-legend-label">Signals:</span>
+        <span class="source-chip sc-lp">⚖️ Lis Pendens</span>
+        <span class="source-chip sc-fc">🏠 Foreclosure</span>
+        <span class="source-chip sc-td">📜 Tax Deed</span>
+        <span class="source-chip sc-jdg">⚡ Judgment</span>
+        <span class="source-chip sc-lien">🔗 Lien</span>
+        <span class="source-chip sc-tax">💸 Delinquent Tax</span>
+        <span class="source-chip sc-prob">🕊️ Probate</span>
+        <span class="source-chip sc-cv">⚠️ Code Violation</span>
+        <span class="source-chip sc-dc">💀 Death Cert</span>
+        <span class="pill pill-stacked" style="font-size:10px;margin-left:6px">⚡ STACKED</span>
+      </div>
+      <div class="filter-bar" id="filterBar">
+        <div class="filter-row">
+          <div>
+            <div class="filter-group-lbl">Priority</div>
+            <div style="display:flex;gap:5px">
+              <button class="filter-btn active" onclick="setScoreBand(this,'all')">All</button>
+              <button class="filter-btn" onclick="setScoreBand(this,'critical')">🚨 75+</button>
+              <button class="filter-btn" onclick="setScoreBand(this,'hot')">🔥 55+</button>
+              <button class="filter-btn" onclick="setScoreBand(this,'warm')">40+</button>
+            </div>
+          </div>
+          <div>
+            <div class="filter-group-lbl">Source</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <button class="filter-btn" onclick="setSrcFilter(this,'foreclosure')">🏠 Foreclosure</button>
+              <button class="filter-btn" onclick="setSrcFilter(this,'lp')">⚖️ Lis Pendens</button>
+              <button class="filter-btn" onclick="setSrcFilter(this,'probate')">🕊️ Probate</button>
+              <button class="filter-btn" onclick="setSrcFilter(this,'judgment')">⚡ Judgment</button>
+              <button class="filter-btn" onclick="setSrcFilter(this,'lien')">🔗 Lien</button>
+              <button class="filter-btn" onclick="setSrcFilter(this,'tax')">💸 Tax</button>
+              <button class="filter-btn" onclick="setSrcFilter(this,'violations')">⚠️ Violations</button>
+              <button class="filter-btn" onclick="setSrcFilter(this,'stacked')">⚡ Stacked</button>
+            </div>
+          </div>
+          <div>
+            <div class="filter-group-lbl">Owner</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <button class="filter-btn" onclick="setSigFilter(this,'Out of State')">OOS</button>
+              <button class="filter-btn" onclick="setSigFilter(this,'PO Box')">PO Box</button>
+              <button class="filter-btn" onclick="setSigFilter(this,'Estate')">Estate</button>
+              <button class="filter-btn" onclick="setSigFilter(this,'Multiple')">Multi-owner</button>
+              <button class="filter-btn" onclick="setSigFilter(this,'LLC')">LLC/Corp</button>
+              <button class="filter-btn" onclick="setSigFilter(this,'Absentee')">Absentee</button>
+              <button class="filter-btn" onclick="setSigFilter(this,'Old Case')">Old Case</button>
+            </div>
+          </div>
+          <div>
+            <div class="filter-group-lbl">Min Score</div>
+            <select class="select-filter" onchange="F.score=this.value?+this.value:null;doFilter()">
+              <option value="">All</option>
+              <option value="75">75+</option><option value="60">60+</option><option value="45">45+</option>
+            </select>
+          </div>
+          <button class="btn btn-ghost" style="margin-top:14px" onclick="clearAllFilters()">Clear all</button>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="tabs">
+          <div class="tab active" onclick="setTab(this,'all')">All <span class="tab-count" id="tc-all">—</span></div>
+          <div class="tab" onclick="setTab(this,'critical')">🚨 Critical <span class="tab-count" id="tc-critical">—</span></div>
+          <div class="tab" onclick="setTab(this,'hot')">🔥 Hot <span class="tab-count" id="tc-hot">—</span></div>
+          <div class="tab" onclick="setTab(this,'warm')">Warm <span class="tab-count" id="tc-warm">—</span></div>
+          <div class="tab" onclick="setTab(this,'stacked')">⚡ Stacked <span class="tab-count" id="tc-stacked">—</span></div>
+          <div class="tab" onclick="setTab(this,'foreclosure')">🏠 Auction <span class="tab-count" id="tc-fc">—</span></div>
+          <div class="tab" onclick="setTab(this,'county')">📋 County <span class="tab-count" id="tc-county">—</span></div>
+          <div class="tab" onclick="setTab(this,'tax')">💸 Tax <span class="tab-count" id="tc-tax">—</span></div>
+          <div class="tab" onclick="setTab(this,'violations')">⚠️ Violations <span class="tab-count" id="tc-cv">—</span></div>
+          <div class="tab" onclick="setTab(this,'lp')">⚖️ Lis Pendens <span class="tab-count" id="tc-lp">—</span></div>
+        </div>
+        <span class="results-count" id="resultsCount"></span>
+        <div class="toolbar-right" style="display:flex;align-items:center;gap:8px">
+          <div style="display:flex;align-items:center;gap:5px">
+            <span style="font-size:11px;color:var(--text3);white-space:nowrap">Sort by:</span>
+            <select id="sortSelect" onchange="setSortBy(this.value)" style="height:28px;padding:0 8px;border-radius:20px;border:1px solid var(--border2);font-size:11.5px;font-family:inherit;color:var(--text2);background:var(--surface);cursor:pointer;outline:none">
+              <option value="score_desc">Score (High → Low)</option>
+              <option value="score_asc">Score (Low → High)</option>
+              <option value="scraped_desc">Scraped (Newest First)</option>
+              <option value="scraped_asc">Scraped (Oldest First)</option>
+              <option value="filed_desc">Filed (Newest First)</option>
+              <option value="filed_asc">Filed (Oldest First)</option>
+              <option value="assessed_desc">Assessed (High → Low)</option>
+              <option value="assessed_asc">Assessed (Low → High)</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:4px;align-items:center">
+            <button class="filter-btn active" id="exportFilterAll" onclick="setExportFilter('all')" style="font-size:11px;height:28px">All</button>
+            <button class="filter-btn" id="exportFilterNew" onclick="setExportFilter('new')" style="font-size:11px;height:28px">🆕 Not Exported</button>
+            <button class="filter-btn" id="exportFilterDone" onclick="setExportFilter('exported')" style="font-size:11px;height:28px">✓ Exported</button>
+          </div>
+          <span id="exportedCount" style="font-size:11px;color:var(--text3)"></span>
+          <button class="btn btn-ghost" onclick="selAll()">Select All</button>
+        </div>
+      </div>
+
+      <!-- LP Date Filter Bar — shows on LP tab, and always when new leads today -->
+      <div id="lpFilterBar" style="display:none;background:#FEF2F2;border:1.5px solid #FECACA;border-radius:var(--r-lg);padding:12px 18px;margin-bottom:12px;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:8px;height:8px;background:#DC2626;border-radius:50%;animation:lpPulse 2s infinite;flex-shrink:0"></div>
+          <span style="font-size:12px;font-weight:700;color:#991B1B">⚖️ Lis Pendens</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <label style="font-size:11.5px;color:#7F1D1D;font-weight:500">Filed date:</label>
+          <select id="lpDateSelect" onchange="setLPDate(this.value)" style="height:30px;padding:0 10px;border-radius:var(--r);border:1.5px solid #FCA5A5;font-size:12px;font-family:inherit;color:#991B1B;background:#FFF5F5;cursor:pointer;outline:none;font-weight:600">
+            <option value="">— All dates —</option>
+          </select>
+        </div>
+        <div id="lpNewTodayCount" style="font-size:11.5px;font-weight:700;color:#DC2626"></div>
+        <button class="btn" style="margin-left:auto;font-size:11.5px;height:30px;background:#DC2626;color:white;border-color:#DC2626" onclick="exportLP()">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Export Today's LP
+        </button>
+        <button onclick="document.getElementById('lpFilterBar').dataset.dismissed='1';document.getElementById('lpFilterBar').style.display='none'" style="font-size:16px;color:#9CA3AF;background:none;border:none;cursor:pointer;padding:0 4px;line-height:1" title="Dismiss">×</button>
+      </div>
+
+      <div class="bulk-bar" id="bulkBar">
+        <span class="bulk-bar-count" id="bulkCount">0 selected</span>
+        <button class="btn btn-ghost">Skiptrace</button>
+        <button class="btn btn-ghost">Push to GHL</button>
+        <button class="btn btn-ghost" onclick="exportCSV()">Export CSV</button>
+      </div>
+      <div class="table-wrap"><div class="table-scroll">
+        <table>
+          <thead><tr>
+            <th><input type="checkbox" id="masterCb" onchange="masterCheck(this)"></th>
+            <th class="sortable" onclick="colSort('score')">Score</th>
+            <th>Signals + Owner</th>
+            <th class="sortable" onclick="colSort('scraped')">Scraped</th>
+            <th class="sortable" onclick="colSort('filed')">Filed</th>
+            <th class="sortable" onclick="colSort('auction')">Auction Date</th>
+            <th>Owner</th>
+            <th>Property Address</th>
+            <th>Property City</th>
+            <th>Property State</th>
+            <th>Property Zip</th>
+            <th>Mailing Address</th>
+            <th>Mailing City</th>
+            <th>Mailing State</th>
+            <th>Mailing Zip</th>
+            <th class="sortable" onclick="colSort('assessed')">Assessed Value</th>
+            <th>Match</th>
+            <th>Links</th>
+          </tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div></div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="owner-initials" id="d-av" style="width:38px;height:38px;font-size:13px">—</div>
+    <div style="flex:1">
+      <div style="font-size:15px;font-weight:700" id="d-name"></div>
+      <div style="font-size:12px;color:var(--text3);margin-top:2px" id="d-addr"></div>
+      <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px" id="d-src-pills"></div>
+    </div>
+    <div class="drawer-close" onclick="closeDrawer()"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+  </div>
+  <div class="drawer-body">
+    <div id="d-banner" style="border-radius:var(--r);padding:14px 16px;margin-bottom:20px;display:flex;align-items:center;gap:14px">
+      <div style="font-size:52px;font-weight:900;letter-spacing:-3px;line-height:1" id="d-score"></div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px" id="d-hotlbl"></div>
+        <div style="font-size:11px;margin-bottom:8px;opacity:.8" id="d-urgency-txt"></div>
+        <div id="d-act"></div>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-label">🤖 Wholesaler Intel</div>
+      <div class="insight-text" id="d-insight"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Score Breakdown — Why This Lead</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:8px">Base score: 30 pts. Additions below.</div>
+      <div class="score-breakdown" id="d-sbreak"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Property & Owner Details</div>
+      <div class="detail-grid" id="d-details"></div>
+    </div>
+    <div class="drawer-section" id="d-tax-section" style="display:none">
+      <div class="drawer-section-title">💸 Delinquent Tax Details</div>
+      <div class="detail-grid" id="d-tax-details"></div>
+    </div>
+    <div class="drawer-section" id="d-cv-section" style="display:none">
+      <div class="drawer-section-title">⚠️ Code Violation Details</div>
+      <div class="detail-grid" id="d-cv-details"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Public Record Links</div>
+      <div id="d-links"></div>
+    </div>
+    <div class="drawer-section">
+      <div class="drawer-section-title">Notes</div>
+      <textarea style="width:100%;border:1px solid var(--border2);border-radius:var(--r);padding:10px;font-family:inherit;font-size:12.5px;resize:vertical;min-height:80px;color:var(--text);background:var(--surface)" placeholder="Add notes about this lead…"></textarea>
+    </div>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-primary" style="flex:1">Push to GHL</button>
+    <button class="btn btn-ghost">Skiptrace</button>
+    <button class="btn btn-ghost">Call Now</button>
+    <button class="btn btn-ghost">SMS</button>
+  </div>
+</div>
+<!-- LINKS MODAL -->
+<div class="links-modal-overlay" id="linksOverlay" onclick="closeLinks()">
+  <div class="links-modal" onclick="event.stopPropagation()">
+    <div class="links-modal-head"><h3>Public Record Links</h3>
+      <div class="drawer-close" onclick="closeLinks()"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+    </div>
+    <div class="links-modal-body" id="linksBody"></div>
+  </div>
+</div>
+<script>
+const DATA_URL='https://raw.githubusercontent.com/bigbuckoffers/OrangeCounty_Intel/refs/heads/main/data/output.csv';
+const AUCTION_MIN_DAYS=3;
+let LEADS=[],F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,exportFilter:'all'},currentTab='all',selectedIds=new Set(),exportedIds=new Set(),sortBy='score_desc';
+function classifySource(lead){
+  const f=(lead.distressFlags||'').toLowerCase();
+  const d=(lead.docType||'').toLowerCase();
+  if(f.includes('foreclosure_auction'))return'foreclosure';
+  if(f.includes('delinquent_taxes')||d.includes('delinquent'))return'tax';
+  if(f.includes('code_violation')&&!f.includes('foreclosure')&&!f.includes('delinquent')&&!f.includes('lis_pendens')&&!f.includes('judgment')&&!f.includes('probate')&&!f.includes('lien'))return'violations';
+  return'county';
+}
+function detectDistressSignals(lead){
+  const sigs=[];
+  const f=(lead.distressFlags||'').toLowerCase();
+  const d=(lead.docType||'').toLowerCase();
+  // Count same-type multiples from stacked doc types
+  // Only add xN suffix when that exact type appears more than once
+  const docParts=(lead.docType||'').split('+').map(t=>t.trim().toLowerCase()).filter(Boolean);
+  const sameTypeCount=t=>docParts.filter(x=>x===t||x.startsWith(t)).length;
+  if(f.includes('foreclosure_auction'))sigs.push('Foreclosure Auction');
+  if(f.includes('lis_pendens')||d.includes('lis pendens')){
+    const n=Math.max(sameTypeCount('lis pendens'),1);
+    sigs.push('Lis Pendens'+(n>1?' x'+n:''));
+  }
+  if(d.includes('tax deed')||d.includes('taxdeed')){
+    const n=Math.max(sameTypeCount('tax deed'),1);
+    sigs.push('Tax Deed'+(n>1?' x'+n:''));
+  }
+  if(f.includes('judgment')||d.includes('judgment')){
+    const n=Math.max(sameTypeCount('judgment'),1);
+    sigs.push('Judgment'+(n>1?' x'+n:''));
+  }
+  if(f.includes('delinquent_taxes')){
+    const m=f.match(/delinquent_taxes_(\d+)yr/);
+    sigs.push('Delinquent Tax '+(m?parseInt(m[1]):1)+'yr');
+  }
+  if((f.includes('multiple_liens')||f.includes('lien'))&&!f.includes('lis_pendens')){
+    const n=Math.max(sameTypeCount('lien'),1);
+    sigs.push('Lien'+(n>1?' x'+n:''));
+  }
+  if(f.includes('probate')||d.includes('probate')){
+    const n=Math.max(sameTypeCount('probate'),1);
+    sigs.push('Probate / Estate'+(n>1?' x'+n:''));
+  }
+  if(f.includes('death_certificate')||d.includes('death')){
+    const n=Math.max(sameTypeCount('death'),1);
+    sigs.push('Death Cert'+(n>1?' x'+n:''));
+  }
+  if(f.includes('code_violation')){
+    const types=(lead.codeViolationTypes||'').toLowerCase();
+    const cnt=lead.codeViolationCount||1;
+    if(types.includes('housing'))sigs.push('Code Violation: Housing'+(cnt>1?' x'+cnt:''));
+    else if(types.includes('zoning')||types.includes('fire rescue'))sigs.push('Code Violation: Zoning/Fire'+(cnt>1?' x'+cnt:''));
+    else if(types.includes('lot cleaning')||types.includes('junk cars'))sigs.push('Code Violation: Lot/Junk'+(cnt>1?' x'+cnt:''));
+    else sigs.push('Code Violation'+(cnt>1?' x'+cnt:''));
+  }
+  return sigs;
+}
+function detectOwnerSignals(lead){
+  const sigs=[];
+  const owner=(lead.ownerName||lead.grantee||'').toUpperCase();
+  const mail=(lead.mailAddr||'').toLowerCase();
+  const prop=(lead.propAddr||'').toLowerCase();
+  const today=new Date();today.setHours(0,0,0,0);
+  if(detectOOS(lead.mailAddr))sigs.push('Out of State');
+  else if(mail.includes('po box')||mail.includes('p.o. box'))sigs.push('PO Box');
+  else{const ps=prop.split(',')[0].trim().toLowerCase().substring(0,15);if(ps.length>4&&mail.length>4&&!mail.includes(ps))sigs.push('Absentee Owner');}
+  if(owner.includes('ESTATE')||owner.includes(' HEIRS')||owner.includes('HEIR ')||owner.includes('DECEASED')||owner.includes('SURVIVING'))sigs.push('Estate / Heirs');
+  const commas=(lead.ownerName||lead.grantee||'').split(',').length-1;
+  if(commas>=1&&!sigs.includes('Estate / Heirs'))sigs.push('Multiple Owners');
+  if(owner.includes(' LLC')||owner.includes(' INC')||owner.includes(' CORP')||owner.includes(' LTD')||owner.includes(' TRUST')||owner.includes(' HOLDINGS')||owner.includes(' INVESTMENTS'))sigs.push('LLC / Corp');
+  const ym=(lead.docNum||'').match(/^(\d{4})-/);
+  if(ym){const yrs=today.getFullYear()-parseInt(ym[1]);if(yrs>=7)sigs.push('Old Case '+yrs+'yr');else if(yrs>=5)sigs.push('Old Case '+yrs+'yr');}
+  return sigs;
+}
+function detectOOS(addr){
+  if(!addr)return false;
+  const a=addr.toUpperCase();
+  const sm=a.match(/,\s*([A-Z]{2})\s+\d{5}/);
+  if(sm&&sm[1]!=='FL')return true;
+  const zm=a.match(/\b(\d{5})(-\d{4})?\b/);
+  if(zm){const z=parseInt(zm[1]);if(z<32000||z>34999)return true;}
+  return false;
+}
+function isReallyStacked(lead){
+  const sigs=lead.distressSignals||[];
+  const cats=new Set();
+  if(sigs.some(s=>s.includes('Foreclosure')||s.includes('Lis Pendens')||s.includes('Tax Deed')))cats.add('fc');
+  if(sigs.some(s=>s.includes('Judgment')))cats.add('jdg');
+  if(sigs.some(s=>s.startsWith('Delinquent Tax')))cats.add('tax');
+  if(sigs.some(s=>s==='Lien'))cats.add('lien');
+  if(sigs.some(s=>s.includes('Probate')||s.includes('Death')))cats.add('probate');
+  if(sigs.some(s=>s.startsWith('Code Violation')))cats.add('cv');
+  return cats.size>=2;
+}
+function calcScore(lead){
+  // Base 30 | +10/flag | +20 LP+FC | +15 >$100k | +10 >$50k | +5 new this week | +5 has address
+  // Flags: Lis Pendens, Pre-foreclosure, Judgment lien, Tax lien, Mechanic lien, Probate/estate, LLC/corp owner, New this week
+  // Foreclosure Auction → always minimum 75
+  // Code Violations → no score points (shown as signal only)
+  let pts=30;const notes=[];
+  const assessed=lead.assessed||0;
+  const distress=lead.distressSignals||[];
+  const owner=lead.ownerSignals||[];
+  const today=new Date();today.setHours(0,0,0,0);
+  const hasLP=distress.includes('Lis Pendens');
+  const hasFC=distress.includes('Foreclosure Auction');
+  const hasTD=distress.includes('Tax Deed');
+  const hasJdg=distress.includes('Judgment');
+  const hasTaxDel=distress.some(s=>s.startsWith('Delinquent Tax'));
+  const hasLien=distress.includes('Lien');
+  const hasProbate=distress.includes('Probate / Estate');
+  const hasDeath=distress.includes('Death Cert');
+  const hasLLC=owner.includes('LLC / Corp');
+  // Recency
+  // Parse filed date — handle both YYYY-MM-DD and MM/DD/YYYY formats
+  let filedDate=null;
+  if(lead.filed){
+    const f=lead.filed.trim();
+    if(/^\d{4}-\d{2}-\d{2}/.test(f)){
+      filedDate=new Date(f.slice(0,10)+'T12:00:00');
+    }else if(/^\d{2}\/\d{2}\/\d{4}/.test(f)){
+      const p=f.split('/');
+      filedDate=new Date(`${p[2].slice(0,4)}-${p[0]}-${p[1]}T12:00:00`);
+    }
+  }
+  const daysSince=filedDate?Math.round((today-filedDate)/86400000):999;
+  const isNewThisWeek=daysSince>=0&&daysSince<=7;
+  // ── Flags +10 each ────────────────────────────────────────────────────
+  if(hasLP){pts+=10;notes.push({label:'Lis Pendens — lawsuit filed on property',val:10});}
+  if(hasFC){pts+=10;notes.push({label:'Pre-foreclosure / Auction scheduled',val:10});}
+  if(hasTD){pts+=10;notes.push({label:'Tax Deed — county taking property back',val:10});}
+  if(hasJdg){pts+=10;notes.push({label:'Judgment lien — court ordered payment',val:10});}
+  if(hasTaxDel){pts+=10;notes.push({label:'Tax lien — property taxes unpaid',val:10});}
+  if(hasLien){pts+=10;notes.push({label:'Mechanic / HOA lien on property',val:10});}
+  if(hasProbate){pts+=10;notes.push({label:'Probate / Estate — heirs may sell',val:10});}
+  if(hasDeath){pts+=10;notes.push({label:'Death cert — estate likely to liquidate',val:10});}
+  if(hasLLC){pts+=10;notes.push({label:'LLC / Corp owner — financial decision',val:10});}
+  if(isNewThisWeek){pts+=10;notes.push({label:'New this week — fresh filing',val:10});}
+  // ── LP + FC combo +20 ────────────────────────────────────────────────
+  if(hasLP&&hasFC){pts+=20;notes.push({label:'LP + Foreclosure combo — imminent loss',val:20});}
+  // ── Assessed value ───────────────────────────────────────────────────
+  if(assessed>=100000&&assessed<5000000){pts+=15;notes.push({label:'Assessed >$100K',val:15});}
+  else if(assessed>=50000&&assessed<5000000){pts+=10;notes.push({label:'Assessed >$50K',val:10});}
+  // ── New this week recency bonus +5 ───────────────────────────────────
+  if(isNewThisWeek){pts+=5;notes.push({label:'Filed this week — recency bonus',val:5});}
+  // ── Has confirmed address +5 ─────────────────────────────────────────
+  if(lead.propAddr&&lead.propAddr!=='—'&&lead.propAddr.length>5){pts+=5;notes.push({label:'Has confirmed property address',val:5});}
+  // ── Code Violation stacking bonus ────────────────────────────────────
+  // CV alone = 0 points. CV + any real flag = +5 bonus (owner under pressure from multiple angles)
+  const hasCVG=distress.some(s=>s.startsWith('Code Violation'));
+  const hasRealFlag=hasLP||hasFC||hasTD||hasJdg||hasTaxDel||hasLien||hasProbate||hasDeath;
+  if(hasCVG&&hasRealFlag){pts+=5;notes.push({label:'Code Violation stacked with financial distress',val:5});}
+  if(owner.includes('Out of State')){pts+=5;notes.push({label:'Out-of-state owner — can\'t manage in person',val:5});}
+  else if(owner.includes('Absentee Owner')){pts+=3;notes.push({label:'Absentee owner — not living at property',val:3});}
+  else if(owner.includes('PO Box')){pts+=3;notes.push({label:'PO Box mailing — likely absentee',val:3});}
+  // ── Delinquent Tax years bonus ───────────────────────────────────────
+  if(hasTaxDel){
+    const txSig=distress.find(s=>s.startsWith('Delinquent Tax'));
+    const yrs=parseInt(txSig?.match(/(\d+)/)?.[1]||1);
+    if(yrs>=5){pts+=10;notes.push({label:'Delinquent '+yrs+'yr — very far behind',val:10});}
+    else if(yrs>=3){pts+=5;notes.push({label:'Delinquent '+yrs+'yr — significantly behind',val:5});}
+  }
+  const finalScore=Math.max(30,Math.min(99,Math.round(pts)));
+  if(hasFC&&finalScore<75){notes.push({label:'Foreclosure Auction — minimum score applied',val:75-finalScore});return{score:75,notes};}
+  return{score:finalScore,notes};
+}
+function generateInsight(lead){
+  const d=lead.distressSignals||[];
+  const o=lead.ownerSignals||[];
+  const hasLP=d.includes('Lis Pendens');
+  const hasFC=d.includes('Foreclosure Auction');
+  const hasTD=d.includes('Tax Deed');
+  const hasJdg=d.includes('Judgment');
+  const hasTax=d.some(s=>s.startsWith('Delinquent Tax'));
+  const hasLien=d.includes('Lien');
+  const hasProbate=d.includes('Probate / Estate');
+  const hasDeath=d.includes('Death Cert');
+  const hasCVH=d.some(s=>s.includes('Housing'));
+  const hasCVG=d.some(s=>s.startsWith('Code Violation'));
+  const hasOOS=o.includes('Out of State');
+  const hasEstate=o.includes('Estate / Heirs');
+  const hasLLC=o.includes('LLC / Corp');
+  const hasMulti=o.includes('Multiple Owners');
+  const hasPOBox=o.includes('PO Box');
+  const hasAbsentee=o.includes('Absentee Owner');
+  const oldSig=o.find(s=>s.startsWith('Old Case'));
+  const txSig=d.find(s=>s.startsWith('Delinquent Tax'));
+  const txYrs=txSig?parseInt(txSig.match(/(\d+)/)?.[1]||1):0;
+  const today=new Date();today.setHours(0,0,0,0);
+  const daysToAuction=hasFC&&lead.filed?Math.ceil((new Date(lead.filed)-today)/86400000):null;
+  const isStacked=lead.isReallyStacked;
+  let parts=[];
+  if(hasLP&&hasFC){parts.push(daysToAuction?`Lawsuit filed + auction in ${daysToAuction} days — clock is ticking`:'Lawsuit on property AND foreclosure auction scheduled');}
+  else if(hasFC){parts.push(daysToAuction?`Foreclosure auction in ${daysToAuction} days`:'Foreclosure auction scheduled');}
+  else if(hasLP){parts.push('Active lawsuit on property — owner under legal pressure');}
+  else if(hasTD){parts.push('County is taking the property back via Tax Deed');}
+  else if(hasTax&&txYrs>=3){parts.push(`${txYrs} years behind on property taxes — serious financial distress`);}
+  else if(hasTax){parts.push('Behind on property taxes — financial pressure building');}
+  else if(hasJdg&&isStacked){parts.push('Court judgment AND additional distress signals — layered financial problems');}
+  else if(hasJdg){parts.push('Court ordered payment — owner has legal financial obligation');}
+  else if(hasProbate){parts.push('Estate/probate filing — heirs often prefer cash over managing inherited property');}
+  else if(hasDeath){parts.push('Death certificate filed — family may need to liquidate quickly');}
+  else if(hasCVH){parts.push('Housing code violations — property may be unlivable, owner under enforcement pressure');}
+  else if(hasCVG){parts.push('Open code violations — county enforcement ongoing, owner has compliance deadline');}
+  else if(hasLien){parts.push('Lien on property — debt attached, makes selling or refinancing difficult');}
+  else{parts.push('Distress filing on record');}
+  if(hasOOS&&hasEstate){parts.push('out-of-state heirs unlikely to want to manage or rehab');}
+  else if(hasOOS){parts.push('owner is out of state and can\'t manage in person');}
+  else if(hasEstate){parts.push('heirs typically want a clean cash exit');}
+  else if(hasLLC&&isStacked){parts.push('LLC owner making a financial decision, not an emotional one');}
+  else if(hasPOBox){parts.push('mailing to a PO Box suggests absentee');}
+  else if(hasAbsentee){parts.push('absentee — not living at property');}
+  else if(hasMulti){parts.push('multiple owners means more people wanting resolution');}
+  if(oldSig){const yrs=parseInt(oldSig.match(/(\d+)/)?.[1]||0);parts.push(`case ${yrs} years old — deeply entrenched problem`);}
+  return parts.length>1?parts[0].charAt(0).toUpperCase()+parts[0].slice(1)+', '+parts.slice(1).join(', ')+'.'
+    :parts[0].charAt(0).toUpperCase()+parts[0].slice(1)+'.';
+}
+function heatLabel(score){
+  if(score>=75)return{text:'VERY HIGH',color:'#DC2626'};
+  if(score>=55)return{text:'HIGH',color:'#D97706'};
+  if(score>=40)return{text:'MEDIUM',color:'#2563EB'};
+  return{text:'LOW',color:'#9CA3AF'};
+}
+function urgencyLabel(score){
+  if(score>=90)return{text:'🚨 MAX PRIORITY — act immediately',color:'#DC2626'};
+  if(score>=75)return{text:'🔥 DROP EVERYTHING — call within the hour',color:'#DC2626'};
+  if(score>=65)return{text:'⚡ Very hot — call today',color:'#D97706'};
+  if(score>=55)return{text:'📈 Hot — priority this week',color:'#D97706'};
+  if(score>=40)return{text:'👀 Warm — follow up soon',color:'#2563EB'};
+  return{text:'Research before outreach',color:'#6B7280'};
+}
+function scoreColor(s){if(s>=75)return'#DC2626';if(s>=55)return'#D97706';if(s>=40)return'#2563EB';return'#9CA3AF';}
+function calcAction(score,match,distress,ownerSigs){
+  const hasOOS=ownerSigs.includes('Out of State');
+  const hasFC=distress.includes('Foreclosure Auction');
+  if(score>=80)return{label:'🚨 Call Now — Max Effort',cls:'action-callhot'};
+  if(score>=75)return{label:'🔥 Call Now',cls:'action-callhot'};
+  if(score>=65&&match==='HIGH')return{label:'📞 Call Now',cls:'action-call'};
+  if(score>=65||hasFC)return{label:'🔍 Skiptrace First',cls:'action-skip'};
+  if(score>=55&&match==='HIGH')return{label:'📞 Call Now',cls:'action-call'};
+  if(score>=55||hasOOS)return{label:'🔍 Skiptrace',cls:'action-skip'};
+  if(score>=45&&match==='HIGH')return{label:'💬 SMS Blast',cls:'action-sms'};
+  if(score>=40)return{label:'✉ Send Mailer',cls:'action-mail'};
+  return{label:'🔎 Research First',cls:'action-research'};
+}
+function isPoBox(addr){
+  if(!addr)return false;
+  return /p[\.\s]*o[\.\s]*\s*box/i.test(addr);
+}
+function getPipelineStage(lead){
+  if(isPoBox(lead.mailAddr))return'PO Box — Mail Only';
+  if(lead.distressSignals.includes('Foreclosure Auction'))return'Foreclosure Auction';
+  if(lead.distressSignals.includes('Lis Pendens'))return'Lis Pendens';
+  if(lead.isReallyStacked)return'Stacked';
+  if(lead.score>=75)return'Critical';
+  return'Standard';
+}
+
+// ── SKIPTRACE EXPORT OWNER + ADDRESS NORMALIZATION ──────────────────────────
+function normText(v){return String(v||'').replace(/\s+/g,' ').trim();}
+function normKey(v){return normText(v).toUpperCase().replace(/[^A-Z0-9]/g,'');}
+function isEntityOwnerName(name){
+  const n=' '+normText(name).toUpperCase()+' ';
+  return /\b(LLC|L\.L\.C|INC|INCORPORATED|CORP|CORPORATION|CO|COMPANY|LTD|LIMITED|LP|LLP|TRUST|TRUSTEE|TR|HOLDINGS|INVESTMENTS|VENTURES|GROUP|PARTNERS|CAPITAL|FUND|BANK|ASSOCIATION|CHURCH|MINISTRIES|PROPERTIES|REALTY|ESTATE OF|HEIRS OF)\b/.test(n);
+}
+function splitOwnerParts(ownerName){
+  return normText(ownerName)
+    .split(',')
+    .map(x=>normText(x))
+    .filter(Boolean);
+}
+function parseOwnerPart(part,inheritedLast){
+  const full=normText(part);
+  if(!full)return{first:'',last:'',entity:false,full:''};
+  if(isEntityOwnerName(full))return{first:full,last:'',entity:true,full};
+
+  const toks=full.split(' ').filter(Boolean);
+  if(toks.length===1){
+    return{first:toks[0],last:inheritedLast||'',entity:false,full};
+  }
+
+  // Orange County owner names usually export as LAST FIRST MIDDLE.
+  // If a second owner is shortened like "MARIA L", reuse the first owner's last name.
+  if(inheritedLast && toks.length===2 && toks[1].length===1){
+    return{first:toks[0],last:inheritedLast,entity:false,full};
+  }
+
+  return{first:toks[1],last:toks[0],entity:false,full};
+}
+function parseOwnersForSkiptrace(ownerName){
+  const parts=splitOwnerParts(ownerName);
+  const owners=[];
+  let inheritedLast='';
+  parts.forEach(part=>{
+    const o=parseOwnerPart(part,inheritedLast);
+    if(o.first||o.last){
+      owners.push(o);
+      if(!o.entity && o.last)inheritedLast=o.last;
+    }
+  });
+  return owners;
+}
+function getAddressKey(l){
+  const pp=parseAddr(l.propAddr);
+  const street=normKey(l.propStreet||pp.street||l.propAddr);
+  const city=normKey(l.propCity||pp.city||'');
+  const state=normKey(l.propState||pp.state||'FL');
+  const zip=normKey(l.propZip||pp.zip||'');
+  return [street,city,state,zip].join('|');
+}
+function uniqueJoin(values,sep='; '){
+  return [...new Set(values.flatMap(v=>Array.isArray(v)?v:[v]).map(v=>normText(v)).filter(v=>v&&v!=='—'))].join(sep);
+}
+function stageRank(stage){
+  return {'Foreclosure Auction':6,'Lis Pendens':5,'Stacked':4,'Critical':3,'Standard':2,'PO Box — Mail Only':1}[stage]||0;
+}
+function bestPipelineStage(group){
+  return group.map(l=>l.pipelineStage).filter(Boolean).sort((a,b)=>stageRank(b)-stageRank(a))[0]||'Standard';
+}
+
+function getGHLTags(input){
+  const group = Array.isArray(input) ? input : [input];
+  const tags = ['propsignal','county_orange_fl'];
+
+  const skipTrace = group.some(l => (l.skipTrace || '').toUpperCase() === 'YES') ? 'YES' : 'NO';
+  tags.push(skipTrace === 'YES' ? 'skiptrace_yes' : 'skiptrace_no');
+
+  const stacked = group.some(l => l.isReallyStacked || (l.stacked || '').toUpperCase() === 'YES');
+  tags.push(stacked ? 'stacked_yes' : 'stacked_no');
+
+  const sources = new Set(group.map(l => (l.source || '').toLowerCase()).filter(Boolean));
+  if(sources.has('foreclosure')) tags.push('source_foreclosure');
+  if(sources.has('county')) tags.push('source_county');
+  if(sources.has('tax')) tags.push('source_tax');
+  if(sources.has('violations')) tags.push('source_violations');
+
+  const signals = group
+    .flatMap(l => l.distressSignals || [])
+    .join(' ')
+    .toLowerCase();
+
+  if(signals.includes('lis pendens')) tags.push('signal_lis_pendens');
+  if(signals.includes('foreclosure auction')) tags.push('signal_foreclosure_auction');
+  if(signals.includes('delinquent tax')) tags.push('signal_delinquent_tax');
+  if(signals.includes('code violation')) tags.push('signal_code_violation');
+  if(signals.includes('judgment')) tags.push('signal_judgment');
+  if(signals.includes('lien')) tags.push('signal_lien');
+  if(signals.includes('probate')) tags.push('signal_probate');
+  if(signals.includes('tax deed')) tags.push('signal_tax_deed');
+  if(signals.includes('death cert')) tags.push('signal_death_cert');
+
+  const maxScore = Math.max(...group.map(l => Number(l.score || 0)));
+  if(maxScore >= 75) tags.push('priority_critical');
+  else if(maxScore >= 55) tags.push('priority_hot');
+  else if(maxScore >= 40) tags.push('priority_warm');
+
+  return [...new Set(tags)].join(', ');
+}
+function buildOneAddressRows(leads){
+  const groups=new Map();
+  leads.forEach(l=>{
+    const key=getAddressKey(l);
+    if(!groups.has(key))groups.set(key,[]);
+    groups.get(key).push(l);
+  });
+
+  const rows=[];
+  [...groups.values()].forEach(group=>{
+    group.sort((a,b)=>(b.score||0)-(a.score||0));
+    const l=group[0];
+    const pp=parseAddr(l.propAddr);
+    const mp=parseAddr(l.mailAddr);
+    const pStreet=l.propStreet||pp.street||l.propAddr||'';
+    const pCity=l.propCity||pp.city||'';
+    const pState=l.propState||pp.state||'FL';
+    const pZip=l.propZip||pp.zip||'';
+    const mStreet=l.mailStreet||mp.street||'';
+    const mCity=l.mailCity||mp.city||'';
+    const mState=l.mailState||mp.state||'FL';
+    const mZip=l.mailZip||mp.zip||'';
+
+    // owner_name is the clean skiptrace-ready name from backend.
+    // Fall back to grantee only if owner_name is blank, but extract primary party only.
+    const ownerName=uniqueJoin(group.map(x=>{
+      if(x.ownerName && x.ownerName!=='—') return x.ownerName;
+      // fallback: take only first comma-separated part from grantee, skip HOA/association noise
+      const raw=x.grantee||'';
+      const _SKIP=/ASSOCIATION|HOMEOWNERS|HOA|MANAGEMENT|UNKNOWN SPOUSE|UNKNOWN TENANT|TENANT IN POSSESSION|TRUSTEE/i;
+      const parts=raw.split(',').map(p=>p.trim()).filter(Boolean);
+      for(const p of parts){ if(!_SKIP.test(p)) return p; }
+      return parts[0]||'';
+    }),', ');
+    const owners=parseOwnersForSkiptrace(ownerName);
+    const ownerCols=[];
+    for(let i=0;i<4;i++){
+      ownerCols.push(owners[i]?.first||'', owners[i]?.last||'');
+    }
+
+    const maxScore=Math.max(...group.map(x=>x.score||0));
+    const heat=heatLabel(maxScore).text;
+    const hasAuction=group.some(x=>x.distressSignals.includes('Foreclosure Auction'));
+    const auctionLead=group.find(x=>x.distressSignals.includes('Foreclosure Auction'));
+    const days=hasAuction&&auctionLead?daysUntil(auctionLead.filed):null;
+    const aDate=days!==null?fmtD(auctionLead.filed):'';
+    const skipTrace=group.some(x=>x.skipTrace==='YES')?'YES':'NO';
+
+    rows.push([
+      // ── Kind template columns first ──────────────────────────────────
+      owners[0]?.first||'', owners[0]?.last||'',
+      mStreet,mCity,mState,mZip,
+      pStreet,pCity,pState,pZip,
+      // ── Additional owners ────────────────────────────────────────────
+      owners[1]?.first||'', owners[1]?.last||'',
+      owners[2]?.first||'', owners[2]?.last||'',
+      owners[3]?.first||'', owners[3]?.last||'',
+      ownerName,
+      // ── PropSignal columns ───────────────────────────────────────────
+      maxScore,heat,
+      uniqueJoin(group.map(x=>x.source)),
+      uniqueJoin(group.map(x=>x.distressSignals)),
+      uniqueJoin(group.map(x=>x.ownerSignals)),
+      uniqueJoin(group.map(x=>x.insight),' | '),
+      uniqueJoin(group.map(x=>x.docNum)),
+      uniqueJoin(group.map(x=>x.filed)),
+      uniqueJoin(group.map(x=>x.scrapedDate)),
+      aDate,
+      days!==null&&days>0?aDate:'',
+      days!==null?days+'d away':'',
+      l.assessed,l.match,l.action,
+      group.some(x=>x.isReallyStacked)?'YES':'NO',
+      uniqueJoin(group.map(x=>x.taxYearsDelinquent||'')),
+      uniqueJoin(group.map(x=>x.taxTotalBalance||'')),
+      uniqueJoin(group.map(x=>x.codeViolationCount||'')),
+      uniqueJoin(group.map(x=>x.codeViolationTypes||'')),
+      uniqueJoin(group.map(x=>x.parcelId)),
+      bestPipelineStage(group),skipTrace,getGHLTags(group),
+      l.propAddr,l.mailAddr,
+      group.length
+    ]);
+  });
+  return rows;
+}
+function downloadRowsAsCSV(rows,filename){
+  const csv=rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download=filename;
+  a.click();
+}
+function skiptraceExportHeader(){
+  return [
+    // ── Kind Skiptrace Template columns first (exact format Kind expects) ──
+    'OWNER 1 FIRST NAME','OWNER 1 LAST NAME',
+    'MAIL ADDRESS','MAIL CITY','MAIL STATE','MAIL ZIP CODE',
+    'PROPERTY ADDRESS','PROPERTY CITY','PROPERTY STATE','PROPERTY ZIP CODE',
+    // ── Additional owner columns ───────────────────────────────────────────
+    'Owner 2 First Name','Owner 2 Last Name',
+    'Owner 3 First Name','Owner 3 Last Name',
+    'Owner 4 First Name','Owner 4 Last Name',
+    'Owner Name',
+    // ── PropSignal intelligence columns ───────────────────────────────────
+    'Score','Heat','Source','Distress Signals','Owner Signals','Why This Lead',
+    'Doc#','File Date','Scraped Date','Auction Date','GHL Stop Outreach Date','Days Until Auction',
+    'Assessed Value','Match','Action','Stacked',
+    'Tax Yrs Delinquent','Tax Balance',
+    'Code Violations','Violation Types',
+    'Parcel ID','Pipeline Stage','Skip Trace','GHL Tags',
+    'Property Address Full','Mailing Address Full','Merged Record Count'
+  ];
+}
+function distressPill(s){
+  // Extract count suffix e.g. "Lien x4" → label="Lien", count=" x4"
+  const xm=s.match(/^(.+?)(\s+x\d+)$/);
+  const label=xm?xm[1]:s;
+  const count=xm?`<span style="font-weight:800;opacity:.85">${xm[2]}</span>`:'';
+  if(label==='Lis Pendens')return`<span class="pill pill-lp">⚖️ ${label}${count}</span>`;
+  if(label==='Foreclosure Auction')return`<span class="pill pill-fc">🏠 ${label}${count}</span>`;
+  if(label==='Tax Deed')return`<span class="pill pill-td">📜 ${label}${count}</span>`;
+  if(label==='Judgment')return`<span class="pill pill-jdg">⚡ ${label}${count}</span>`;
+  if(label.startsWith('Delinquent Tax'))return`<span class="pill pill-tax">💸 ${label}${count}</span>`;
+  if(label==='Lien')return`<span class="pill pill-lien">🔗 ${label}${count}</span>`;
+  if(label==='Probate / Estate')return`<span class="pill pill-prob">🕊️ ${label}${count}</span>`;
+  if(label==='Death Cert')return`<span class="pill pill-dc">💀 ${label}${count}</span>`;
+  if(label.includes('Housing'))return`<span class="pill pill-cv-housing">🔴 ${label}${count}</span>`;
+  if(label.startsWith('Code Violation'))return`<span class="pill pill-cv">⚠️ ${label}${count}</span>`;
+  return`<span class="pill pill-generic">${label}${count}</span>`;
+}
+const OWNER_CLS={'Out of State':'pill-oos','PO Box':'pill-po','Absentee Owner':'pill-abs','Estate / Heirs':'pill-estate','Multiple Owners':'pill-multi','LLC / Corp':'pill-llc'};
+function ownerPill(s){
+  if(s.startsWith('Old Case'))return`<span class="pill pill-old">${s}</span>`;
+  return`<span class="pill ${OWNER_CLS[s]||'pill-generic'}">${s}</span>`;
+}
+function parseCSV(text){
+  const lines=text.trim().split('\n');const headers=parseCSVLine(lines[0]);const results=[];
+  for(let i=1;i<lines.length;i++){if(!lines[i].trim())continue;const vals=parseCSVLine(lines[i]);const row={};headers.forEach((h,idx)=>{row[h.trim()]=(vals[idx]||'').trim();});results.push(row);}
+  return results;
+}
+function parseCSVLine(line){
+  const result=[];let cur='',inQ=false;
+  for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}else if(c===','&&!inQ){result.push(cur);cur='';}else cur+=c;}
+  result.push(cur);return result;
+}
+function mapRow(row,idx){
+  const match=(row.match_confidence||'').toUpperCase();
+  const assessed=parseFloat((row.assessed_value||'').replace(/[$,]/g,''))||0;
+  const lead={
+    id:idx+1,assessed,match,
+    docType:row.document_type||'Unknown',docNum:row.document_number||'—',filed:row.file_date||'',
+    grantor:row.grantor||'—',grantee:row.grantee||row.owner_name||'—',
+    ownerName:row.owner_name||row.grantee||'—',propAddr:row.property_address||'—',
+    mailAddr:row.mailing_address||'—',parcelId:row.parcel_id||'',
+    scrapedAt:row.scraped_at||'',scrapedDate:row.scraped_at?row.scraped_at.slice(0,10):'',
+    matchReason:row.match_reason||'',countyUrl:row.county_search_url||'',
+    distressFlags:row.distress_flags||'',isStacked:(row.stacked||'').toLowerCase()==='true',
+    stackedTypes:row.stacked_types||'',
+    taxYearsDelinquent:parseInt(row.tax_years_delinquent||'0')||0,
+    taxTotalBalance:parseFloat(row.tax_total_balance||'0')||0,
+    taxYearsList:row.tax_years_list||'',taxCertStatus:row.tax_cert_status||'',
+    codeViolationCount:parseInt(row.code_violation_count||'0')||0,
+    codeViolationTypes:row.code_violation_types||'',
+    propStreet:row.prop_street||parseAddr(row.property_address||'').street,
+    propCity:  row.prop_city||parseAddr(row.property_address||'').city,
+    propState: row.prop_state||parseAddr(row.property_address||'').state||'FL',
+    propZip:   row.prop_zip||parseAddr(row.property_address||'').zip,
+    mailStreet:row.mail_street||parseAddr(row.mailing_address||'').street,
+    mailCity:  row.mail_city||parseAddr(row.mailing_address||'').city,
+    mailState: row.mail_state||parseAddr(row.mailing_address||'').state||'FL',
+    mailZip:   row.mail_zip||parseAddr(row.mailing_address||'').zip,
+  };
+  lead.source=classifySource(lead);
+  lead.distressSignals=detectDistressSignals(lead);
+  lead.ownerSignals=detectOwnerSignals(lead);
+  lead.allSignals=[...lead.distressSignals,...lead.ownerSignals];
+  lead.isReallyStacked=isReallyStacked(lead);
+  const{score,notes}=calcScore(lead);
+  lead.score=score;lead.scoreNotes=notes;
+  lead.insight=generateInsight(lead);
+  const actionObj=calcAction(score,match,lead.distressSignals,lead.ownerSignals);
+  lead.action=actionObj.label;lead.actionCls=actionObj.cls;
+  lead.pipelineStage=getPipelineStage(lead);
+  lead.skipTrace=isPoBox(lead.mailAddr)||!lead.mailAddr||lead.mailAddr==='—'?'NO':'YES';
+  const links=[];
+  if(lead.countyUrl)links.push({name:'Property Appraiser',url:lead.countyUrl,cat:'PROP'});
+  links.push({name:'Orange County Clerk',url:'https://www.myorangeclerk.com/official-records',cat:'CLERK'});
+  links.push({name:'Tax Collector',url:'https://www.octaxcol.com',cat:'TAX'});
+  if(lead.distressSignals.includes('Foreclosure Auction'))links.push({name:'RealForeclose (Auction)',url:'https://www.realforeclose.com',cat:'AUCTION'});
+  if(lead.distressSignals.some(s=>s.startsWith('Code Violation')))links.push({name:'Code Enforcement',url:'https://netapps.ocfl.net/CETitleViolationSearch/',cat:'CODE'});
+  lead.links=links;
+  return lead;
+}
+function buildDatePicker(){
+  const byDate={};
+  LEADS.forEach(l=>{
+    if(!l.scrapedDate)return;
+    if(!byDate[l.scrapedDate])byDate[l.scrapedDate]={count:0,sigs:{}};
+    byDate[l.scrapedDate].count++;
+    l.distressSignals.forEach(s=>{
+      const k=s.includes('Foreclosure')?'FC':s.includes('Lis Pendens')?'LP':s.startsWith('Delinquent Tax')?'TAX':s.startsWith('Code Violation')?'CV':s==='Judgment'?'JDG':s==='Lien'?'LIEN':s.includes('Probate')||s.includes('Death')?'PROB':'OTHER';
+      byDate[l.scrapedDate].sigs[k]=(byDate[l.scrapedDate].sigs[k]||0)+1;
+    });
+  });
+  const dates=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
+  const sel=document.getElementById('datePicker');
+  sel.innerHTML='<option value="">— Show all dates —</option>';
+  dates.forEach(d=>{
+    const info=byDate[d];
+    const opt=document.createElement('option');
+    opt.value=d;opt.textContent=formatDateLabel(d)+' — '+info.count.toLocaleString()+' leads';
+    sel.appendChild(opt);
+  });
+  window._byDate=byDate;
+}
+function formatDateLabel(d){
+  if(!d)return'';
+  const dt=new Date(d+'T12:00:00');
+  const today=new Date();today.setHours(0,0,0,0);
+  const diff=Math.round((new Date(d+'T12:00:00')-today)/86400000);
+  const str=dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  if(diff===0)return'Today ('+str+')';
+  if(diff===-1)return'Yesterday ('+str+')';
+  return str;
+}
+function onDatePick(date){
+  F.date=date||null;
+  const clearBtn=document.getElementById('dateClearBtn');
+  const bar=document.getElementById('dateIntelBar');
+  const chips=document.getElementById('dateChips');
+  if(!date){chips.innerHTML='';clearBtn.style.display='none';bar.classList.remove('date-intel-active');doFilter();return;}
+  clearBtn.style.display='';
+  bar.classList.add('date-intel-active');
+  const info=(window._byDate||{})[date];
+  if(info){
+    const SIG_MAP={FC:{label:'Foreclosure',cls:'dc-fc',icon:'🏠'},LP:{label:'Lis Pendens',cls:'dc-lp',icon:'⚖️'},TAX:{label:'Tax Delinquent',cls:'dc-tax',icon:'💸'},CV:{label:'Code Violations',cls:'dc-cv',icon:'⚠️'},JDG:{label:'Judgments',cls:'dc-jdg',icon:'⚡'},LIEN:{label:'Liens',cls:'dc-lien',icon:'🔗'},PROB:{label:'Probate/Death',cls:'dc-prob',icon:'🕊️'},DC:{label:'Death Cert',cls:'dc-dc',icon:'💀'}};
+    chips.innerHTML=Object.entries(info.sigs).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]).map(([k,v])=>{const m=SIG_MAP[k]||{label:k,cls:'dc-cv',icon:'📌'};return`<span class="date-chip ${m.cls}">${m.icon} ${v.toLocaleString()} ${m.label}</span>`;}).join('');
+  }else{chips.innerHTML='';}
+  doFilter();
+}
+function clearDateFilter(){
+  F.date=null;
+  document.getElementById('datePicker').value='';
+  document.getElementById('dateClearBtn').style.display='none';
+  document.getElementById('dateIntelBar').classList.remove('date-intel-active');
+  document.getElementById('dateChips').innerHTML='';
+  doFilter();
+}
+function daysUntil(dateStr){if(!dateStr)return null;const d=new Date(dateStr);const t=new Date();t.setHours(0,0,0,0);return Math.ceil((d-t)/86400000);}
+function getFiltered(){
+  let leads=[...LEADS];
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  if(q)leads=leads.filter(l=>(l.ownerName||'').toLowerCase().includes(q)||(l.grantee||'').toLowerCase().includes(q)||(l.propAddr||'').toLowerCase().includes(q)||(l.mailAddr||'').toLowerCase().includes(q)||(l.docNum||'').toLowerCase().includes(q)||(l.docType||'').toLowerCase().includes(q)||l.allSignals.some(s=>s.toLowerCase().includes(q)));
+  if(F.date)leads=leads.filter(l=>l.scrapedDate===F.date);
+  if(F.signal)leads=leads.filter(l=>l.allSignals.some(s=>s.toLowerCase().includes(F.signal.toLowerCase())));
+  if(F.score)leads=leads.filter(l=>l.score>=F.score);
+  if(F.scoreBand==='critical')leads=leads.filter(l=>l.score>=75);
+  else if(F.scoreBand==='hot')leads=leads.filter(l=>l.score>=55&&l.score<75);
+  else if(F.scoreBand==='warm')leads=leads.filter(l=>l.score>=40&&l.score<55);
+  if(F.source==='foreclosure')leads=leads.filter(l=>l.source==='foreclosure');
+  else if(F.source==='county')leads=leads.filter(l=>l.source==='county');
+  else if(F.source==='tax')leads=leads.filter(l=>l.source==='tax');
+  else if(F.source==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
+  else if(F.source==='stacked')leads=leads.filter(l=>l.isReallyStacked);
+  else if(F.source==='lp')leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
+  else if(F.source==='probate')leads=leads.filter(l=>l.distressSignals.includes('Probate / Estate'));
+  else if(F.source==='judgment')leads=leads.filter(l=>l.distressSignals.includes('Judgment'));
+  else if(F.source==='lien')leads=leads.filter(l=>l.distressSignals.includes('Lien'));
+  if(currentTab==='critical')leads=leads.filter(l=>l.score>=75);
+  else if(currentTab==='hot')leads=leads.filter(l=>l.score>=55&&l.score<75);
+  else if(currentTab==='warm')leads=leads.filter(l=>l.score>=40&&l.score<55);
+  else if(currentTab==='stacked')leads=leads.filter(l=>l.isReallyStacked);
+  else if(currentTab==='foreclosure')leads=leads.filter(l=>l.source==='foreclosure');
+  else if(currentTab==='county')leads=leads.filter(l=>l.source==='county');
+  else if(currentTab==='tax')leads=leads.filter(l=>l.source==='tax');
+  else if(currentTab==='violations')leads=leads.filter(l=>l.source==='violations'||l.distressSignals.some(s=>s.startsWith('Code Violation')));
+  else if(currentTab==='lp')leads=leads.filter(l=>l.distressSignals.includes('Lis Pendens'));
+  if(currentTab==='lp'&&F.lpDate)leads=leads.filter(l=>(l.filed||'').slice(0,10)===F.lpDate);
+  if(F.exportFilter==='new')leads=leads.filter(l=>!exportedIds.has(l.docNum));
+  else if(F.exportFilter==='exported')leads=leads.filter(l=>exportedIds.has(l.docNum));
+  leads.sort((a,b)=>{
+    switch(sortBy){
+      case'score_asc':    return(a.score||0)-(b.score||0);
+      case'filed_desc':   return((b.filed||'').slice(0,10)).localeCompare((a.filed||'').slice(0,10));
+      case'filed_asc':    return((a.filed||'').slice(0,10)).localeCompare((b.filed||'').slice(0,10));
+      case'scraped_desc': return(b.scrapedDate||'').localeCompare(a.scrapedDate||'');
+      case'scraped_asc':  return(a.scrapedDate||'').localeCompare(b.scrapedDate||'');
+      case'assessed_desc':return(b.assessed||0)-(a.assessed||0);
+      case'assessed_asc': return(a.assessed||0)-(b.assessed||0);
+      case'auction_desc': return((b.filed&&b.distressSignals.includes('Foreclosure Auction')?b.filed:'')).localeCompare((a.filed&&a.distressSignals.includes('Foreclosure Auction')?a.filed:''));
+      case'auction_asc':  return((a.filed&&a.distressSignals.includes('Foreclosure Auction')?a.filed:'')).localeCompare((b.filed&&b.distressSignals.includes('Foreclosure Auction')?b.filed:''));
+      default:            return(b.score||0)-(a.score||0);
+    }
+  });
+  return leads;
+}
+const fmt=n=>n?'$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}):'—';
+const fmtD=d=>{if(!d)return'—';const p=d.split(/[-T]/);if(p.length<3)return d;return`${p[1]}/${p[2].slice(0,2)}/${p[0]}`;};
+const initials=n=>(n||'?').split(' ').slice(0,2).map(w=>w[0]||'').join('').slice(0,2).toUpperCase()||'?';
+function auctionCell(lead){
+  if(!lead.distressSignals.includes('Foreclosure Auction'))return'<span style="color:var(--text3);font-size:10.5px">—</span>';
+  const days=daysUntil(lead.filed);if(days===null)return'—';
+  const col=days<=5?'#DC2626':days<=8?'#D97706':'#059669';
+  return`<div style="font-size:11px;font-weight:700;color:${col}">${fmtD(lead.filed)}</div><div style="font-size:9px;color:${col};margin-top:1px">${days}d away</div>`;
+}
+function makeRing(score){
+  const circ=126,dash=(score/100)*circ,color=scoreColor(score),heat=heatLabel(score);
+  return`<div class="score-cell"><div class="score-ring"><svg viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="20"/><circle cx="22" cy="22" r="20" fill="none" stroke="${color}" stroke-width="3.5" stroke-dasharray="${dash} ${circ}" stroke-linecap="round"/></svg><div class="score-val" style="color:${color}">${score}</div></div><div class="score-heat" style="color:${heat.color}">${heat.text}</div></div>`;
+}
+function urgencyBadge(score){
+  if(score>=90)return`<span class="urgency-badge" style="background:#DC2626;color:white">🚨 MAX PRIORITY</span>`;
+  if(score>=75)return`<span class="urgency-badge" style="background:#DC2626;color:white">🔥 DROP EVERYTHING</span>`;
+  if(score>=65)return`<span class="urgency-badge" style="background:#FEE2E2;color:#DC2626">⚡ CALL TODAY</span>`;
+  if(score>=55)return`<span class="urgency-badge" style="background:#FFFBEB;color:#D97706">📈 HOT</span>`;
+  if(score>=40)return`<span class="urgency-badge" style="background:#EFF6FF;color:#2563EB">👀 WARM</span>`;
+  return`<span class="urgency-badge" style="background:#F1F5F9;color:#9CA3AF">COOL</span>`;
+}
+const matchCls={HIGH:'match-high',MEDIUM:'match-medium',LOW:'match-low'};
+const matchBadge=m=>`<span class="match-badge ${matchCls[m]||'match-none'}">${m||'—'}</span>`;
+function renderTable(){
+  const filtered=getFiltered();
+  const L=LEADS;
+  const cvCount=L.filter(l=>l.distressSignals.some(s=>s.startsWith('Code Violation'))).length;
+  document.getElementById('resultsCount').textContent=`${filtered.length.toLocaleString()} of ${L.length.toLocaleString()} leads`+(F.date?' · '+formatDateLabel(F.date):'');
+  document.getElementById('tc-all').textContent=L.length.toLocaleString();
+  document.getElementById('tc-critical').textContent=L.filter(l=>l.score>=75).length;
+  document.getElementById('tc-hot').textContent=L.filter(l=>l.score>=55&&l.score<75).length;
+  document.getElementById('tc-warm').textContent=L.filter(l=>l.score>=40&&l.score<55).length;
+  document.getElementById('tc-stacked').textContent=L.filter(l=>l.isReallyStacked).length;
+  document.getElementById('tc-fc').textContent=L.filter(l=>l.source==='foreclosure').length;
+  document.getElementById('tc-county').textContent=L.filter(l=>l.source==='county').length;
+  document.getElementById('tc-tax').textContent=L.filter(l=>l.source==='tax').length;
+  document.getElementById('tc-cv').textContent=cvCount;
+  document.getElementById('tc-lp').textContent=L.filter(l=>l.distressSignals.includes('Lis Pendens')).length;
+
+  // LP filter bar visibility:
+  // - Always show on LP tab
+  // - Show on any tab when there are new LP leads today (and user hasn't dismissed)
+  const lpBar=document.getElementById('lpFilterBar');
+  if(lpBar){
+    const today=new Date().toISOString().slice(0,10);
+    const hasTodayLP=LEADS.some(l=>l.distressSignals.includes('Lis Pendens')&&(l.filed||'').slice(0,10)===today);
+    const dismissed=lpBar.dataset.dismissed==='1';
+    lpBar.style.display=(currentTab==='lp'||(hasTodayLP&&!dismissed))?'flex':'none';
+  }
+
+  const tbody=document.getElementById('tbody');
+  tbody.innerHTML='';
+  filtered.forEach(lead=>{
+    const tr=document.createElement('tr');
+    if(selectedIds.has(lead.id))tr.classList.add('selected');
+    if(lead.score>=75)tr.classList.add('row-critical');
+    if(exportedIds.has(lead.docNum))tr.style.opacity='0.55';
+    tr.onclick=e=>{if(e.target.type==='checkbox'||e.target.closest('.links-btn'))return;openDrawer(lead);};
+    const owner=lead.ownerName||lead.grantee;
+    const distPills=lead.distressSignals.map(distressPill).join('');
+    const ownPills=lead.ownerSignals.map(ownerPill).join('');
+    const stackBadge=lead.isReallyStacked?`<span class="pill pill-stacked" style="margin-top:2px">⚡ STACKED</span>`:'';
+    const today=new Date().toISOString().slice(0,10);
+    const isNewLP=lead.distressSignals.includes('Lis Pendens')&&(lead.filed||'').slice(0,10)===today;
+    const newLPBadge=isNewLP?`<div style="background:#DC2626;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block">🔴 NEW TODAY</div>`:'';
+    const isExported=exportedIds.has(lead.docNum);
+    const exportedBadge=isExported?`<div style="background:#D1FAE5;color:#065F46;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block">✓ EXPORTED</div>`:'';
+    tr.innerHTML=`
+      <td><input type="checkbox" ${selectedIds.has(lead.id)?'checked':''} onchange="toggleSel(${lead.id},this)"></td>
+      <td>${makeRing(lead.score)}</td>
+      <td><div class="sig-wrap"><div class="sig-distress">${distPills}${stackBadge}</div>${ownPills?`<div class="sig-owner">${ownPills}</div>`:''}</div>${newLPBadge}${exportedBadge}</td>
+      <td style="white-space:nowrap;font-size:10.5px;color:var(--text3)">${lead.scrapedDate||'—'}</td>
+      <td style="white-space:nowrap;font-size:10.5px;color:var(--text2)">${lead.filed?fmtD(lead.filed):'—'}</td>
+      <td>${lead.distressSignals.includes('Foreclosure Auction')?auctionCell(lead):'<span style="color:var(--text3);font-size:10.5px">—</span>'}</td>
+      <td><div style="display:flex;align-items:center;gap:6px"><div class="owner-initials">${initials(owner)}</div><div class="addr-main">${owner}</div></div></td>
+      <td><div class="addr-main">${(lead.propStreet&&!/^\d+$/.test(lead.propStreet.trim()))?lead.propStreet:(lead.propAddr||'—')}</div></td>
+      <td><div class="addr-main">${lead.propCity||''}</div></td>
+      <td><div class="addr-main">${lead.propState||'FL'}</div></td>
+      <td><div class="addr-main">${lead.propZip||''}</div></td>
+      <td><div class="addr-sub">${lead.mailStreet||lead.mailAddr}</div></td>
+      <td><div class="addr-sub">${lead.mailCity||''}</div></td>
+      <td><div class="addr-sub">${lead.mailState||'FL'}</div></td>
+      <td><div class="addr-sub">${lead.mailZip||''}</div></td>
+      <td><div class="money">${fmt(lead.assessed)}</div></td>
+      <td>${matchBadge(lead.match)}</td>
+      <td><button class="links-btn" onclick="openLinks(event,${lead.id})"><svg viewBox="0 0 24 24" fill="currentColor" style="width:10px;height:10px"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>Links</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+function buildLPDatePicker(){
+  const lpLeads=LEADS.filter(l=>l.distressSignals.includes('Lis Pendens'));
+  const dates=[...new Set(lpLeads.map(l=>(l.filed||'').slice(0,10)).filter(Boolean))].sort((a,b)=>b.localeCompare(a));
+  const sel=document.getElementById('lpDateSelect');
+  if(!sel)return;
+  sel.innerHTML='<option value="">— All dates —</option>';
+  const today=new Date().toISOString().slice(0,10);
+  dates.forEach(d=>{
+    const opt=document.createElement('option');
+    const label=d===today?'Today ('+d+')':d;
+    opt.value=d;opt.textContent=label+' — '+lpLeads.filter(l=>(l.filed||'').slice(0,10)===d).length+' leads';
+    sel.appendChild(opt);
+  });
+  // Auto-select today if there are today's leads
+  const todayLeads=lpLeads.filter(l=>(l.filed||'').slice(0,10)===today);
+  const countEl=document.getElementById('lpNewTodayCount');
+  if(countEl){
+    if(todayLeads.length>0){
+      countEl.textContent='🔴 '+todayLeads.length+' NEW today — export now!';
+      sel.value=today;
+      F.lpDate=today;
+    }else{
+      countEl.textContent='No new LP filings today';
+    }
+  }
+}
+function setLPDate(date){
+  F.lpDate=date||null;
+  doFilter();
+}
+function exportLP(){
+  const date=F.lpDate||new Date().toISOString().slice(0,10);
+  const leads=LEADS.filter(l=>{
+    if(!l.distressSignals.includes('Lis Pendens'))return false;
+    if(F.lpDate&&(l.filed||'').slice(0,10)!==F.lpDate)return false;
+    return true;
+  });
+  if(!leads.length){alert('No Lis Pendens leads for selected date.');return;}
+  const rows=[skiptraceExportHeader(), ...buildOneAddressRows(leads)];
+  downloadRowsAsCSV(rows,'lis_pendens_one_address_'+date+'.csv');
+  markAsExported(leads);
+  alert('Exported '+(rows.length-1)+' one-address Lis Pendens rows for '+date);
+}
+
+function renderFocus(){
+  const top=[...LEADS].sort((a,b)=>b.score-a.score).slice(0,10);
+  document.getElementById('focusItems').innerHTML=top.map(l=>{
+    const col=scoreColor(l.score);
+    const days=l.distressSignals.includes('Foreclosure Auction')?daysUntil(l.filed):null;
+    const dStr=days!==null&&days>0?`🟠 ${days}d to auction`:l.isReallyStacked?'⚡ Stacked':'';
+    return`<div class="focus-item" onclick="openDrawer(LEADS.find(x=>x.id===${l.id}))">
+      <div class="focus-score" style="color:${col}">${l.score}</div>
+      <div class="focus-name">${l.ownerName||l.grantee}</div>
+      <div class="focus-why">${l.insight}</div>
+      ${dStr?`<div style="font-size:9px;opacity:.7;margin-top:3px">${dStr}</div>`:''}
+    </div>`;
+  }).join('');
+}
+function updateCards(){
+  const L=LEADS;
+  const cvCount=L.filter(l=>l.distressSignals.some(s=>s.startsWith('Code Violation'))).length;
+  document.getElementById('c-total').textContent=L.length.toLocaleString();
+  document.getElementById('c-critical').textContent=L.filter(l=>l.score>=75).length.toLocaleString();
+  document.getElementById('c-hot').textContent=L.filter(l=>l.score>=55&&l.score<75).length.toLocaleString();
+  document.getElementById('c-stacked').textContent=L.filter(l=>l.isReallyStacked).length.toLocaleString();
+  document.getElementById('c-fc').textContent=L.filter(l=>l.source==='foreclosure').length.toLocaleString();
+  document.getElementById('c-county').textContent=L.filter(l=>l.source==='county').length.toLocaleString();
+  document.getElementById('c-tax').textContent=L.filter(l=>l.source==='tax').length.toLocaleString();
+  document.getElementById('c-cv').textContent=cvCount.toLocaleString();
+  document.getElementById('nb-total').textContent=L.length.toLocaleString();
+  document.getElementById('nb-hot').textContent=L.filter(l=>l.score>=75).length;
+  document.getElementById('nb-stacked').textContent=L.filter(l=>l.isReallyStacked).length;
+  document.getElementById('nb-fc').textContent=L.filter(l=>l.source==='foreclosure').length;
+  document.getElementById('nb-county').textContent=L.filter(l=>l.source==='county').length;
+  document.getElementById('nb-tax').textContent=L.filter(l=>l.source==='tax').length;
+  document.getElementById('nb-cv').textContent=cvCount;
+  document.getElementById('c-hot-trend').textContent=`▲ ${L.filter(l=>l.score>=75).length} need immediate attention`;
+  const latest=L.map(l=>l.scrapedAt).filter(Boolean).sort().pop();
+  if(latest){const d=new Date(latest);const s=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('sync-time').textContent='Last sync: '+s;document.getElementById('last-run').textContent='Data as of '+s;}
+}
+function openDrawer(lead){
+  const owner=lead.ownerName||lead.grantee;
+  document.getElementById('d-av').textContent=initials(owner);
+  document.getElementById('d-name').textContent=owner;
+  document.getElementById('d-addr').textContent=lead.propAddr;
+  document.getElementById('d-src-pills').innerHTML=lead.distressSignals.map(distressPill).join(' ')+(lead.isReallyStacked?`<span class="pill pill-stacked">⚡ STACKED</span>`:'');
+  const col=scoreColor(lead.score),urg=urgencyLabel(lead.score);
+  document.getElementById('d-banner').style.background=lead.score>=75?'#FEF2F2':lead.score>=55?'#FFFBEB':'#EFF6FF';
+  document.getElementById('d-score').textContent=lead.score;
+  document.getElementById('d-score').style.color=col;
+  document.getElementById('d-hotlbl').textContent=lead.score>=90?'🚨 MAX PRIORITY':lead.score>=75?'🔥 DROP EVERYTHING':lead.score>=65?'⚡ VERY HOT':lead.score>=55?'📈 HOT LEAD':lead.score>=40?'👀 WARM LEAD':'COOL LEAD';
+  document.getElementById('d-hotlbl').style.color=col;
+  document.getElementById('d-urgency-txt').textContent=urg.text;
+  document.getElementById('d-urgency-txt').style.color=urg.color;
+  document.getElementById('d-act').innerHTML=`<span class="action-badge ${lead.actionCls}">${lead.action}</span>`;
+  document.getElementById('d-insight').textContent=lead.insight;
+  const maxVal=Math.max(...(lead.scoreNotes||[]).map(n=>Math.abs(n.val)),1);
+  document.getElementById('d-sbreak').innerHTML=(lead.scoreNotes||[]).map(n=>`
+    <div class="score-row">
+      <div class="score-row-label">${n.label}</div>
+      <div class="score-row-bar"><div class="score-row-fill" style="width:${(Math.abs(n.val)/maxVal)*100}%;background:${n.val<0?'var(--red)':'var(--green)'}"></div></div>
+      <div class="score-row-val" style="color:${n.val<0?'var(--red)':'var(--green)'}">${n.val>0?'+':''}${n.val}</div>
+    </div>`).join('')+
+    `<div class="score-row" style="background:var(--surface2)"><div class="score-row-label" style="font-weight:700">FINAL SCORE (base 30)</div><div class="score-row-bar"></div><div class="score-row-val" style="color:${col};font-size:13px">${lead.score}</div></div>`;
+  const days=lead.distressSignals.includes('Foreclosure Auction')?daysUntil(lead.filed):null;
+  const daysStr=days===null?'Not a foreclosure auction':days>0?`${days} day(s) until auction`:'Auction date passed';
+  const pCity=lead.propCity||'';const pZip=lead.propZip||'';
+  const pStreet=lead.propStreet||(lead.propAddr!=='—'?lead.propAddr:'');
+  const mStreet=lead.mailStreet||lead.mailAddr;
+  const mCity=lead.mailCity||'';const mState=lead.mailState||'FL';const mZip=lead.mailZip||'';
+  document.getElementById('d-details').innerHTML=`
+    <div class="detail-item"><div class="detail-item-label">Owner</div><div class="detail-item-val">${owner}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Source Type</div><div class="detail-item-val">${lead.distressSignals.join(' + ')||lead.docType}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Property Street</div><div class="detail-item-val" style="font-size:11.5px">${pStreet||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Prop City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${pCity||'—'} / FL / ${pZip||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mailing Street</div><div class="detail-item-val" style="font-size:11.5px">${mStreet||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Mail City / State / Zip</div><div class="detail-item-val" style="font-size:11.5px">${mCity||'—'} / ${mState} / ${mZip||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Assessed Value</div><div class="detail-item-val">${fmt(lead.assessed)}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Doc Number</div><div class="detail-item-val" style="font-family:monospace;font-size:10.5px">${lead.docNum}</div></div>
+    <div class="detail-item"><div class="detail-item-label">File Date</div><div class="detail-item-val">${fmtD(lead.filed)}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Auction Countdown</div><div class="detail-item-val" style="color:${col};font-weight:600">${daysStr}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Match Confidence</div><div class="detail-item-val">${matchBadge(lead.match)}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Parcel ID</div><div class="detail-item-val" style="font-size:10.5px">${lead.parcelId||'—'}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Scraped Date</div><div class="detail-item-val" style="font-size:10.5px">${lead.scrapedDate||'—'}</div></div>
+    <div class="detail-item" style="grid-column:1/-1"><div class="detail-item-label">Match Reason</div><div class="detail-item-val" style="font-size:10.5px">${lead.matchReason||'—'}</div></div>
+  `;
+  if(lead.taxYearsDelinquent>0||lead.taxTotalBalance>0){
+    document.getElementById('d-tax-section').style.display='block';
+    document.getElementById('d-tax-details').innerHTML=`
+      <div class="detail-item"><div class="detail-item-label">Years Delinquent</div><div class="detail-item-val" style="color:#9D174D;font-weight:700">${lead.taxYearsDelinquent||'1+'} yr</div></div>
+      <div class="detail-item"><div class="detail-item-label">Total Balance</div><div class="detail-item-val" style="color:#9D174D;font-weight:700">${lead.taxTotalBalance?'$'+lead.taxTotalBalance.toLocaleString():'See county'}</div></div>
+      <div class="detail-item"><div class="detail-item-label">Delinquent Years</div><div class="detail-item-val" style="font-size:10.5px">${lead.taxYearsList||'—'}</div></div>
+      <div class="detail-item"><div class="detail-item-label">Cert Status</div><div class="detail-item-val">${lead.taxCertStatus||'—'}</div></div>`;
+  }else{document.getElementById('d-tax-section').style.display='none';}
+  if(lead.codeViolationCount>0){
+    document.getElementById('d-cv-section').style.display='block';
+    document.getElementById('d-cv-details').innerHTML=`
+      <div class="detail-item"><div class="detail-item-label">Active Violations</div><div class="detail-item-val" style="color:#92400E;font-weight:700">${lead.codeViolationCount} open case(s)</div></div>
+      <div class="detail-item"><div class="detail-item-label">Violation Types</div><div class="detail-item-val" style="font-size:10.5px">${lead.codeViolationTypes||'—'}</div></div>
+      <div class="detail-item" style="grid-column:1/-1"><div class="detail-item-label">Lookup</div><div class="detail-item-val"><a href="https://netapps.ocfl.net/CETitleViolationSearch/" target="_blank" style="color:var(--blue);font-size:10.5px">netapps.ocfl.net → click "here" ↗</a></div></div>`;
+  }else{document.getElementById('d-cv-section').style.display='none';}
+  document.getElementById('d-links').innerHTML=lead.links.map(lk=>`
+    <a href="${lk.url}" target="_blank" class="link-item" style="padding:8px 0;border-bottom:1px solid var(--border)">
+      <span style="background:var(--blue-light);color:var(--blue);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-right:8px;min-width:40px;display:inline-block;text-align:center">${lk.cat}</span>
+      <span style="font-size:12.5px;font-weight:500;color:var(--text);flex:1">${lk.name}</span>
+      <span style="color:var(--text3);font-size:11px">↗</span>
+    </a>`).join('');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+}
+function closeDrawer(){document.getElementById('drawerOverlay').classList.remove('open');document.getElementById('drawer').classList.remove('open')}
+function openLinks(e,id){
+  e.stopPropagation();
+  const lead=LEADS.find(l=>l.id===id);if(!lead)return;
+  document.getElementById('linksBody').innerHTML=lead.links.map(lk=>`
+    <a href="${lk.url}" target="_blank" class="link-item">
+      <span style="background:var(--blue-light);color:var(--blue);font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;min-width:48px;text-align:center">${lk.cat}</span>
+      <div style="flex:1"><div style="font-size:12.5px;font-weight:500;color:var(--text)">${lk.name}</div><div style="font-size:10.5px;color:var(--text3)">${lk.url.replace('https://','')}</div></div>
+      <span style="color:var(--text3)">↗</span>
+    </a>`).join('');
+  document.getElementById('linksOverlay').classList.add('open');
+}
+function closeLinks(){document.getElementById('linksOverlay').classList.remove('open')}
+function toggleFilterBar(){document.getElementById('filterBar').classList.toggle('open')}
+function setScoreBand(btn,val){document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');F.scoreBand=val==='all'?null:val;doFilter()}
+function setSigFilter(btn,val){const a=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.signal=a?null:val;if(!a)btn.classList.add('active');doFilter()}
+function setSrcFilter(btn,val){const a=btn.classList.contains('active');document.querySelectorAll('#filterBar .filter-btn').forEach(b=>b.classList.remove('active'));F.source=a?null:val;if(!a)btn.classList.add('active');doFilter()}
+function setTab(el,tab){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');currentTab=tab;doFilter()}
+function setTabFilter(tab){currentTab=tab;document.querySelectorAll('.tab').forEach((t,i)=>{const names=['all','critical','hot','warm','stacked','foreclosure','county','tax','violations','lp'];t.classList.toggle('active',names[i]===tab);});doFilter()}
+function clearAllFilters(){F={source:null,signal:null,scoreBand:null,score:null,date:null,lpDate:null,exportFilter:'all'};currentTab='all';clearDateFilter();document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.select-filter').forEach(s=>s.value='');setExportFilter('all');doFilter()}
+function doFilter(){renderTable()}
+function toggleSel(id,cb){if(cb.checked)selectedIds.add(id);else selectedIds.delete(id);updateBulk()}
+function masterCheck(cb){getFiltered().forEach(l=>{if(cb.checked)selectedIds.add(l.id);else selectedIds.delete(l.id)});renderTable();updateBulk()}
+function selAll(){getFiltered().forEach(l=>selectedIds.add(l.id));renderTable();updateBulk()}
+function updateBulk(){const n=selectedIds.size;document.getElementById('bulkCount').textContent=`${n} lead${n!==1?'s':''} selected`;document.getElementById('bulkBar').classList.toggle('visible',n>0)}
+// ADDRESS PARSER
+const VALID_STATES=new Set(['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC']);
+const STATE_NAMES={'ALABAMA':'AL','ALASKA':'AK','ARIZONA':'AZ','ARKANSAS':'AR','CALIFORNIA':'CA','COLORADO':'CO','CONNECTICUT':'CT','DELAWARE':'DE','FLORIDA':'FL','GEORGIA':'GA','HAWAII':'HI','IDAHO':'ID','ILLINOIS':'IL','INDIANA':'IN','IOWA':'IA','KANSAS':'KS','KENTUCKY':'KY','LOUISIANA':'LA','MAINE':'ME','MARYLAND':'MD','MASSACHUSETTS':'MA','MICHIGAN':'MI','MINNESOTA':'MN','MISSISSIPPI':'MS','MISSOURI':'MO','MONTANA':'MT','NEBRASKA':'NE','NEVADA':'NV','NEW HAMPSHIRE':'NH','NEW JERSEY':'NJ','NEW MEXICO':'NM','NEW YORK':'NY','NORTH CAROLINA':'NC','NORTH DAKOTA':'ND','OHIO':'OH','OKLAHOMA':'OK','OREGON':'OR','PENNSYLVANIA':'PA','RHODE ISLAND':'RI','SOUTH CAROLINA':'SC','SOUTH DAKOTA':'SD','TENNESSEE':'TN','TEXAS':'TX','UTAH':'UT','VERMONT':'VT','VIRGINIA':'VA','WASHINGTON':'WA','WEST VIRGINIA':'WV','WISCONSIN':'WI','WYOMING':'WY','DISTRICT OF COLUMBIA':'DC'};
+const KNOWN_CITIES=['ALTAMONTE SPRINGS','BUENAVENTURA LAKES','DOCTOR PHILLIPS','HUNTERS CREEK','WINTER GARDEN','WINTER PARK','MOUNT DORA','BELLE ISLE','CASSELBERRY','EATONVILLE','EDGEWOOD','GOLDENROD','CELEBRATION','WINDERMERE','KISSIMMEE','LONGWOOD','MAITLAND','MINNEOLA','GROVELAND','CLERMONT','LAKE MARY','OAK RIDGE','PINE HILLS','PINE CASTLE','REUNION','ST CLOUD','TAVARES','LEESBURG','APOPKA','ORLANDO','SANFORD','OCOEE','DAVENPORT','HAINES CITY','NORTH MUSKEGON','HUNTSVILLE','JACKSONVILLE','TALLAHASSEE','GAINESVILLE','PENSACOLA','FORT LAUDERDALE','MIAMI','TAMPA','HIALEAH','CAPE CORAL','FORT MYERS','PORT ST LUCIE','HOLLYWOOD','MIRAMAR','CORAL SPRINGS','CLEARWATER','BRANDON','SPRING HILL','LAKELAND','POMPANO BEACH','WEST PALM BEACH','DAVIE','BOCA RATON','DELTONA','PALM BAY','LARGO','DEERFIELD BEACH','MELBOURNE','SUNRISE','PLANTATION','BOYNTON BEACH','LAUDERHILL','WESTON','FORT PIERCE','PALM COAST','HOMESTEAD','MIAMI GARDENS','TUSCALOOSA','BIRMINGHAM','MONTGOMERY','MOBILE','ANCHORAGE','PHOENIX','TUCSON','MESA','CHANDLER','GLENDALE','SCOTTSDALE','GILBERT','TEMPE','PEORIA','SURPRISE','LITTLE ROCK','LOS ANGELES','SAN DIEGO','SAN JOSE','SAN FRANCISCO','FRESNO','SACRAMENTO','LONG BEACH','OAKLAND','BAKERSFIELD','ANAHEIM','DENVER','COLORADO SPRINGS','AURORA','FORT COLLINS','BRIDGEPORT','NEW HAVEN','WILMINGTON','WASHINGTON','ATLANTA','SAVANNAH','HONOLULU','BOISE','CHICAGO','ROCKFORD','JOLIET','NAPERVILLE','INDIANAPOLIS','FORT WAYNE','EVANSVILLE','SOUTH BEND','DES MOINES','WICHITA','LOUISVILLE','LEXINGTON','NEW ORLEANS','PORTLAND','BALTIMORE','BOSTON','WORCESTER','SPRINGFIELD','DETROIT','GRAND RAPIDS','WARREN','STERLING HEIGHTS','MINNEAPOLIS','ST PAUL','JACKSON','KANSAS CITY','ST LOUIS','BILLINGS','OMAHA','LINCOLN','LAS VEGAS','HENDERSON','RENO','MANCHESTER','NEWARK','JERSEY CITY','PATERSON','ALBUQUERQUE','BUFFALO','ROCHESTER','YONKERS','CHARLOTTE','RALEIGH','GREENSBORO','DURHAM','FARGO','COLUMBUS','CLEVELAND','CINCINNATI','TOLEDO','AKRON','OKLAHOMA CITY','TULSA','EUGENE','PHILADELPHIA','PITTSBURGH','ALLENTOWN','PROVIDENCE','COLUMBIA','SIOUX FALLS','MEMPHIS','NASHVILLE','KNOXVILLE','CHATTANOOGA','HOUSTON','SAN ANTONIO','DALLAS','AUSTIN','FORT WORTH','EL PASO','ARLINGTON','CORPUS CHRISTI','PLANO','LAREDO','LUBBOCK','SALT LAKE CITY','WEST VALLEY CITY','PROVO','VIRGINIA BEACH','NORFOLK','CHESAPEAKE','RICHMOND','SEATTLE','SPOKANE','TACOMA','BELLEVUE','CHARLESTON','MILWAUKEE','MADISON','GREEN BAY','CHEYENNE'];
+function parseAddr(addr){
+  if(!addr||addr==='—')return{street:'',city:'',state:'FL',zip:''};
+  addr=addr.trim().toUpperCase();
+  const lc=addr.lastIndexOf(',');
+  if(lc>=0){
+    let sfx=addr.slice(lc+1);
+    for(const [full,abbr] of Object.entries(STATE_NAMES)){sfx=sfx.replace(new RegExp('\\b'+full+'\\b','g'),abbr);}
+    addr=addr.slice(0,lc+1)+sfx;
+  }
+  addr=addr.replace(/(\d{5})-\d{4}/g,'$1');
+  const toks=addr.split(/[\s,]+/);
+  let zip='';
+  for(let i=toks.length-1;i>0;i--){if(/^\d{5}$/.test(toks[i])){zip=toks[i];break;}}
+  if(zip){const zp=addr.lastIndexOf(zip);addr=addr.slice(0,zp).trim().replace(/[,\s]+$/,'').trim();}
+  const sm=addr.match(/[,\s]+([A-Z]{2})\s*$/);
+  let state='';
+  if(sm&&VALID_STATES.has(sm[1])){state=sm[1];addr=addr.slice(0,addr.length-sm[0].length).trim().replace(/,\s*$/,'').trim();}
+  const ci=addr.lastIndexOf(',');
+  let street=addr,city='';
+  if(ci>0){
+    street=addr.slice(0,ci).trim();
+    city=addr.slice(ci+1).trim();
+  } else {
+    // Street type suffixes — if the token after city match is a street type,
+    // then the "city" is actually part of the street name (e.g. "6205 CLEVELAND ST")
+    const STREET_TYPES=new Set(['ST','AVE','BLVD','DR','RD','LN','CT','WAY','PL','CIR',
+      'TER','TRL','PKWY','HWY','FWY','SQ','LOOP','RUN','PASS','PATH','ROW','ALY',
+      'STREET','AVENUE','BOULEVARD','DRIVE','ROAD','LANE','COURT','CIRCLE','PLACE',
+      'TERRACE','TRAIL','PARKWAY','HIGHWAY']);
+    for(const knownCity of KNOWN_CITIES){
+      const pat=new RegExp('\\s+'+knownCity.replace(/ /g,'\\s+')+'(\\s+[A-Z]{2})?$');
+      const m=pat.exec(addr);
+      if(m){
+        // Check token immediately after city — if it's a street type, skip this match
+        const afterCity=addr.slice(addr.lastIndexOf(knownCity)+knownCity.length).trim();
+        const firstAfter=(afterCity.split(/\s+/)[0]||'').replace(/[^A-Z]/g,'');
+        if(STREET_TYPES.has(firstAfter)) continue;
+        city=knownCity;
+        street=addr.slice(0,addr.lastIndexOf(knownCity)).trim();
+        break;
+      }
+    }
+    if(!city)street=addr;
+  }
+  return{street,city,state:state||'FL',zip};
+}
+// ── EXPORTED LEADS PERSISTENCE ────────────────────────────────────────────────
+async function loadExportedIds(){
+  try{
+    const raw=localStorage.getItem('propsignal_exported_leads');
+    if(raw){
+      const ids=JSON.parse(raw);
+      ids.forEach(id=>exportedIds.add(id));
+      updateExportedCount();
+    }
+  }catch(e){/* first run */}
+}
+async function saveExportedIds(){
+  try{
+    localStorage.setItem('propsignal_exported_leads',JSON.stringify([...exportedIds]));
+  }catch(e){console.warn('Could not save exported leads',e);}
+}
+function updateExportedCount(){
+  const el=document.getElementById('exportedCount');
+  if(el)el.textContent=exportedIds.size>0?exportedIds.size+' exported':'';
+}
+function setSortBy(val){sortBy=val;doFilter();}
+function colSort(col){
+  // Toggle: if already sorting this col desc → go asc, otherwise go desc
+  const cur=sortBy;
+  if(cur===col+'_desc')sortBy=col+'_asc';
+  else sortBy=col+'_desc';
+  // Update header classes
+  document.querySelectorAll('thead th.sortable').forEach(th=>{
+    th.classList.remove('sort-asc','sort-desc');
+  });
+  const colMap={score:1,scraped:3,filed:4,auction:5,assessed:15};
+  const idx=colMap[col];
+  if(idx!==undefined){
+    const th=document.querySelectorAll('thead th')[idx];
+    if(th)th.classList.add(sortBy.endsWith('_desc')?'sort-desc':'sort-asc');
+  }
+  // Also sync the dropdown if present
+  const sel=document.getElementById('sortSelect');
+  if(sel){
+    const map={score_desc:'score_desc',score_asc:'score_asc',filed_desc:'filed_desc',filed_asc:'filed_asc',scraped_desc:'scraped_desc',scraped_asc:'scraped_asc'};
+    if(map[sortBy])sel.value=map[sortBy];
+  }
+  doFilter();
+}
+function setExportFilter(val){
+  F.exportFilter=val;
+  ['all','new','exported'].forEach(v=>{
+    const btn=document.getElementById('exportFilter'+v.charAt(0).toUpperCase()+v.slice(1));
+    if(btn)btn.classList.toggle('active',v===val);
+  });
+  doFilter();
+}
+async function markAsExported(leads){
+  leads.forEach(l=>{if(l.docNum&&l.docNum!=='—')exportedIds.add(l.docNum);});
+  await saveExportedIds();
+  updateExportedCount();
+  renderTable();
+}
+function exportCSV(){
+  const leads=getFiltered();
+  const rows=[skiptraceExportHeader(), ...buildOneAddressRows(leads)];
+  downloadRowsAsCSV(rows,'propsignal_skiptrace_one_address_'+new Date().toISOString().slice(0,10)+'.csv');
+  markAsExported(leads);
+}
+
+async function loadData(){
+  try{
+    const res=await fetch(DATA_URL+'?t='+Date.now());
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const text=await res.text();
+    const rows=parseCSV(text);
+    const byDoc={};const noDocs=[];
+    rows.forEach(r=>{const doc=(r.document_number||'').trim();if(!doc||doc==='—'){noDocs.push(r);return;}const score=parseFloat(r.seller_score||0);if(!byDoc[doc]||score>parseFloat(byDoc[doc].seller_score||0))byDoc[doc]=r;});
+    const deduped=[...Object.values(byDoc),...noDocs];
+    // Secondary dedup by parcel ID — keep highest scored record per parcel
+    const byParcel={};const noParcel=[];
+    deduped.forEach(r=>{
+      const pid=(r.parcel_id||'').trim().replace(/[-\s]/g,'');
+      if(!pid||pid.length<10){noParcel.push(r);return;}
+      const score=parseFloat(r.seller_score||0);
+      if(!byParcel[pid]||score>parseFloat(byParcel[pid].seller_score||0))byParcel[pid]=r;
+    });
+    // Tertiary dedup by property address — catches same property with no parcel ID
+    const byAddr={};const noAddr=[];
+    noParcel.forEach(r=>{
+      const addr=(r.property_address||r.prop_street||'').trim().toUpperCase().replace(/\s+/g,' ');
+      if(!addr||addr==='—'||addr.length<8){noAddr.push(r);return;}
+      const score=parseFloat(r.seller_score||0);
+      if(!byAddr[addr]||score>parseFloat(byAddr[addr].seller_score||0))byAddr[addr]=r;
+    });
+    const deduped2=[...Object.values(byParcel),...Object.values(byAddr),...noAddr];
+    let leads=deduped2.map((r,i)=>mapRow(r,i)).filter(Boolean);
+    leads=leads.filter(lead=>{if(lead.source!=='foreclosure')return true;const days=daysUntil(lead.filed);if(days===null)return true;return days>AUCTION_MIN_DAYS;});
+    leads.sort((a,b)=>b.score-a.score);
+    LEADS=leads;
+    document.getElementById('loadingState').style.display='none';
+    document.getElementById('mainContent').style.display='block';
+    updateCards();buildDatePicker();renderFocus();
+    buildLPDatePicker();
+    await loadExportedIds();
+    requestAnimationFrame(()=>requestAnimationFrame(()=>renderTable()));
+  }catch(err){
+    document.getElementById('loadingState').innerHTML=`
+      <div style="color:var(--red);font-weight:600;font-size:14px">Failed to load data</div>
+      <div style="color:var(--text3);font-size:12px;margin-top:8px">${err.message}</div>
+      <button class="btn btn-ghost" style="margin-top:16px" onclick="loadData()">↺ Retry</button>`;
+  }
+}
+loadData();
+</script>
+</body>
+</html>
