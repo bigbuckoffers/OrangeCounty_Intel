@@ -1,33 +1,10 @@
 {
-  "generated_at": "2026-05-19T18:29:58.810788Z",
-  "total_records": 43,
+  "generated_at": "2026-05-19T20:12:18.304511Z",
+  "total_records": 41,
   "active": 30,
   "expired": 0,
-  "too_soon": 13,
+  "too_soon": 11,
   "foreclosures": [
-    {
-      "auction_date": "2026-05-20",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2019-CA-006693-O",
-      "parcel_id": "282121363000090",
-      "address": "1148 GRAND HILLTOP DR, APOPKA, 32703",
-      "final_judgment": "$240,485.89",
-      "assessed_value": "$235,038.00",
-      "opening_bid": "",
-      "owner_name": "PAGE SHERION R",
-      "mailing_address": "1148 Grand Hilltop Dr, Apopka, FL 32703-6301",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/282121363000090",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20220360737",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/20/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 1,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:27.887200Z"
-    },
     {
       "auction_date": "2026-05-20",
       "auction_time": "11:00 AM ET",
@@ -49,7 +26,15 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:27.887460Z"
+      "scraped_at": "2026-05-19T20:11:48.899837Z",
+      "prop_street": "1225 LAKE SHADOW CIR UNIT 14102",
+      "prop_city": "Maitland",
+      "prop_state": "FL",
+      "prop_zip": "32751",
+      "mail_street": "APT 8 POINT CENTRAL",
+      "mail_city": "14B Sydenham Rd",
+      "mail_state": "United Kingdom",
+      "mail_zip": ""
     },
     {
       "auction_date": "2026-05-20",
@@ -72,7 +57,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:27.887645Z"
+      "scraped_at": "2026-05-19T20:11:48.900044Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -95,7 +80,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:27.887853Z"
+      "scraped_at": "2026-05-19T20:11:48.900227Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -118,7 +103,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:27.888033Z"
+      "scraped_at": "2026-05-19T20:11:48.900418Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -141,7 +126,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:27.888214Z"
+      "scraped_at": "2026-05-19T20:11:48.900593Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -164,7 +149,15 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:27.888444Z"
+      "scraped_at": "2026-05-19T20:11:48.900818Z",
+      "prop_street": "3705 CONNOR AVE",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32808",
+      "mail_street": "141 AMSTERDAM AVE",
+      "mail_city": "Passaic",
+      "mail_state": "NJ",
+      "mail_zip": "07055-2441"
     },
     {
       "auction_date": "2026-05-21",
@@ -187,7 +180,15 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:30.334670Z"
+      "scraped_at": "2026-05-19T20:11:51.003564Z",
+      "prop_street": "5627 MASTERS BLVD",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32819",
+      "mail_street": "4426 HUGH HOWELL RD STE B-200",
+      "mail_city": "Tucker",
+      "mail_state": "GA",
+      "mail_zip": "30084-4918"
     },
     {
       "auction_date": "2026-05-21",
@@ -210,30 +211,15 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:30.334936Z"
-    },
-    {
-      "auction_date": "2026-05-21",
-      "auction_time": "11:00 AM ET",
-      "case_number": "2025-CA-005135-O",
-      "parcel_id": "302306217400150",
-      "address": "2508 LASSEK DR, ORLANDO, 32806",
-      "final_judgment": "$207,864.37",
-      "assessed_value": "$240,974.00",
-      "opening_bid": "",
-      "owner_name": "VARN ANDREW",
-      "mailing_address": "2508 Lassek Dr, Orlando, FL 32806-5034",
-      "property_type": "SINGLE FAM CLASS III",
-      "homestead": false,
-      "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/302306217400150",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260218442",
-      "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/21/2026",
-      "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 2,
-      "status": "TOO_SOON",
-      "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:30.335177Z"
+      "scraped_at": "2026-05-19T20:11:51.003809Z",
+      "prop_street": "1547 PRIORY CIR",
+      "prop_city": "Winter Garden",
+      "prop_state": "FL",
+      "prop_zip": "34787",
+      "mail_street": "1547 PRIORY CIR",
+      "mail_city": "Winter Garden",
+      "mail_state": "FL",
+      "mail_zip": "34787-5566"
     },
     {
       "auction_date": "2026-05-21",
@@ -256,7 +242,7 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:30.335355Z"
+      "scraped_at": "2026-05-19T20:11:51.003985Z"
     },
     {
       "auction_date": "2026-05-21",
@@ -279,7 +265,15 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:30.335585Z"
+      "scraped_at": "2026-05-19T20:11:51.004213Z",
+      "prop_street": "1368 COUNTRYRIDGE PL",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32835",
+      "mail_street": "239 WILMETTE AVE SW",
+      "mail_city": "Palm Bay",
+      "mail_state": "FL",
+      "mail_zip": "32908-3528"
     },
     {
       "auction_date": "2026-05-21",
@@ -302,7 +296,15 @@
       "days_until_auction": 2,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:30.335835Z"
+      "scraped_at": "2026-05-19T20:11:51.004453Z",
+      "prop_street": "2242 J LAWSON BLVD",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32824",
+      "mail_street": "2242 J LAWSON BLVD",
+      "mail_city": "Orlando",
+      "mail_state": "FL",
+      "mail_zip": "32824-4372"
     },
     {
       "auction_date": "2026-05-26",
@@ -325,7 +327,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:46.416433Z"
+      "scraped_at": "2026-05-19T20:12:05.407271Z"
     },
     {
       "auction_date": "2026-05-26",
@@ -348,7 +350,15 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:46.416686Z"
+      "scraped_at": "2026-05-19T20:12:05.407533Z",
+      "prop_street": "6014 MELBOURNE AVE",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32835",
+      "mail_street": "6014 MELBOURNE AVE",
+      "mail_city": "Orlando",
+      "mail_state": "FL",
+      "mail_zip": "32835-1190"
     },
     {
       "auction_date": "2026-05-26",
@@ -371,7 +381,15 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:46.416938Z"
+      "scraped_at": "2026-05-19T20:12:05.407768Z",
+      "prop_street": "2902 CALUMET DR",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32810",
+      "mail_street": "5522 CASA BLANCA LN APT 4",
+      "mail_city": "Orlando",
+      "mail_state": "FL",
+      "mail_zip": "32807-1556"
     },
     {
       "auction_date": "2026-05-26",
@@ -394,7 +412,15 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:46.417168Z"
+      "scraped_at": "2026-05-19T20:12:05.407994Z",
+      "prop_street": "903 DOREEN AVE",
+      "prop_city": "Ocoee",
+      "prop_state": "FL",
+      "prop_zip": "34761",
+      "mail_street": "903 DOREEN AVE",
+      "mail_city": "Ocoee",
+      "mail_state": "FL",
+      "mail_zip": "34761-1603"
     },
     {
       "auction_date": "2026-05-26",
@@ -417,7 +443,15 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:46.417396Z"
+      "scraped_at": "2026-05-19T20:12:05.408224Z",
+      "prop_street": "6614 S GOLDENROD RD UNIT 105B",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32822",
+      "mail_street": "6614 S GOLDENROD RD UNIT B",
+      "mail_city": "Orlando",
+      "mail_state": "FL",
+      "mail_zip": "32822-8725"
     },
     {
       "auction_date": "2026-05-26",
@@ -440,7 +474,15 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:46.417626Z"
+      "scraped_at": "2026-05-19T20:12:05.408461Z",
+      "prop_street": "9651 BISCOTTI AVE",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32829",
+      "mail_street": "9651 BISCOTTI AVE",
+      "mail_city": "Orlando",
+      "mail_state": "FL",
+      "mail_zip": "32829-8125"
     },
     {
       "auction_date": "2026-05-26",
@@ -463,7 +505,15 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:46.417868Z"
+      "scraped_at": "2026-05-19T20:12:05.408687Z",
+      "prop_street": "12144 BRUCETON WAY UNIT 101",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32828",
+      "mail_street": "1965 JAN LAN BLVD",
+      "mail_city": "Saint Cloud",
+      "mail_state": "FL",
+      "mail_zip": "34772-8861"
     },
     {
       "auction_date": "2026-05-27",
@@ -486,7 +536,15 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:50.106488Z"
+      "scraped_at": "2026-05-19T20:12:09.035289Z",
+      "prop_street": "2727 CULLENS CT",
+      "prop_city": "Ocoee",
+      "prop_state": "FL",
+      "prop_zip": "34761",
+      "mail_street": "2727 CULLENS CT",
+      "mail_city": "Ocoee",
+      "mail_state": "FL",
+      "mail_zip": "34761-9112"
     },
     {
       "auction_date": "2026-05-27",
@@ -509,7 +567,15 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:50.106741Z"
+      "scraped_at": "2026-05-19T20:12:09.035548Z",
+      "prop_street": "202 S ORANGE BLOSSOM TRL",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32805",
+      "mail_street": "122 E LAKE AVE",
+      "mail_city": "Longwood",
+      "mail_state": "FL",
+      "mail_zip": "32750-5441"
     },
     {
       "auction_date": "2026-05-27",
@@ -532,7 +598,15 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:50.106993Z"
+      "scraped_at": "2026-05-19T20:12:09.035778Z",
+      "prop_street": "4218 CROSSEN DR",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32822",
+      "mail_street": "4218 CROSSEN DR",
+      "mail_city": "Orlando",
+      "mail_state": "FL",
+      "mail_zip": "32822-7515"
     },
     {
       "auction_date": "2026-05-27",
@@ -555,7 +629,15 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:50.107223Z"
+      "scraped_at": "2026-05-19T20:12:09.036000Z",
+      "prop_street": "211 S ULYSSES DR",
+      "prop_city": "Apopka",
+      "prop_state": "FL",
+      "prop_zip": "32703",
+      "mail_street": "211 S ULYSSES DR",
+      "mail_city": "Apopka",
+      "mail_state": "FL",
+      "mail_zip": "32703-4745"
     },
     {
       "auction_date": "2026-05-27",
@@ -578,30 +660,38 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:50.107397Z"
+      "scraped_at": "2026-05-19T20:12:09.036171Z"
     },
     {
       "auction_date": "2026-05-27",
       "auction_time": "11:00 AM ET",
       "case_number": "2025-CA-001958-O",
-      "parcel_id": "Property Appraiser",
-      "address": "",
-      "final_judgment": "$0.00",
-      "assessed_value": "",
+      "parcel_id": "272328831722300",
+      "address": "8126 RED STOPPER LN, WINTER GARDEN, 34787",
+      "final_judgment": "$10,178.71",
+      "assessed_value": "$274,212.00",
       "opening_bid": "",
-      "owner_name": "",
-      "mailing_address": "",
-      "property_type": "",
+      "owner_name": "LOPEZ MORALES JANET",
+      "mailing_address": "8126 Red Stopper Ln, Winter Garden, FL 34787-4821",
+      "property_type": "TOWNHOUSE CLASS II",
       "homestead": false,
       "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/",
-      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/",
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/272328831722300",
+      "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260282849",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=05/27/2026",
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 8,
       "status": "ACTIVE",
-      "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:50.107565Z"
+      "matched_lead": false,
+      "scraped_at": "2026-05-19T20:12:09.036412Z",
+      "prop_street": "8126 RED STOPPER LN",
+      "prop_city": "Winter Garden",
+      "prop_state": "FL",
+      "prop_zip": "34787",
+      "mail_street": "8126 RED STOPPER LN",
+      "mail_city": "Winter Garden",
+      "mail_state": "FL",
+      "mail_zip": "34787-4821"
     },
     {
       "auction_date": "2026-05-27",
@@ -624,7 +714,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:50.107734Z"
+      "scraped_at": "2026-05-19T20:12:09.036583Z"
     },
     {
       "auction_date": "2026-05-27",
@@ -647,7 +737,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:50.107915Z"
+      "scraped_at": "2026-05-19T20:12:09.036755Z"
     },
     {
       "auction_date": "2026-05-27",
@@ -670,7 +760,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:50.108084Z"
+      "scraped_at": "2026-05-19T20:12:09.036926Z"
     },
     {
       "auction_date": "2026-05-27",
@@ -693,7 +783,15 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:50.108308Z"
+      "scraped_at": "2026-05-19T20:12:09.037151Z",
+      "prop_street": "717 WHITE IVEY CT",
+      "prop_city": "Apopka",
+      "prop_state": "FL",
+      "prop_zip": "32712",
+      "mail_street": "717 WHITE IVEY CT",
+      "mail_city": "Apopka",
+      "mail_state": "FL",
+      "mail_zip": "32712-3309"
     },
     {
       "auction_date": "2026-05-28",
@@ -716,7 +814,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.611783Z"
+      "scraped_at": "2026-05-19T20:12:13.101126Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -739,7 +837,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.611996Z"
+      "scraped_at": "2026-05-19T20:12:13.101326Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -762,7 +860,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.612172Z"
+      "scraped_at": "2026-05-19T20:12:13.101504Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -785,7 +883,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.612345Z"
+      "scraped_at": "2026-05-19T20:12:13.101676Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -808,7 +906,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.612519Z"
+      "scraped_at": "2026-05-19T20:12:13.101851Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -831,7 +929,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.612692Z"
+      "scraped_at": "2026-05-19T20:12:13.102021Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -854,7 +952,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.612877Z"
+      "scraped_at": "2026-05-19T20:12:13.102191Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -877,7 +975,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.613051Z"
+      "scraped_at": "2026-05-19T20:12:13.102372Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -900,7 +998,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.613220Z"
+      "scraped_at": "2026-05-19T20:12:13.102543Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -923,7 +1021,7 @@
       "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-19T18:29:53.613392Z"
+      "scraped_at": "2026-05-19T20:12:13.102712Z"
     },
     {
       "auction_date": "2026-06-01",
@@ -946,7 +1044,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:56.604748Z"
+      "scraped_at": "2026-05-19T20:12:16.089544Z"
     },
     {
       "auction_date": "2026-06-01",
@@ -969,7 +1067,15 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:56.605013Z"
+      "scraped_at": "2026-05-19T20:12:16.089794Z",
+      "prop_street": "1711 CHISBURY CT",
+      "prop_city": "Orlando",
+      "prop_state": "FL",
+      "prop_zip": "32837",
+      "mail_street": "1711 CHISBURY CT",
+      "mail_city": "Orlando",
+      "mail_state": "FL",
+      "mail_zip": "32837-5717"
     },
     {
       "auction_date": "2026-06-01",
@@ -992,7 +1098,15 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-19T18:29:56.605245Z"
+      "scraped_at": "2026-05-19T20:12:16.090027Z",
+      "prop_street": "262 PLEASANT GARDENS DR",
+      "prop_city": "Apopka",
+      "prop_state": "FL",
+      "prop_zip": "32703",
+      "mail_street": "262 PLEASANT GARDENS DR",
+      "mail_city": "Apopka",
+      "mail_state": "FL",
+      "mail_zip": "32703-4747"
     }
   ]
 }
