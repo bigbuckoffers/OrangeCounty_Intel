@@ -16,7 +16,7 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
 
-print("CLEANUP_VERSION = 2026-05-19-v6-strict-safety", flush=True)
+print("CLEANUP_VERSION = 2026-05-20-v7-fc-address-fix", flush=True)
 
 OUTPUT_PATH      = "data/output.json"
 OUTPUT_CSV       = "data/output.csv"
@@ -669,6 +669,15 @@ def fill_missing_city_zip(leads):
     }
 
     # Find leads that need city/zip
+    # Also normalize None -> '' for city/zip fields
+    for l in leads:
+        if isinstance(l, dict):
+            if l.get('prop_city') is None:  l['prop_city']  = ''
+            if l.get('prop_zip')  is None:  l['prop_zip']   = ''
+            if l.get('prop_state') is None: l['prop_state'] = 'FL'
+            if l.get('mail_city') is None:  l['mail_city']  = ''
+            if l.get('mail_zip')  is None:  l['mail_zip']   = ''
+
     needs_fix = [l for l in leads if isinstance(l, dict) and
                  is_valid_parcel(clean_parcel(l.get('parcel_id', ''))) and
                  (not l.get('prop_city') or
@@ -1087,12 +1096,17 @@ def final_address_validation_guard(leads):
         has_reliable  = (is_valid_parcel(pid) and
                          any(s in doc_type for s in _RELIABLE_SOURCES))
 
+        # Foreclosure auction address comes directly from realforeclose.com — always trust it
+        has_fc_direct = ('foreclosure' in doc_type and
+                         bool(lead.get('property_address') or lead.get('prop_street')))
+
         # For NONE confidence, reliable source alone is not enough —
-        # the parcel/address may have come from a stacked record, not this filing
+        # the parcel/address may have come from a stacked record, not this filing.
+        # Exception: foreclosure addresses come directly from the auction site.
         if confidence == 'NONE':
-            confirmed = has_direct or has_strict or has_revalidated
+            confirmed = has_direct or has_strict or has_revalidated or has_fc_direct
         else:
-            confirmed = has_direct or has_strict or has_revalidated or has_reliable
+            confirmed = has_direct or has_strict or has_revalidated or has_reliable or has_fc_direct
 
         doc_num = (lead.get('document_number') or '')
         if doc_num in _DEBUG_DOCS:
