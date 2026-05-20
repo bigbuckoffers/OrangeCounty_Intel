@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T02:14:14.602455Z",
+  "generated_at": "2026-05-20T13:43:43.912855Z",
   "total_records": 51,
   "active": 40,
   "expired": 0,
@@ -26,7 +26,7 @@
       "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:33.693354Z",
+      "scraped_at": "2026-05-20T13:43:05.955961Z",
       "prop_street": "1225 LAKE SHADOW CIR UNIT 14102",
       "prop_city": "Maitland",
       "prop_state": "FL",
@@ -57,7 +57,7 @@
       "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:33.693553Z"
+      "scraped_at": "2026-05-20T13:43:05.956168Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -80,7 +80,7 @@
       "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:33.693739Z"
+      "scraped_at": "2026-05-20T13:43:05.956354Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -103,7 +103,7 @@
       "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:33.693929Z"
+      "scraped_at": "2026-05-20T13:43:05.956534Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -126,7 +126,7 @@
       "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:33.694108Z"
+      "scraped_at": "2026-05-20T13:43:05.956708Z"
     },
     {
       "auction_date": "2026-05-20",
@@ -149,7 +149,7 @@
       "days_until_auction": 0,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:33.694341Z",
+      "scraped_at": "2026-05-20T13:43:05.956946Z",
       "prop_street": "3705 CONNOR AVE",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -180,7 +180,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:36.565909Z",
+      "scraped_at": "2026-05-20T13:43:08.235814Z",
       "prop_street": "5627 MASTERS BLVD",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -211,7 +211,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:36.566209Z",
+      "scraped_at": "2026-05-20T13:43:08.236075Z",
       "prop_street": "1547 PRIORY CIR",
       "prop_city": "Winter Garden",
       "prop_state": "FL",
@@ -242,7 +242,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:36.566503Z"
+      "scraped_at": "2026-05-20T13:43:08.236259Z"
     },
     {
       "auction_date": "2026-05-21",
@@ -265,7 +265,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:36.567275Z",
+      "scraped_at": "2026-05-20T13:43:08.236493Z",
       "prop_street": "1368 COUNTRYRIDGE PL",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -296,7 +296,7 @@
       "days_until_auction": 1,
       "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:36.567516Z",
+      "scraped_at": "2026-05-20T13:43:08.236717Z",
       "prop_street": "2242 J LAWSON BLVD",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -327,7 +327,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:55.096094Z"
+      "scraped_at": "2026-05-20T13:43:24.673926Z"
     },
     {
       "auction_date": "2026-05-26",
@@ -350,7 +350,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:55.096340Z",
+      "scraped_at": "2026-05-20T13:43:24.674179Z",
       "prop_street": "6014 MELBOURNE AVE",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -381,7 +381,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:55.096573Z",
+      "scraped_at": "2026-05-20T13:43:24.674418Z",
       "prop_street": "2902 CALUMET DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -412,7 +412,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:55.096816Z",
+      "scraped_at": "2026-05-20T13:43:24.674649Z",
       "prop_street": "903 DOREEN AVE",
       "prop_city": "Ocoee",
       "prop_state": "FL",
@@ -443,7 +443,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:55.097046Z",
+      "scraped_at": "2026-05-20T13:43:24.674880Z",
       "prop_street": "6614 S GOLDENROD RD UNIT 105B",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -474,7 +474,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:55.097275Z",
+      "scraped_at": "2026-05-20T13:43:24.675116Z",
       "prop_street": "9651 BISCOTTI AVE",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -505,7 +505,7 @@
       "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:55.097503Z",
+      "scraped_at": "2026-05-20T13:43:24.675343Z",
       "prop_street": "12144 BRUCETON WAY UNIT 101",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -536,7 +536,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:59.938975Z",
+      "scraped_at": "2026-05-20T13:43:29.133595Z",
       "prop_street": "2727 CULLENS CT",
       "prop_city": "Ocoee",
       "prop_state": "FL",
@@ -567,7 +567,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:59.939218Z",
+      "scraped_at": "2026-05-20T13:43:29.133844Z",
       "prop_street": "202 S ORANGE BLOSSOM TRL",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -598,7 +598,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:59.939447Z",
+      "scraped_at": "2026-05-20T13:43:29.134095Z",
       "prop_street": "4218 CROSSEN DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -629,7 +629,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:59.939675Z",
+      "scraped_at": "2026-05-20T13:43:29.134321Z",
       "prop_street": "211 S ULYSSES DR",
       "prop_city": "Apopka",
       "prop_state": "FL",
@@ -660,7 +660,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:59.939860Z"
+      "scraped_at": "2026-05-20T13:43:29.134492Z"
     },
     {
       "auction_date": "2026-05-27",
@@ -683,7 +683,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:59.940089Z",
+      "scraped_at": "2026-05-20T13:43:29.134715Z",
       "prop_street": "8126 RED STOPPER LN",
       "prop_city": "Winter Garden",
       "prop_state": "FL",
@@ -714,7 +714,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:59.940266Z"
+      "scraped_at": "2026-05-20T13:43:29.134896Z"
     },
     {
       "auction_date": "2026-05-27",
@@ -737,7 +737,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:59.940444Z"
+      "scraped_at": "2026-05-20T13:43:29.135072Z"
     },
     {
       "auction_date": "2026-05-27",
@@ -760,7 +760,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:13:59.940620Z"
+      "scraped_at": "2026-05-20T13:43:29.135246Z"
     },
     {
       "auction_date": "2026-05-27",
@@ -783,7 +783,7 @@
       "days_until_auction": 7,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:13:59.940855Z",
+      "scraped_at": "2026-05-20T13:43:29.135468Z",
       "prop_street": "717 WHITE IVEY CT",
       "prop_city": "Apopka",
       "prop_state": "FL",
@@ -814,7 +814,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.787191Z"
+      "scraped_at": "2026-05-20T13:43:33.234780Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -837,7 +837,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.787377Z"
+      "scraped_at": "2026-05-20T13:43:33.234983Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -860,7 +860,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.787557Z"
+      "scraped_at": "2026-05-20T13:43:33.235158Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -883,7 +883,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.787737Z"
+      "scraped_at": "2026-05-20T13:43:33.235332Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -906,7 +906,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.787921Z"
+      "scraped_at": "2026-05-20T13:43:33.235502Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -929,7 +929,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.788095Z"
+      "scraped_at": "2026-05-20T13:43:33.235672Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -952,7 +952,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.788269Z"
+      "scraped_at": "2026-05-20T13:43:33.235843Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -975,7 +975,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.788444Z"
+      "scraped_at": "2026-05-20T13:43:33.236034Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -998,7 +998,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.788621Z"
+      "scraped_at": "2026-05-20T13:43:33.236205Z"
     },
     {
       "auction_date": "2026-05-28",
@@ -1021,7 +1021,7 @@
       "days_until_auction": 8,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:04.788813Z"
+      "scraped_at": "2026-05-20T13:43:33.236374Z"
     },
     {
       "auction_date": "2026-06-01",
@@ -1044,7 +1044,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:14:08.334546Z"
+      "scraped_at": "2026-05-20T13:43:36.426331Z"
     },
     {
       "auction_date": "2026-06-01",
@@ -1067,7 +1067,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:14:08.334799Z",
+      "scraped_at": "2026-05-20T13:43:36.426615Z",
       "prop_street": "1711 CHISBURY CT",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1098,7 +1098,7 @@
       "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:14:08.335028Z",
+      "scraped_at": "2026-05-20T13:43:36.426849Z",
       "prop_street": "262 PLEASANT GARDENS DR",
       "prop_city": "Apopka",
       "prop_state": "FL",
@@ -1129,7 +1129,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.941033Z"
+      "scraped_at": "2026-05-20T13:43:39.320294Z"
     },
     {
       "auction_date": "2026-06-02",
@@ -1152,7 +1152,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.941226Z"
+      "scraped_at": "2026-05-20T13:43:39.320488Z"
     },
     {
       "auction_date": "2026-06-02",
@@ -1175,7 +1175,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.941409Z"
+      "scraped_at": "2026-05-20T13:43:39.320667Z"
     },
     {
       "auction_date": "2026-06-02",
@@ -1197,8 +1197,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.941639Z",
+      "matched_lead": true,
+      "scraped_at": "2026-05-20T13:43:39.320909Z",
       "prop_street": "3362 AZOLLA ST",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1229,7 +1229,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.941827Z"
+      "scraped_at": "2026-05-20T13:43:39.321082Z"
     },
     {
       "auction_date": "2026-06-02",
@@ -1252,7 +1252,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.942005Z"
+      "scraped_at": "2026-05-20T13:43:39.321252Z"
     },
     {
       "auction_date": "2026-06-02",
@@ -1275,7 +1275,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.942184Z"
+      "scraped_at": "2026-05-20T13:43:39.321429Z"
     },
     {
       "auction_date": "2026-06-02",
@@ -1297,8 +1297,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.942411Z",
+      "matched_lead": true,
+      "scraped_at": "2026-05-20T13:43:39.321649Z",
       "prop_street": "14061 TURNING LEAF DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1328,8 +1328,8 @@
       "source": "myorangeclerk.realforeclose.com",
       "days_until_auction": 13,
       "status": "ACTIVE",
-      "matched_lead": false,
-      "scraped_at": "2026-05-20T02:14:10.942640Z",
+      "matched_lead": true,
+      "scraped_at": "2026-05-20T13:43:39.321872Z",
       "prop_street": "433 CORTONA DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1360,7 +1360,7 @@
       "days_until_auction": 13,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-05-20T02:14:10.942872Z",
+      "scraped_at": "2026-05-20T13:43:39.322111Z",
       "prop_street": "14322 SAPELO BEACH DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
