@@ -229,6 +229,14 @@ TAX-22-22-28-8932-05070,2009-01-01,Delinquent Taxes,,BRANNEN MARGARET R ESTATE,,
 "2025-CA-009800-O (cts I, II, III, IV)",2026-06-17,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-04T15:34:18.882730Z
 "2025-CA-010216-O (Cts I, III, IV, V, VI)",2026-06-17,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-04T15:34:18.882907Z
 2025-CA-006680-O,2026-06-16,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-08T16:12:06.665704Z
+2025-CC-022853-O,2026-06-22,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:21.627975Z
+2025-CA-000244-O (Ct I),2026-06-23,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:24.501057Z
+2025-CA-004220-O,2026-06-23,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:24.501522Z
+2025-CA-005305-O (Count II),2026-06-23,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:24.501746Z
+2025-CA-006881-O,2026-06-23,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:24.501947Z
+2025-CA-007062-O,2026-06-23,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:24.502149Z
+2025-CA-008753-O (COUNT III),2026-06-23,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:24.502349Z
+2025-CA-008753-O (COUNT VI),2026-06-23,Foreclosure Auction,,,,,,,NONE,0,Foreclosure auction — direct from realforeclose.com,True,2026-06-10T15:55:24.502558Z
 TAX-33-21-29-0000-00093,2025-01-01,Delinquent Taxes,,"SECOND CHANCE INTERNATIONAL MINISTRIES I, VALENTIN WESLINE",,,SECOND CHANCE INTERNATIONAL MINISTRIES I,192232908504380,NEEDS_REVIEW,25,score=25 | type+40 | surname+20(VALENTIN) | no_anchor-15 | ambiguous-20 | cleared stale unvalidated address before final save,True,2026-04-28T18:28:30.396578Z
 TAX-02-23-28-6126-00100,2025-01-01,Delinquent Taxes,,LEECO FOODS INC,,,LEECO FOODS INC,212230473604122,NEEDS_REVIEW,45,score=45 | type+40 | surname+20(LEECO) | no_anchor-15 | cleared stale unvalidated address before final save,True,2026-04-28T18:28:30.401422Z
 TAX-23-22-29-3904-00040,2025-01-01,Delinquent Taxes,,"WATSON BARRY L, WATSON REBECCA",,,WATSON BARRY L,182229862401440,NEEDS_REVIEW,25,score=25 | type+40 | surname+20(WATSON) | no_anchor-15 | ambiguous-20 | cleared stale unvalidated address before final save,True,2026-04-28T18:28:30.405696Z
