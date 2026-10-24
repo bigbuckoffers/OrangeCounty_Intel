@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-23T16:58:59.533300Z",
+  "generated_at": "2026-10-24T15:51:02.628013Z",
   "total_records": 61,
-  "active": 61,
+  "active": 60,
   "expired": 0,
-  "too_soon": 0,
+  "too_soon": 1,
   "foreclosures": [
     {
       "auction_date": "2026-10-26",
@@ -23,10 +23,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260520129",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/26/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 3,
-      "status": "ACTIVE",
+      "days_until_auction": 2,
+      "status": "TOO_SOON",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:23.912062Z",
+      "scraped_at": "2026-10-24T15:50:25.140455Z",
       "prop_street": "5510 LEE ANN DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -54,10 +54,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260516081",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:26.051066Z",
+      "scraped_at": "2026-10-24T15:50:27.149513Z",
       "prop_street": "619 BOARDMAN ST",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -85,10 +85,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260514965",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.051272Z"
+      "scraped_at": "2026-10-24T15:50:27.149630Z"
     },
     {
       "auction_date": "2026-10-27",
@@ -108,10 +108,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260515111",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.051452Z"
+      "scraped_at": "2026-10-24T15:50:27.149742Z"
     },
     {
       "auction_date": "2026-10-27",
@@ -131,10 +131,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260494484",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.051626Z"
+      "scraped_at": "2026-10-24T15:50:27.149843Z"
     },
     {
       "auction_date": "2026-10-27",
@@ -154,10 +154,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260242300",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:26.051854Z",
+      "scraped_at": "2026-10-24T15:50:27.149977Z",
       "prop_street": "3243 STONEWYCK ST",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -185,10 +185,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260467223",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.052031Z"
+      "scraped_at": "2026-10-24T15:50:27.150080Z"
     },
     {
       "auction_date": "2026-10-27",
@@ -208,10 +208,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260467222",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.052215Z"
+      "scraped_at": "2026-10-24T15:50:27.150179Z"
     },
     {
       "auction_date": "2026-10-27",
@@ -231,10 +231,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260496570",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.052384Z"
+      "scraped_at": "2026-10-24T15:50:27.150274Z"
     },
     {
       "auction_date": "2026-10-27",
@@ -254,10 +254,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260512932",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.052557Z"
+      "scraped_at": "2026-10-24T15:50:27.150373Z"
     },
     {
       "auction_date": "2026-10-27",
@@ -277,10 +277,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260496478",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/27/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 4,
+      "days_until_auction": 3,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:26.052726Z"
+      "scraped_at": "2026-10-24T15:50:27.150469Z"
     },
     {
       "auction_date": "2026-10-28",
@@ -300,10 +300,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260477992",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 5,
+      "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:28.735874Z",
+      "scraped_at": "2026-10-24T15:50:29.490121Z",
       "prop_street": "81 JAKE CT",
       "prop_city": "Ocoee",
       "prop_state": "FL",
@@ -331,10 +331,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260494674",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 5,
+      "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:28.736138Z",
+      "scraped_at": "2026-10-24T15:50:29.490266Z",
       "prop_street": "14668 BRADDOCK OAK DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -362,10 +362,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260445929",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 5,
+      "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:28.736448Z",
+      "scraped_at": "2026-10-24T15:50:29.490399Z",
       "prop_street": "4327 INWOOD LANDING DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -393,10 +393,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260485686",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 5,
+      "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:28.736674Z",
+      "scraped_at": "2026-10-24T15:50:29.490529Z",
       "prop_street": "2294 ALOHA BAY CT",
       "prop_city": "Ocoee",
       "prop_state": "FL",
@@ -424,10 +424,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260499597",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 5,
+      "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:28.736896Z",
+      "scraped_at": "2026-10-24T15:50:29.490658Z",
       "prop_street": "5920 NORVALE CT",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -455,10 +455,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260571945",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/28/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 5,
+      "days_until_auction": 4,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:28.737071Z"
+      "scraped_at": "2026-10-24T15:50:29.490766Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -478,10 +478,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260457308",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:33.196520Z"
+      "scraped_at": "2026-10-24T15:50:33.224295Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -501,10 +501,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260299572",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:33.196908Z"
+      "scraped_at": "2026-10-24T15:50:33.224434Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -524,10 +524,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260521861",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:33.197108Z"
+      "scraped_at": "2026-10-24T15:50:33.224537Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -547,10 +547,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260521862",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:33.197292Z"
+      "scraped_at": "2026-10-24T15:50:33.224640Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -570,10 +570,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260521853",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:33.197471Z"
+      "scraped_at": "2026-10-24T15:50:33.224749Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -593,10 +593,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260521859",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:33.197677Z"
+      "scraped_at": "2026-10-24T15:50:33.224847Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -616,10 +616,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260458750",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:33.197911Z",
+      "scraped_at": "2026-10-24T15:50:33.224978Z",
       "prop_street": "1624 RENEE AVE",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -647,10 +647,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260521815",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:33.198096Z"
+      "scraped_at": "2026-10-24T15:50:33.225080Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -670,10 +670,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260521804",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:33.198278Z"
+      "scraped_at": "2026-10-24T15:50:33.225181Z"
     },
     {
       "auction_date": "2026-10-29",
@@ -693,10 +693,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260521827",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/29/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 6,
+      "days_until_auction": 5,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:33.198454Z"
+      "scraped_at": "2026-10-24T15:50:33.225283Z"
     },
     {
       "auction_date": "2026-10-30",
@@ -716,10 +716,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260123644",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/30/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 7,
+      "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:35.278472Z",
+      "scraped_at": "2026-10-24T15:50:35.098864Z",
       "prop_street": "281 BREWER AVE",
       "prop_city": "Winter Park",
       "prop_state": "FL",
@@ -747,10 +747,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250481303",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/30/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 7,
+      "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:35.278710Z",
+      "scraped_at": "2026-10-24T15:50:35.099012Z",
       "prop_street": "932 SILVERTIP RD",
       "prop_city": "Apopka",
       "prop_state": "FL",
@@ -764,7 +764,7 @@
       "auction_date": "2026-10-30",
       "auction_time": "11:00 AM ET",
       "case_number": "2026-CA-001171-O",
-      "parcel_id": "ALCOHOLIC LICENSE",
+      "parcel_id": "ALCOHOLIC BEVERAGE LICENSE",
       "address": "",
       "final_judgment": "$740,164.79",
       "assessed_value": "",
@@ -774,14 +774,14 @@
       "property_type": "",
       "homestead": false,
       "absentee_owner": false,
-      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/ALCOHOLIC LICENSE",
+      "ocpa_url": "https://ocpaweb.ocpafl.org/parcelsearch/Parcel%20ID/ALCOHOLIC BEVERAGE LICENSE",
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260554064",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=10/30/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 7,
+      "days_until_auction": 6,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:35.278886Z"
+      "scraped_at": "2026-10-24T15:50:35.099118Z"
     },
     {
       "auction_date": "2026-11-02",
@@ -801,10 +801,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20160047484",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.210222Z",
+      "scraped_at": "2026-10-24T15:50:45.383130Z",
       "prop_street": "6026 CANYON DE CHELLEY CT",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -832,10 +832,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20240213383",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.210460Z",
+      "scraped_at": "2026-10-24T15:50:45.383274Z",
       "prop_street": "12712 LANGSTAFF DR",
       "prop_city": "Windermere",
       "prop_state": "FL",
@@ -863,10 +863,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20240188061",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.210683Z",
+      "scraped_at": "2026-10-24T15:50:45.383408Z",
       "prop_street": "854 LOST GROVE CIR",
       "prop_city": "Winter Garden",
       "prop_state": "FL",
@@ -894,10 +894,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20240322101",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.210916Z",
+      "scraped_at": "2026-10-24T15:50:45.383540Z",
       "prop_street": "7133 TALLOWTREE LN",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -925,10 +925,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250366520",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.211156Z",
+      "scraped_at": "2026-10-24T15:50:45.383669Z",
       "prop_street": "932 CLOYD DAIRY LOOP",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -956,10 +956,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260293785",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.211380Z",
+      "scraped_at": "2026-10-24T15:50:45.383806Z",
       "prop_street": "8273 WILSON TER",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -978,7 +978,7 @@
       "final_judgment": "$365,771.53",
       "assessed_value": "$169,439.00",
       "opening_bid": "",
-      "owner_name": "WILEY SHELBY W LIFE ESTATE, WILEY MARSHA L LIFE ESTATE,REM: BRANDON TYLER WILEY",
+      "owner_name": "WILEY SHELBY W, WILEY MARSHA L LIFE ESTATE,REM: BRANDON TYLER WILEY",
       "mailing_address": "10613 Abingdon Chase, Orlando, FL 32817-2056",
       "property_type": "SINGLE FAM CLASS III",
       "homestead": false,
@@ -987,10 +987,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260267515",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.211605Z",
+      "scraped_at": "2026-10-24T15:50:45.383935Z",
       "prop_street": "10613 ABINGDON CHASE",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1018,10 +1018,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260506104",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:43.211825Z",
+      "scraped_at": "2026-10-24T15:50:45.384062Z",
       "prop_street": "2564 OCOEE RESERVE CT",
       "prop_city": "Ocoee",
       "prop_state": "FL",
@@ -1049,10 +1049,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260557032",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.212045Z",
+      "scraped_at": "2026-10-24T15:50:45.384190Z",
       "prop_street": "1713 TERRAPIN RD",
       "prop_city": "Ocoee",
       "prop_state": "FL",
@@ -1080,10 +1080,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260493016",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/02/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 10,
+      "days_until_auction": 9,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:43.212276Z",
+      "scraped_at": "2026-10-24T15:50:45.384317Z",
       "prop_street": "1114 ALDER TREE DR",
       "prop_city": "Apopka",
       "prop_state": "FL",
@@ -1111,10 +1111,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260515162",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:50.257414Z"
+      "scraped_at": "2026-10-24T15:50:51.929730Z"
     },
     {
       "auction_date": "2026-11-03",
@@ -1134,10 +1134,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260375567",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:50.257653Z",
+      "scraped_at": "2026-10-24T15:50:51.929875Z",
       "prop_street": "311 W 17TH ST",
       "prop_city": "Apopka",
       "prop_state": "FL",
@@ -1165,10 +1165,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260510973",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:50.257860Z"
+      "scraped_at": "2026-10-24T15:50:51.930001Z"
     },
     {
       "auction_date": "2026-11-03",
@@ -1188,10 +1188,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250034247",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:50.258080Z",
+      "scraped_at": "2026-10-24T15:50:51.930156Z",
       "prop_street": "2438 STRICKER DR",
       "prop_city": "Ocoee",
       "prop_state": "FL",
@@ -1219,10 +1219,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250550394",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:50.258297Z"
+      "scraped_at": "2026-10-24T15:50:51.930277Z"
     },
     {
       "auction_date": "2026-11-03",
@@ -1242,10 +1242,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260442856",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:50.258517Z",
+      "scraped_at": "2026-10-24T15:50:51.930404Z",
       "prop_street": "1034 LAKE DOE BLVD",
       "prop_city": "Apopka",
       "prop_state": "FL",
@@ -1273,10 +1273,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260515152",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:50.258691Z"
+      "scraped_at": "2026-10-24T15:50:51.930503Z"
     },
     {
       "auction_date": "2026-11-03",
@@ -1296,10 +1296,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260512829",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:50.258865Z"
+      "scraped_at": "2026-10-24T15:50:51.930601Z"
     },
     {
       "auction_date": "2026-11-03",
@@ -1319,10 +1319,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260352775",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:50.259101Z",
+      "scraped_at": "2026-10-24T15:50:51.930736Z",
       "prop_street": "7716 TERN DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1350,10 +1350,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260516925",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/03/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 11,
+      "days_until_auction": 10,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:50.259273Z"
+      "scraped_at": "2026-10-24T15:50:51.930835Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1373,10 +1373,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20250549996",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:53.859911Z",
+      "scraped_at": "2026-10-24T15:50:55.635228Z",
       "prop_street": "4218 CROSSEN DR",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1404,10 +1404,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260546025",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:53.860148Z"
+      "scraped_at": "2026-10-24T15:50:55.635364Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1427,10 +1427,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260446142",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": true,
-      "scraped_at": "2026-10-23T16:58:53.860380Z",
+      "scraped_at": "2026-10-24T15:50:55.635495Z",
       "prop_street": "1824 WOODWARD ST",
       "prop_city": "Orlando",
       "prop_state": "FL",
@@ -1458,10 +1458,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260550920",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:53.860558Z"
+      "scraped_at": "2026-10-24T15:50:55.635595Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1481,10 +1481,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260550902",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:53.860736Z"
+      "scraped_at": "2026-10-24T15:50:55.635703Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1504,10 +1504,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260550893",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:53.860913Z"
+      "scraped_at": "2026-10-24T15:50:55.635801Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1527,10 +1527,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260550900",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:53.861098Z"
+      "scraped_at": "2026-10-24T15:50:55.635899Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1550,10 +1550,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260550899",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:53.861280Z"
+      "scraped_at": "2026-10-24T15:50:55.635999Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1573,10 +1573,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260550908",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:53.861452Z"
+      "scraped_at": "2026-10-24T15:50:55.636098Z"
     },
     {
       "auction_date": "2026-11-04",
@@ -1596,10 +1596,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260550917",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/04/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 12,
+      "days_until_auction": 11,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:53.861627Z"
+      "scraped_at": "2026-10-24T15:50:55.636196Z"
     },
     {
       "auction_date": "2026-11-05",
@@ -1619,10 +1619,10 @@
       "comptroller_url": "https://selfservice.or.occompt.com/ssweb/web/integration/document/20260522433",
       "auction_url": "https://myorangeclerk.realforeclose.com/index.cfm?zaction=AUCTION&Zmethod=PREVIEW&AUCTIONDATE=11/05/2026",
       "source": "myorangeclerk.realforeclose.com",
-      "days_until_auction": 13,
+      "days_until_auction": 12,
       "status": "ACTIVE",
       "matched_lead": false,
-      "scraped_at": "2026-10-23T16:58:56.340162Z",
+      "scraped_at": "2026-10-24T15:50:57.973244Z",
       "prop_street": "5505 HERNANDES DR UNIT 118",
       "prop_city": "Orlando",
       "prop_state": "FL",
